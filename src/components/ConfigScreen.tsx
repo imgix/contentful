@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { AppExtensionSDK } from 'contentful-ui-extensions-sdk';
-import { Heading, Form, Workbench, Paragraph } from '@contentful/forma-36-react-components';
+import { Heading, Form, Workbench, Paragraph, TextField, Button } from '@contentful/forma-36-react-components';
 import { css } from 'emotion';
 
 export interface AppInstallationParameters {}
@@ -59,7 +59,20 @@ export default class Config extends Component<ConfigProps, ConfigState> {
       <Workbench className={css({ margin: '80px' })}>
         <Form>
           <Heading>App Config</Heading>
-          <Paragraph>Welcome to your contentful app. This is your config page.</Paragraph>
+          <Paragraph>Welcome to your imgix contentful app. This is your config page.</Paragraph>
+          <TextField
+            name="API Key"
+            id="imgixAPI"
+            labelText="API Key"
+            helpText="Access your API key at https://dashboard.imgix.com/api-keys"
+            required={true}
+          />
+          <Button
+            type='submit'
+            buttonType='positive'
+          >
+              Save
+          </Button>
         </Form>
       </Workbench>
     );
