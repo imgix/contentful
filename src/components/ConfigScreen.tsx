@@ -3,7 +3,9 @@ import { AppExtensionSDK } from 'contentful-ui-extensions-sdk';
 import { Heading, Form, Workbench, Paragraph, TextField, Button } from '@contentful/forma-36-react-components';
 import { css } from 'emotion';
 
-export interface AppInstallationParameters {}
+export interface AppInstallationParameters {
+  imgixAPIKey?: string;
+}
 
 interface ConfigProps {
   sdk: AppExtensionSDK;
@@ -54,6 +56,22 @@ export default class Config extends Component<ConfigProps, ConfigState> {
     };
   };
 
+  saveAPIKey = () => {
+    // Gets the value from the API Key textfield,
+    // saving it as an application installation parameter
+    let keyValue: string = (document.getElementById("APIKey") as HTMLInputElement).value;
+
+    if (keyValue) {
+      const keyParameter: AppInstallationParameters = { imgixAPIKey: keyValue };
+      const updatedState = {
+        parameters: {
+          ...keyParameter
+        }
+      };
+      this.setState(updatedState);
+    }
+  };
+
   render() {
     return (
       <Workbench className={css({ margin: '80px' })}>
@@ -62,7 +80,7 @@ export default class Config extends Component<ConfigProps, ConfigState> {
           <Paragraph>Welcome to your imgix contentful app. This is your config page.</Paragraph>
           <TextField
             name="API Key"
-            id="imgixAPI"
+            id="APIKey"
             labelText="API Key"
             helpText="Access your API key at https://dashboard.imgix.com/api-keys"
             required={true}
@@ -70,6 +88,7 @@ export default class Config extends Component<ConfigProps, ConfigState> {
           <Button
             type='submit'
             buttonType='positive'
+            onClick={this.saveAPIKey}
           >
               Save
           </Button>
