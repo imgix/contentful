@@ -1,34 +1,38 @@
-This project was bootstrapped with [Create Contentful App](https://github.com/contentful/create-contentful-app).
+<!-- ix-docs-ignore -->
+![imgix logo](https://assets.imgix.net/sdk-imgix-logo.svg)
 
-## Available Scripts
+A Contentful app that integrates with the imgix management API. Use this app to easily search and serve images from imgix directly into your application's content models.
 
-In the project directory, you can run:
+[![Build Status](https://travis-ci.com/imgix/contentful.svg?branch=main)](https://travis-ci.com/imgix/contentful)
+[![License](https://img.shields.io/npm/l/contentful)](https://github.com/imgix/contentful/blob/main/LICENSE.md)
+[![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 
-#### `npm start`
+---
 
-Creates or updates your app definition in contentful, and runs the app in development mode.
-Open your app to view it in the browser.
+<!-- /ix-docs-ignore -->
 
-The page will reload if you make edits.
-You will also see any lint errors in the console.
+<!-- NB: Run `npx markdown-toc README.md --maxdepth 4 | sed -e 's/[[:space:]]\{2\}/    /g'` to generate TOC, and copy the result from the terminal to replace the TOC below :) -->
 
-#### `npm run build`
+<!-- prettier-ignore-start -->
 
-Builds the app for production to the `build` folder.
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<!-- toc -->
 
-The build is minified and the filenames include the hashes.
-Your app is ready to be deployed!
+- [Run locally](#run-locally)
 
-## Libraries to use
+<!-- tocstop -->
 
-To make your app look and feel like Contentful use the following libraries:
+<!-- prettier-ignore-end -->
 
-- [Forma 36](https://f36.contentful.com/) – Contentful's design system
-- [Contentful Field Editors](https://www.contentful.com/developers/docs/extensibility/field-editors/) – Contentful's field editor React components
+## Run locally
 
-## Learn More
+To get a local version of this project running in your Contentful workplace, use the following steps:
 
-[Read more](https://www.contentful.com/developers/docs/extensibility/app-framework/create-contentful-app/) and check out the video on how to use the CLI.
-
-Create Contentful App uses [Create React App](https://create-react-app.dev/). You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started) and how to further customize your app.
+- From your organization's space:
+  - Go to **Apps** tab and select **Create App**
+  - In the **App URL** field, enter `http://localhost:3000`
+  - Under the **Locations** section, select the following options:
+    - **App configuration screen *(app-config)***
+    - **Entry Field *(entry-field)***
+- From your local project directory:
+  - Run `npm start`
+  - Ensure that your project is running on `localhost:3000`, or at least matches the **App URL** specified earlier
