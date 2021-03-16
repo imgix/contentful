@@ -56,7 +56,7 @@ export default class Config extends Component<ConfigProps, ConfigState> {
     };
   };
 
-  saveAPIKey = () => {
+  setAPIKey = () => {
     // Gets the value from the API Key textfield,
     // saving it as an application installation parameter
     let keyValue: string = (document.getElementById("APIKey") as HTMLInputElement).value;
@@ -72,6 +72,13 @@ export default class Config extends Component<ConfigProps, ConfigState> {
     }
   };
 
+  getAPIKey = async () => {
+    return this.props.sdk.app.getParameters()
+    .then((response: AppInstallationParameters | null) => {
+      return response?.imgixAPIKey;
+    });
+  };
+
   render() {
     return (
       <Workbench className={css({ margin: '80px' })}>
@@ -82,13 +89,14 @@ export default class Config extends Component<ConfigProps, ConfigState> {
             name="API Key"
             id="APIKey"
             labelText="API Key"
+            value={this.state.parameters?.imgixAPIKey || ""}
             helpText="Access your API key at https://dashboard.imgix.com/api-keys"
             required={true}
           />
           <Button
             type='submit'
             buttonType='positive'
-            onClick={this.saveAPIKey}
+            onClick={this.setAPIKey}
           >
               Save
           </Button>
