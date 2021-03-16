@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
 import { AppExtensionSDK } from 'contentful-ui-extensions-sdk';
-import { Heading, Form, Workbench, Paragraph, TextField, Button } from '@contentful/forma-36-react-components';
+import {
+  Heading,
+  Form,
+  Workbench,
+  Paragraph,
+  TextField,
+  Button,
+} from '@contentful/forma-36-react-components';
 import { css } from 'emotion';
 
 export interface AppInstallationParameters {
@@ -52,31 +59,34 @@ export default class Config extends Component<ConfigProps, ConfigState> {
       parameters: this.state.parameters,
       // In case you don't want to submit any update to app
       // locations, you can just pass the currentState as is
-      targetState: currentState
+      targetState: currentState,
     };
   };
 
   setAPIKey = () => {
     // Gets the value from the API Key textfield,
     // saving it as an application installation parameter
-    let keyValue: string = (document.getElementById("APIKey") as HTMLInputElement).value;
+    let keyValue: string = (document.getElementById(
+      'APIKey',
+    ) as HTMLInputElement).value;
 
     if (keyValue) {
       const keyParameter: AppInstallationParameters = { imgixAPIKey: keyValue };
       const updatedState = {
         parameters: {
-          ...keyParameter
-        }
+          ...keyParameter,
+        },
       };
       this.setState(updatedState);
     }
   };
 
   getAPIKey = async () => {
-    return this.props.sdk.app.getParameters()
-    .then((response: AppInstallationParameters | null) => {
-      return response?.imgixAPIKey;
-    });
+    return this.props.sdk.app
+      .getParameters()
+      .then((response: AppInstallationParameters | null) => {
+        return response?.imgixAPIKey;
+      });
   };
 
   render() {
@@ -84,21 +94,19 @@ export default class Config extends Component<ConfigProps, ConfigState> {
       <Workbench className={css({ margin: '80px' })}>
         <Form>
           <Heading>App Config</Heading>
-          <Paragraph>Welcome to your imgix Contentful app. This is your config page.</Paragraph>
+          <Paragraph>
+            Welcome to your imgix Contentful app. This is your config page.
+          </Paragraph>
           <TextField
             name="API Key"
             id="APIKey"
             labelText="API Key"
-            value={this.state.parameters?.imgixAPIKey || ""}
+            value={this.state.parameters?.imgixAPIKey || ''}
             helpText="Access your API key at https://dashboard.imgix.com/api-keys"
             required={true}
           />
-          <Button
-            type='submit'
-            buttonType='positive'
-            onClick={this.setAPIKey}
-          >
-              Save
+          <Button type="submit" buttonType="positive" onClick={this.setAPIKey}>
+            Save
           </Button>
         </Form>
       </Workbench>

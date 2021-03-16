@@ -9,8 +9,8 @@ describe('Config Screen component', () => {
         onConfigure: jest.fn(),
         getParameters: jest.fn().mockReturnValueOnce({}),
         setReady: jest.fn(),
-        getCurrentState: jest.fn()
-      }
+        getCurrentState: jest.fn(),
+      },
     };
     const { getByText } = render(<ConfigScreen sdk={mockSdk} />);
 
@@ -18,7 +18,7 @@ describe('Config Screen component', () => {
     await mockSdk.app.onConfigure.mock.calls[0][0]();
 
     expect(
-      getByText('Welcome to your contentful app. This is your config page.')
+      getByText('Welcome to your contentful app. This is your config page.'),
     ).toBeInTheDocument();
   });
 });
