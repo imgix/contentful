@@ -6,6 +6,7 @@ A Contentful app that integrates with the imgix management API. Use this app to 
 [![Build Status](https://travis-ci.com/imgix/contentful.svg?branch=main)](https://travis-ci.com/imgix/contentful)
 [![License](https://img.shields.io/npm/l/contentful)](https://github.com/imgix/contentful/blob/main/LICENSE.md)
 [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fimgix%2Fcontentful.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fimgix%2Fcontentful?ref=badge_shield)
 
 ---
 
@@ -18,6 +19,7 @@ A Contentful app that integrates with the imgix management API. Use this app to 
 <!-- toc -->
 
 - [Run locally](#run-locally)
+- [License](#license)
 
 <!-- tocstop -->
 
@@ -36,3 +38,6 @@ To get a local version of this project running in your Contentful workplace, use
 - From your local project directory:
   - Run `npm start`
   - Ensure that your project is running on `localhost:3000`, or at least matches the **App URL** specified earlier
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fimgix%2Fcontentful.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fimgix%2Fcontentful?ref=badge_large)
