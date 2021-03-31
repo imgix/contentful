@@ -10,7 +10,14 @@ interface DialogProps {
 
 interface DialogState {
   imgix: any; // TODO - replace with class type
+  allSources: Array<SourceProps>;
+  selectedSource: Partial<SourceProps>;
 }
+
+type SourceProps = {
+  id: string;
+  name: string;
+};
 
 export default class Dialog extends Component<DialogProps, DialogState> {
   constructor(props: DialogProps) {
@@ -22,7 +29,9 @@ export default class Dialog extends Component<DialogProps, DialogState> {
     });
 
     this.state = {
-      imgix
+      imgix,
+      allSources: [],
+      selectedSource: {},
     };
   }
 
@@ -32,10 +41,10 @@ export default class Dialog extends Component<DialogProps, DialogState> {
 
   getSourceIDAndPaths = async (
     props: DialogProps,
-  ) => {
+  ): Promise<Array<SourceProps>> => {
     const sources = await this.getSources(props);
     const enabledSources = sources.data.reduce(
-      (result: any[], source: any) => {
+      (result: SourceProps[], source: any) => {
         if (source.attributes.enabled) {
           let id = source.id;
           let name = source.attributes.name;
@@ -48,6 +57,11 @@ export default class Dialog extends Component<DialogProps, DialogState> {
 
     return enabledSources;
   };
+
+  async componentDidMount() {
+    const sources = await this.getSourceIDAndPaths(this.props);
+    this.setState({ allSources: sources });
+  }
 
   render() {
     return (
