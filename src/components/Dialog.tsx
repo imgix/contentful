@@ -16,7 +16,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
   constructor(props: DialogProps) {
     super(props);
 
-    const apiKey = (props as any).sdk.parameters.installation.imgixAPIKey;
+    const apiKey = (props as any).sdk?.parameters.installation.imgixAPIKey || "";
     const imgix = new ImgixApi({
       apiKey,
     });
