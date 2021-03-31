@@ -22,9 +22,32 @@ export default class Dialog extends Component<DialogProps, DialogState> {
     });
 
     this.state = {
-      imgix,
+      imgix
     };
   }
+
+  getSources = async (props: DialogProps) => {
+    return await this.state.imgix.request('sources');
+  };
+
+  getSourceIDAndPaths = async (
+    props: DialogProps,
+  ) => {
+    const sources = await this.getSources(props);
+    const enabledSources = sources.data.reduce(
+      (result: any[], source: any) => {
+        if (source.attributes.enabled) {
+          let id = source.id;
+          let name = source.attributes.name;
+          result.push({ id, name });
+        }
+        return result;
+      },
+      [],
+    );
+
+    return enabledSources;
+  };
 
   render() {
     return (
