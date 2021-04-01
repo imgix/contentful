@@ -90,12 +90,22 @@ export default class Dialog extends Component<DialogProps, DialogState> {
               indicateDropdown
               onClick={() => this.setOpen(!this.state.isOpen)}
             >
-              Select a Source
+              {this.state.selectedSource.name || 'Select a Source'}
             </Button>
           }
         >
           <DropdownList>
-            <DropdownListItem>Example item</DropdownListItem>
+            {this.state.allSources.map((source: SourceProps) => (
+              <DropdownListItem
+                key={source.id}
+                onClick={() => {
+                  this.setState({ selectedSource: source });
+                  this.setOpen(!this.state.isOpen);
+                }}
+              >
+                {source.name}
+              </DropdownListItem>
+            ))}
           </DropdownList>
         </Dropdown>
         <br />
