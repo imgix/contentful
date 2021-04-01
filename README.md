@@ -4,7 +4,7 @@
 A Contentful app that integrates with the imgix management API. Use this app to easily search and serve images from imgix directly into your application's content models.
 
 [![Build Status](https://travis-ci.com/imgix/contentful.svg?branch=main)](https://travis-ci.com/imgix/contentful)
-[![License](https://img.shields.io/npm/l/contentful)](https://github.com/imgix/contentful/blob/main/LICENSE.md)
+[![License](https://img.shields.io/github/license/imgix/contentful)](https://github.com/imgix/contentful/blob/main/LICENSE.md)
 [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fimgix%2Fcontentful.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fimgix%2Fcontentful?ref=badge_shield)
 
