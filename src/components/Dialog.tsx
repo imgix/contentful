@@ -16,6 +16,7 @@ interface DialogProps {
 
 interface DialogState {
   imgix: any; // TODO - replace with class type
+  isOpen: boolean;
   allSources: Array<SourceProps>;
   selectedSource: Partial<SourceProps>;
 }
@@ -37,6 +38,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
 
     this.state = {
       imgix,
+      isOpen: false,
       allSources: [],
       selectedSource: {},
     };
@@ -65,6 +67,10 @@ export default class Dialog extends Component<DialogProps, DialogState> {
     return enabledSources;
   };
 
+  setOpen = (isOpen: boolean) => {
+    this.setState({ isOpen: isOpen });
+  };
+
   async componentDidMount() {
     const sources = await this.getSourceIDAndPaths(this.props);
     this.setState({ allSources: sources });
@@ -75,14 +81,14 @@ export default class Dialog extends Component<DialogProps, DialogState> {
       <div>
         <Paragraph>Hello Dialog Component</Paragraph>
         <Dropdown
-          isOpen={false}
-          onClose={() => {}}
+          isOpen={this.state.isOpen}
+          onClose={() => this.setOpen(false)}
           toggleElement={
             <Button
               size="small"
               buttonType="muted"
               indicateDropdown
-              onClick={() => {}}
+              onClick={() => this.setOpen(!this.state.isOpen)}
             >
               Select a Source
             </Button>
