@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
-import { Button, Paragraph } from '@contentful/forma-36-react-components';
+import {
+  Button,
+  Paragraph,
+  Dropdown,
+  DropdownList,
+  DropdownListItem,
+} from '@contentful/forma-36-react-components';
 import { DialogExtensionSDK } from 'contentful-ui-extensions-sdk';
 // @ts-ignore - TODO add .d.ts file
 import ImgixApi from 'imgix-management-js';
@@ -23,7 +29,8 @@ export default class Dialog extends Component<DialogProps, DialogState> {
   constructor(props: DialogProps) {
     super(props);
 
-    const apiKey = (props as any).sdk?.parameters.installation.imgixAPIKey || "";
+    const apiKey =
+      (props as any).sdk?.parameters.installation.imgixAPIKey || '';
     const imgix = new ImgixApi({
       apiKey,
     });
@@ -67,6 +74,25 @@ export default class Dialog extends Component<DialogProps, DialogState> {
     return (
       <div>
         <Paragraph>Hello Dialog Component</Paragraph>
+        <Dropdown
+          isOpen={false}
+          onClose={() => {}}
+          toggleElement={
+            <Button
+              size="small"
+              buttonType="muted"
+              indicateDropdown
+              onClick={() => {}}
+            >
+              Select a Source
+            </Button>
+          }
+        >
+          <DropdownList>
+            <DropdownListItem>Example item</DropdownListItem>
+          </DropdownList>
+        </Dropdown>
+        <br />
         <Button onClick={() => this.props.sdk.close('Done!')} />
       </div>
     );
