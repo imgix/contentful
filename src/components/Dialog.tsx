@@ -120,7 +120,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
           </DropdownList>
         </Dropdown>
         <br />
-        <Button onClick={() => this.props.sdk.close('Done!')} />
+        <Button onClick={() => this.props.sdk.close('Done!')}>Done</Button>
       </div>
     );
   }

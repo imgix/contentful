@@ -18,7 +18,9 @@ const Field = (props: FieldProps) => {
         onClick={() => {
           props.sdk.dialogs.openCurrentApp({ width: 1000, minHeight: 2000 });
         }}
-      />
+      >
+        Select an Image
+      </Button>
     </div>
   );
 };
