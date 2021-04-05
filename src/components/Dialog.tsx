@@ -67,6 +67,15 @@ export default class Dialog extends Component<DialogProps, DialogState> {
     return enabledSources;
   };
 
+  getImages = async () => {
+    return this.state.imgix.request(`assets/${this.state.selectedSource?.id}`);
+  };
+
+  getImagePaths = async () => {
+    const images = await this.getImages();
+    return images.data.map((image: any) => image.attributes.origin_path);
+  };
+
   setOpen = (isOpen: boolean) => {
     this.setState({ isOpen: isOpen });
   };
