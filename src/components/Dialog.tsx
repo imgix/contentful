@@ -50,8 +50,15 @@ export default class Dialog extends Component<DialogProps, DialogState> {
   getSourceIDAndPaths = async (
     props: DialogProps,
   ): Promise<Array<SourceProps>> => {
-    const sources = await this.getSources(props);
-    let enabledSources: Array<SourceProps> = [];
+    let sources,
+      enabledSources: Array<SourceProps> = [];
+
+    try {
+      sources = await this.getSources(props);
+    } catch (error) {
+      console.error(error);
+      return enabledSources;
+    }
 
     /*
      * Resolved requests can either return an array
@@ -89,8 +96,15 @@ export default class Dialog extends Component<DialogProps, DialogState> {
   };
 
   getImagePaths = async () => {
-    let allOriginPaths: string[] = [];
-    const images = await this.getImages();
+    let images,
+      allOriginPaths: string[] = [];
+
+    try {
+      images = await this.getImages();
+    } catch (error) {
+      console.error(error);
+      return allOriginPaths;
+    }
 
     /*
      * Resolved requests can either return an array
@@ -106,6 +120,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
       const image: any = images.data; // TODO: add more explicit types for source.data
       allOriginPaths.push(image.attributes.origin_path);
     }
+
     return allOriginPaths;
   };
 
