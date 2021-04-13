@@ -141,9 +141,9 @@ export default class Dialog extends Component<DialogProps, DialogState> {
               <DropdownListItem
                 key={source.id}
                 onClick={() => {
-                  this.setState({ selectedSource: source }, () => {
+                  this.setState({ selectedSource: source }, async () => {
                     this.setOpen(false);
-                    this.getImagePaths();
+                    await this.getImagePaths();
                   });
                 }}
               >
