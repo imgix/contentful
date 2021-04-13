@@ -51,17 +51,35 @@ export default class Dialog extends Component<DialogProps, DialogState> {
     props: DialogProps,
   ): Promise<Array<SourceProps>> => {
     const sources = await this.getSources(props);
-    const enabledSources = sources.data.reduce(
-      (result: SourceProps[], source: any) => {
-        if (source.attributes.enabled) {
-          let id = source.id;
-          let name = source.attributes.name;
-          result.push({ id, name });
-        }
-        return result;
-      },
-      [],
-    );
+    let enabledSources: Array<SourceProps> = [];
+
+    /*
+     * Resolved requests can either return an array
+     * of objects or a single object via the data
+     * top-level field. In the following block, we
+     * will account for both possibilities.
+     */
+    if (Array.isArray(sources.data)) {
+      enabledSources = sources.data.reduce(
+        (result: SourceProps[], source: any) => {
+          // TODO: add more explicit types for source.data
+          if (source.attributes.enabled) {
+            let id = source.id;
+            let name = source.attributes.name;
+            result.push({ id, name });
+          }
+          return result;
+        },
+        [],
+      );
+    } else if (sources) {
+      const source: any = sources.data; // TODO: add more explicit types for source.data
+      if (source.attributes.enabled) {
+        let id = source.id;
+        let name = source.attributes.name;
+        enabledSources.push({ id, name });
+      }
+    }
 
     return enabledSources;
   };
