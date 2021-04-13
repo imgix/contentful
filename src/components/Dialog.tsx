@@ -89,8 +89,24 @@ export default class Dialog extends Component<DialogProps, DialogState> {
   };
 
   getImagePaths = async () => {
+    let allOriginPaths: string[] = [];
     const images = await this.getImages();
-    return images.data.map((image: any) => image.attributes.origin_path);
+
+    /*
+     * Resolved requests can either return an array
+     * of objects or a single object via the data
+     * top-level field. In the following block, we
+     * will account for both possibilities.
+     */
+    if (Array.isArray(images.data)) {
+      images.data.map((image: any) =>
+        allOriginPaths.push(image.attributes.origin_path),
+      );
+    } else if (images) {
+      const image: any = images.data; // TODO: add more explicit types for source.data
+      allOriginPaths.push(image.attributes.origin_path);
+    }
+    return allOriginPaths;
   };
 
   setOpen = (isOpen: boolean) => {
