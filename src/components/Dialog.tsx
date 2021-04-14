@@ -93,7 +93,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
   };
 
   getImages = async () => {
-    return this.state.imgix.request(`assets/${this.state.selectedSource?.id}`);
+    return await this.state.imgix.request(`assets/${this.state.selectedSource?.id}`);
   };
 
   getImagePaths = async () => {
