@@ -24,6 +24,7 @@ interface DialogState {
 type SourceProps = {
   id: string;
   name: string;
+  domain: string;
 };
 
 export default class Dialog extends Component<DialogProps, DialogState> {
