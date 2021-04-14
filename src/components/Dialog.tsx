@@ -7,6 +7,7 @@ import {
   DropdownListItem,
 } from '@contentful/forma-36-react-components';
 import { DialogExtensionSDK } from 'contentful-ui-extensions-sdk';
+import { AppInstallationParameters } from './ConfigScreen';
 import ImgixAPI from 'imgix-management-js';
 
 interface DialogProps {
@@ -30,7 +31,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
     super(props);
 
     const apiKey =
-      (props as any).sdk?.parameters.installation.imgixAPIKey || '';
+      (props.sdk.parameters.installation as AppInstallationParameters).imgixAPIKey || '';
     const imgix = new ImgixAPI({
       apiKey,
     });
