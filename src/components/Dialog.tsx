@@ -75,7 +75,9 @@ export default class Dialog extends Component<DialogProps, DialogState> {
           if (source.attributes.enabled) {
             let id = source.id;
             let name = source.attributes.name;
-            result.push({ id, name });
+            // there may be multiple domains, but we'll extract the first one for now
+            let domain = source.attributes.deployment.imgix_subdomains[0];
+            result.push({ id, name, domain });
           }
           return result;
         },
@@ -86,7 +88,9 @@ export default class Dialog extends Component<DialogProps, DialogState> {
       if (source.attributes.enabled) {
         let id = source.id;
         let name = source.attributes.name;
-        enabledSources.push({ id, name });
+        // there may be multiple domains, but we'll extract the first one for now
+        let domain = source.attributes.deployment.imgix_subdomains[0];
+        enabledSources.push({ id, name, domain });
       }
     }
 
