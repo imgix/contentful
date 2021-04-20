@@ -58,7 +58,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
     try {
       sources = await this.getSources(props);
     } catch (error) {
-      console.error(error);
+      console.error(error.toString());
       return enabledSources;
     }
 
@@ -99,7 +99,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
     try {
       images = await this.getImages();
     } catch (error) {
-      console.error(error);
+      console.error(error.toString());
       return allOriginPaths;
     }
 
