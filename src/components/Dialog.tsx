@@ -32,7 +32,8 @@ export default class Dialog extends Component<DialogProps, DialogState> {
     super(props);
 
     const apiKey =
-      (props.sdk.parameters.installation as AppInstallationParameters).imgixAPIKey || '';
+      (props.sdk.parameters.installation as AppInstallationParameters)
+        .imgixAPIKey || '';
     const imgix = new ImgixAPI({
       apiKey,
     });
@@ -87,7 +88,9 @@ export default class Dialog extends Component<DialogProps, DialogState> {
   };
 
   getImages = async () => {
-    return await this.state.imgix.request(`assets/${this.state.selectedSource?.id}`);
+    return await this.state.imgix.request(
+      `assets/${this.state.selectedSource?.id}`,
+    );
   };
 
   getImagePaths = async () => {
