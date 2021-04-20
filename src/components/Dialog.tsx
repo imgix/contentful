@@ -45,18 +45,16 @@ export default class Dialog extends Component<DialogProps, DialogState> {
     };
   }
 
-  getSources = async (props: DialogProps) => {
+  getSources = async () => {
     return await this.state.imgix.request('sources');
   };
 
-  getSourceIDAndPaths = async (
-    props: DialogProps,
-  ): Promise<Array<SourceProps>> => {
+  getSourceIDAndPaths = async (): Promise<Array<SourceProps>> => {
     let sources,
       enabledSources: Array<SourceProps> = [];
 
     try {
-      sources = await this.getSources(props);
+      sources = await this.getSources();
     } catch (error) {
       console.error(error.toString());
       return enabledSources;
@@ -124,7 +122,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
   };
 
   async componentDidMount() {
-    const sources = await this.getSourceIDAndPaths(this.props);
+    const sources = await this.getSourceIDAndPaths();
     this.setState({ allSources: sources });
   }
 
