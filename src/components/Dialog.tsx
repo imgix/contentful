@@ -8,7 +8,7 @@ import {
 } from '@contentful/forma-36-react-components';
 import { DialogExtensionSDK } from 'contentful-ui-extensions-sdk';
 import { AppInstallationParameters } from './ConfigScreen';
-import ImgixAPI from 'imgix-management-js';
+import ImgixAPI, { APIError } from 'imgix-management-js';
 
 interface DialogProps {
   sdk: DialogExtensionSDK;
@@ -57,7 +57,12 @@ export default class Dialog extends Component<DialogProps, DialogState> {
     try {
       sources = await this.getSources();
     } catch (error) {
-      console.error(error.toString());
+      // APIError will emit more helpful data for debugging
+      if (error instanceof APIError) {
+        console.error(error.toString());
+      } else {
+        console.error(error);
+      }
       return enabledSources;
     }
 
@@ -100,7 +105,12 @@ export default class Dialog extends Component<DialogProps, DialogState> {
     try {
       images = await this.getImages();
     } catch (error) {
-      console.error(error.toString());
+      // APIError will emit more helpful data for debugging
+      if (error instanceof APIError) {
+        console.error(error.toString());
+      } else {
+        console.error(error);
+      }
       return allOriginPaths;
     }
 
