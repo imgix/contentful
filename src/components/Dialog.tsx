@@ -104,19 +104,17 @@ export default class Dialog extends Component<DialogProps, DialogState> {
     }
 
     /*
-     * Resolved requests can either return an array
-     * of objects or a single object via the data
-     * top-level field. In the following block, we
-     * will account for both possibilities.
+     * Resolved requests can either return an array of objects or a single
+     * object via the `data` top-level field. When parsing all enabled sources,
+     * both possibilities must be accounted for.
      */
-    if (Array.isArray(images.data)) {
-      images.data.map((image: any) =>
-        allOriginPaths.push(image.attributes.origin_path),
-      );
-    } else if (images) {
-      const image: any = images.data; // TODO: add more explicit types for source.data
-      allOriginPaths.push(image.attributes.origin_path);
-    }
+    const imagesArray = Array.isArray(images.data)
+      ? images.data
+      : [images.data];
+    imagesArray.map((image: any) =>
+      // TODO: add more explicit types for image
+      allOriginPaths.push(image.attributes.origin_path),
+    );
 
     return allOriginPaths;
   };
