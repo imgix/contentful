@@ -21,7 +21,7 @@ interface DialogState {
   selectedSource: Partial<SourceProps>;
 }
 
-type SourceProps = {
+export type SourceProps = {
   id: string;
   name: string;
   domain: string;
