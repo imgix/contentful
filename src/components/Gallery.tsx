@@ -13,6 +13,15 @@ interface GalleryState {
 }
 
 export default class Gallery extends Component<GalleryProps, GalleryState> {
+  constructor(props: GalleryProps) {
+    super(props);
+
+    this.state = {
+      imgix: props.imgix,
+      fullUrls: [],
+    };
+  }
+
 
   render() {
     return (
