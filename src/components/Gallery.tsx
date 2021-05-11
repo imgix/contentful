@@ -60,6 +60,20 @@ export default class Gallery extends Component<GalleryProps, GalleryState> {
     return allOriginPaths;
   };
 
+  /*
+   * Constructs an array of imgix image URL from the selected source in the
+   * application Dialog component
+   */
+  constructUrl(images: string[]) {
+    const scheme = 'https://';
+    const domain = this.props.selectedSource.name;
+    const imgixDomain = '.imgix.net';
+
+    const urls = images.map(
+      (path: string) => scheme + domain + imgixDomain + path,
+    );
+    return urls;
+  }
   render() {
     return (
       <div className="gallery">
