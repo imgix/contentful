@@ -9,6 +9,7 @@ import {
 import { DialogExtensionSDK } from 'contentful-ui-extensions-sdk';
 import { AppInstallationParameters } from './ConfigScreen';
 import ImgixAPI, { APIError } from 'imgix-management-js';
+import Gallery from './Gallery';
 
 interface DialogProps {
   sdk: DialogExtensionSDK;
@@ -136,6 +137,14 @@ export default class Dialog extends Component<DialogProps, DialogState> {
         </Dropdown>
         <br />
         <Button onClick={() => this.props.sdk.close('Done!')}>Done</Button>
+        <br />
+        <br />
+        {this.state.selectedSource && (
+          <Gallery
+            selectedSource={this.state.selectedSource}
+            imgix={this.state.imgix}
+          />
+        )}
       </div>
     );
   }
