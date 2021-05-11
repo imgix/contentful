@@ -92,44 +92,6 @@ export default class Dialog extends Component<DialogProps, DialogState> {
     return enabledSources;
   };
 
-  getImages = async () => {
-    return await this.state.imgix.request(
-      `assets/${this.state.selectedSource?.id}`,
-    );
-  };
-
-  getImagePaths = async () => {
-    let images,
-      allOriginPaths: string[] = [];
-
-    try {
-      images = await this.getImages();
-    } catch (error) {
-      // APIError will emit more helpful data for debugging
-      if (error instanceof APIError) {
-        console.error(error.toString());
-      } else {
-        console.error(error);
-      }
-      return allOriginPaths;
-    }
-
-    /*
-     * Resolved requests can either return an array of objects or a single
-     * object via the `data` top-level field. When parsing all enabled sources,
-     * both possibilities must be accounted for.
-     */
-    const imagesArray = Array.isArray(images.data)
-      ? images.data
-      : [images.data];
-    imagesArray.map((image: any) =>
-      // TODO: add more explicit types for image
-      allOriginPaths.push(image.attributes.origin_path),
-    );
-
-    return allOriginPaths;
-  };
-
   setOpen = (isOpen: boolean) => {
     this.setState({ isOpen: isOpen });
   };
@@ -164,7 +126,6 @@ export default class Dialog extends Component<DialogProps, DialogState> {
                 onClick={() => {
                   this.setState({ selectedSource: source }, async () => {
                     this.setOpen(false);
-                    await this.getImagePaths();
                   });
                 }}
               >
