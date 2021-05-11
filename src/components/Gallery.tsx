@@ -74,6 +74,15 @@ export default class Gallery extends Component<GalleryProps, GalleryState> {
     );
     return urls;
   }
+
+  async componentDidUpdate(prevProps: GalleryProps) {
+    if (this.props.selectedSource !== prevProps.selectedSource) {
+      const images = await this.getImagePaths();
+      const fullUrls = this.constructUrl(images);
+      this.setState({ fullUrls });
+    }
+  }
+
   render() {
     return (
       <div className="gallery">
