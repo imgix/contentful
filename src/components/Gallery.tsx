@@ -1,5 +1,6 @@
 import ImgixAPI, { APIError } from 'imgix-management-js';
 import { Component } from 'react';
+import Imgix from 'react-imgix';
 import { SourceProps } from './Dialog';
 
 interface GalleryProps {
@@ -86,6 +87,14 @@ export default class Gallery extends Component<GalleryProps, GalleryState> {
   render() {
     return (
       <div className="gallery">
+        <ul>
+          {this.state.fullUrls.length > 0 &&
+            this.state.fullUrls.map((url: string) => (
+              <li>
+                <Imgix src={url} width={100} height={100} />
+              </li>
+            ))}
+        </ul>
       </div>
     );
   }
