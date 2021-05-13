@@ -9,7 +9,6 @@ interface GalleryProps {
 }
 
 interface GalleryState {
-  imgix: ImgixAPI;
   fullUrls: Array<string>;
 }
 
@@ -18,13 +17,12 @@ export default class Gallery extends Component<GalleryProps, GalleryState> {
     super(props);
 
     this.state = {
-      imgix: props.imgix,
       fullUrls: [],
     };
   }
 
   getImages = async () => {
-    return await this.state.imgix.request(
+    return await this.props.imgix.request(
       `assets/${this.props.selectedSource?.id}`,
     );
   };
