@@ -10,6 +10,7 @@ interface GalleryProps {
 
 interface GalleryState {
   fullUrls: Array<string>;
+  currentSourceId: string | undefined;
 }
 
 export default class Gallery extends Component<GalleryProps, GalleryState> {
@@ -18,6 +19,7 @@ export default class Gallery extends Component<GalleryProps, GalleryState> {
 
     this.state = {
       fullUrls: [],
+      currentSourceId: undefined,
     };
   }
 
