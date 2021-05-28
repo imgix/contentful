@@ -90,9 +90,7 @@ export default class Gallery extends Component<GalleryProps, GalleryState> {
 
   async componentDidUpdate(prevProps: GalleryProps) {
     if (this.props.selectedSource.id !== prevProps.selectedSource.id) {
-      const images = await this.getImagePaths();
-      const fullUrls = this.constructUrl(images);
-      this.setState({ fullUrls });
+      this.renderImages();
     }
   }
 
