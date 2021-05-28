@@ -10,7 +10,6 @@ interface GalleryProps {
 
 interface GalleryState {
   fullUrls: Array<string>;
-  currentSourceId: string | undefined;
 }
 
 export default class Gallery extends Component<GalleryProps, GalleryState> {
@@ -18,8 +17,7 @@ export default class Gallery extends Component<GalleryProps, GalleryState> {
     super(props);
 
     this.state = {
-      fullUrls: [],
-      currentSourceId: undefined,
+      fullUrls: []
     };
   }
 
@@ -76,12 +74,11 @@ export default class Gallery extends Component<GalleryProps, GalleryState> {
     return urls;
   }
 
-  async componentDidUpdate() {
-    if (this.props.selectedSource.id !== this.state.currentSourceId) {
+  async componentDidUpdate(prevProps: GalleryProps) {
+    if (this.props.selectedSource.id !== prevProps.selectedSource.id) {
       const images = await this.getImagePaths();
       const fullUrls = this.constructUrl(images);
-      const currentSourceId = this.props.selectedSource.id;
-      this.setState({ fullUrls, currentSourceId });
+      this.setState({ fullUrls });
     }
   }
 
