@@ -93,8 +93,12 @@ export default class Dialog extends Component<DialogProps, DialogState> {
     return enabledSources;
   };
 
-  setOpen = (isOpen: boolean) => {
-    this.setState({ isOpen: isOpen });
+  setOpen = (isOpen: boolean, selectedSource?: SourceProps) => {
+    if (selectedSource) {
+      this.setState({ isOpen, selectedSource });
+    } else {
+      this.setState({ isOpen });
+    }
   };
 
   async componentDidMount() {
@@ -124,11 +128,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
             {this.state.allSources.map((source: SourceProps) => (
               <DropdownListItem
                 key={source.id}
-                onClick={() => {
-                  this.setState({ selectedSource: source }, async () => {
-                    this.setOpen(false);
-                  });
-                }}
+                onClick={() => this.setOpen(false, source)}
               >
                 {source.name}
               </DropdownListItem>
