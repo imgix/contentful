@@ -74,6 +74,16 @@ export default class Gallery extends Component<GalleryProps, GalleryState> {
     return urls;
   }
 
+  /*
+   * Requests and constructs fully-qualified image URLs, saving the results to
+   * state
+   */
+  async renderImages() {
+    const images = await this.getImagePaths();
+    const fullUrls = this.constructUrl(images);
+    this.setState({ fullUrls });
+  }
+
   async componentDidUpdate(prevProps: GalleryProps) {
     if (this.props.selectedSource.id !== prevProps.selectedSource.id) {
       const images = await this.getImagePaths();
