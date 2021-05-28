@@ -139,12 +139,10 @@ export default class Dialog extends Component<DialogProps, DialogState> {
         <Button onClick={() => this.props.sdk.close('Done!')}>Done</Button>
         <br />
         <br />
-        {this.state.selectedSource.id && (
-          <Gallery
-            selectedSource={this.state.selectedSource}
-            imgix={this.state.imgix}
-          />
-        )}
+        <Gallery
+          selectedSource={this.state.selectedSource}
+          imgix={this.state.imgix}
+        />
       </div>
     );
   }
