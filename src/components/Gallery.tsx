@@ -17,7 +17,7 @@ export default class Gallery extends Component<GalleryProps, GalleryState> {
     super(props);
 
     this.state = {
-      fullUrls: []
+      fullUrls: [],
     };
   }
 
