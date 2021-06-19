@@ -97,15 +97,22 @@ export default class Gallery extends Component<GalleryProps, GalleryState> {
 
   render() {
     return (
-      <div className="gallery">
-        <ul>
-          {this.state.fullUrls.length > 0 &&
-            this.state.fullUrls.map((url: string) => (
-              <li>
-                <Imgix src={url} width={100} height={100} />
-              </li>
-            ))}
-        </ul>
+      <div className="row">
+        {this.state.fullUrls.length > 0 &&
+          this.state.fullUrls.map((url: string) => (
+            <div className="column">
+              <Imgix
+                src={url}
+                width={100}
+                height={100}
+                imgixParams={{
+                  fit: 'crop',
+                  crop: 'entropy',
+                }}
+                sizes="(min-width: 480px) calc(12.5vw - 20px)"
+              />
+            </div>
+          ))}
       </div>
     );
   }
