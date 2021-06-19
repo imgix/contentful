@@ -16,7 +16,11 @@ const Field = (props: FieldProps) => {
       <Paragraph>Hello Entry Field Component</Paragraph>
       <Button
         onClick={() => {
-          props.sdk.dialogs.openCurrentApp({ width: 1000, minHeight: 2000 });
+          props.sdk.dialogs.openCurrentApp({
+            width: 'fullWidth',
+            minHeight: 1000,
+            position: 'top',
+          });
         }}
       >
         Select an Image
