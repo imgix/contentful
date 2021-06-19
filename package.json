@@ -29,7 +29,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "prettier --write '{src,test}/**/*.tsx'"
+    "lint": "prettier --write '{src,test}/**/*.{tsx,css}'"
   },
   "eslintConfig": {
     "extends": "react-app"
