@@ -1,0 +1,22 @@
+.column {
+  float: left;
+  padding: 10px;
+  width: calc(12.5% - 20px);
+}
+
+.column img {
+  opacity: 0.8;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+}
+
+.column img:hover {
+  opacity: 1;
+}
+
+.row:after {
+  content: '';
+  display: table;
+  clear: both;
+}
