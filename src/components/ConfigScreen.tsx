@@ -36,7 +36,8 @@ export default class Config extends Component<ConfigProps, ConfigState> {
   async componentDidMount() {
     // Get current parameters of the app.
     // If the app is not installed yet, `parameters` will be `null`.
-    const parameters: AppInstallationParameters | null = await this.props.sdk.app.getParameters();
+    const parameters: AppInstallationParameters | null =
+      await this.props.sdk.app.getParameters();
 
     this.setState(parameters ? { parameters } : this.state, () => {
       // Once preparation has finished, call `setReady` to hide
@@ -66,9 +67,9 @@ export default class Config extends Component<ConfigProps, ConfigState> {
   setAPIKey = () => {
     // Gets the value from the API Key textfield,
     // saving it as an application installation parameter
-    let keyValue: string = (document.getElementById(
-      'APIKey',
-    ) as HTMLInputElement).value;
+    let keyValue: string = (
+      document.getElementById('APIKey') as HTMLInputElement
+    ).value;
 
     if (keyValue) {
       const keyParameter: AppInstallationParameters = { imgixAPIKey: keyValue };
