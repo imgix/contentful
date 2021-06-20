@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import {
   Button,
   Paragraph,
@@ -143,6 +143,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
           <Gallery
             selectedSource={this.state.selectedSource}
             imgix={this.state.imgix}
+            sdk={this.props.sdk}
           />
         )}
       </div>
