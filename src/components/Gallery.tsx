@@ -2,11 +2,13 @@ import ImgixAPI, { APIError } from 'imgix-management-js';
 import { Component } from 'react';
 import Imgix from 'react-imgix';
 import { SourceProps } from './Dialog';
+import { DialogExtensionSDK } from 'contentful-ui-extensions-sdk';
 import './Gallery.css';
 
 interface GalleryProps {
   selectedSource: Partial<SourceProps>;
   imgix: ImgixAPI;
+  sdk: DialogExtensionSDK;
 }
 
 interface GalleryState {
@@ -106,10 +108,14 @@ export default class Gallery extends Component<GalleryProps, GalleryState> {
                 width={100}
                 height={100}
                 imgixParams={{
+                  auto: 'format',
                   fit: 'crop',
                   crop: 'entropy',
                 }}
                 sizes="(min-width: 480px) calc(12.5vw - 20px)"
+                htmlAttributes={{
+                  onClick: () => this.props.sdk.close(url),
+                }}
               />
             </div>
           ))}
