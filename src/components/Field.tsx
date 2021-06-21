@@ -11,6 +11,8 @@ interface FieldState {
 }
 
 export default class Field extends Component<FieldProps, FieldState> {
+  constructor(props: FieldProps) {
+    super(props);
 
   return (
     <div>
@@ -30,4 +32,5 @@ export default class Field extends Component<FieldProps, FieldState> {
   );
 };
 
-export default Field;
+  }
+
