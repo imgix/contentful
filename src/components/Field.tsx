@@ -61,7 +61,9 @@ export default class Field extends Component<FieldProps, FieldState> {
                 position: 'top',
               })
               .then((image) =>
-                this.setState({ image }),
+                this.setState({ image }, () =>
+                  this.props.sdk.field.setValue(image),
+                ),
               );
           }}
         >
