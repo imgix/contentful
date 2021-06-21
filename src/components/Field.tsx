@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import { Button } from '@contentful/forma-36-react-components';
 import { FieldExtensionSDK } from 'contentful-ui-extensions-sdk';
+import Imgix from 'react-imgix';
 
 interface FieldProps {
   sdk: FieldExtensionSDK;
@@ -37,6 +38,20 @@ export default class Field extends Component<FieldProps, FieldState> {
   render() {
     return (
       <div>
+        {this.state.image && (
+          <div>
+            <Imgix
+              width={100}
+              height={100}
+              src={this.state.image}
+              imgixParams={{
+                auto: 'format',
+                fit: 'crop',
+                crop: 'entropy',
+              }}
+            />
+          </div>
+        )}
         <Button
           onClick={() => {
             this.props.sdk.dialogs
