@@ -34,3 +34,25 @@ export default class Field extends Component<FieldProps, FieldState> {
 
   }
 
+  render() {
+    return (
+      <div>
+        <Button
+          onClick={() => {
+            this.props.sdk.dialogs
+              .openCurrentApp({
+                width: 'fullWidth',
+                minHeight: 1000,
+                position: 'top',
+              })
+              .then((image) =>
+                this.setState({ image }),
+              );
+          }}
+        >
+          Select an Image
+        </Button>
+      </div>
+    );
+  }
+}
