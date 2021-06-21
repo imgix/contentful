@@ -15,24 +15,11 @@ export default class Field extends Component<FieldProps, FieldState> {
   constructor(props: FieldProps) {
     super(props);
 
-  return (
-    <div>
-      <Paragraph>Hello Entry Field Component</Paragraph>
-      <Button
-        onClick={() => {
-          props.sdk.dialogs.openCurrentApp({
-            width: 'fullWidth',
-            minHeight: 1000,
-            position: 'top',
-          });
-        }}
-      >
-        Select an Image
-      </Button>
-    </div>
-  );
-};
+    const storedValue = this.props.sdk.field.getValue();
 
+    this.state = {
+      image: storedValue || '',
+    };
   }
 
   render() {
