@@ -4,8 +4,14 @@ import { render } from '@testing-library/react';
 
 describe('Field component', () => {
   it('Component text exists', () => {
-    const { getByText } = render(<Field />);
+    const mockSdk: any = {
+      field: {
+        getValue: () => {}
+      },
+    };
 
-    expect(getByText('Hello Entry Field Component')).toBeInTheDocument();
+    const { getByText } = render(<Field sdk={mockSdk} />);
+
+    expect(getByText('Select an Image')).toBeInTheDocument();
   });
 });
