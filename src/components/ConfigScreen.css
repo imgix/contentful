@@ -1,0 +1,9 @@
+.ix-helper-text {
+  margin-top: 0.5rem;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial,
+    sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  display: block;
+  color: #606c7c;
+}
