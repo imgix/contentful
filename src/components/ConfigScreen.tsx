@@ -9,6 +9,7 @@ import {
   Button,
 } from '@contentful/forma-36-react-components';
 import { css } from 'emotion';
+import './ConfigScreen.css';
 
 export interface AppInstallationParameters {
   imgixAPIKey?: string;
@@ -98,14 +99,21 @@ export default class Config extends Component<ConfigProps, ConfigState> {
           <Paragraph>
             Welcome to your imgix Contentful app. This is your config page.
           </Paragraph>
-          <TextField
-            name="API Key"
-            id="APIKey"
-            labelText="API Key"
-            value={this.state.parameters?.imgixAPIKey || ''}
-            helpText="Access your API key at https://dashboard.imgix.com/api-keys"
-            required={true}
-          />
+          <div>
+            <TextField
+              name="API Key"
+              id="APIKey"
+              labelText="API Key"
+              value={this.state.parameters?.imgixAPIKey || ''}
+              required={true}
+            />
+            <p className="ix-helper-text">
+              Access your API key at{' '}
+              <a target="_blank" rel="noreferrer" href="https://dashboard.imgix.com/api-keys">
+                https://dashboard.imgix.com/api-keys
+              </a>
+            </p>
+          </div>
           <Button type="submit" buttonType="positive" onClick={this.setAPIKey}>
             Save
           </Button>
