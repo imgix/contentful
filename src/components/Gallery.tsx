@@ -99,10 +99,10 @@ export default class Gallery extends Component<GalleryProps, GalleryState> {
 
   render() {
     return (
-      <div className="row">
+      <div className="ix-row">
         {this.state.fullUrls.length > 0 &&
           this.state.fullUrls.map((url: string) => (
-            <div className="column">
+            <div className="ix-column">
               <Imgix
                 src={url}
                 width={100}
