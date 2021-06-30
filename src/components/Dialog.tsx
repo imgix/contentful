@@ -136,7 +136,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
           </DropdownList>
         </Dropdown>
         <br />
-        <Button onClick={() => this.props.sdk.close('Done!')}>Done</Button>
+        <Button onClick={() => this.props.sdk.close(undefined)}>Done</Button>
         <br />
         <br />
         {this.state.selectedSource?.id && (
