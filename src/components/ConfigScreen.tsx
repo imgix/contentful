@@ -109,7 +109,11 @@ export default class Config extends Component<ConfigProps, ConfigState> {
             />
             <p className="ix-helper-text">
               Access your API key at{' '}
-              <a target="_blank" rel="noreferrer" href="https://dashboard.imgix.com/api-keys">
+              <a
+                target="_blank"
+                rel="noreferrer"
+                href="https://dashboard.imgix.com/api-keys"
+              >
                 https://dashboard.imgix.com/api-keys
               </a>
             </p>
