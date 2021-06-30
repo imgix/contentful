@@ -6,7 +6,7 @@ describe('Field component', () => {
   it('Component text exists', () => {
     const mockSdk: any = {
       field: {
-        getValue: () => {}
+        getValue: () => {},
       },
     };
 
