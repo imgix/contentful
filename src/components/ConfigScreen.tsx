@@ -95,7 +95,7 @@ export default class Config extends Component<ConfigProps, ConfigState> {
     return (
       <Workbench className={css({ margin: '80px' })}>
         <Form>
-          <Heading>App Config</Heading>
+          <Heading>App Configuration</Heading>
           <Paragraph>
             Welcome to your imgix Contentful app. This is your config page.
           </Paragraph>
