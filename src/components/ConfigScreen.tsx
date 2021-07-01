@@ -106,6 +106,9 @@ export default class Config extends Component<ConfigProps, ConfigState> {
               labelText="API Key"
               value={this.state.parameters?.imgixAPIKey || ''}
               required={true}
+              textInputProps={{
+                type: 'password',
+              }}
             />
             <p className="ix-helper-text">
               Access your API key at{' '}
