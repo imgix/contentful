@@ -7,6 +7,7 @@ import {
   Paragraph,
   TextField,
   Notification,
+  Icon,
   Button,
 } from '@contentful/forma-36-react-components';
 import { css } from 'emotion';
@@ -147,6 +148,9 @@ export default class Config extends Component<ConfigProps, ConfigState> {
               }}
               onChange={this.handleChange}
             />
+            {this.state.parameters.successfullyVerified && (
+                <Icon icon="CheckCircle" size="tiny" color="positive" />
+            )}
             <p className="ix-helper-text">
               Access your API key at{' '}
               <a
