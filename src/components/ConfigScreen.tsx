@@ -79,6 +79,7 @@ export default class Config extends Component<ConfigProps, ConfigState> {
     this.setState({
       parameters: {
         imgixAPIKey: e.target.value,
+        successfullyVerified: this.state.parameters.successfullyVerified,
       },
     });
   };
