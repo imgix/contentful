@@ -73,6 +73,13 @@ export default class Config extends Component<ConfigProps, ConfigState> {
     });
   };
 
+  verifyAPIKey = async () => {
+  };
+
+  onClick = async () => {
+      await this.verifyAPIKey();
+  };
+
   getAPIKey = async () => {
     return this.props.sdk.app
       .getParameters()
@@ -111,8 +118,12 @@ export default class Config extends Component<ConfigProps, ConfigState> {
               </a>
             </p>
           </div>
-          <Button type="submit" buttonType="positive" onClick={this.setAPIKey}>
-            Save
+          <Button
+            type="submit"
+            buttonType="positive"
+            onClick={this.onClick}
+          >
+            Verify
           </Button>
         </Form>
       </Workbench>
