@@ -25,6 +25,7 @@ interface ConfigProps {
 
 interface ConfigState {
   isButtonLoading?: boolean;
+  validationMessage?: string;
   parameters: AppInstallationParameters;
 }
 
@@ -33,6 +34,7 @@ export default class Config extends Component<ConfigProps, ConfigState> {
     super(props);
     this.state = {
       isButtonLoading: false,
+      validationMessage: '',
       parameters: {},
     };
 
@@ -108,6 +110,7 @@ export default class Config extends Component<ConfigProps, ConfigState> {
       updatedInstallationParameters.successfullyVerified = false;
     } finally {
       this.setState({
+        validationMessage: '',
         isButtonLoading: false,
         parameters: updatedInstallationParameters,
       });
@@ -121,6 +124,7 @@ export default class Config extends Component<ConfigProps, ConfigState> {
       };
       updatedInstallationParameters.successfullyVerified = false;
       this.setState({
+        validationMessage: 'Please input your API Key',
         parameters: updatedInstallationParameters,
       });
     } else {
