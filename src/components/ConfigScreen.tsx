@@ -24,13 +24,17 @@ interface ConfigProps {
 }
 
 interface ConfigState {
+  isButtonLoading?: boolean;
   parameters: AppInstallationParameters;
 }
 
 export default class Config extends Component<ConfigProps, ConfigState> {
   constructor(props: ConfigProps) {
     super(props);
-    this.state = { parameters: {} };
+    this.state = {
+      isButtonLoading: false,
+      parameters: {},
+    };
 
     // `onConfigure` allows to configure a callback to be
     // invoked when a user attempts to install the app or update
@@ -78,6 +82,8 @@ export default class Config extends Component<ConfigProps, ConfigState> {
   };
 
   verifyAPIKey = async () => {
+    this.setState({ isButtonLoading: true });
+
     const imgix = new ImgixAPI({
       apiKey: this.state.parameters.imgixAPIKey || '',
     });
@@ -102,6 +108,7 @@ export default class Config extends Component<ConfigProps, ConfigState> {
       updatedInstallationParameters.successfullyVerified = false;
     } finally {
       this.setState({
+        isButtonLoading: false,
         parameters: updatedInstallationParameters,
       });
     }
@@ -173,6 +180,7 @@ export default class Config extends Component<ConfigProps, ConfigState> {
             type="submit"
             buttonType="positive"
             onClick={this.onClick}
+            loading={this.state.isButtonLoading}
           >
             Verify
           </Button>
