@@ -106,7 +106,7 @@ export default class Config extends Component<ConfigProps, ConfigState> {
         "We couldn't verify this API Key. Confirm your details and try again.",
         {
           duration: 3000,
-          },
+        },
       );
       updatedInstallationParameters.successfullyVerified = false;
     } finally {
