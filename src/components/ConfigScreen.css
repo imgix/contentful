@@ -7,3 +7,17 @@
   display: block;
   color: #606c7c;
 }
+
+.flex-container {
+  display: flex;
+}
+
+.flex-child {
+  flex: 20 0 100%;
+}
+
+.icon {
+  flex: 2;
+  margin-top: 10%;
+  margin-left: 10px;
+}

@@ -138,19 +138,26 @@ export default class Config extends Component<ConfigProps, ConfigState> {
             Welcome to your imgix Contentful app. This is your config page.
           </Paragraph>
           <div>
-            <TextField
-              name="API Key"
-              id="APIKey"
-              labelText="API Key"
-              value={this.state.parameters?.imgixAPIKey || ''}
-              textInputProps={{
-                type: 'password',
-              }}
-              onChange={this.handleChange}
-            />
-            {this.state.parameters.successfullyVerified && (
-                <Icon icon="CheckCircle" size="tiny" color="positive" />
-            )}
+            <div className="flex-container">
+              <div className="flex-child">
+                <TextField
+                  name="API Key"
+                  id="APIKey"
+                  labelText="API Key"
+                  value={this.state.parameters?.imgixAPIKey || ''}
+                  validationMessage={this.state.validationMessage}
+                  textInputProps={{
+                    type: 'password',
+                  }}
+                  onChange={this.handleChange}
+                />
+              </div>
+              {this.state.parameters.successfullyVerified && (
+                <div className="icon">
+                  <Icon icon="CheckCircle" size="tiny" color="positive" />
+                </div>
+              )}
+            </div>
             <p className="ix-helper-text">
               Access your API key at{' '}
               <a
