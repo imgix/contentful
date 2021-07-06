@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component, ChangeEvent } from 'react';
 import { AppExtensionSDK } from 'contentful-ui-extensions-sdk';
 import {
   Heading,
@@ -65,22 +65,12 @@ export default class Config extends Component<ConfigProps, ConfigState> {
     };
   };
 
-  setAPIKey = () => {
-    // Gets the value from the API Key textfield,
-    // saving it as an application installation parameter
-    let keyValue: string = (
-      document.getElementById('APIKey') as HTMLInputElement
-    ).value;
-
-    if (keyValue) {
-      const keyParameter: AppInstallationParameters = { imgixAPIKey: keyValue };
-      const updatedState = {
-        parameters: {
-          ...keyParameter,
-        },
-      };
-      this.setState(updatedState);
-    }
+  handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    this.setState({
+      parameters: {
+        imgixAPIKey: e.target.value,
+      },
+    });
   };
 
   getAPIKey = async () => {
@@ -105,10 +95,10 @@ export default class Config extends Component<ConfigProps, ConfigState> {
               id="APIKey"
               labelText="API Key"
               value={this.state.parameters?.imgixAPIKey || ''}
-              required={true}
               textInputProps={{
                 type: 'password',
               }}
+              onChange={this.handleChange}
             />
             <p className="ix-helper-text">
               Access your API key at{' '}
