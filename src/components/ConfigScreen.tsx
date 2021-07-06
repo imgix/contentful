@@ -6,10 +6,12 @@ import {
   Workbench,
   Paragraph,
   TextField,
+  Notification,
   Button,
 } from '@contentful/forma-36-react-components';
 import { css } from 'emotion';
 import './ConfigScreen.css';
+import ImgixAPI from 'imgix-management-js';
 
 export interface AppInstallationParameters {
   imgixAPIKey?: string;
@@ -74,6 +76,23 @@ export default class Config extends Component<ConfigProps, ConfigState> {
   };
 
   verifyAPIKey = async () => {
+    const imgix = new ImgixAPI({
+      apiKey: this.state.parameters.imgixAPIKey || '',
+    });
+
+    try {
+      await imgix.request('sources');
+      Notification.success('Your API Key was successfully confirmed.', {
+        duration: 3000,
+      });
+    } catch (error) {
+      Notification.error(
+        "We couldn't verify this API Key. Confirm your details and try again.",
+        {
+          duration: 3000,
+          },
+      );
+    }
   };
 
   onClick = async () => {
