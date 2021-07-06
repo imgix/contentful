@@ -15,6 +15,7 @@ import ImgixAPI from 'imgix-management-js';
 
 export interface AppInstallationParameters {
   imgixAPIKey?: string;
+  successfullyVerified?: boolean;
 }
 
 interface ConfigProps {
@@ -80,11 +81,16 @@ export default class Config extends Component<ConfigProps, ConfigState> {
       apiKey: this.state.parameters.imgixAPIKey || '',
     });
 
+    let updatedInstallationParameters: AppInstallationParameters = {
+      ...this.state.parameters,
+    };
+
     try {
       await imgix.request('sources');
       Notification.success('Your API Key was successfully confirmed.', {
         duration: 3000,
       });
+      updatedInstallationParameters.successfullyVerified = true;
     } catch (error) {
       Notification.error(
         "We couldn't verify this API Key. Confirm your details and try again.",
@@ -92,11 +98,26 @@ export default class Config extends Component<ConfigProps, ConfigState> {
           duration: 3000,
           },
       );
+      updatedInstallationParameters.successfullyVerified = false;
+    } finally {
+      this.setState({
+        parameters: updatedInstallationParameters,
+      });
     }
   };
 
   onClick = async () => {
+    if (this.state.parameters.imgixAPIKey === '') {
+      let updatedInstallationParameters: AppInstallationParameters = {
+        ...this.state.parameters,
+      };
+      updatedInstallationParameters.successfullyVerified = false;
+      this.setState({
+        parameters: updatedInstallationParameters,
+      });
+    } else {
       await this.verifyAPIKey();
+    }
   };
 
   getAPIKey = async () => {
