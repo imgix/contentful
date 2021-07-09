@@ -166,28 +166,6 @@ export default class Gallery extends Component<GalleryProps, GalleryState> {
   };
 
   render() {
-    return (
-      <div className="ix-row">
-        {this.state.fullUrls.length > 0 &&
-          this.state.fullUrls.map((url: string) => (
-            <div className="ix-column">
-              <Imgix
-                src={url}
-                width={100}
-                height={100}
-                imgixParams={{
-                  auto: 'format',
-                  fit: 'crop',
-                  crop: 'entropy',
-                }}
-                sizes="(min-width: 480px) calc(12.5vw - 20px)"
-                htmlAttributes={{
-                  onClick: () => this.props.sdk.close(url),
-                }}
-              />
-            </div>
-          ))}
-      </div>
-    );
+    return <div className="ix-gallery">{this.images()}</div>;
   }
 }
