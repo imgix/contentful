@@ -53,15 +53,19 @@ export default class Gallery extends Component<GalleryProps, GalleryState> {
      * object via the `data` top-level field. When parsing all enabled sources,
      * both possibilities must be accounted for.
      */
-    const imagesArray = Array.isArray(images.data)
-      ? images.data
-      : [images.data];
-    imagesArray.map((image: any) =>
-      // TODO: add more explicit types for image
-      allOriginPaths.push(image.attributes.origin_path),
-    );
+    if (images) {
+      const imagesArray = Array.isArray(images.data)
+        ? images.data
+        : [images.data];
+      imagesArray.map((image: any) =>
+        // TODO: add more explicit types for image
+        allOriginPaths.push(image.attributes.origin_path),
+      );
 
-    return allOriginPaths;
+      return allOriginPaths;
+    } else {
+      return [];
+    }
   };
 
   /*
