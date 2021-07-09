@@ -28,7 +28,7 @@ export default class Gallery extends Component<GalleryProps, GalleryState> {
 
   getImages = async () => {
     return await this.props.imgix.request(
-      `assets/${this.props.selectedSource?.id}`,
+      `assets/${this.props.selectedSource?.id}?page[number]=0&page[size]=18`,
     );
   };
 
