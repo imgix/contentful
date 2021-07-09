@@ -1,15 +1,9 @@
 .ix-container {
-  /* margin-top: 38px;
-    margin-left: 64px;
-    margin-right: 64px; */
-  /* margin: 38px 64px 65px 64px; */
   margin: 24px 64px 65px 64px;
   display: grid;
   grid-template-columns: 1fr;
-  /* grid-template-rows: repeat(2, .5fr) 3fr 1fr; */
   grid-template-rows: repeat(2, 0.25fr) 3fr 1fr;
   grid-column-gap: 20px;
-  /* grid-row-gap: 20px; */
 }
 
 .ix-title {
