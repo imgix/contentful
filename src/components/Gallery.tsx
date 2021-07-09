@@ -114,7 +114,7 @@ export default class Gallery extends Component<GalleryProps, GalleryState> {
 
   // stores the placeholder image for the gallery or the acutal images
   images = () => {
-    const numberofPlaceholders = 18;
+    const numberofPlaceholders = 100;
 
     if (!this.state.renderPlaceholder) {
       return this.state.fullUrls.map((url: string) => (
