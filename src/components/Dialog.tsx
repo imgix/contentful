@@ -108,9 +108,10 @@ export default class Dialog extends Component<DialogProps, DialogState> {
 
   render() {
     return (
-      <div>
-        <Paragraph>Hello Dialog Component</Paragraph>
+      <div className="ix-container">
+        <Paragraph className="ix-title">imgix Source:</Paragraph>
         <Dropdown
+          className="ix-dropdown"
           isOpen={this.state.isOpen}
           onClose={() => this.setOpen(false)}
           toggleElement={
@@ -135,17 +136,11 @@ export default class Dialog extends Component<DialogProps, DialogState> {
             ))}
           </DropdownList>
         </Dropdown>
-        <br />
-        <Button onClick={() => this.props.sdk.close(undefined)}>Done</Button>
-        <br />
-        <br />
-        {this.state.selectedSource?.id && (
-          <Gallery
-            selectedSource={this.state.selectedSource}
-            imgix={this.state.imgix}
-            sdk={this.props.sdk}
-          />
-        )}
+        <Gallery
+          selectedSource={this.state.selectedSource}
+          imgix={this.state.imgix}
+          sdk={this.props.sdk}
+        />
       </div>
     );
   }
