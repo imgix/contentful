@@ -122,7 +122,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
               indicateDropdown
               onClick={() => this.setOpen(!this.state.isOpen)}
             >
-              {this.state.selectedSource.name || 'Select a Source'}
+              {this.state.selectedSource.name || 'Select an imgix Source'}
             </Button>
           }
         >
