@@ -43,9 +43,10 @@ export default class Field extends Component<FieldProps, FieldState> {
           onClick={() => {
             this.props.sdk.dialogs
               .openCurrentApp({
-                width: 'fullWidth',
-                minHeight: 1000,
+                width: 1200,
+                minHeight: 726,
                 position: 'top',
+                shouldCloseOnOverlayClick: true,
               })
               .then((image) =>
                 this.setState({ image }, () =>
