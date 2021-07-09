@@ -21,3 +21,10 @@
   grid-row: 2;
   margin-bottom: 50px;
 }
+
+.ix-placeholder-text {
+  text-align: center;
+  margin-top: 33px;
+  font-size: 21px;
+  font-weight: 700;
+}
