@@ -1,5 +1,4 @@
 .ix-container {
-  margin: 24px 64px 65px 64px;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 50px 100px 460px 50px;
@@ -7,11 +6,13 @@
 }
 
 .ix-title {
+  margin-left: 32px;
   grid-row: 1;
   height: 20px;
 }
 
 .ix-dropdown {
+  margin-left: 32px;
   grid-row: 2;
   margin-bottom: 50px;
 }

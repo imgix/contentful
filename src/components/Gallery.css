@@ -5,6 +5,12 @@
   1025px — 1200px: Desktops, large screens.
   1201px and more — Extra large screens, TV. 
 */
+
+.ix-gallery {
+  overflow: hidden;
+  margin-left: 32px;
+}
+
 @media only screen and (min-width: 480px) {
   .ix-gallery {
     display: grid;
