@@ -8,9 +8,7 @@
 @media only screen and (min-width: 480px) {
   .ix-gallery {
     display: grid;
-    /* grid-template-columns: repeat(6, 1fr); */
     grid-template-columns: repeat(auto-fill, 140px);
-    /* grid-template-rows: repeat(3, 1fr); */
     grid-template-rows: auto;
     grid-column-gap: 20px;
     grid-row-gap: 20px;
@@ -33,9 +31,7 @@
 @media only screen and (min-width: 768px) {
   .ix-gallery {
     display: grid;
-    /* grid-template-columns: repeat(6, 1fr); */
     grid-template-columns: repeat(auto-fill, 140px);
-    /* grid-template-rows: repeat(3, 1fr); */
     grid-template-rows: auto;
     grid-column-gap: 20px;
     grid-row-gap: 20px;
@@ -58,9 +54,7 @@
 @media only screen and (min-width: 1024px) {
   .ix-gallery {
     display: grid;
-    /* grid-template-columns: repeat(6, 1fr); */
     grid-template-columns: repeat(auto-fill, 140px);
-    /* grid-template-rows: repeat(3, 1fr); */
     grid-template-rows: auto;
     grid-column-gap: 20px;
     grid-row-gap: 20px;
@@ -83,9 +77,7 @@
 @media only screen and (min-width: 1200px) {
   .ix-gallery {
     display: grid;
-    /* grid-template-columns: repeat(6, 1fr); */
     grid-template-columns: repeat(auto-fill, 140px);
-    /* grid-template-rows: repeat(3, 1fr); */
     grid-template-rows: auto;
     grid-column-gap: 20px;
     grid-row-gap: 20px;
