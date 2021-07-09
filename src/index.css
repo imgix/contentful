@@ -1,4 +1,4 @@
-html,
+/* html,
 body,
 div {
   margin: 0;
@@ -7,4 +7,14 @@ div {
   font-size: 100%;
   font: inherit;
   vertical-align: baseline;
+} */
+
+iframe[title*='widget-renderer'] {
+  width: max-content;
+  background-color: red;
+}
+iframe[src*='http://localhost:3000/']
+{
+  width: max-content;
+  background-color: red;
 }
