@@ -3,12 +3,21 @@
 }
 
 .ix-title {
-  margin-bottom: 10px;
+  margin-left: 32px;
+  margin-top: 38px;
+  grid-row: 1;
+  height: 20px;
+}
+
+.ix-dropdown {
+  margin-left: 32px;
+  margin-top: 28px;
+  grid-row: 2;
 }
 
 .ix-placeholder-text {
   text-align: center;
-  margin-top: 33px;
+  margin-top: 40px;
   font-size: 21px;
   font-weight: 700;
 }
