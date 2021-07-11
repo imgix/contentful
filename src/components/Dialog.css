@@ -2,6 +2,18 @@
   padding: 20px;
 }
 
+.ix-header-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.ix-close-button {
+  width: 10%;
+  margin-left: auto;
+  margin-top: 38px;
+  margin-right: 64px;
+}
+
 .ix-title {
   margin-left: 32px;
   margin-top: 38px;
