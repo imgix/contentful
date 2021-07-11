@@ -10,6 +10,9 @@
   margin-top: 38px;
   grid-row: 1;
   height: 20px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
 }
 
 .ix-dropdown {
