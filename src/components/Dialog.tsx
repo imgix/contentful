@@ -111,6 +111,13 @@ export default class Dialog extends Component<DialogProps, DialogState> {
     return (
       <div className="ix-container">
         <Paragraph className="ix-title">imgix Source:</Paragraph>
+          <Button
+            className="ix-close-button"
+            icon="Close"
+            buttonType="naked"
+            size="small"
+            onClick={() => this.props.sdk.close()}
+          ></Button>
         <Dropdown
           className="ix-dropdown"
           isOpen={this.state.isOpen}
