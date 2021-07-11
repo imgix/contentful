@@ -153,6 +153,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
           sdk={this.props.sdk}
         />
         {this.state.selectedSource.id && (
+          <div className="ix-pagination">
             <Button buttonType="muted" icon="ChevronLeft" size="small">
               Prev Page
             </Button>
@@ -172,6 +173,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
                   icon="ChevronRight"
                 />
             </Button>
+          </div>
         )}
       </div>
     );
