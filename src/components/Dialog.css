@@ -42,3 +42,9 @@
     padding-right: 64px;
   }
 }
+
+.ix-pagination {
+  margin-left: 32px;
+  margin-top: 32px;
+  grid-row: 4;
+}
