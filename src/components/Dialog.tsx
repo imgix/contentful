@@ -5,6 +5,7 @@ import {
   Dropdown,
   DropdownList,
   DropdownListItem,
+  Icon,
 } from '@contentful/forma-36-react-components';
 import { DialogExtensionSDK } from 'contentful-ui-extensions-sdk';
 import { AppInstallationParameters } from './ConfigScreen';
@@ -151,6 +152,27 @@ export default class Dialog extends Component<DialogProps, DialogState> {
           imgix={this.state.imgix}
           sdk={this.props.sdk}
         />
+        {this.state.selectedSource.id && (
+            <Button buttonType="muted" icon="ChevronLeft" size="small">
+              Prev Page
+            </Button>
+            <Dropdown
+              toggleElement={
+                <Button size="small" buttonType="muted" indicateDropdown>
+                  {'Page 1 of 5'} {/* TODO: replace placeholder */}
+                </Button>
+              }
+            >
+              {/* placeholder */}
+            </Dropdown>
+            <Button buttonType="muted" size="small">
+                Next Page
+                <Icon
+                  color="secondary"
+                  icon="ChevronRight"
+                />
+            </Button>
+        )}
       </div>
     );
   }
