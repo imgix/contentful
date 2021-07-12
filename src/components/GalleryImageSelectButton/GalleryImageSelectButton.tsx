@@ -23,21 +23,17 @@ export function GalleryImageSelectButton({
   };
 
   return (
-    <div
-      className={
-        hidden
-          ? 'ix-gallery-image-select-button hidden'
-          : 'ix-gallery-image-select-button'
-      }
-    >
-      <Button
-        size="small"
-        disabled={disabled}
-        onClick={onClick}
-        buttonType={disabled ? 'muted' : 'primary'}
-      >
-        Select image
-      </Button>
+    <div className={hidden ? 'ix-gallery-select hidden' : 'ix-gallery-select'}>
+      <div className="ix-gallery-select-button">
+        <Button
+          size="small"
+          disabled={disabled}
+          onClick={onClick}
+          buttonType={disabled ? 'muted' : 'primary'}
+        >
+          Select image
+        </Button>
+      </div>
     </div>
   );
 }

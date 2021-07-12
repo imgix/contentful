@@ -1,6 +1,9 @@
-.ix-gallery-image-select-button {
-  padding-top: 32px;
-  position: absolute;
-  top: 85%;
-  left: 85%;
+.ix-gallery-select {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(1fr, 1fr));
+}
+.ix-gallery-select-button {
+  grid-column: 2;
+  justify-self: right;
+  padding: 32px;
 }
