@@ -47,7 +47,7 @@
     ]
   },
   "devDependencies": {
-    "@types/react-imgix": "9.0.3",
+    "@types/react-imgix": "9.0.4",
     "prettier": "2.3.2"
   }
 }
