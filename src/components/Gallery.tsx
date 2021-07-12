@@ -1,8 +1,10 @@
-import ImgixAPI, { APIError } from 'imgix-management-js';
 import { Component } from 'react';
-import Imgix from 'react-imgix';
-import { SourceProps } from './Dialog';
+import ImgixAPI, { APIError } from 'imgix-management-js';
 import { DialogExtensionSDK } from 'contentful-ui-extensions-sdk';
+
+import { SourceProps } from './Dialog';
+import { GalleryImage } from './GalleryImage/GalleryImage';
+
 import './Gallery.css';
 
 interface GalleryProps {
@@ -119,22 +121,7 @@ export default class Gallery extends Component<GalleryProps, GalleryState> {
     if (!this.state.renderPlaceholder) {
       return this.state.fullUrls.map((url: string) => (
         <div className="ix-column">
-          <Imgix
-            src={url}
-            // width={100}
-            // height={100}
-            width={70}
-            height={70}
-            imgixParams={{
-              auto: 'format',
-              fit: 'crop',
-              crop: 'entropy',
-            }}
-            sizes="(min-width: 480px) calc(12.5vw - 20px)"
-            htmlAttributes={{
-              onClick: () => this.props.sdk.close(url),
-            }}
-          />
+          <GalleryImage url={url} onClose={() => this.props.sdk.close(url)} />
         </div>
       ));
     } else {
