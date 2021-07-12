@@ -1,0 +1,26 @@
+.ix-gallery-image {
+  position: relative;
+  z-index: 2;
+}
+.ix-gallery-image-gradient {
+  z-index: 5;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 140px;
+  content: '';
+}
+/* css gradient on hover */
+.ix-gallery-image-gradient:hover {
+  background: rgba(255, 255, 255, 0.424);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 142px;
+  content: '';
+  cursor: pointer;
+}
