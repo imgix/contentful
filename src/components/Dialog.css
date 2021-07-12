@@ -1,20 +1,9 @@
 .ix-container {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 50px 100px 460px 50px;
-  grid-column-gap: 20px;
+  padding: 20px;
 }
 
 .ix-title {
-  margin-left: 32px;
-  grid-row: 1;
-  height: 20px;
-}
-
-.ix-dropdown {
-  margin-left: 32px;
-  grid-row: 2;
-  margin-bottom: 50px;
+  margin-bottom: 10px;
 }
 
 .ix-placeholder-text {
@@ -22,4 +11,17 @@
   margin-top: 33px;
   font-size: 21px;
   font-weight: 700;
+}
+
+@media only screen and (min-width: 481px) {
+  .ix-container {
+    padding: 40px;
+  }
+}
+
+@media only screen and (min-width: 1025px) {
+  .ix-container {
+    padding-left: 64px;
+    padding-right: 64px;
+  }
 }
