@@ -118,13 +118,13 @@ export default class Gallery extends Component<GalleryProps, GalleryState> {
 
     if (!this.state.renderPlaceholder) {
       return this.state.fullUrls.map((url: string) => (
-        <div className="ix-column">
+        <div className="ix-gallery-item">
           <Imgix
             src={url}
             // width={100}
             // height={100}
-            width={70}
-            height={70}
+            width={140}
+            height={140}
             imgixParams={{
               auto: 'format',
               fit: 'crop',
@@ -140,7 +140,7 @@ export default class Gallery extends Component<GalleryProps, GalleryState> {
     } else {
       // return an array of placerholder images
       return [...Array(numberofPlaceholders)].map((_, i) => (
-        <div className="ix-column ix-placeholder">
+        <div className="ix-gallery-item ix-placeholder">
           {/* <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
               <rect x="100" y="150" rx="0" ry="0" width="400" height="300" fill="#E5EBED" />
             </svg> */}
