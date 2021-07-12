@@ -167,11 +167,14 @@ export default class Dialog extends Component<DialogProps, DialogState> {
               {/* placeholder */}
             </Dropdown>
             <Button buttonType="muted" size="small">
+              <div className="ix-next-page-button">
                 Next Page
                 <Icon
+                  className="ix-chevron-right"
                   color="secondary"
                   icon="ChevronRight"
                 />
+              </div>
             </Button>
           </div>
         )}

@@ -48,3 +48,18 @@
   margin-top: 32px;
   grid-row: 4;
 }
+
+.ix-next-page-button {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+}
+
+.ix-chevron-right {
+  margin-top: 5px;
+}
+
+.Button__Button___1ZfFj
+  Button__Button--muted___2Wair
+  Button__Button--small___3yyrk {
+  width: 120px;
+}
