@@ -11,8 +11,8 @@
   grid-gap: 8px;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: auto;
-  margin-left: 20px;
-  margin-right: 20px;
+  margin-top: 32px;
+  margin-bottom: 32px;
 
   overflow: hidden;
 }
@@ -40,8 +40,6 @@
   .ix-gallery {
     grid-gap: 12px;
     grid-template-columns: repeat(4, 1fr);
-    margin-left: 40px;
-    margin-right: 40px;
   }
 }
 
@@ -56,7 +54,5 @@
   .ix-gallery {
     grid-gap: 20px;
     grid-template-columns: repeat(6, 1fr);
-    margin-left: 64px;
-    margin-right: 64px;
   }
 }
