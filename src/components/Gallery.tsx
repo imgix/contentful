@@ -121,7 +121,7 @@ export default class Gallery extends Component<GalleryProps, GalleryState> {
     if (!this.state.renderPlaceholder) {
       return this.state.fullUrls.map((url: string) => (
         <div className="ix-column">
-          <GalleryImage url={url} onClose={() => this.props.sdk.close(url)} />
+          <GalleryImage url={url} />
         </div>
       ));
     } else {

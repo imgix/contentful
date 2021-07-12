@@ -5,10 +5,9 @@ import './GalleryImage.css';
 
 interface GalleryImageProps {
   url: string;
-  onClose: Function;
 }
 
-export function GalleryImage({ url, onClose }: GalleryImageProps) {
+export function GalleryImage({ url }: GalleryImageProps) {
   return (
     <div className="ix-gallery-image">
       <div className="ix-gallery-image-gradient"></div>
@@ -22,9 +21,6 @@ export function GalleryImage({ url, onClose }: GalleryImageProps) {
           crop: 'entropy',
         }}
         sizes="(min-width: 480px) calc(12.5vw - 20px)"
-        htmlAttributes={{
-          onClick: () => onClose(url),
-        }}
       />
     </div>
   );
