@@ -132,7 +132,7 @@ export default class Gallery extends Component<GalleryProps, GalleryState> {
     if (!this.state.renderPlaceholder) {
       return this.state.fullUrls.map((url: string) => (
         <div className="ix-column" onClick={(e) => this.handleImageClick(url)}>
-          <GalleryImage url={url} />
+          <GalleryImage url={url} focus={url === this.state.selectedSource} />
         </div>
       ));
     } else {

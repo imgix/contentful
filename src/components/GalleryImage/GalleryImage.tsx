@@ -5,11 +5,13 @@ import './GalleryImage.css';
 
 interface GalleryImageProps {
   url: string;
+  focus: boolean;
 }
 
-export function GalleryImage({ url }: GalleryImageProps) {
+export function GalleryImage({ url, focus }: GalleryImageProps) {
+  const _focus = focus ? ' ix-focus' : '';
   return (
-    <div className="ix-gallery-image">
+    <div className={'ix-gallery-image' + _focus}>
       <div className="ix-gallery-image-gradient"></div>
       <Imgix
         src={url}
