@@ -2,13 +2,25 @@
   padding: 20px;
 }
 
+.ix-header-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.ix-close-button {
+  width: 10%;
+  margin-left: auto;
+  margin-top: 38px;
+  margin-right: 64px;
+}
+
 .ix-title {
   margin-bottom: 10px;
 }
 
 .ix-placeholder-text {
   text-align: center;
-  margin-top: 33px;
+  margin-top: 40px;
   font-size: 21px;
   font-weight: 700;
 }
