@@ -4,6 +4,7 @@ import { DialogExtensionSDK } from 'contentful-ui-extensions-sdk';
 
 import { SourceProps } from './Dialog';
 import { GalleryImage } from './GalleryImage/GalleryImage';
+import { GalleryImageSelectButton } from './/GalleryImageSelectButton/GalleryImageSelectButton';
 
 import './Gallery.css';
 
@@ -16,6 +17,7 @@ interface GalleryProps {
 interface GalleryState {
   fullUrls: Array<string>;
   renderPlaceholder: boolean;
+  selectedSource: string;
 }
 
 export default class Gallery extends Component<GalleryProps, GalleryState> {
@@ -25,6 +27,7 @@ export default class Gallery extends Component<GalleryProps, GalleryState> {
     this.state = {
       fullUrls: [],
       renderPlaceholder: true,
+      selectedSource: '',
     };
   }
 
@@ -114,7 +117,13 @@ export default class Gallery extends Component<GalleryProps, GalleryState> {
     }
   }
 
+  handleImageClick = (url: string) => {
+    this.setState({ selectedSource: url });
+  };
 
+  handleSubmit = (selectedSource: string) => {
+    this.props.sdk.close(selectedSource);
+  };
 
   // stores the placeholder image for the gallery or the acutal images
   images = () => {
@@ -122,7 +131,7 @@ export default class Gallery extends Component<GalleryProps, GalleryState> {
 
     if (!this.state.renderPlaceholder) {
       return this.state.fullUrls.map((url: string) => (
-        <div className="ix-column">
+        <div className="ix-column" onClick={(e) => this.handleImageClick(url)}>
           <GalleryImage url={url} />
         </div>
       ));
@@ -155,6 +164,16 @@ export default class Gallery extends Component<GalleryProps, GalleryState> {
   };
 
   render() {
-    return <div className="ix-gallery">{this.images()}</div>;
+    const selectedSource = this.state.selectedSource;
+    return (
+      <>
+        <div className="ix-gallery">{this.images()}</div>
+        <GalleryImageSelectButton
+          disabled={this.state.selectedSource === ''} // if no source, disable
+          hidden={this.state.fullUrls.length === 0} // if no images, hide
+          handleClick={(e: any) => this.handleSubmit(selectedSource)}
+        />
+      </>
+    );
   }
 }
