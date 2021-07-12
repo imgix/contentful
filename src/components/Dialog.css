@@ -1,7 +1,7 @@
 .ix-container {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 50px 100px 460px 50px;
+  grid-template-rows: 50px 100px 470px 50px;
   grid-column-gap: 20px;
 }
 
