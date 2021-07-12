@@ -28,6 +28,16 @@ export default class Gallery extends Component<GalleryProps, GalleryState> {
     };
   }
 
+  async componentDidMount() {
+    this.renderImagesOrPlaceholder();
+  }
+
+  async componentDidUpdate(prevProps: GalleryProps) {
+    if (this.props.selectedSource.id !== prevProps.selectedSource.id) {
+      this.renderImagesOrPlaceholder();
+    }
+  }
+
   getImages = async () => {
     return await this.props.imgix.request(
       `assets/${this.props.selectedSource?.id}?page[number]=0&page[size]=18`,
@@ -104,15 +114,7 @@ export default class Gallery extends Component<GalleryProps, GalleryState> {
     }
   }
 
-  async componentDidMount() {
-    this.renderImagesOrPlaceholder();
-  }
 
-  async componentDidUpdate(prevProps: GalleryProps) {
-    if (this.props.selectedSource.id !== prevProps.selectedSource.id) {
-      this.renderImagesOrPlaceholder();
-    }
-  }
 
   // stores the placeholder image for the gallery or the acutal images
   images = () => {
