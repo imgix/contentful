@@ -39,3 +39,7 @@
   font-size: 21px;
   font-weight: 700;
 }
+
+.hidden {
+  display: none;
+}
