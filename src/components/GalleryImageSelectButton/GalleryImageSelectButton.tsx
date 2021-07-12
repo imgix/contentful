@@ -32,9 +32,9 @@ export function GalleryImageSelectButton({
     >
       <Button
         size="small"
-        buttonType="muted"
         disabled={disabled}
         onClick={onClick}
+        buttonType={disabled ? 'muted' : 'primary'}
       >
         Select image
       </Button>
