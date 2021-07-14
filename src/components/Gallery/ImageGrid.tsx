@@ -1,6 +1,8 @@
 import { FunctionComponent } from 'react';
 import Imgix from 'react-imgix';
 
+import './ImageGrid.css';
+
 interface ImageGridProps {
   images: string[];
   onClick: (event: any) => void;
