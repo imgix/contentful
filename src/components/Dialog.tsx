@@ -22,6 +22,7 @@ interface DialogState {
   isOpen: boolean;
   allSources: Array<SourceProps>;
   selectedSource: Partial<SourceProps>;
+  totalImageCount: number;
 }
 
 export type SourceProps = {
@@ -46,6 +47,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
       isOpen: false,
       allSources: [],
       selectedSource: {},
+      totalImageCount: 0,
     };
   }
 
@@ -160,7 +162,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
             <Dropdown
               toggleElement={
                 <Button size="small" buttonType="muted" indicateDropdown>
-                  {'Page 1 of 5'} {/* TODO: replace placeholder */}
+                  {'Page 1 of '} {Math.ceil(this.state.totalImageCount / 18)}
                 </Button>
               }
             >
