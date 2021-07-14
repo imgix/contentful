@@ -1,12 +1,11 @@
 import { Component } from 'react';
 import ImgixAPI, { APIError } from 'imgix-management-js';
-import Imgix from 'react-imgix';
 import { DialogExtensionSDK } from 'contentful-ui-extensions-sdk';
 
 import { SourceProps } from '../Dialog';
 import { ImageGrid } from './ImageGrid';
 
-import './Gallery.css';
+import './ImageGallery.css';
 
 interface GalleryProps {
   selectedSource: Partial<SourceProps>;
