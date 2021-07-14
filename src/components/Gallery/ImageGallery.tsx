@@ -3,8 +3,7 @@ import ImgixAPI, { APIError } from 'imgix-management-js';
 import { DialogExtensionSDK } from 'contentful-ui-extensions-sdk';
 
 import { SourceProps } from '../Dialog';
-import { ImageGrid } from './ImageGrid';
-import { ImagePlaceholder } from './ImagePlaceholder';
+import { ImageGrid, ImagePlaceholder } from './';
 
 import './ImageGallery.css';
 
@@ -20,7 +19,7 @@ interface GalleryState {
   renderPlaceholder: boolean;
 }
 
-export default class Gallery extends Component<GalleryProps, GalleryState> {
+export class Gallery extends Component<GalleryProps, GalleryState> {
   constructor(props: GalleryProps) {
     super(props);
 
