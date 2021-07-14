@@ -8,9 +8,11 @@ import {
   Icon,
 } from '@contentful/forma-36-react-components';
 import { DialogExtensionSDK } from 'contentful-ui-extensions-sdk';
-import { AppInstallationParameters } from './ConfigScreen';
 import ImgixAPI, { APIError } from 'imgix-management-js';
-import Gallery from './Gallery/ImageGallery';
+
+import { AppInstallationParameters } from '../ConfigScreen/';
+import { ImageGallery } from '../Gallery/';
+
 import './Dialog.css';
 
 interface DialogProps {
@@ -153,7 +155,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
             ))}
           </DropdownList>
         </Dropdown>
-        <Gallery
+        <ImageGallery
           selectedSource={this.state.selectedSource}
           imgix={this.state.imgix}
           sdk={this.props.sdk}
