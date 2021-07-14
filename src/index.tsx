@@ -14,14 +14,15 @@ import {
 import '@contentful/forma-36-react-components/dist/styles.css';
 import '@contentful/forma-36-fcss/dist/styles.css';
 import '@contentful/forma-36-tokens/dist/css/index.css';
-import './index.css';
 
 import Config from './components/ConfigScreen';
-import EntryEditor from './components/EntryEditor';
-import Page from './components/Page';
-import Sidebar from './components/Sidebar';
-import Field from './components/Field';
-import Dialog from './components/Dialog';
+import EntryEditor from './components/EntryEditor/';
+import Page from './components/Page/';
+import Sidebar from './components/Sidebar/';
+import Field from './components/Field/';
+import Dialog from './components/Dialog/';
+
+import './index.css';
 
 import LocalhostWarning from './components/LocalhostWarning';
 
