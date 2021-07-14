@@ -99,7 +99,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
 
   handleTotalImageCount = (totalImageCount: number) => {
     this.setState({ totalImageCount });
-  }
+  };
 
   setOpen = (isOpen: boolean, selectedSource?: SourceProps) => {
     if (selectedSource) {
