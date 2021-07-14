@@ -1,8 +1,11 @@
-import ImgixAPI, { APIError } from 'imgix-management-js';
 import { Component } from 'react';
+import ImgixAPI, { APIError } from 'imgix-management-js';
 import Imgix from 'react-imgix';
-import { SourceProps } from '../Dialog';
 import { DialogExtensionSDK } from 'contentful-ui-extensions-sdk';
+
+import { SourceProps } from '../Dialog';
+import { ImageGrid } from './ImageGrid';
+
 import './Gallery.css';
 
 interface GalleryProps {
@@ -112,60 +115,14 @@ export default class Gallery extends Component<GalleryProps, GalleryState> {
     }
   }
 
-  // stores the placeholder image for the gallery or the acutal images
-  images = () => {
-    const numberofPlaceholders = 100;
-
-    if (!this.state.renderPlaceholder) {
-      return this.state.fullUrls.map((url: string) => (
-        <div className="ix-gallery-item">
-          <Imgix
-            src={url}
-            // width={100}
-            // height={100}
-            width={140}
-            height={140}
-            imgixParams={{
-              auto: 'format',
-              fit: 'crop',
-              crop: 'entropy',
-            }}
-            sizes="(min-width: 480px) calc(12.5vw - 20px)"
-            htmlAttributes={{
-              onClick: () => this.props.sdk.close(url),
-            }}
-          />
-        </div>
-      ));
-    } else {
-      // return an array of placerholder images
-      return [...Array(numberofPlaceholders)].map((_, i) => (
-        <div className="ix-gallery-item ix-placeholder">
-          {/* <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
-              <rect x="100" y="150" rx="0" ry="0" width="400" height="300" fill="#E5EBED" />
-            </svg> */}
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="140"
-            height="140"
-            viewBox="0 0 140 140"
-          >
-            <rect
-              x="100"
-              y="150"
-              rx="0"
-              ry="0"
-              width="140"
-              height="140"
-              fill="#E5EBED"
-            />
-          </svg>
-        </div>
-      ));
-    }
-  };
-
   render() {
-    return <div className="ix-gallery">{this.images()}</div>;
+    return (
+      <div className="ix-gallery">
+        <ImageGrid
+          images={this.state.fullUrls}
+          onClick={this.props.sdk.close}
+        />
+      </div>
+    );
   }
 }
