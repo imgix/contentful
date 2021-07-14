@@ -1,7 +1,7 @@
 import ImgixAPI, { APIError } from 'imgix-management-js';
 import { Component } from 'react';
 import Imgix from 'react-imgix';
-import { SourceProps } from './Dialog';
+import { SourceProps } from '../Dialog';
 import { DialogExtensionSDK } from 'contentful-ui-extensions-sdk';
 import './Gallery.css';
 
