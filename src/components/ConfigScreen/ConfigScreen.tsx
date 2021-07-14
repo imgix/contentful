@@ -11,8 +11,9 @@ import {
   Button,
 } from '@contentful/forma-36-react-components';
 import { css } from 'emotion';
-import './ConfigScreen.css';
 import ImgixAPI from 'imgix-management-js';
+
+import './ConfigScreen.css';
 
 export interface AppInstallationParameters {
   imgixAPIKey?: string;

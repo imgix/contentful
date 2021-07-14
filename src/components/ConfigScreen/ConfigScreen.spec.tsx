@@ -1,5 +1,5 @@
 import React from 'react';
-import ConfigScreen from './ConfigScreen';
+import ConfigScreen from './';
 import { render } from '@testing-library/react';
 
 describe('Config Screen component', () => {
