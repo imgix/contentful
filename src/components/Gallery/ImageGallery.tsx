@@ -4,6 +4,7 @@ import { DialogExtensionSDK } from 'contentful-ui-extensions-sdk';
 
 import { SourceProps } from '../Dialog';
 import { ImageGrid } from './ImageGrid';
+import { ImagePlaceholder } from './ImagePlaceholder';
 
 import './ImageGallery.css';
 
@@ -115,6 +116,9 @@ export default class Gallery extends Component<GalleryProps, GalleryState> {
   }
 
   render() {
+    if (this.state.fullUrls.length === 0) {
+      return <ImagePlaceholder />;
+    }
     return (
       <div className="ix-gallery">
         <ImageGrid
