@@ -1,17 +1,12 @@
 import { Component } from 'react';
-import {
-  Button,
-  Paragraph,
-  Dropdown,
-  DropdownList,
-  DropdownListItem,
-  Icon,
-} from '@contentful/forma-36-react-components';
 import { DialogExtensionSDK } from 'contentful-ui-extensions-sdk';
 import ImgixAPI, { APIError } from 'imgix-management-js';
 
+import { DialogHeader } from './';
 import { AppInstallationParameters } from '../ConfigScreen/';
 import { ImageGallery } from '../Gallery/';
+import { SourceSelect } from '../SourceSelect/';
+import { Pagination } from '../Pagination/';
 
 import './Dialog.css';
 
@@ -103,12 +98,8 @@ export default class Dialog extends Component<DialogProps, DialogState> {
     this.setState({ totalImageCount });
   };
 
-  setOpen = (isOpen: boolean, selectedSource?: SourceProps) => {
-    if (selectedSource) {
-      this.setState({ isOpen, selectedSource });
-    } else {
-      this.setState({ isOpen });
-    }
+  setSelectedSource = (source: SourceProps) => {
+    this.setState({ selectedSource: source });
   };
 
   async componentDidMount() {
@@ -117,76 +108,27 @@ export default class Dialog extends Component<DialogProps, DialogState> {
   }
 
   render() {
+    const { selectedSource, allSources, totalImageCount, imgix } = this.state;
+    const sdk = this.props.sdk;
+
     return (
       <div className="ix-container">
-        <div className="ix-header-container">
-          <Paragraph className="ix-title">imgix Source:</Paragraph>
-          <Button
-            className="ix-close-button"
-            icon="Close"
-            buttonType="naked"
-            size="small"
-            onClick={() => this.props.sdk.close()}
-          ></Button>
-        </div>
-        <Dropdown
-          className="ix-dropdown"
-          isOpen={this.state.isOpen}
-          onClose={() => this.setOpen(false)}
-          toggleElement={
-            <Button
-              size="small"
-              buttonType="muted"
-              indicateDropdown
-              onClick={() => this.setOpen(!this.state.isOpen)}
-            >
-              {this.state.selectedSource.name || 'Select an imgix Source'}
-            </Button>
-          }
-        >
-          <DropdownList>
-            {this.state.allSources.map((source: SourceProps) => (
-              <DropdownListItem
-                key={source.id}
-                onClick={() => this.setOpen(false, source)}
-              >
-                {source.name}
-              </DropdownListItem>
-            ))}
-          </DropdownList>
-        </Dropdown>
+        <DialogHeader handleClose={this.props.sdk.close} />
+        <SourceSelect
+          selectedSource={selectedSource}
+          allSources={allSources}
+          setSource={this.setSelectedSource}
+        />
         <ImageGallery
-          selectedSource={this.state.selectedSource}
-          imgix={this.state.imgix}
-          sdk={this.props.sdk}
+          selectedSource={selectedSource}
+          imgix={imgix}
+          sdk={sdk}
           getTotalImageCount={this.handleTotalImageCount}
         />
-        {this.state.selectedSource.id && (
-          <div className="ix-pagination">
-            <Button buttonType="muted" icon="ChevronLeft" size="small">
-              Prev Page
-            </Button>
-            <Dropdown
-              toggleElement={
-                <Button size="small" buttonType="muted" indicateDropdown>
-                  {'Page 1 of '} {Math.ceil(this.state.totalImageCount / 18)}
-                </Button>
-              }
-            >
-              {/* placeholder */}
-            </Dropdown>
-            <Button buttonType="muted" size="small">
-              <div className="ix-next-page-button">
-                Next Page
-                <Icon
-                  className="ix-chevron-right"
-                  color="secondary"
-                  icon="ChevronRight"
-                />
-              </div>
-            </Button>
-          </div>
-        )}
+        <Pagination
+          sourceId={selectedSource.id}
+          totalImageCount={totalImageCount}
+        />
       </div>
     );
   }
