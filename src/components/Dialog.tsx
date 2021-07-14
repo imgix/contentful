@@ -9,7 +9,7 @@ import {
 import { DialogExtensionSDK } from 'contentful-ui-extensions-sdk';
 import { AppInstallationParameters } from './ConfigScreen';
 import ImgixAPI, { APIError } from 'imgix-management-js';
-import Gallery from './Gallery/Gallery';
+import Gallery from './Gallery/ImageGallery';
 import './Dialog.css';
 
 interface DialogProps {
