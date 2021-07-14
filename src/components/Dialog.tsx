@@ -97,6 +97,10 @@ export default class Dialog extends Component<DialogProps, DialogState> {
     return enabledSources;
   };
 
+  handleTotalImageCount = (totalImageCount: number) => {
+    this.setState({ totalImageCount });
+  }
+
   setOpen = (isOpen: boolean, selectedSource?: SourceProps) => {
     if (selectedSource) {
       this.setState({ isOpen, selectedSource });
@@ -153,6 +157,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
           selectedSource={this.state.selectedSource}
           imgix={this.state.imgix}
           sdk={this.props.sdk}
+          getTotalImageCount={this.handleTotalImageCount}
         />
         {this.state.selectedSource.id && (
           <div className="ix-pagination">
