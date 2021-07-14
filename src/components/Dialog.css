@@ -30,13 +30,6 @@
   grid-row: 2;
 }
 
-.ix-placeholder-text {
-  text-align: center;
-  margin-top: 40px;
-  font-size: 21px;
-  font-weight: 700;
-}
-
 @media only screen and (min-width: 481px) {
   .ix-container {
     padding: 40px;
