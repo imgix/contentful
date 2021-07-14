@@ -1,5 +1,5 @@
 import React from 'react';
-import EntryEditor from './EntryEditor';
+import EntryEditor from './';
 import { render } from '@testing-library/react';
 
 describe('Entry component', () => {
