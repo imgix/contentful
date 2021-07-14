@@ -151,11 +151,6 @@ export default class Dialog extends Component<DialogProps, DialogState> {
           imgix={this.state.imgix}
           sdk={this.props.sdk}
         />
-        {!this.state.selectedSource.id && (
-          <Paragraph className="ix-placeholder-text">
-            Select a Source to view your image gallery
-          </Paragraph>
-        )}
       </div>
     );
   }
