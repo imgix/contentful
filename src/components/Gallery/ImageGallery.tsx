@@ -35,7 +35,9 @@ export default class Gallery extends Component<GalleryProps, GalleryState> {
       `assets/${this.props.selectedSource?.id}?page[number]=0&page[size]=18`,
     );
     // TODO: add more explicit types for image
-    this.props.getTotalImageCount(parseInt((assets.meta.cursor as any).totalRecords));
+    this.props.getTotalImageCount(
+      parseInt((assets.meta.cursor as any).totalRecords),
+    );
     return assets;
   };
 
