@@ -12,6 +12,7 @@ interface GalleryProps {
   selectedSource: Partial<SourceProps>;
   imgix: ImgixAPI;
   sdk: DialogExtensionSDK;
+  getTotalImageCount: (totalImageCount: number) => void;
 }
 
 interface GalleryState {
@@ -30,9 +31,12 @@ export default class Gallery extends Component<GalleryProps, GalleryState> {
   }
 
   getImages = async () => {
-    return await this.props.imgix.request(
+    const assets = await this.props.imgix.request(
       `assets/${this.props.selectedSource?.id}?page[number]=0&page[size]=18`,
     );
+    // TODO: add more explicit types for image
+    this.props.getTotalImageCount(parseInt((assets.meta.cursor as any).totalRecords));
+    return assets;
   };
 
   getImagePaths = async () => {
