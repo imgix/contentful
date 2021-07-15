@@ -103,7 +103,10 @@ export default class Dialog extends Component<DialogProps, DialogState> {
 
   handleTotalImageCount = (totalImageCount: number) =>
     this.setState({
-      page: { current: 1, totalPageCount: Math.ceil(totalImageCount / 18) },
+      page: {
+        ...this.state.page,
+        totalPageCount: Math.ceil(totalImageCount / 18),
+      },
     });
 
   handlePageChange = (newPageIndex: number) =>
