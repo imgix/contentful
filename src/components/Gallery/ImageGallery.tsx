@@ -2,7 +2,7 @@ import { Component } from 'react';
 import ImgixAPI, { APIError } from 'imgix-management-js';
 import { DialogExtensionSDK } from 'contentful-ui-extensions-sdk';
 
-import { SourceProps } from '../Dialog';
+import { SourceProps, PageProps } from '../Dialog';
 import { ImageGrid, ImagePlaceholder, ImagePagination } from './';
 
 import './ImageGallery.css';
@@ -12,6 +12,7 @@ interface GalleryProps {
   imgix: ImgixAPI;
   sdk: DialogExtensionSDK;
   getTotalImageCount: (totalImageCount: number) => void;
+  pageInfo: PageProps;
 }
 
 interface GalleryState {
@@ -134,6 +135,7 @@ export class Gallery extends Component<GalleryProps, GalleryState> {
         </div>
         <ImagePagination
           sourceId={this.props.selectedSource.id}
+          pageInfo={this.props.pageInfo}
         />
       </div>
     );
