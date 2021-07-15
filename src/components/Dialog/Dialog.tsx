@@ -18,7 +18,6 @@ interface DialogState {
   isOpen: boolean;
   allSources: Array<SourceProps>;
   selectedSource: Partial<SourceProps>;
-  totalImageCount: number;
   page: PageProps;
 }
 
@@ -103,7 +102,6 @@ export default class Dialog extends Component<DialogProps, DialogState> {
   };
 
   handleTotalImageCount = (totalImageCount: number) => {
-    this.setState({ totalImageCount });
   };
 
   setSelectedSource = (source: SourceProps) => {
@@ -116,7 +114,6 @@ export default class Dialog extends Component<DialogProps, DialogState> {
   }
 
   render() {
-    const { selectedSource, allSources, totalImageCount, imgix } = this.state;
     const sdk = this.props.sdk;
 
     return (
