@@ -1,0 +1,40 @@
+.ix-gallery-item {
+  position: relative;
+}
+.ix-gallery-item img {
+  width: 100%;
+  height: 100%;
+  vertical-align: middle;
+  position: relative;
+  z-index: 1;
+}
+
+.ix-gallery-image-gradient {
+  z-index: 2;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 160px;
+  content: '';
+  box-sizing: border-box;
+}
+/* css gradient on hover */
+.ix-gallery-image-gradient:hover {
+  background: rgba(255, 255, 255, 0.424);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 160px;
+  content: '';
+  cursor: pointer;
+}
+.ix-hidden {
+  display: none;
+}
+.ix-selected {
+  border: 4px solid #2e75d4;
+}

@@ -3,7 +3,7 @@ import ImgixAPI, { APIError } from 'imgix-management-js';
 import { DialogExtensionSDK } from 'contentful-ui-extensions-sdk';
 
 import { SourceProps, PageProps } from '../Dialog';
-import { ImageGrid, ImagePlaceholder, ImagePagination } from './';
+import { GridImage, ImagePlaceholder, ImagePagination } from './';
 
 import './ImageGallery.css';
 
@@ -18,6 +18,7 @@ interface GalleryProps {
 interface GalleryState {
   fullUrls: Array<string>;
   renderPlaceholder: boolean;
+  selectedImage: string;
 }
 
 export class Gallery extends Component<GalleryProps, GalleryState> {
@@ -27,6 +28,7 @@ export class Gallery extends Component<GalleryProps, GalleryState> {
     this.state = {
       fullUrls: [],
       renderPlaceholder: true,
+      selectedImage: '',
     };
   }
 
@@ -122,16 +124,26 @@ export class Gallery extends Component<GalleryProps, GalleryState> {
   }
 
   render() {
-    if (this.state.fullUrls.length === 0) {
+    const { fullUrls, selectedImage } = this.state;
+    console.log(`fullUrls`, fullUrls);
+
+    if (fullUrls.length === 0) {
       return <ImagePlaceholder />;
     }
+
     return (
       <div>
         <div className="ix-gallery">
-          <ImageGrid
-            images={this.state.fullUrls}
-            onClick={this.props.sdk.close}
-          />
+          {fullUrls.map((url: string) => {
+            return (
+              <GridImage
+                key={url}
+                selected={selectedImage === url}
+                imageSrc={url}
+                onClick={this.props.sdk.close}
+              />
+            );
+          })}
         </div>
         <ImagePagination
           sourceId={this.props.selectedSource.id}
