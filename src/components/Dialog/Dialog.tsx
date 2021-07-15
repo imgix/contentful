@@ -101,11 +101,10 @@ export default class Dialog extends Component<DialogProps, DialogState> {
     return enabledSources;
   };
 
-  handleTotalImageCount = (totalImageCount: number) => {
+  handleTotalImageCount = (totalImageCount: number) =>
     this.setState({
       page: { current: 1, totalPageCount: Math.ceil(totalImageCount / 18) },
     });
-  };
 
   setSelectedSource = (source: SourceProps) => {
     this.setState({ selectedSource: source });
