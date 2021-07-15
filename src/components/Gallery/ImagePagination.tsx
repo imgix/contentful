@@ -27,6 +27,21 @@ export function ImagePagination({
     setOpen(false);
     changePage(newPageIndex);
   };
+  const paginateForward = () => {
+    const nextPage = pageInfo.currentIndex + 1;
+    if (nextPage < pageInfo.totalPageCount) {
+      console.log('going to next page');
+      changePage(nextPage);
+    }
+  };
+  const paginateBackward = () => {
+    const prevPage = pageInfo.currentIndex - 1;
+    if (prevPage >= 0) {
+      console.log('going to prev page');
+      changePage(prevPage);
+    }
+  };
+
 
   if (sourceId == undefined) {
     // return react fragment if no sourceId is provided
