@@ -1,5 +1,11 @@
 import React, { ReactElement } from 'react';
-import { Button, Dropdown, Icon } from '@contentful/forma-36-react-components';
+import {
+  Button,
+  Dropdown,
+  DropdownList,
+  DropdownListItem,
+  Icon,
+} from '@contentful/forma-36-react-components';
 
 import { PageProps } from '../Dialog';
 
@@ -10,7 +16,15 @@ interface Props {
   pageInfo: PageProps;
 }
 
-export function ImagePagination({ sourceId, pageInfo }: Props): ReactElement {
+export function ImagePagination({
+  sourceId,
+  pageInfo,
+}: Props): ReactElement {
+  const [isOpen, setOpen] = React.useState(false);
+  const handleDropdownClick = (newPageIndex: number) => {
+    setOpen(false);
+  };
+
   if (sourceId == undefined) {
     // return react fragment if no sourceId is provided
     return <></>;
@@ -21,13 +35,34 @@ export function ImagePagination({ sourceId, pageInfo }: Props): ReactElement {
         Prev Page
       </Button>
       <Dropdown
+        isOpen={isOpen}
+        onClose={() => setOpen(false)}
         toggleElement={
-          <Button size="small" buttonType="muted" indicateDropdown>
+          <Button
+            size="small"
+            buttonType="muted"
+            indicateDropdown
+            onClick={() => setOpen(!isOpen)}
+          >
             {'Page ' + pageInfo.current + ' of ' + pageInfo.totalPageCount}
           </Button>
         }
       >
-        {/* placeholder */}
+        <DropdownList maxHeight={111}>
+          {/* a maxHeight of 111 is the minimum height to fit 3 entries without
+          needing to scroll */}
+          {[...Array(pageInfo.totalPageCount)].map((_, _pageIndex) => {
+            const pageIndex = _pageIndex + 1;
+            return (
+              <DropdownListItem
+                key={`page-${pageIndex}`}
+                onClick={() => handleDropdownClick(pageIndex)}
+              >
+                {'Page ' + pageIndex}
+              </DropdownListItem>
+            );
+          })}
+        </DropdownList>
       </Dropdown>
       <Button buttonType="muted" size="small">
         <div className="ix-next-page-button">
