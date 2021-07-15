@@ -22,7 +22,7 @@ interface DialogState {
 }
 
 export type PageProps = {
-  current: number;
+  currentIndex: number;
   totalPageCount: number;
 };
 
@@ -49,7 +49,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
       allSources: [],
       selectedSource: {},
       page: {
-        current: 1,
+        currentIndex: 0,
         totalPageCount: 1,
       },
     };
@@ -107,7 +107,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
     });
 
   handlePageChange = (newPageIndex: number) =>
-    this.setState({ page: { ...this.state.page, current: newPageIndex } });
+    this.setState({ page: { ...this.state.page, currentIndex: newPageIndex } });
 
   setSelectedSource = (source: SourceProps) => {
     this.setState({ selectedSource: source });
