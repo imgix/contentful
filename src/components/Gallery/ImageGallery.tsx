@@ -150,7 +150,7 @@ export class Gallery extends Component<GalleryProps, GalleryState> {
                 key={url}
                 selected={selectedImage === url}
                 imageSrc={url}
-                handleClick={(e) => this.handleClick(url)}
+                handleClick={() => this.handleClick(url)}
               />
             );
           })}
