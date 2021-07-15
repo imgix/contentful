@@ -120,7 +120,10 @@ export class Gallery extends Component<GalleryProps, GalleryState> {
   }
 
   async componentDidUpdate(prevProps: GalleryProps) {
-    if (this.props.selectedSource.id !== prevProps.selectedSource.id) {
+    if (
+      this.props.selectedSource.id !== prevProps.selectedSource.id ||
+      this.props.pageInfo.currentIndex !== prevProps.pageInfo.currentIndex
+    ) {
       this.renderImagesOrPlaceholder();
     }
   }
