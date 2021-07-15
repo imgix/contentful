@@ -1,8 +1,6 @@
 import { useState } from 'react';
 import { Button } from '@contentful/forma-36-react-components';
 
-import './ImageSelect.css';
-
 interface ImageSelectProps {
   handleSubmit: Function; // Called when the button is clicked
   disabled: boolean; // Whether the button is disabled
