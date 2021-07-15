@@ -13,6 +13,7 @@ interface GalleryProps {
   sdk: DialogExtensionSDK;
   getTotalImageCount: (totalImageCount: number) => void;
   pageInfo: PageProps;
+  changePage: (newPageIndex: number) => void;
 }
 
 interface GalleryState {
@@ -136,6 +137,7 @@ export class Gallery extends Component<GalleryProps, GalleryState> {
         <ImagePagination
           sourceId={this.props.selectedSource.id}
           pageInfo={this.props.pageInfo}
+          changePage={this.props.changePage}
         />
       </div>
     );

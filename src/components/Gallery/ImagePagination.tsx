@@ -14,15 +14,18 @@ import './ImagePagination.css';
 interface Props {
   sourceId: string | undefined;
   pageInfo: PageProps;
+  changePage: (newIndex: number) => void;
 }
 
 export function ImagePagination({
   sourceId,
   pageInfo,
+  changePage,
 }: Props): ReactElement {
   const [isOpen, setOpen] = React.useState(false);
   const handleDropdownClick = (newPageIndex: number) => {
     setOpen(false);
+    changePage(newPageIndex);
   };
 
   if (sourceId == undefined) {
