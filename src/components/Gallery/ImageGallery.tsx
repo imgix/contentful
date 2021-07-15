@@ -3,6 +3,7 @@ import ImgixAPI, { APIError } from 'imgix-management-js';
 import { DialogExtensionSDK } from 'contentful-ui-extensions-sdk';
 
 import { SourceProps, PageProps } from '../Dialog';
+import { ImageSelectButton } from '../ImageSelect/ImageSelect';
 import { GridImage, ImagePlaceholder, ImagePagination } from './';
 
 import './ImageGallery.css';
@@ -123,6 +124,12 @@ export class Gallery extends Component<GalleryProps, GalleryState> {
     }
   }
 
+  handleClick = (selectedImage: string) => this.setState({ selectedImage });
+
+  handleSubmit = () => {
+    this.props.sdk.close(this.state.selectedImage);
+  };
+
   render() {
     const { fullUrls, selectedImage } = this.state;
 
@@ -139,10 +146,16 @@ export class Gallery extends Component<GalleryProps, GalleryState> {
                 key={url}
                 selected={selectedImage === url}
                 imageSrc={url}
+                handleClick={(e) => this.handleClick(url)}
               />
             );
           })}
         </div>
+        <ImageSelectButton
+          hidden={!!fullUrls.length}
+          disabled={selectedImage === ''}
+          handleSubmit={this.handleSubmit}
+        />
         <ImagePagination
           sourceId={this.props.selectedSource.id}
           pageInfo={this.props.pageInfo}
