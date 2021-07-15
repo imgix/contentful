@@ -140,7 +140,6 @@ export class Gallery extends Component<GalleryProps, GalleryState> {
                 key={url}
                 selected={selectedImage === url}
                 imageSrc={url}
-                onClick={this.props.sdk.close}
               />
             );
           })}

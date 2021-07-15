@@ -6,13 +6,11 @@ import './GridImage.css';
 interface GridImageComponentProps {
   imageSrc: string;
   selected: boolean;
-  onClick: (event: any) => void;
 }
 
 export const GridImage: FunctionComponent<GridImageComponentProps> = ({
   imageSrc,
   selected,
-  onClick,
 }) => {
   const focus = selected ? ' ix-selected' : '';
   return (
@@ -28,9 +26,6 @@ export const GridImage: FunctionComponent<GridImageComponentProps> = ({
           crop: 'entropy',
         }}
         sizes="(min-width: 480px) calc(12.5vw - 20px)"
-        htmlAttributes={{
-          onClick: () => onClick(imageSrc),
-        }}
       />
     </div>
   );
