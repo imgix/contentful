@@ -36,7 +36,7 @@ export class Gallery extends Component<GalleryProps, GalleryState> {
 
   getImages = async () => {
     const assets = await this.props.imgix.request(
-      `assets/${this.props.selectedSource?.id}?page[number]=0&page[size]=18`,
+      `assets/${this.props.selectedSource?.id}?page[number]=${this.props.pageInfo.currentIndex}&page[size]=18`,
     );
     // TODO: add more explicit types for image
     this.props.getTotalImageCount(
