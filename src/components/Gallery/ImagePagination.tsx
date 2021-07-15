@@ -62,7 +62,7 @@ export function ImagePagination({
             return (
               <DropdownListItem
                 key={`page-${pageIndex}`}
-                onClick={() => handleDropdownClick(pageIndex)}
+                onClick={() => handleDropdownClick(_pageIndex)}
               >
                 {'Page ' + pageIndex}
               </DropdownListItem>
