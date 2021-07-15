@@ -42,14 +42,18 @@ export function ImagePagination({
     }
   };
 
-
   if (sourceId == undefined) {
     // return react fragment if no sourceId is provided
     return <></>;
   }
   return (
     <div className="ix-pagination">
-      <Button buttonType="muted" icon="ChevronLeft" size="small">
+      <Button
+        buttonType="muted"
+        icon="ChevronLeft"
+        size="small"
+        onClick={() => paginateBackward()}
+      >
         Prev Page
       </Button>
       <Dropdown
@@ -82,7 +86,7 @@ export function ImagePagination({
           })}
         </DropdownList>
       </Dropdown>
-      <Button buttonType="muted" size="small">
+      <Button buttonType="muted" size="small" onClick={() => paginateForward()}>
         <div className="ix-next-page-button">
           Next Page
           <Icon
