@@ -41,6 +41,7 @@ export class Gallery extends Component<GalleryProps, GalleryState> {
     this.props.getTotalImageCount(
       parseInt((assets.meta.cursor as any).totalRecords || 0),
     );
+
     return assets;
   };
 
