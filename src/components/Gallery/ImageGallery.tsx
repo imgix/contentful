@@ -40,8 +40,9 @@ export class Gallery extends Component<GalleryProps, GalleryState> {
     );
     // TODO: add more explicit types for image
     this.props.getTotalImageCount(
-      parseInt((assets.meta.cursor as any).totalRecords),
+      parseInt((assets.meta.cursor as any).totalRecords || 0),
     );
+
     return assets;
   };
 
