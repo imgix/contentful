@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, MouseEventHandler } from 'react';
 import Imgix from 'react-imgix';
 
 import './GridImage.css';
@@ -6,15 +6,17 @@ import './GridImage.css';
 interface GridImageComponentProps {
   imageSrc: string;
   selected: boolean;
+  handleClick: MouseEventHandler<HTMLDivElement>;
 }
 
 export const GridImage: FunctionComponent<GridImageComponentProps> = ({
   imageSrc,
   selected,
+  handleClick,
 }) => {
   const focus = selected ? ' ix-selected' : '';
   return (
-    <div className="ix-gallery-item">
+    <div onClick={handleClick} className="ix-gallery-item">
       <div className={'ix-gallery-image-gradient' + focus}></div>
       <Imgix
         src={imageSrc}
