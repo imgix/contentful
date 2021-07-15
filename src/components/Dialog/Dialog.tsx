@@ -117,6 +117,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
   }
 
   render() {
+    const { selectedSource, allSources, page, imgix } = this.state;
     const sdk = this.props.sdk;
 
     return (
@@ -132,10 +133,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
           imgix={imgix}
           sdk={sdk}
           getTotalImageCount={this.handleTotalImageCount}
-        />
-        <Pagination
-          sourceId={selectedSource.id}
-          totalImageCount={totalImageCount}
+          pageInfo={page}
         />
       </div>
     );
