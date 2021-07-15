@@ -6,7 +6,6 @@ import { DialogHeader } from './';
 import { AppInstallationParameters } from '../ConfigScreen/';
 import { ImageGallery } from '../Gallery/';
 import { SourceSelect } from '../SourceSelect/';
-import { Pagination } from '../Pagination/';
 
 import './Dialog.css';
 

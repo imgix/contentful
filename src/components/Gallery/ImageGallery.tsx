@@ -3,7 +3,7 @@ import ImgixAPI, { APIError } from 'imgix-management-js';
 import { DialogExtensionSDK } from 'contentful-ui-extensions-sdk';
 
 import { SourceProps } from '../Dialog';
-import { ImageGrid, ImagePlaceholder } from './';
+import { ImageGrid, ImagePlaceholder, ImagePagination } from './';
 
 import './ImageGallery.css';
 
@@ -125,10 +125,15 @@ export class Gallery extends Component<GalleryProps, GalleryState> {
       return <ImagePlaceholder />;
     }
     return (
-      <div className="ix-gallery">
-        <ImageGrid
-          images={this.state.fullUrls}
-          onClick={this.props.sdk.close}
+      <div>
+        <div className="ix-gallery">
+          <ImageGrid
+            images={this.state.fullUrls}
+            onClick={this.props.sdk.close}
+          />
+        </div>
+        <ImagePagination
+          sourceId={this.props.selectedSource.id}
         />
       </div>
     );

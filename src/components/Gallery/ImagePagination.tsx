@@ -1,14 +1,16 @@
 import React, { ReactElement } from 'react';
 import { Button, Dropdown, Icon } from '@contentful/forma-36-react-components';
 
-import './Pagination.css';
+import { PageProps } from '../Dialog';
+
+import './ImagePagination.css';
 
 interface Props {
-  totalImageCount: number;
   sourceId: string | undefined;
+  pageInfo: PageProps;
 }
 
-export function Pagination({ totalImageCount, sourceId }: Props): ReactElement {
+export function ImagePagination({ sourceId, pageInfo }: Props): ReactElement {
   if (sourceId == undefined) {
     // return react fragment if no sourceId is provided
     return <></>;
@@ -21,7 +23,7 @@ export function Pagination({ totalImageCount, sourceId }: Props): ReactElement {
       <Dropdown
         toggleElement={
           <Button size="small" buttonType="muted" indicateDropdown>
-            {'Page 1 of '} {Math.ceil(totalImageCount / 18)}
+            {'Page ' + pageInfo.current + ' of ' + pageInfo.totalPageCount}
           </Button>
         }
       >
