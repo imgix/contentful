@@ -125,7 +125,6 @@ export class Gallery extends Component<GalleryProps, GalleryState> {
 
   render() {
     const { fullUrls, selectedImage } = this.state;
-    console.log(`fullUrls`, fullUrls);
 
     if (fullUrls.length === 0) {
       return <ImagePlaceholder />;
