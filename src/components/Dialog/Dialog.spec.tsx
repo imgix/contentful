@@ -13,6 +13,6 @@ describe('Dialog component', () => {
     };
 
     const { getByText } = render(<Dialog sdk={mockSdk} />);
-    expect(getByText('Hello Dialog Component')).toBeInTheDocument();
+    expect(getByText('imgix Source:')).toBeInTheDocument();
   });
 });
