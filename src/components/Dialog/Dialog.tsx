@@ -106,6 +106,9 @@ export default class Dialog extends Component<DialogProps, DialogState> {
       page: { current: 1, totalPageCount: Math.ceil(totalImageCount / 18) },
     });
 
+  handlePageChange = (newPageIndex: number) =>
+    this.setState({ page: { ...this.state.page, current: newPageIndex } });
+
   setSelectedSource = (source: SourceProps) => {
     this.setState({ selectedSource: source });
   };
@@ -133,6 +136,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
           sdk={sdk}
           getTotalImageCount={this.handleTotalImageCount}
           pageInfo={page}
+          changePage={this.handlePageChange}
         />
       </div>
     );
