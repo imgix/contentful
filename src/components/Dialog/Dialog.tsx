@@ -19,7 +19,13 @@ interface DialogState {
   allSources: Array<SourceProps>;
   selectedSource: Partial<SourceProps>;
   totalImageCount: number;
+  page: PageProps;
 }
+
+export type PageProps = {
+  current: number;
+  totalPageCount: number;
+};
 
 export type SourceProps = {
   id: string;
@@ -43,7 +49,10 @@ export default class Dialog extends Component<DialogProps, DialogState> {
       isOpen: false,
       allSources: [],
       selectedSource: {},
-      totalImageCount: 0,
+      page: {
+        current: 1,
+        totalPageCount: 1,
+      },
     };
   }
 
