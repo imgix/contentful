@@ -44,6 +44,8 @@ export default class Field extends Component<FieldProps, FieldState> {
           </div>
         )}
         <Button
+          className="ix-add-image-button"
+          icon="Plus"
           onClick={() => {
             this.props.sdk.dialogs
               .openCurrentApp({
@@ -59,7 +61,7 @@ export default class Field extends Component<FieldProps, FieldState> {
               );
           }}
         >
-          Select an Image
+          Add An Origin Image
         </Button>
       </div>
     );

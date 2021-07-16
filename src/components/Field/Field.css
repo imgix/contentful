@@ -4,3 +4,11 @@
     border-color: #B4C3CA;
     height: 148px;
 }
+
+.ix-add-image-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -22px -19px 0 -96.85px;
+}
+
