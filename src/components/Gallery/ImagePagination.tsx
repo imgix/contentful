@@ -47,10 +47,7 @@ export function ImagePagination({
             indicateDropdown
             onClick={() => setOpen(!isOpen)}
           >
-            {'Page ' +
-              `${pageInfo.currentIndex + 1}` +
-              ' of ' +
-              pageInfo.totalPageCount}
+            {`Page ${pageInfo.currentIndex + 1} of ${pageInfo.totalPageCount}`}
           </Button>
         }
       >
