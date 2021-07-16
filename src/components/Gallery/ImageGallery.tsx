@@ -108,10 +108,19 @@ export class Gallery extends Component<GalleryProps, GalleryState> {
       console.log(fullUrls);
 
       if (fullUrls.length) {
+        // close no-images warning and update state with image urls
+        Notification.close('no-origin-images');
         this.setState({ fullUrls });
       } else {
-        Notification.warning('No images found in the current space.', {
-          duration: 3000,
+        // show no-images warning and set state with empty images array
+        Notification.warning('', {
+          title: 'This Source has no Origin images',
+          id: 'no-origin-images',
+          cta: {
+            label: 'Go to the imgix dashboard to add origin images',
+            textLinkProps: { href: 'https://dashboard.imgix.com' },
+          },
+          duration: 10000,
         });
         this.setState({ fullUrls: [] });
       }
