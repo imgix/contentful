@@ -105,7 +105,6 @@ export class Gallery extends Component<GalleryProps, GalleryState> {
       const images = await this.getImagePaths();
       const fullUrls = this.constructUrl(images);
       // if at least one path, remove placeholders
-      console.log(fullUrls);
 
       if (fullUrls.length) {
         // close no-images warning and update state with image urls
