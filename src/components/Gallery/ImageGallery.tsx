@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import ImgixAPI, { APIError } from 'imgix-management-js';
 import { DialogExtensionSDK } from 'contentful-ui-extensions-sdk';
+import { Notification } from '@contentful/forma-36-react-components';
 
 import { SourceProps, PageProps } from '../Dialog';
 import { ImageSelectButton } from '../ImageSelect/ImageSelect';
@@ -19,7 +20,6 @@ interface GalleryProps {
 
 interface GalleryState {
   fullUrls: Array<string>;
-  renderPlaceholder: boolean;
   selectedImage: string;
 }
 
@@ -29,7 +29,6 @@ export class Gallery extends Component<GalleryProps, GalleryState> {
 
     this.state = {
       fullUrls: [],
-      renderPlaceholder: true,
       selectedImage: '',
     };
   }
@@ -100,23 +99,27 @@ export class Gallery extends Component<GalleryProps, GalleryState> {
    * Requests and constructs fully-qualified image URLs, saving the results to
    * state
    */
-  async renderImagesOrPlaceholder() {
+  async requestImageUrls() {
     // if selected source, return images
     if (Object.keys(this.props.selectedSource).length) {
       const images = await this.getImagePaths();
       const fullUrls = this.constructUrl(images);
       // if at least one path, remove placeholders
+      console.log(fullUrls);
+
       if (fullUrls.length) {
-        this.setState({ fullUrls, renderPlaceholder: false });
+        this.setState({ fullUrls });
       } else {
-        // if no selected source source, render placeholders
-        this.setState({ renderPlaceholder: true });
+        Notification.warning('No images found in the current space.', {
+          duration: 3000,
+        });
+        this.setState({ fullUrls: [] });
       }
     }
   }
 
   async componentDidMount() {
-    this.renderImagesOrPlaceholder();
+    this.requestImageUrls();
   }
 
   async componentDidUpdate(prevProps: GalleryProps) {
@@ -124,7 +127,7 @@ export class Gallery extends Component<GalleryProps, GalleryState> {
       this.props.selectedSource.id !== prevProps.selectedSource.id ||
       this.props.pageInfo.currentIndex !== prevProps.pageInfo.currentIndex
     ) {
-      this.renderImagesOrPlaceholder();
+      this.requestImageUrls();
     }
   }
 
@@ -137,7 +140,7 @@ export class Gallery extends Component<GalleryProps, GalleryState> {
   render() {
     const { fullUrls, selectedImage } = this.state;
 
-    if (fullUrls.length === 0) {
+    if (!fullUrls.length) {
       return <ImagePlaceholder />;
     }
 
