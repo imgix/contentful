@@ -118,13 +118,20 @@ export default class Dialog extends Component<DialogProps, DialogState> {
     return enabledSources;
   };
 
-  handleTotalImageCount = (totalImageCount: number) =>
+  handleTotalImageCount = (totalImageCount: number) => {
+    if (totalImageCount === 0) {
+      Notification.warning('No images found in the current space.', {
+        duration: 3000,
+      });
+    }
+
     this.setState({
       page: {
         ...this.state.page,
         totalPageCount: Math.ceil(totalImageCount / 18),
       },
     });
+  };
 
   handlePageChange = (newPageIndex: number) =>
     this.setState({ page: { ...this.state.page, currentIndex: newPageIndex } });
