@@ -1,10 +1,8 @@
 import { Component } from 'react';
 
-import { Button } from '@contentful/forma-36-react-components';
 import { FieldExtensionSDK } from 'contentful-ui-extensions-sdk';
 
-import Imgix from 'react-imgix';
-
+import { FieldImagePreview, FieldPrompt } from './';
 import './Field.css';
 
 interface FieldProps {
@@ -26,44 +24,26 @@ export default class Field extends Component<FieldProps, FieldState> {
     };
   }
 
+  openDialog = () => {
+    this.props.sdk.dialogs
+      .openCurrentApp({
+        width: 1200,
+        minHeight: 1200,
+        position: 'top',
+        shouldCloseOnOverlayClick: true,
+      })
+      .then((imagePath) =>
+        this.setState({ imagePath }, () =>
+          this.props.sdk.field.setValue(imagePath),
+        ),
+      );
+  };
+
   render() {
-    return (
-      <div className="ix-field">
-        {this.state.image && (
-          <div>
-            <Imgix
-              width={100}
-              height={100}
-              src={this.state.image}
-              imgixParams={{
-                auto: 'format',
-                fit: 'crop',
-                crop: 'entropy',
-              }}
-            />
-          </div>
-        )}
-        <Button
-          className="ix-add-image-button"
-          icon="Plus"
-          onClick={() => {
-            this.props.sdk.dialogs
-              .openCurrentApp({
-                width: 1200,
-                minHeight: 1200,
-                position: 'top',
-                shouldCloseOnOverlayClick: true,
-              })
-              .then((image) =>
-                this.setState({ image }, () =>
-                  this.props.sdk.field.setValue(image),
-                ),
-              );
-          }}
-        >
-          Add An Origin Image
-        </Button>
-      </div>
-    );
+    if (this.state.imagePath) {
+      return <FieldImagePreview imagePath={this.state.imagePath} />;
+    } else {
+      return <FieldPrompt onClick={this.openDialog} />;
+    }
   }
 }
