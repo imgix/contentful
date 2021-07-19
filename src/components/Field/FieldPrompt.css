@@ -1,0 +1,13 @@
+.ix-field-prompt {
+  border-style: dashed;
+  border-width: 1px;
+  border-color: #b4c3ca;
+  height: 148px;
+}
+
+.ix-add-image-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -22px -19px 0 -96.85px;
+}
