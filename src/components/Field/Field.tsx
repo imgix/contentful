@@ -12,7 +12,7 @@ interface FieldProps {
 }
 
 interface FieldState {
-  image: string;
+  imagePath: string;
 }
 
 export default class Field extends Component<FieldProps, FieldState> {
@@ -22,7 +22,7 @@ export default class Field extends Component<FieldProps, FieldState> {
     const storedValue = this.props.sdk.field.getValue();
 
     this.state = {
-      image: storedValue || '',
+      imagePath: storedValue || '',
     };
   }
 
