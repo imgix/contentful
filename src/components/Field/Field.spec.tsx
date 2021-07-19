@@ -12,6 +12,6 @@ describe('Field component', () => {
 
     const { getByText } = render(<Field sdk={mockSdk} />);
 
-    expect(getByText('Select an Image')).toBeInTheDocument();
+    expect(getByText('Add An Origin Image')).toBeInTheDocument();
   });
 });
