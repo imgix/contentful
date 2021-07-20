@@ -28,6 +28,7 @@ interface ConfigState {
   isButtonLoading?: boolean;
   validationMessage?: string;
   parameters: AppInstallationParameters;
+  validKey?: boolean;
 }
 
 export default class Config extends Component<ConfigProps, ConfigState> {
@@ -37,6 +38,7 @@ export default class Config extends Component<ConfigProps, ConfigState> {
       isButtonLoading: false,
       validationMessage: '',
       parameters: {},
+      validKey: false,
     };
 
     // `onConfigure` allows to configure a callback to be
@@ -67,6 +69,22 @@ export default class Config extends Component<ConfigProps, ConfigState> {
     // related to this app installation
     const currentState = await this.props.sdk.app.getCurrentState();
 
+    // Verify that the user has provided a valid imgix API key
+    // and that the user has successfully verified the app.
+    const validKey = await this.verifyAPIKey();
+
+    if (!validKey) {
+      Notification.closeAll();
+      // Warn user they have provided an invalid API key.
+      Notification.error(
+        "We couldn't verify this imgix API Key. Confirm your details and try again.",
+        {
+          title: 'invalid-api-key',
+          duration: 10000,
+        },
+      );
+    }
+
     return {
       // Parameters to be persisted as the app configuration.
       parameters: this.state.parameters,
@@ -87,6 +105,7 @@ export default class Config extends Component<ConfigProps, ConfigState> {
 
   verifyAPIKey = async () => {
     this.setState({ isButtonLoading: true });
+    let validKey = false;
 
     const imgix = new ImgixAPI({
       apiKey: this.state.parameters.imgixAPIKey || '',
@@ -102,6 +121,7 @@ export default class Config extends Component<ConfigProps, ConfigState> {
         duration: 3000,
       });
       updatedInstallationParameters.successfullyVerified = true;
+      validKey = true;
     } catch (error) {
       Notification.error(
         "We couldn't verify this API Key. Confirm your details and try again.",
@@ -110,13 +130,16 @@ export default class Config extends Component<ConfigProps, ConfigState> {
         },
       );
       updatedInstallationParameters.successfullyVerified = false;
+      validKey = false;
     } finally {
       this.setState({
         validationMessage: '',
         isButtonLoading: false,
         parameters: updatedInstallationParameters,
+        validKey,
       });
     }
+    return validKey;
   };
 
   onClick = async () => {
