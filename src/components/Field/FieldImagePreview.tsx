@@ -6,10 +6,14 @@ import './FieldImagePreview.css';
 
 interface FieldImagePreviewProps {
   imagePath: string;
+  openDialog: Function;
+  clearSelection: Function;
 }
 
 export function FieldImagePreview({
   imagePath,
+  openDialog,
+  clearSelection,
 }: FieldImagePreviewProps): ReactElement {
   return (
     <div className="ix-field-image">
@@ -26,12 +30,14 @@ export function FieldImagePreview({
         <Button
           icon="Plus"
           buttonType="primary"
+          onClick={() => openDialog()}
         >
           Replace
         </Button>
         <Button
           icon="Delete"
           buttonType="negative"
+          onClick={() => clearSelection()}
         >
           Remove
         </Button>

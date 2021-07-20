@@ -9,7 +9,7 @@ interface FieldProps {
 }
 
 interface FieldState {
-  imagePath: string;
+  imagePath: string | undefined;
 }
 
 export default class Field extends Component<FieldProps, FieldState> {
@@ -38,9 +38,21 @@ export default class Field extends Component<FieldProps, FieldState> {
       );
   };
 
+  clearSelection = () => {
+    this.setState({ imagePath: undefined }, () =>
+      this.props.sdk.field.setValue(undefined),
+    );
+  };
+
   render() {
     if (this.state.imagePath) {
-      return <FieldImagePreview imagePath={this.state.imagePath} />;
+      return (
+        <FieldImagePreview
+          imagePath={this.state.imagePath}
+          openDialog={this.openDialog}
+          clearSelection={this.clearSelection}
+        />
+      );
     } else {
       return <FieldPrompt onClick={this.openDialog} />;
     }
