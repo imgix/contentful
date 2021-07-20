@@ -54,7 +54,11 @@ export default class Field extends Component<FieldProps, FieldState> {
         />
       );
     } else {
-      return <FieldPrompt onClick={this.openDialog} />;
+      return (
+        <FieldPrompt
+          openDialog={this.openDialog}
+        />
+      );
     }
   }
 }
