@@ -79,12 +79,20 @@ export default class Dialog extends Component<DialogProps, DialogState> {
     try {
       sources = await this.getSources();
     } catch (error) {
+      const err = { ...error };
+      const errorName = err.name;
+      const errorMessage = err.response.errors[0].detail;
       // APIError will emit more helpful data for debugging
       if (error instanceof APIError) {
         console.error(error.toString());
       } else {
         console.error(error);
       }
+
+      Notification.error(errorMessage, {
+        title: errorName || 'imgix API Error',
+        duration: 10000,
+      });
       return enabledSources;
     }
 
