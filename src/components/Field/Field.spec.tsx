@@ -8,6 +8,9 @@ describe('Field component', () => {
       field: {
         getValue: () => {},
       },
+      window: {
+        updateHeight: () => {},
+      },
     };
 
     const { getByText } = render(<Field sdk={mockSdk} />);
