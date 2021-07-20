@@ -16,10 +16,10 @@ export function FieldImagePreview({
   clearSelection,
 }: FieldImagePreviewProps): ReactElement {
   return (
-    <div className="ix-field-image">
+    <div className="ix-field-image-preview">
       <Imgix
-        width={191}
-        height={191}
+        width={230}
+        height={230}
         src={imagePath}
         imgixParams={{
           auto: 'format',
@@ -27,7 +27,9 @@ export function FieldImagePreview({
           crop: 'entropy',
         }}
       />
+      <div className="ix-field-image-preview-buttons">
         <Button
+          className="ix-field-image-preview-buttons-replace"
           icon="Plus"
           buttonType="primary"
           onClick={() => openDialog()}
@@ -35,12 +37,14 @@ export function FieldImagePreview({
           Replace
         </Button>
         <Button
+          className="ix-field-image-preview-buttons-remove"
           icon="Delete"
           buttonType="negative"
           onClick={() => clearSelection()}
         >
           Remove
         </Button>
+      </div>
     </div>
   );
 }
