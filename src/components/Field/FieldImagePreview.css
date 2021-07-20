@@ -1,3 +1,24 @@
-.ix-field-image {
-  height: 311px;
+.ix-field-image-preview {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(2, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 16px;
+  width: 230px;
+}
+
+.ix-field-image-preview-buttons {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr;
+  grid-column-gap: 16px;
+  grid-row-gap: 0px;
+}
+
+.ix-field-image-preview-buttons-replace > span {
+  padding: 0px;
+}
+
+.ix-field-image-preview-buttons-remove > span {
+  padding: 0px;
 }
