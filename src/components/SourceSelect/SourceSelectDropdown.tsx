@@ -26,6 +26,12 @@ export function SourceSelectDropdown({
     setSource(source);
   };
 
+  const dropDownText = allSources.length
+    ? 'Select an imgix Source'
+    : 'No sources';
+
+  const buttonType = allSources.length ? 'muted' : 'warning';
+
   return (
     <Dropdown
       className="ix-dropdown"
@@ -34,11 +40,11 @@ export function SourceSelectDropdown({
       toggleElement={
         <Button
           size="small"
-          buttonType="muted"
+          buttonType={buttonType}
           indicateDropdown
           onClick={() => setOpen(!isOpen)}
         >
-          {selectedSource.name || 'Select an imgix Source'}
+          {selectedSource.name || dropDownText}
         </Button>
       }
     >
