@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import { DialogExtensionSDK } from 'contentful-ui-extensions-sdk';
 import ImgixAPI, { APIError } from 'imgix-management-js';
+import { Notification } from '@contentful/forma-36-react-components';
 
 import { DialogHeader } from './';
 import { AppInstallationParameters } from '../ConfigScreen/';
@@ -59,6 +60,18 @@ export default class Dialog extends Component<DialogProps, DialogState> {
     return this.state.imgix.request('sources');
   };
 
+  showNoEnabledSourceNotification = () => {
+    Notification.warning('', {
+      title: 'This imgix account has no enabled Sources',
+      id: 'no-origin-sources',
+      cta: {
+        label: 'Go to the imgix dashboard to add sources',
+        textLinkProps: { href: 'https://dashboard.imgix.com' },
+      },
+      duration: 10000,
+    });
+  };
+
   getSourceIDAndPaths = async (): Promise<Array<SourceProps>> => {
     let sources,
       enabledSources: Array<SourceProps> = [];
@@ -97,6 +110,10 @@ export default class Dialog extends Component<DialogProps, DialogState> {
       },
       [] as SourceProps[],
     );
+
+    if (!enabledSources.length) {
+      this.showNoEnabledSourceNotification();
+    }
 
     return enabledSources;
   };
