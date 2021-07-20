@@ -56,7 +56,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
   }
 
   getSources = async () => {
-    return await this.state.imgix.request('sources');
+    return this.state.imgix.request('sources');
   };
 
   getSourceIDAndPaths = async (): Promise<Array<SourceProps>> => {
