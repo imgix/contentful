@@ -4,16 +4,18 @@ import { Button } from '@contentful/forma-36-react-components';
 import './FieldPrompt.css';
 
 interface FieldPromptProps {
-  onClick: Function;
+  openDialog: Function;
 }
 
-export function FieldPrompt({ onClick }: FieldPromptProps): ReactElement {
+export function FieldPrompt({
+  openDialog,
+}: FieldPromptProps): ReactElement {
   return (
     <div className="ix-field-prompt">
       <Button
         className="ix-add-image-button"
         icon="Plus"
-        onClick={() => onClick()}
+        onClick={() => openDialog()}
       >
         Add An Origin Image
       </Button>
