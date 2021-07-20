@@ -30,6 +30,7 @@ export default class Field extends Component<FieldProps, FieldState> {
         minHeight: 1200,
         position: 'top',
         shouldCloseOnOverlayClick: true,
+        allowHeightOverflow: true,
       })
       .then((imagePath) =>
         this.setState({ imagePath }, () =>
