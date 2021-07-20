@@ -1,5 +1,5 @@
 import { ReactElement } from 'react';
-
+import { Button } from '@contentful/forma-36-react-components';
 import Imgix from 'react-imgix';
 
 import './FieldImagePreview.css';
@@ -23,6 +23,18 @@ export function FieldImagePreview({
           crop: 'entropy',
         }}
       />
+        <Button
+          icon="Plus"
+          buttonType="primary"
+        >
+          Replace
+        </Button>
+        <Button
+          icon="Delete"
+          buttonType="negative"
+        >
+          Remove
+        </Button>
     </div>
   );
 }
