@@ -3,7 +3,6 @@ import { Component } from 'react';
 import { FieldExtensionSDK } from 'contentful-ui-extensions-sdk';
 
 import { FieldImagePreview, FieldPrompt } from './';
-import './Field.css';
 
 interface FieldProps {
   sdk: FieldExtensionSDK;
