@@ -45,11 +45,13 @@ export default class Field extends Component<FieldProps, FieldState> {
   };
 
   render() {
+    const updateHeightHandler = this.props.sdk.window.updateHeight;
     if (this.state.imagePath) {
       return (
         <FieldImagePreview
           imagePath={this.state.imagePath}
           openDialog={this.openDialog}
+          updateHeight={updateHeightHandler}
           clearSelection={this.clearSelection}
         />
       );
@@ -57,6 +59,7 @@ export default class Field extends Component<FieldProps, FieldState> {
       return (
         <FieldPrompt
           openDialog={this.openDialog}
+          updateHeight={updateHeightHandler}
         />
       );
     }
