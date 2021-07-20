@@ -6,6 +6,7 @@ import './FieldImagePreview.css';
 
 interface FieldImagePreviewProps {
   imagePath: string;
+  updateHeight: Function;
   openDialog: Function;
   clearSelection: Function;
 }
@@ -13,8 +14,10 @@ interface FieldImagePreviewProps {
 export function FieldImagePreview({
   imagePath,
   openDialog,
+  updateHeight,
   clearSelection,
 }: FieldImagePreviewProps): ReactElement {
+  updateHeight(311);
   return (
     <div className="ix-field-image-preview">
       <Imgix

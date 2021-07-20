@@ -5,11 +5,14 @@ import './FieldPrompt.css';
 
 interface FieldPromptProps {
   openDialog: Function;
+  updateHeight: Function;
 }
 
 export function FieldPrompt({
   openDialog,
+  updateHeight,
 }: FieldPromptProps): ReactElement {
+  updateHeight(150);
   return (
     <div className="ix-field-prompt">
       <Button
