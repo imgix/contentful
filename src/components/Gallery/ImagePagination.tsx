@@ -3,8 +3,7 @@ import {
   Button,
   Dropdown,
   DropdownList,
-  DropdownListItem,
-  Icon,
+  DropdownListItem
 } from '@contentful/forma-36-react-components';
 
 import { PageProps } from '../Dialog';
@@ -40,13 +39,14 @@ export function ImagePagination({
     }
   };
 
-  if (sourceId == undefined) {
+  if (sourceId === undefined) {
     // return react fragment if no sourceId is provided
     return <></>;
   }
   return (
     <div className="ix-pagination">
       <Button
+        className="ix-pagination-button ix-pagination-prevButton"
         buttonType="muted"
         icon="ChevronLeft"
         size="small"
@@ -61,6 +61,7 @@ export function ImagePagination({
           <Button
             size="small"
             buttonType="muted"
+            className="ix-pagination-button ix-pagination-dropdownButton"
             indicateDropdown
             onClick={() => setOpen(!isOpen)}
           >
@@ -84,15 +85,14 @@ export function ImagePagination({
           })}
         </DropdownList>
       </Dropdown>
-      <Button buttonType="muted" size="small" onClick={() => paginateForward()}>
-        <div className="ix-next-page-button">
-          Next Page
-          <Icon
-            className="ix-chevron-right"
-            color="secondary"
-            icon="ChevronRight"
-          />
-        </div>
+      <Button
+        className="ix-pagination-button ix-pagination-nextButton"
+        buttonType="muted"
+        icon="ChevronRight"
+        size="small"
+        onClick={() => paginateForward()}
+      >
+        Next Page
       </Button>
     </div>
   );

@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import { ReactElement } from 'react';
 import { Button, Paragraph } from '@contentful/forma-36-react-components';
 
 import './DialogHeader.css';
