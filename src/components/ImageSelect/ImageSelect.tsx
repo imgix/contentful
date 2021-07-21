@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { Button } from '@contentful/forma-36-react-components';
 
+import './ImageSelect.css';
+
 interface ImageSelectProps {
   handleSubmit: Function; // Called when the button is clicked
   disabled: boolean; // Whether the button is disabled
@@ -20,22 +22,15 @@ export function ImageSelectButton({
   };
 
   return (
-    <div
-      className={
-        hidden
-          ? 'ix-gallery-image-select-button hidden'
-          : 'ix-gallery-image-select-button'
-      }
+    <Button
+      size="small"
+      buttonType="primary"
+      className={hidden ? 'ix-select-addButton' : 'ix-select-addButton_hidden'}
+      icon="Plus"
+      disabled={disabled}
+      onClick={handleClick}
     >
-      <Button
-        size="small"
-        buttonType="primary"
-        icon="Plus"
-        disabled={disabled}
-        onClick={handleClick}
-      >
-        Add image
-      </Button>
-    </div>
+      Add image
+    </Button>
   );
 }

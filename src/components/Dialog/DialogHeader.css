@@ -1,15 +1,12 @@
 .ix-header-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-}
-
-.ix-close-button {
-  width: 10%;
-  margin-left: auto;
-  margin-top: 38px;
-  margin-right: 64px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .ix-title {
-  margin-bottom: 10px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 150%;
 }

@@ -166,16 +166,18 @@ export class Gallery extends Component<GalleryProps, GalleryState> {
             );
           })}
         </div>
-        <ImageSelectButton
-          hidden={!!fullUrls.length}
-          disabled={selectedImage === ''}
-          handleSubmit={this.handleSubmit}
-        />
-        <ImagePagination
-          sourceId={this.props.selectedSource.id}
-          pageInfo={this.props.pageInfo}
-          changePage={this.props.changePage}
-        />
+        <div className="ix-gallery-footer">
+          <ImagePagination
+            sourceId={this.props.selectedSource.id}
+            pageInfo={this.props.pageInfo}
+            changePage={this.props.changePage}
+          />
+          <ImageSelectButton
+            hidden={!!fullUrls.length}
+            disabled={selectedImage === ''}
+            handleSubmit={this.handleSubmit}
+          />
+        </div>
       </div>
     );
   }
