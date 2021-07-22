@@ -3,9 +3,7 @@ import { Paragraph } from '@contentful/forma-36-react-components';
 
 import './ImagePlaceholder.css';
 
-interface Props {}
-
-export function ImagePlaceholder({}: Props): ReactElement {
+export function ImagePlaceholder(): ReactElement {
   return (
     <div className="ix-grid-item-placeholder">
       <Paragraph className="ix-placeholder-text">
