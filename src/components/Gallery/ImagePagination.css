@@ -15,7 +15,19 @@
   border-radius: 0;
 }
 
+.ix-pagination-dropdown {
+  width: 133px;
+}
+
+.ix-pagination-dropdown > li > button > span {
+  text-align: center;
+}
+
 .ix-pagination-nextButton {
   direction: rtl;
   border-radius: 0 8px 8px 0;
+}
+
+[data-test-id='cf-ui-dropdown-container'] {
+  border-radius: 0 0 8px 8px;
 }
