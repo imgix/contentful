@@ -6,6 +6,13 @@ import { DialogHeader } from './';
 import { AppInstallationParameters } from '../ConfigScreen/';
 import { ImageGallery } from '../Gallery/';
 import { SourceSelect } from '../SourceSelect/';
+import { Note } from '../Note/';
+import {
+  IxError,
+  invalidApiKeyError,
+  noSourcesError,
+  noOriginImagesError,
+} from '../../helpers/errors';
 
 import './Dialog.css';
 
@@ -19,6 +26,8 @@ interface DialogState {
   allSources: Array<SourceProps>;
   selectedSource: Partial<SourceProps>;
   page: PageProps;
+  verified: boolean; // if API key is verified
+  errors: IxError[]; // array of IxErrors if any
 }
 
 export type PageProps = {
@@ -39,6 +48,9 @@ export default class Dialog extends Component<DialogProps, DialogState> {
     const apiKey =
       (props.sdk.parameters.installation as AppInstallationParameters)
         .imgixAPIKey || '';
+    const verified = !!(
+      props.sdk.parameters.installation as AppInstallationParameters
+    ).successfullyVerified;
     const imgix = new ImgixAPI({
       apiKey,
     });
@@ -52,6 +64,8 @@ export default class Dialog extends Component<DialogProps, DialogState> {
         currentIndex: 0,
         totalPageCount: 1,
       },
+      verified: verified,
+      errors: [],
     };
   }
 
@@ -101,13 +115,22 @@ export default class Dialog extends Component<DialogProps, DialogState> {
     return enabledSources;
   };
 
-  handleTotalImageCount = (totalImageCount: number) =>
-    this.setState({
+  handleTotalImageCount = (totalImageCount: number) => {
+    const totalPageCount = Math.ceil(totalImageCount / 18);
+    let errors = [...this.state.errors];
+
+    if (!totalPageCount) {
+      errors.push(noOriginImagesError());
+    }
+
+    return this.setState({
       page: {
         ...this.state.page,
-        totalPageCount: Math.ceil(totalImageCount / 18),
+        totalPageCount,
       },
+      errors,
     });
+  };
 
   handlePageChange = (newPageIndex: number) =>
     this.setState({ page: { ...this.state.page, currentIndex: newPageIndex } });
@@ -117,8 +140,22 @@ export default class Dialog extends Component<DialogProps, DialogState> {
   };
 
   async componentDidMount() {
-    const sources = await this.getSourceIDAndPaths();
-    this.setState({ allSources: sources });
+    // If the API key is not valid do not attempt to load sources
+    if (!this.state.verified) {
+      this.setState({
+        errors: [invalidApiKeyError()],
+      });
+      return;
+    }
+    try {
+      const sources = await this.getSourceIDAndPaths();
+      if (sources.length === 0) {
+        throw noSourcesError();
+      }
+      this.setState({ allSources: sources });
+    } catch (error) {
+      this.setState({ errors: [error] });
+    }
   }
 
   render() {
@@ -141,6 +178,16 @@ export default class Dialog extends Component<DialogProps, DialogState> {
           pageInfo={page}
           changePage={this.handlePageChange}
         />
+        {/* { UI Error fallback } */}
+        {this.state.errors.length > 0 && (
+          <Note
+            error={this.state.errors[0]}
+            type={this.state.errors[0].type}
+            resetErrorBoundary={() =>
+              this.setState({ errors: this.state.errors.slice(1) })
+            }
+          />
+        )}
       </div>
     );
   }
