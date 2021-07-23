@@ -107,20 +107,8 @@ export class Gallery extends Component<GalleryProps, GalleryState> {
       // if at least one path, remove placeholders
 
       if (fullUrls.length) {
-        // close no-images warning and update state with image urls
-        Notification.close('no-origin-images');
         this.setState({ fullUrls });
       } else {
-        // show no-images warning and set state with empty images array
-        Notification.warning('', {
-          title: 'This Source has no Origin images',
-          id: 'no-origin-images',
-          cta: {
-            label: 'Go to the imgix dashboard to add origin images',
-            textLinkProps: { href: 'https://dashboard.imgix.com' },
-          },
-          duration: 10000,
-        });
         this.setState({ fullUrls: [] });
       }
     }
