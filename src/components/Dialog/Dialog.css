@@ -13,7 +13,3 @@
     padding: 40px 64px;
   }
 }
-
-[data-test-id='cf-ui-notification'] {
-  margin-bottom: 40vh;
-}

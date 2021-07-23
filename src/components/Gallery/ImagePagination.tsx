@@ -69,7 +69,7 @@ export function ImagePagination({
           </Button>
         }
       >
-        <DropdownList maxHeight={111}>
+        <DropdownList className="ix-pagination-dropdown" maxHeight={111}>
           {/* a maxHeight of 111 is the minimum height to fit 3 entries without
           needing to scroll */}
           {[...Array(pageInfo.totalPageCount)].map((_, _pageIndex) => {
