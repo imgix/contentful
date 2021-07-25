@@ -100,9 +100,12 @@ export default class Config extends Component<ConfigProps, ConfigState> {
     try {
       await imgix.request('sources');
       Notification.setPosition('top', { offset: 355 });
-      Notification.success('Your API Key was successfully confirmed.', {
-        duration: 3000,
-      });
+      Notification.success(
+        'Your API key was successfully confirmed! Click the Install/Save button (in the top right corner) to complete installation.',
+        {
+          duration: 10000,
+        },
+      );
       updatedInstallationParameters.successfullyVerified = true;
     } catch (error) {
       Notification.setPosition('top', { offset: 355 });
