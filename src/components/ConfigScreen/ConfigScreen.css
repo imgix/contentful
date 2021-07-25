@@ -25,10 +25,19 @@
 
 .icon {
   flex: 2;
-  margin-top: 10%;
+  margin-top: 8%;
   margin-left: 10px;
 }
 
 [data-test-id='cf-notification-container'] {
   margin-left: 80px;
 }
+
+.ix-config-container {
+  margin: 80px;
+}
+
+.ix-config-description {
+  max-width: 500px;
+}
+
