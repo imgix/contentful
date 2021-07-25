@@ -9,6 +9,7 @@ import {
   Notification,
   Icon,
   Button,
+  TextLink,
 } from '@contentful/forma-36-react-components';
 import { css } from 'emotion';
 import ImgixAPI from 'imgix-management-js';
@@ -148,9 +149,36 @@ export default class Config extends Component<ConfigProps, ConfigState> {
     return (
       <Workbench className={css({ margin: '80px' })}>
         <Form>
-          <Heading>App Configuration</Heading>
-          <Paragraph>
-            Welcome to your imgix Contentful app. This is your config page.
+          <Heading>Getting set up with imgix and Contentful</Heading>
+          <Paragraph className="ix-config-description">
+            Welcome to your imgix-contentful configuration page! This
+            integration will allow you to directly interface with your
+            organization's{' '}
+            <TextLink
+              href="https://docs.imgix.com/setup/image-manager"
+              target="_blank"
+            >
+              Image Manager
+            </TextLink>{' '}
+            to select and insert images into your content models.<br></br>
+            <br></br>
+            Before installing this integration to your Contentful workspace, you
+            will need to create an API key from the{' '}
+            <TextLink
+              href="https://dashboard.imgix.com/api-keys"
+              target="_blank"
+            >
+              imgix dashboard
+            </TextLink>
+            . For this integration to work correctly, please ensure that your
+            generated key has the following permissions: <code>Sources</code>{' '}
+            and <code>Image Manager Browse</code>.<br></br>
+            <br></br>
+            After having generated your imgix API key, paste it into the field
+            below and press <code>Verify</code>. If the key is valid, complete
+            set up by pressing <code>Install</code> or <code>Save</code> in the
+            top right hand corner of your screen. If the key is not valid,
+            please confirm your information and try again.
           </Paragraph>
           <div>
             <div className="flex-container">
@@ -174,7 +202,7 @@ export default class Config extends Component<ConfigProps, ConfigState> {
               )}
             </div>
             <p className="ix-helper-text">
-              Access your API key at{' '}
+              Create and/or access your API key at{' '}
               <a
                 target="_blank"
                 rel="noreferrer"
