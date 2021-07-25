@@ -11,7 +11,6 @@ import {
   Button,
   TextLink,
 } from '@contentful/forma-36-react-components';
-import { css } from 'emotion';
 import ImgixAPI from 'imgix-management-js';
 
 import './ConfigScreen.css';
@@ -150,7 +149,7 @@ export default class Config extends Component<ConfigProps, ConfigState> {
 
   render() {
     return (
-      <Workbench className={css({ margin: '80px' })}>
+      <Workbench className="ix-config-container">
         <Form>
           <Heading>Getting set up with imgix and Contentful</Heading>
           <Paragraph className="ix-config-description">
