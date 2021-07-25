@@ -18,9 +18,7 @@ describe('Config Screen component', () => {
     await mockSdk.app.onConfigure.mock.calls[0][0]();
 
     expect(
-      getByText(
-        'Welcome to your imgix Contentful app. This is your config page.',
-      ),
+      getByText('Getting set up with imgix and Contentful'),
     ).toBeInTheDocument();
   });
 });
