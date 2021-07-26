@@ -98,7 +98,7 @@ export default class Config extends Component<ConfigProps, ConfigState> {
 
     try {
       await imgix.request('sources');
-      Notification.setPosition('top', { offset: 355 });
+      Notification.setPosition('top', { offset: 595 });
       Notification.success(
         'Your API key was successfully confirmed! Click the Install/Save button (in the top right corner) to complete installation.',
         {
@@ -107,7 +107,7 @@ export default class Config extends Component<ConfigProps, ConfigState> {
       );
       updatedInstallationParameters.successfullyVerified = true;
     } catch (error) {
-      Notification.setPosition('top', { offset: 355 });
+      Notification.setPosition('top', { offset: 595 });
       Notification.error(
         "We couldn't verify this API Key. Confirm your details and try again.",
         {
