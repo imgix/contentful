@@ -217,7 +217,7 @@ export default class Config extends Component<ConfigProps, ConfigState> {
           <Button
             type="submit"
             buttonType="positive"
-            disabled={this.state.parameters.imgixAPIKey?.length == 0}
+            disabled={this.state.parameters.imgixAPIKey?.length === 0}
             onClick={this.onClick}
             loading={this.state.isButtonLoading}
           >
