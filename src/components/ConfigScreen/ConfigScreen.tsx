@@ -10,6 +10,8 @@ import {
   Icon,
   Button,
   TextLink,
+  List,
+  ListItem,
 } from '@contentful/forma-36-react-components';
 import ImgixAPI from 'imgix-management-js';
 
@@ -150,9 +152,9 @@ export default class Config extends Component<ConfigProps, ConfigState> {
   render() {
     return (
       <Workbench className="ix-config-container">
-        <Form>
+        <Form className="ix-config-description">
           <Heading>Getting set up with imgix and Contentful</Heading>
-          <Paragraph className="ix-config-description">
+          <Paragraph>
             Welcome to your imgix-contentful configuration page! This
             integration will allow you to directly interface with your
             organization's{' '}
@@ -173,15 +175,33 @@ export default class Config extends Component<ConfigProps, ConfigState> {
               imgix dashboard
             </TextLink>
             . For this integration to work correctly, please ensure that your
-            generated key has the following permissions: <code>Sources</code>{' '}
-            and <code>Image Manager Browse</code>.<br></br>
+            generated key has the following permissions:{' '}
+            <code className="ix-config-description-permissions">Sources</code>{' '}
+            and{' '}
+            <code className="ix-config-description-permissions">
+              Image Manager Browse
+            </code>
+            .<br></br>
             <br></br>
             After having generated your imgix API key, paste it into the field
-            below and press <code>Verify</code>. If the key is valid, complete
-            set up by pressing <code>Install</code> or <code>Save</code> in the
-            top right hand corner of your screen. If the key is not valid,
-            please confirm your information and try again.
+            below and press{' '}
+            <code className="ix-config-description-green-button">Verify</code>.
           </Paragraph>
+          <List className="ix-config-description-list">
+            <ListItem>
+              If the key is valid, complete set up by pressing{' '}
+              <code className="ix-config-description-blue-buttons">
+                Install
+              </code>{' '}
+              or{' '}
+              <code className="ix-config-description-blue-buttons">Save</code>{' '}
+              in the top right hand corner of the screen.
+            </ListItem>
+            <ListItem>
+              If the key is not valid, please confirm your information and try
+              again.
+            </ListItem>
+          </List>
           <div>
             <div className="flex-container">
               <div className="flex-child">

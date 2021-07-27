@@ -34,9 +34,24 @@
   max-width: 500px;
 }
 
-.ix-config-description > code {
+code {
   padding: 0.5px 4px;
   border-radius: 3px;
-  background-color: rgb(85, 85, 85);
-  color: orange;
+  color: rgba(255, 255, 255, 0.842);
+}
+
+code.ix-config-description-permissions {
+  background-color: #1b273a;
+}
+
+code.ix-config-description-blue-buttons {
+  background-color: #036fe3;
+}
+
+code.ix-config-description-green-button {
+  background-color: #008539;
+}
+
+.ix-config-description-list {
+  color: #414d63;
 }
