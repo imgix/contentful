@@ -1,7 +1,6 @@
 import { Component } from 'react';
 import ImgixAPI, { APIError } from 'imgix-management-js';
 import { DialogExtensionSDK } from 'contentful-ui-extensions-sdk';
-import { Notification } from '@contentful/forma-36-react-components';
 
 import { SourceProps, PageProps } from '../Dialog';
 import { ImageSelectButton } from '../ImageSelect/ImageSelect';
