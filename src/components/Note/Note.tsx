@@ -1,6 +1,8 @@
 import { ReactElement } from 'react';
 import { Note, TextLink } from '@contentful/forma-36-react-components';
 
+import './Note.css';
+
 export interface INoteProps {
   type: 'primary' | 'positive' | 'negative' | 'warning';
   error: Error;
@@ -17,17 +19,17 @@ export function IxNote({
   const linkTitle = title?.length ? title : link;
 
   return (
-    <div className="ix-note" style={{ marginTop: 25 }}>
+    <div className="ix-note">
       <Note
         noteType={type}
         title={error.name}
         hasCloseButton
         onClose={resetErrorBoundary}
       >
-        {message + ' '}{' '}
+        {message + ' '}
         <TextLink target="window" href={link}>
           {linkTitle}
-        </TextLink>{' '}
+        </TextLink>
         {' ' + rest}
       </Note>
     </div>
