@@ -45,12 +45,10 @@ export default class Dialog extends Component<DialogProps, DialogState> {
   constructor(props: DialogProps) {
     super(props);
 
-    const apiKey =
-      (props.sdk.parameters.installation as AppInstallationParameters)
-        .imgixAPIKey || '';
-    const verified = !!(
-      props.sdk.parameters.installation as AppInstallationParameters
-    ).successfullyVerified;
+    const installationParameters =
+      (props.sdk.parameters.installation as AppInstallationParameters);
+    const apiKey = installationParameters.imgixAPIKey || ''
+    const verified = !!installationParameters.successfullyVerified;
     const imgix = new ImgixAPI({
       apiKey,
     });
@@ -64,7 +62,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
         currentIndex: 0,
         totalPageCount: 1,
       },
-      verified: verified,
+      verified,
       errors: [],
     };
   }
