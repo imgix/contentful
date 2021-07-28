@@ -15,7 +15,6 @@ export function IxNote({
   const [message, _link, ...rest] = error.message.split('$');
   const [link, title] = _link.split('|');
   const linkTitle = title?.length ? title : link;
-  console.log(message, link, ...rest);
 
   return (
     <div className="ix-note" style={{ marginTop: 25 }}>
