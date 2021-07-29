@@ -239,7 +239,11 @@ export default class Config extends Component<ConfigProps, ConfigState> {
             buttonType="positive"
             disabled={this.state.parameters.imgixAPIKey?.length === 0}
             onClick={this.onClick}
-            loading={this.state.isButtonLoading}
+            /*
+            ** TODO: uncomment out once the following forma36 bug is addressed
+            ** https://github.com/contentful/forma-36/issues/895
+            */
+            // loading={this.state.isButtonLoading}
           >
             Verify
           </Button>
