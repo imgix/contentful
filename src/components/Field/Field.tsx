@@ -33,7 +33,7 @@ export default class Field extends Component<FieldProps, FieldState> {
         allowHeightOverflow: true,
         parameters: {
           selectedImage: this.state.imagePath,
-        }
+        },
       })
       .then((imagePath) =>
         this.setState({ imagePath }, () =>
