@@ -43,15 +43,15 @@ export type SourceProps = {
 
 type AppInvocationParameters = {
   selectedImage: string;
-}
+};
 
 export default class Dialog extends Component<DialogProps, DialogState> {
   constructor(props: DialogProps) {
     super(props);
 
-    const installationParameters =
-      (props.sdk.parameters.installation as AppInstallationParameters);
-    const apiKey = installationParameters.imgixAPIKey || ''
+    const installationParameters = props.sdk.parameters
+      .installation as AppInstallationParameters;
+    const apiKey = installationParameters.imgixAPIKey || '';
     const verified = !!installationParameters.successfullyVerified;
     const imgix = new ImgixAPI({
       apiKey,
@@ -163,7 +163,9 @@ export default class Dialog extends Component<DialogProps, DialogState> {
   render() {
     const { selectedSource, allSources, page, imgix } = this.state;
     const sdk = this.props.sdk;
-    const selectedImage = (this.props.sdk.parameters.invocation as AppInvocationParameters)?.selectedImage;
+    const selectedImage = (
+      this.props.sdk.parameters.invocation as AppInvocationParameters
+    )?.selectedImage;
 
     return (
       <div className="ix-container">

@@ -240,9 +240,9 @@ export default class Config extends Component<ConfigProps, ConfigState> {
             disabled={!this.state.parameters.imgixAPIKey?.length}
             onClick={this.onClick}
             /*
-            ** TODO: uncomment out once the following forma36 bug is addressed
-            ** https://github.com/contentful/forma-36/issues/895
-            */
+             ** TODO: uncomment out once the following forma36 bug is addressed
+             ** https://github.com/contentful/forma-36/issues/895
+             */
             // loading={this.state.isButtonLoading}
           >
             Verify

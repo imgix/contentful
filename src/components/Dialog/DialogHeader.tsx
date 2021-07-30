@@ -10,7 +10,10 @@ interface DialogHeaderProps {
   selectedImage: selectedImageType;
 }
 
-export function DialogHeader({ handleClose, selectedImage }: DialogHeaderProps): ReactElement {
+export function DialogHeader({
+  handleClose,
+  selectedImage,
+}: DialogHeaderProps): ReactElement {
   return (
     <div className="ix-header-container">
       <Paragraph className="ix-title">imgix Source:</Paragraph>
