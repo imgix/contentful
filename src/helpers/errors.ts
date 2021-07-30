@@ -32,7 +32,7 @@ const ERROR_MESSAGES = {
     type: 'warning',
   },
   NoOriginImagesError: {
-    message: `Go to $${DASHBOARD_URL}$ to add Origin images to this Source.`,
+    message: `Go to $${DASHBOARD_URL + '/sources'}$ to add Origin images to this Source.`,
     name: 'This Source has no Origin images',
     type: 'warning',
   },
