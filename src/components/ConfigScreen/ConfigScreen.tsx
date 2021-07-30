@@ -65,6 +65,9 @@ export default class Config extends Component<ConfigProps, ConfigState> {
     // or "Save" in the configuration screen.
     // for more details see https://www.contentful.com/developers/docs/extensibility/ui-extensions/sdk-reference/#register-an-app-configuration-hook
 
+    // ensure the API key is validated
+    await this.verifyAPIKey();
+
     // Get current the state of EditorInterface and other entities
     // related to this app installation
     const currentState = await this.props.sdk.app.getCurrentState();
