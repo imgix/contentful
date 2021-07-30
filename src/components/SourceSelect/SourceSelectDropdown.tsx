@@ -13,17 +13,20 @@ interface Props {
   selectedSource: Partial<SourceProps>;
   allSources: Array<any>;
   setSource: Function;
+  resetErrors: Function;
 }
 
 export function SourceSelectDropdown({
   selectedSource,
   allSources,
   setSource,
+  resetErrors,
 }: Props): ReactElement {
   const [isOpen, setOpen] = React.useState(false);
   const handleClick = (source: SourceProps) => {
     setOpen(false);
     setSource(source);
+    resetErrors();
   };
 
   return (
