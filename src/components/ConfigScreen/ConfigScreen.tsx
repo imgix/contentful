@@ -13,7 +13,7 @@ import {
   List,
   ListItem,
 } from '@contentful/forma-36-react-components';
-import ImgixAPI from 'imgix-management-js';
+import ImgixAPI, { APIError } from 'imgix-management-js';
 
 import './ConfigScreen.css';
 
@@ -112,6 +112,12 @@ export default class Config extends Component<ConfigProps, ConfigState> {
       );
       updatedInstallationParameters.successfullyVerified = true;
     } catch (error) {
+      // APIError will emit more helpful data for debugging
+      if (error instanceof APIError) {
+        console.error(error.toString());
+      } else {
+        console.error(error);
+      }
       Notification.setPosition('top', { offset: 650 });
       Notification.error(
         "We couldn't verify this API Key. Confirm your details and try again.",
