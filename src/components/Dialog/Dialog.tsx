@@ -41,6 +41,10 @@ export type SourceProps = {
   domain: string;
 };
 
+type AppInvocationParameters = {
+  selectedImage: string;
+}
+
 export default class Dialog extends Component<DialogProps, DialogState> {
   constructor(props: DialogProps) {
     super(props);
@@ -159,10 +163,11 @@ export default class Dialog extends Component<DialogProps, DialogState> {
   render() {
     const { selectedSource, allSources, page, imgix } = this.state;
     const sdk = this.props.sdk;
+    const selectedImage = (this.props.sdk.parameters.invocation as AppInvocationParameters)?.selectedImage;
 
     return (
       <div className="ix-container">
-        <DialogHeader handleClose={this.props.sdk.close} />
+        <DialogHeader handleClose={sdk.close} selectedImage={selectedImage} />
         <SourceSelect
           selectedSource={selectedSource}
           allSources={allSources}
