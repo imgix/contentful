@@ -237,7 +237,7 @@ export default class Config extends Component<ConfigProps, ConfigState> {
           <Button
             type="submit"
             buttonType="positive"
-            disabled={this.state.parameters.imgixAPIKey?.length === 0}
+            disabled={!this.state.parameters.imgixAPIKey?.length}
             onClick={this.onClick}
             /*
             ** TODO: uncomment out once the following forma36 bug is addressed
