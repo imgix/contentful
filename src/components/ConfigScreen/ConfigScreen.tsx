@@ -14,6 +14,7 @@ import {
   ListItem,
 } from '@contentful/forma-36-react-components';
 import ImgixAPI, { APIError } from 'imgix-management-js';
+import debounce from 'lodash.debounce';
 
 import './ConfigScreen.css';
 
@@ -150,6 +151,10 @@ export default class Config extends Component<ConfigProps, ConfigState> {
     }
   };
 
+  debounceOnClick = debounce(this.onClick, 1000, {
+    leading: true,
+  });
+
   getAPIKey = async () => {
     return this.props.sdk.app
       .getParameters()
@@ -247,12 +252,12 @@ export default class Config extends Component<ConfigProps, ConfigState> {
             type="submit"
             buttonType="positive"
             disabled={!this.state.parameters.imgixAPIKey?.length}
-            onClick={this.onClick}
             /*
              ** TODO: uncomment out once the following forma36 bug is addressed
              ** https://github.com/contentful/forma-36/issues/895
              */
             // loading={this.state.isButtonLoading}
+            onClick={this.debounceOnClick}
           >
             Verify
           </Button>
