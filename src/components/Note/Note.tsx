@@ -15,7 +15,7 @@ export function IxNote({
   resetErrorBoundary,
 }: INoteProps): ReactElement {
   const [message, _link, ...rest] = error.message.split('$');
-  const [link, title] = _link.split('|');
+  const [link, title] = _link?.split('|') || ['', ''];
   const linkTitle = title?.length ? title : link;
 
   return (
