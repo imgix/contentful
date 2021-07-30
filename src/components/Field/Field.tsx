@@ -31,6 +31,9 @@ export default class Field extends Component<FieldProps, FieldState> {
         position: 'top',
         shouldCloseOnOverlayClick: true,
         allowHeightOverflow: true,
+        parameters: {
+          selectedImage: this.state.imagePath,
+        }
       })
       .then((imagePath) =>
         this.setState({ imagePath }, () =>
