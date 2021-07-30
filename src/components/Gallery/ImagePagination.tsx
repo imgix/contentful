@@ -5,6 +5,7 @@ import {
   DropdownList,
   DropdownListItem,
 } from '@contentful/forma-36-react-components';
+import { debounce } from 'lodash';
 
 import { PageProps } from '../Dialog';
 
@@ -32,12 +33,14 @@ export function ImagePagination({
       changePage(nextPage);
     }
   };
+  const debouncePaginateForward = debounce(paginateForward, 1000);
   const paginateBackward = () => {
     const prevPage = pageInfo.currentIndex - 1;
     if (prevPage >= 0) {
       changePage(prevPage);
     }
   };
+  const debouncePaginateBackward = debounce(paginateBackward, 1000);
 
   if (sourceId === undefined) {
     // return react fragment if no sourceId is provided
@@ -50,7 +53,7 @@ export function ImagePagination({
         buttonType="muted"
         icon="ChevronLeft"
         size="small"
-        onClick={() => paginateBackward()}
+        onClick={debouncePaginateBackward}
       >
         Prev Page
       </Button>
@@ -90,7 +93,7 @@ export function ImagePagination({
         buttonType="muted"
         icon="ChevronRight"
         size="small"
-        onClick={() => paginateForward()}
+        onClick={debouncePaginateForward}
       >
         Next Page
       </Button>
