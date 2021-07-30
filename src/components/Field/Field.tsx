@@ -1,6 +1,6 @@
 import { Component } from 'react';
-
 import { FieldExtensionSDK } from 'contentful-ui-extensions-sdk';
+import { debounce } from 'lodash';
 
 import { FieldImagePreview, FieldPrompt } from './';
 
@@ -41,6 +41,7 @@ export default class Field extends Component<FieldProps, FieldState> {
         ),
       );
   };
+  debounceOpenDialog = debounce(this.openDialog, 1000, { leading: true });
 
   clearSelection = () => {
     this.setState({ imagePath: undefined }, () =>
@@ -54,7 +55,7 @@ export default class Field extends Component<FieldProps, FieldState> {
       return (
         <FieldImagePreview
           imagePath={this.state.imagePath}
-          openDialog={this.openDialog}
+          openDialog={this.debounceOpenDialog}
           updateHeight={updateHeightHandler}
           clearSelection={this.clearSelection}
         />
@@ -62,7 +63,7 @@ export default class Field extends Component<FieldProps, FieldState> {
     } else {
       return (
         <FieldPrompt
-          openDialog={this.openDialog}
+          openDialog={this.debounceOpenDialog}
           updateHeight={updateHeightHandler}
         />
       );
