@@ -141,6 +141,10 @@ export default class Dialog extends Component<DialogProps, DialogState> {
     this.setState({ selectedSource: source });
   };
 
+  resetNErrors = (n: number = 1) => {
+    this.setState({ errors: this.state.errors.slice(n) });
+  };
+
   async componentDidMount() {
     // If the API key is not valid do not attempt to load sources
     if (!this.state.verified) {
@@ -174,6 +178,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
           selectedSource={selectedSource}
           allSources={allSources}
           setSource={this.setSelectedSource}
+          resetErrors={() => this.resetNErrors(this.state.errors.length)}
         />
         <ImageGallery
           selectedSource={selectedSource}
@@ -188,9 +193,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
           <Note
             error={this.state.errors[0]}
             type={this.state.errors[0].type}
-            resetErrorBoundary={() =>
-              this.setState({ errors: this.state.errors.slice(1) })
-            }
+            resetErrorBoundary={this.resetNErrors}
           />
         )}
       </div>
