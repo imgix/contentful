@@ -5,7 +5,6 @@ export type ErrorType =
   | `NoOriginImagesError`;
 
 const DASHBOARD_URL = 'https://dashboard.imgix.com';
-const APP_CONFIG_URL = 'https://app.contentful.com/deeplink?link=apps';
 
 /*
 * The error messages are split on `$` and then again on `|`. The `$` is used to
@@ -14,7 +13,7 @@ const APP_CONFIG_URL = 'https://app.contentful.com/deeplink?link=apps';
 * message's "link" url and title.
 
 * E.g.
-* `Return to $${APP_CONFIG_URL}|App Config Page$ to enter a valid API key`
+* `Return to $${APP_CONFIG_URL}|Configuration Page$ to enter a valid API key`
 * Will be parsed as: 
 * `Return to https://app.contentful.com/deeplink?link=apps to enter a valid
 * API key`.
@@ -22,17 +21,18 @@ const APP_CONFIG_URL = 'https://app.contentful.com/deeplink?link=apps';
 
 const ERROR_MESSAGES = {
   InvalidApiKeyError: {
-    message: `Return to $${APP_CONFIG_URL}|App Config Page$ to enter a valid API key`,
+    message: `Return to the Configuration Page to enter a valid API Key or 
+    contact your system administrator.`,
     name: 'Invalid API Key',
     type: 'negative',
   },
   NoSourcesError: {
-    message: `Go to $${DASHBOARD_URL}$ to add an imgix source.`,
-    name: 'You have no imgix sources',
+    message: `Go to $${DASHBOARD_URL + '/sources'}$ to add an imgix Source.`,
+    name: 'You have no imgix Sources',
     type: 'warning',
   },
   NoOriginImagesError: {
-    message: `Go to $${DASHBOARD_URL}$ to add an imgix source.`,
+    message: `Go to $${DASHBOARD_URL}$ to add Origin images to this Source.`,
     name: 'This Source has no Origin images',
     type: 'warning',
   },
