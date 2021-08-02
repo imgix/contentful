@@ -8,6 +8,7 @@ import {
 } from '@contentful/forma-36-react-components';
 
 import { SourceProps } from '../Dialog';
+import './SourceSelect.css';
 
 interface Props {
   selectedSource: Partial<SourceProps>;
@@ -31,13 +32,13 @@ export function SourceSelectDropdown({
 
   return (
     <Dropdown
-      className="ix-dropdown"
       isOpen={isOpen}
       onClose={() => setOpen(false)}
       toggleElement={
         <Button
           size="small"
           buttonType="muted"
+          className="ix-dropdown"
           indicateDropdown
           onClick={() => setOpen(!isOpen)}
         >
@@ -45,7 +46,7 @@ export function SourceSelectDropdown({
         </Button>
       }
     >
-      <DropdownList>
+      <DropdownList className="ix-dropdown-list">
         {allSources.map((source: SourceProps) => (
           <DropdownListItem key={source.id} onClick={() => handleClick(source)}>
             {source.name}
