@@ -1,4 +1,3 @@
-import React from 'react';
 import Dialog from './';
 import { render } from '@testing-library/react';
 
