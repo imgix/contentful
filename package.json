@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@contentful/field-editor-single-line": "^0.14.0",
+    "@contentful/field-editor-single-line": "^0.15.0",
     "@contentful/field-editor-test-utils": "^0.17.0",
     "@contentful/forma-36-fcss": "^0.3.0",
     "@contentful/forma-36-react-components": "^3.74.1",
