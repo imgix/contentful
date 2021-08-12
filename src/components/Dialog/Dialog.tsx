@@ -1,6 +1,8 @@
 import { Component } from 'react';
 import { DialogExtensionSDK } from 'contentful-ui-extensions-sdk';
+
 import ImgixAPI, { APIError } from 'imgix-management-js';
+import { debounce } from 'lodash';
 
 import { DialogHeader } from './';
 import { AppInstallationParameters } from '../ConfigScreen/';
@@ -135,7 +137,13 @@ export default class Dialog extends Component<DialogProps, DialogState> {
   };
 
   handlePageChange = (newPageIndex: number) =>
-    this.setState({ page: { ...this.state.page, currentIndex: newPageIndex } });
+    this.setState({
+      page: { ...this.state.page, currentIndex: newPageIndex },
+    });
+
+  debounceHandlePageChange = debounce(this.handlePageChange, 1000, {
+    leading: true,
+  });
 
   setSelectedSource = (source: SourceProps) => {
     this.setState({ selectedSource: source });
@@ -186,7 +194,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
           sdk={sdk}
           getTotalImageCount={this.handleTotalImageCount}
           pageInfo={page}
-          changePage={this.handlePageChange}
+          changePage={this.debounceHandlePageChange}
         />
         {/* { UI Error fallback } */}
         {this.state.errors.length > 0 && (
