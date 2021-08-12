@@ -1,6 +1,5 @@
 import { Component } from 'react';
 import { DialogExtensionSDK } from 'contentful-ui-extensions-sdk';
-
 import ImgixAPI, { APIError } from 'imgix-management-js';
 import { debounce } from 'lodash';
 
