@@ -22,6 +22,9 @@ export function ImagePagination({
   changePage,
 }: Props): ReactElement {
   const [isOpen, setOpen] = React.useState(false);
+  let leftDisabled = pageInfo.currentIndex === 0;
+  let rightDisabled = pageInfo.currentIndex === pageInfo.totalPageCount - 1;
+
   const handleDropdownClick = (newPageIndex: number) => {
     setOpen(false);
     changePage(newPageIndex);
@@ -52,6 +55,7 @@ export function ImagePagination({
         buttonType="muted"
         icon="ChevronLeft"
         size="small"
+        disabled={leftDisabled}
         onClick={paginateBackward}
       >
         Prev Page
@@ -92,6 +96,7 @@ export function ImagePagination({
         buttonType="muted"
         icon="ChevronRight"
         size="small"
+        disabled={rightDisabled}
         onClick={paginateForward}
       >
         Next Page
