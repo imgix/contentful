@@ -252,11 +252,7 @@ export default class Config extends Component<ConfigProps, ConfigState> {
             type="submit"
             buttonType="positive"
             disabled={!this.state.parameters.imgixAPIKey?.length}
-            /*
-             ** TODO: uncomment out once the following forma36 bug is addressed
-             ** https://github.com/contentful/forma-36/issues/895
-             */
-            // loading={this.state.isButtonLoading}
+            loading={this.state.isButtonLoading}
             onClick={this.debounceOnClick}
           >
             Verify
