@@ -19,7 +19,7 @@ export default class Field extends Component<FieldProps, FieldState> {
     const storedValue = this.props.sdk.field.getValue();
 
     this.state = {
-      imagePath: storedValue || '',
+      imagePath: storedValue?.src || '',
     };
   }
 
@@ -37,7 +37,7 @@ export default class Field extends Component<FieldProps, FieldState> {
       })
       .then((imagePath) =>
         this.setState({ imagePath }, () =>
-          this.props.sdk.field.setValue(imagePath),
+          this.props.sdk.field.setValue({ src: imagePath }),
         ),
       );
   };
