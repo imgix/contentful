@@ -8,7 +8,7 @@ import {
 } from '@contentful/forma-36-react-components';
 
 import { SourceProps } from '../Dialog';
-import './SourceSelect.css';
+import './SourceSelectDropdown.css';
 
 interface Props {
   selectedSource: Partial<SourceProps>;
