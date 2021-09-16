@@ -167,7 +167,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
       }
       this.setState({ allSources: sources });
     } catch (error) {
-      this.setState({ errors: [error] });
+      this.setState({ errors: [error] as IxError[] });
     }
   }
 
