@@ -2,6 +2,10 @@
   width: 300px;
 }
 
+.ix-dropdown > span {
+  justify-content: space-between;
+}
+
 .ix-dropdown-list {
   width: 300px;
 }
