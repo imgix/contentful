@@ -50,6 +50,6 @@
   "devDependencies": {
     "@types/lodash.debounce": "4.0.6",
     "@types/react-imgix": "9.0.4",
-    "prettier": "2.3.2"
+    "prettier": "2.4.1"
   }
 }
