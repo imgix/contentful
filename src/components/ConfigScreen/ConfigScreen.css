@@ -18,7 +18,7 @@
 
 .icon {
   flex: 2;
-  margin-top: 8%;
+  margin-top: 2.5rem;
   margin-left: 10px;
 }
 
@@ -27,11 +27,16 @@
 }
 
 .ix-config-container {
-  margin: 80px;
+  background: linear-gradient(#00bffe 300px, transparent 300px) no-repeat;
 }
 
 .ix-config-description {
-  max-width: 500px;
+  margin: 2rem auto 2rem;
+  max-width: 768px;
+  background-color: #ffffff;
+  padding: 2rem 3rem;
+  border-radius: 2px;
+  box-shadow: rgb(0 0 0 / 10%) 0px 0px 20px;
 }
 
 code {
