@@ -65,14 +65,15 @@ export default class Config extends Component<ConfigProps, ConfigState> {
   async componentDidMount() {
     // Get current parameters of the app.
     // If the app is not installed yet, `parameters` will be `null`.
-    const parameters: AppInstallationParameters | null =
-      await this.props.sdk.app.getParameters();
+    const parameters: AppInstallationParameters =
+      (await this.props.sdk.app.getParameters()) || {};
 
     // Forcing the type here to include any[] as Promise.all can return `undefined`
     // but we will filter all values out before returning the final array
     const contentTypes: (ContentType | any)[] =
       await this.getContentTypesWithCompatibleFields();
 
+    this.setState({ parameters, contentTypes }, async () => {
       // Once preparation has finished, call `setReady` to hide
       // the loading screen and present the app to a user.
       this.props.sdk.app.setReady();
