@@ -75,6 +75,67 @@ export default class Config extends Component<ConfigProps, ConfigState> {
     });
   }
 
+  /**
+   * A function that returns all content types (e.g. Blog Posts) with any compatible fields
+   * (i.e. Object) that are not configured to use the imgix app
+   * @returns an array of @type ContentType objects
+   */
+  async getContentTypesWithCompatibleFields() {
+    const { space, ids } = this.props.sdk;
+    const editorInterfaces = await space.getEditorInterfaces();
+    const appId = ids.app;
+
+    /**
+     * A function that returns all compatible fields for a given content type
+     * @param controls
+     * @param fields
+     * @returns
+     */
+    // TODO: add more explicit types from https://github.com/contentful/apps/blob/9a06aa60c815bf674f019ddb1b9806a53ac8fb0b/packages/dam-app-base/src/AppConfig/fields.ts
+    const getCompatibleFields = (controls: any[], fields: any[]) => {
+      const compatibleFields: CompatibleField[] = [];
+      controls.forEach((control, index) => {
+        if (control.fieldId === fields[index].id) {
+          if (fields[index].type === 'Object') {
+            // const enabled = control.widgetId === appId; KEEP THIS
+            if (control.widgetId !== appId) {
+              compatibleFields.push({
+                fieldId: control.fieldId,
+                fieldName: fields[index].name,
+                enabled: false,
+              });
+            }
+          }
+        }
+      });
+      return compatibleFields;
+    };
+
+    return Promise.all(
+      // TODO: add more explicit types from https://github.com/contentful/apps/blob/9a06aa60c815bf674f019ddb1b9806a53ac8fb0b/packages/dam-app-base/src/AppConfig/fields.ts
+      editorInterfaces.items.map(async (ei: any) => {
+        const contentId = ei.sys?.contentType?.sys?.id;
+        const contentType: any = await space.getContentType(contentId);
+
+        if (contentType.fields) {
+          const mergedFields = getCompatibleFields(
+            ei.controls,
+            contentType.fields,
+          );
+          if (mergedFields.length > 0) {
+            return {
+              contentName: contentType.name as string,
+              contentId: contentId as string,
+              mergedFields,
+            };
+          }
+        }
+      }),
+    ).then((allObjectFields) =>
+      allObjectFields.filter((field) => typeof field !== 'undefined'),
+    );
+  }
+
   onConfigure = async () => {
     // This method will be called when a user clicks on "Install"
     // or "Save" in the configuration screen.
