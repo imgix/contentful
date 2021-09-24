@@ -151,17 +151,50 @@ export default class Config extends Component<ConfigProps, ConfigState> {
     // ensure the API key is validated
     await this.verifyAPIKey();
 
-    // Get current the state of EditorInterface and other entities
-    // related to this app installation
-    const currentState = await this.props.sdk.app.getCurrentState();
+    // Generate a new target state with the App assigned to the selected
+    // content types
+    const targetState = await this.createTargetState();
 
     return {
       // Parameters to be persisted as the app configuration.
       parameters: this.state.parameters,
       // In case you don't want to submit any update to app
       // locations, you can just pass the currentState as is
-      targetState: currentState,
+      targetState,
     };
+  };
+
+  /**
+   * A function that will construct an EditorInterface object. This value is
+   * is used to render the imgix app on any fields selected by the user on the
+   * ConfigScreen.
+   * @returns EditorInterface - for more information see https://www.contentful.com/developers/docs/extensibility/app-framework/target-state/#field-location
+   */
+  createTargetState = async () => {
+    const currentState = await this.props.sdk.app.getCurrentState();
+
+    const EditorInterface = this.state.contentTypes.reduce(
+      (editorInterface: any, { contentId, mergedFields }: ContentType) => {
+        if (
+          mergedFields.length > 0 &&
+          mergedFields.some((field) => field.enabled)
+        ) {
+          editorInterface[contentId] = {
+            controls: [],
+          };
+
+          mergedFields.map(({ fieldId, enabled }: CompatibleField) => {
+            if (enabled) {
+              editorInterface[contentId].controls.push({ fieldId });
+            }
+          });
+        }
+        return editorInterface;
+      },
+      currentState?.EditorInterface || {},
+    );
+
+    return { ...currentState, EditorInterface };
   };
 
   handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
