@@ -183,7 +183,7 @@ export default class Config extends Component<ConfigProps, ConfigState> {
             controls: [],
           };
 
-          compatibleFields.map(({ fieldId, enabled }: CompatibleField) => {
+          compatibleFields.forEach(({ fieldId, enabled }: CompatibleField) => {
             if (enabled) {
               editorInterface[contentId].controls.push({ fieldId });
             }
