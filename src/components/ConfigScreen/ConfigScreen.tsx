@@ -385,13 +385,19 @@ export default class Config extends Component<ConfigProps, ConfigState> {
               </Paragraph>
               <br></br>
               {this.state.contentTypes.map(
-                ({ contentName, compatibleFields }: ContentType, contentIndex) => (
+                (
+                  { contentName, compatibleFields }: ContentType,
+                  contentIndex,
+                ) => (
                   <div>
                     <Subheading>{contentName}</Subheading>
                     <br></br>
                     <Form>
                       {compatibleFields.map(
-                        ({ fieldId, fieldName, enabled }: CompatibleField, fieldIndex) => (
+                        (
+                          { fieldId, fieldName, enabled }: CompatibleField,
+                          fieldIndex,
+                        ) => (
                           <CheckboxField
                             labelText={fieldName}
                             id={fieldId}
