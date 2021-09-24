@@ -34,7 +34,7 @@ interface CompatibleField {
 interface ContentType {
   contentName: string;
   contentId: string;
-  mergedFields: CompatibleField[];
+  compatibleFields: CompatibleField[];
 }
 
 interface ConfigProps {
@@ -125,15 +125,15 @@ export default class Config extends Component<ConfigProps, ConfigState> {
         const contentType: any = await space.getContentType(contentId);
 
         if (contentType.fields) {
-          const mergedFields = getCompatibleFields(
+          const compatibleFields = getCompatibleFields(
             ei.controls,
             contentType.fields,
           );
-          if (mergedFields.length > 0) {
+          if (compatibleFields.length > 0) {
             return {
               contentName: contentType.name as string,
               contentId: contentId as string,
-              mergedFields,
+              compatibleFields,
             };
           }
         }
@@ -174,16 +174,16 @@ export default class Config extends Component<ConfigProps, ConfigState> {
     const currentState = await this.props.sdk.app.getCurrentState();
 
     const EditorInterface = this.state.contentTypes.reduce(
-      (editorInterface: any, { contentId, mergedFields }: ContentType) => {
+      (editorInterface: any, { contentId, compatibleFields }: ContentType) => {
         if (
-          mergedFields.length > 0 &&
-          mergedFields.some((field) => field.enabled)
+          compatibleFields.length > 0 &&
+          compatibleFields.some((field) => field.enabled)
         ) {
           editorInterface[contentId] = {
             controls: [],
           };
 
-          mergedFields.map(({ fieldId, enabled }: CompatibleField) => {
+          compatibleFields.map(({ fieldId, enabled }: CompatibleField) => {
             if (enabled) {
               editorInterface[contentId].controls.push({ fieldId });
             }
@@ -383,13 +383,14 @@ export default class Config extends Component<ConfigProps, ConfigState> {
                 fields. Select which JSON fields you’d like to enable for this
                 app.
               </Paragraph>
+              <br></br>
               {this.state.contentTypes.map(
-                ({ contentName, mergedFields }: ContentType, contentIndex) => (
+                ({ contentName, compatibleFields }: ContentType, contentIndex) => (
                   <div>
                     <Subheading>{contentName}</Subheading>
                     <br></br>
                     <Form>
-                      {mergedFields.map(
+                      {compatibleFields.map(
                         ({ fieldId, fieldName, enabled }: CompatibleField, fieldIndex) => (
                           <CheckboxField
                             labelText={fieldName}
@@ -401,7 +402,7 @@ export default class Config extends Component<ConfigProps, ConfigState> {
                               const changedState = { ...this.state };
                               changedState.contentTypes[
                                 contentIndex
-                              ].mergedFields[fieldIndex].enabled = !enabled;
+                              ].compatibleFields[fieldIndex].enabled = !enabled;
                               this.setState(changedState);
                             }}
                           />
