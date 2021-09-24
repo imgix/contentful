@@ -23,6 +23,18 @@ export interface AppInstallationParameters {
   successfullyVerified?: boolean;
 }
 
+interface CompatibleField {
+  fieldId: string;
+  fieldName: string;
+  enabled: boolean;
+}
+
+interface ContentType {
+  contentName: string;
+  contentId: string;
+  mergedFields: CompatibleField[];
+}
+
 interface ConfigProps {
   sdk: AppExtensionSDK;
 }
@@ -31,6 +43,7 @@ interface ConfigState {
   isButtonLoading?: boolean;
   validationMessage?: string;
   parameters: AppInstallationParameters;
+  contentTypes: ContentType[];
 }
 
 export default class Config extends Component<ConfigProps, ConfigState> {
@@ -40,6 +53,7 @@ export default class Config extends Component<ConfigProps, ConfigState> {
       isButtonLoading: false,
       validationMessage: '',
       parameters: {},
+      contentTypes: [],
     };
 
     // `onConfigure` allows to configure a callback to be
