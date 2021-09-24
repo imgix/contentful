@@ -12,6 +12,8 @@ import {
   TextLink,
   List,
   ListItem,
+  CheckboxField,
+  Subheading,
 } from '@contentful/forma-36-react-components';
 import ImgixAPI, { APIError } from 'imgix-management-js';
 import debounce from 'lodash.debounce';
@@ -339,6 +341,45 @@ export default class Config extends Component<ConfigProps, ConfigState> {
           >
             Verify
           </Button>
+          {this.state.contentTypes.length > 0 && (
+            <div>
+              <hr></hr>
+              <Heading>Assign to fields</Heading>
+              <Paragraph>
+                This app can only be used with <strong>JSON object</strong>{' '}
+                fields. Select which JSON fields you’d like to enable for this
+                app.
+              </Paragraph>
+              {this.state.contentTypes.map(
+                ({ contentName, mergedFields }: ContentType, contentIndex) => (
+                  <div>
+                    <Subheading>{contentName}</Subheading>
+                    <br></br>
+                    <Form>
+                      {mergedFields.map(
+                        ({ fieldId, fieldName, enabled }: CompatibleField, fieldIndex) => (
+                          <CheckboxField
+                            labelText={fieldName}
+                            id={fieldId}
+                            helpText={`FieldId: ${fieldId}`}
+                            checked={enabled}
+                            onChange={() => {
+                              // flip the enabled value of the selected field
+                              const changedState = { ...this.state };
+                              changedState.contentTypes[
+                                contentIndex
+                              ].mergedFields[fieldIndex].enabled = !enabled;
+                              this.setState(changedState);
+                            }}
+                          />
+                        ),
+                      )}
+                    </Form>
+                  </div>
+                ),
+              )}
+            </div>
+          )}
         </Form>
         <div className="ix-config-footer">
           <img className="ix-config-footerLogo" src="https://assets.imgix.net/sdk-imgix-logo.svg" alt="App logo" />
