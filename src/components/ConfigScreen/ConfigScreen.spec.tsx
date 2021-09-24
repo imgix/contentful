@@ -10,6 +10,14 @@ describe('Config Screen component', () => {
         setReady: jest.fn(),
         getCurrentState: jest.fn(),
       },
+      space: {
+        getEditorInterfaces: jest.fn().mockReturnValueOnce({
+          items: [],
+        }),
+      },
+      ids: {
+        app: 'test-app-id',
+      },
     };
     const { getByText } = render(<ConfigScreen sdk={mockSdk} />);
 
