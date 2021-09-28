@@ -1,7 +1,14 @@
 .ix-helper-text {
   margin-top: 0.5rem;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial,
-    sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
+  font-family: -apple-system,
+    BlinkMacSystemFont,
+    Segoe UI,
+    Helvetica,
+    Arial,
+    sans-serif,
+    Apple Color Emoji,
+    Segoe UI Emoji,
+    Segoe UI Symbol;
   font-size: 0.875rem;
   line-height: 1.5;
   display: block;
@@ -18,20 +25,42 @@
 
 .icon {
   flex: 2;
-  margin-top: 8%;
+  margin-top: 2.5rem;
   margin-left: 10px;
 }
 
 [data-test-id='cf-notification-container'] {
   margin-left: 80px;
+  left: 50vh;
 }
 
 .ix-config-container {
-  margin: 80px;
+  position: inherit;
+  background: linear-gradient(#00bffe 300px, #fafafa 300px) no-repeat;
+  height: 100vh;
+}
+
+.ix-config-container > div {
+  flex-direction: column;
 }
 
 .ix-config-description {
-  max-width: 500px;
+  margin: 2rem auto 2rem;
+  max-width: 768px;
+  background-color: #ffffff;
+  padding: 2rem 3rem;
+  border-radius: 2px;
+  box-shadow: rgb(0 0 0 / 10%) 0 0 20px;
+}
+
+.ix-config-footer {
+  display: flex;
+  justify-content: center;
+}
+
+.ix-config-footerLogo {
+  display: block;
+  width: 120px;
 }
 
 code {

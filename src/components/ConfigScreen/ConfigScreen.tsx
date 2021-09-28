@@ -104,11 +104,12 @@ export default class Config extends Component<ConfigProps, ConfigState> {
 
     try {
       await imgix.request('sources');
-      Notification.setPosition('top', { offset: 645 });
+      Notification.setPosition('top', { offset: 490 });
       Notification.success(
         'Your API key was successfully confirmed! Click the Install/Save button (in the top right corner) to complete installation.',
         {
           duration: 10000,
+          id: 'ix-config-notification'
         },
       );
       updatedInstallationParameters.successfullyVerified = true;
@@ -119,11 +120,12 @@ export default class Config extends Component<ConfigProps, ConfigState> {
       } else {
         console.error(error);
       }
-      Notification.setPosition('top', { offset: 650 });
+      Notification.setPosition('top', { offset: 490 });
       Notification.error(
         "We couldn't verify this API Key. Confirm your details and try again.",
         {
           duration: 3000,
+          id: 'ix-config-notification'
         },
       );
       updatedInstallationParameters.successfullyVerified = false;
@@ -258,6 +260,9 @@ export default class Config extends Component<ConfigProps, ConfigState> {
             Verify
           </Button>
         </Form>
+        <div className="ix-config-footer">
+          <img className="ix-config-footerLogo" src="https://assets.imgix.net/sdk-imgix-logo.svg" alt="App logo" />
+        </div>
       </Workbench>
     );
   }
