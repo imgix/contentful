@@ -123,7 +123,6 @@ export default class Config extends Component<ConfigProps, ConfigState> {
       editorInterfaces.items.map(async (ei: any) => {
         const contentId = ei.sys?.contentType?.sys?.id;
         const contentType: any = await space.getContentType(contentId);
-
         if (contentType.fields) {
           const compatibleFields = getCompatibleFields(
             ei.controls,
@@ -224,7 +223,7 @@ export default class Config extends Component<ConfigProps, ConfigState> {
         'Your API key was successfully confirmed! Click the Install/Save button (in the top right corner) to complete installation.',
         {
           duration: 10000,
-          id: 'ix-config-notification'
+          id: 'ix-config-notification',
         },
       );
       updatedInstallationParameters.successfullyVerified = true;
@@ -240,7 +239,7 @@ export default class Config extends Component<ConfigProps, ConfigState> {
         "We couldn't verify this API Key. Confirm your details and try again.",
         {
           duration: 3000,
-          id: 'ix-config-notification'
+          id: 'ix-config-notification',
         },
       );
       updatedInstallationParameters.successfullyVerified = false;
@@ -423,7 +422,11 @@ export default class Config extends Component<ConfigProps, ConfigState> {
           )}
         </Form>
         <div className="ix-config-footer">
-          <img className="ix-config-footerLogo" src="https://assets.imgix.net/sdk-imgix-logo.svg" alt="App logo" />
+          <img
+            className="ix-config-footerLogo"
+            src="https://assets.imgix.net/sdk-imgix-logo.svg"
+            alt="App logo"
+          />
         </div>
       </Workbench>
     );
