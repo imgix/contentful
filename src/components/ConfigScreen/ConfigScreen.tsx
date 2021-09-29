@@ -343,6 +343,7 @@ export default class Config extends Component<ConfigProps, ConfigState> {
                   validationMessage={this.state.validationMessage}
                   textInputProps={{
                     type: 'password',
+                    autoComplete: 'new-api-key',
                   }}
                   onChange={this.handleChange}
                 />
