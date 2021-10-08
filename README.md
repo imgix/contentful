@@ -23,7 +23,7 @@ A Contentful app that integrates with imgix's [Image Manager](https://docs.imgix
     * [Assign to Fields](#assign-to-fields)
 - [Add to Content Model](#add-to-content-model)
 - [Browse and Select Images](#browse-and-select-images)
-- [Query an Image's `src`](#query-an-images-src)
+- [Query an Image](#query-an-image)
     * [Transforming Images](#transforming-images)
 - [License](#license)
 
@@ -67,15 +67,87 @@ https://user-images.githubusercontent.com/15919091/136624966-717df2ec-f3fd-4e3c-
 
 From any instance of a field using the imgix app, a modal can be opened to browse images by imgix source. First, select a desired source to browse images from. Using any of the pagination buttons, navigate each page of assets to choose from. After selecting an image, it can be inserted to the field via the `Add image` button. Additionally, there are options to replace an image, or clear a selection from the field altogether.
 
-https://user-images.githubusercontent.com/15919091/136625073-6c109568-7b8b-490f-aa2f-4be12bbc2cb0.mov
+## Query an Image
 
-## Query an Image's `src`
+Once content is published, developers can query the `src` of the selected image, returned as a string, via the Contentful API. The example below demonstrates this using GraphQL, but this can be done independent of any specific tool.
 
-Once content is published, developers can query the `src` of the selected image via the Contentful API. The example below demonstrates this using GraphQL in a Gatsby site, but this can be done independent of any specific site builder or stack.
+```graphql
+query MyQuery {
+  allContentfulArticle {
+    nodes {
+      avatar {
+        src
+      }
+      bannerImage {
+        src
+      }
+    }
+  }
+}
+```
+
+returns:
+
+```json
+{
+  "data": {
+    "allContentfulArticle": {
+      "nodes": [
+        {
+          "avatar": {
+            "src": "https://fourbottle.imgix.net/heroes/pourover.jpg"
+          },
+          "bannerImage": {
+            "src": "https://fourbottle.imgix.net/heroes/light-scatter.jpg"
+          }
+        }
+      ]
+    }
+  },
+  "extensions": {}
+}
+```
 
 ### Transforming Images
 
-Developers can leverage the power of imgix's [rendering API](https://docs.imgix.com/apis/rendering) downstream from where the image was selected in Contentful. We recommend piping the `src` field of the image through to one of imgix's [SDKs](https://docs.imgix.com/libraries). The example below builds on the previous one by passing the image `src` through to [react-imgix](https://github.com/imgix/react-imgix):
+Developers can leverage the power of imgix's [rendering API](https://docs.imgix.com/apis/rendering) downstream from where the image was selected in Contentful. We recommend piping the `src` field of the image through to one of imgix's [SDKs](https://docs.imgix.com/libraries). The example below builds on the previous one by passing the image `src` through to [@imgix/gatsby](https://github.com/imgix/gatsby):
+
+```js
+import React from "react";
+import { graphql } from "gatsby";
+import { ImgixGatsbyImage } from "@imgix/gatsby";
+
+export default function Home({ data }) {
+  return (
+    data.allContentfulArticle.nodes.map(({ node }) => (
+        <ImgixGatsbyImage
+          src={node.avatar.src}
+          imgixParams={{
+            auto: "format,compress",
+            crop: "faces,edges",
+          }}
+          layout="constrained"
+          width={350}
+          aspectRatio={16 / 9}
+          sizes="(min-width: 1024px) calc(30vw - 128px), (min-width: 768px) calc(50vw - 100px), calc(100vw - 70px)"
+          alt="An imgix-served image from Contentful"
+        />
+    ))
+  );
+}
+
+export const query = graphql`
+query MyQuery {
+  allContentfulArticle {
+    nodes {
+      avatar {
+        src
+      }
+    }
+  }
+}
+`;
+```
 
 ## License
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fimgix%2Fcontentful.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fimgix%2Fcontentful?ref=badge_large)
