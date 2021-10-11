@@ -20,7 +20,7 @@ A Contentful app that integrates with imgix's [Image Manager](https://docs.imgix
 
 - [Installation](#installation)
 - [Configuration](#configuration)
-    * [Assign to Fields](#assign-to-fields)
+    * [Assign to Fields (Optional)](#assign-to-fields-optional)
 - [Add to Content Model](#add-to-content-model)
 - [Browse and Select Images](#browse-and-select-images)
 - [Query an Image](#query-an-image)
@@ -33,7 +33,7 @@ A Contentful app that integrates with imgix's [Image Manager](https://docs.imgix
 
 ## Installation
 
-The app can installed to your Contentful workspace via the [marketplace](https://www.contentful.com/marketplace/app/imgix/).
+The app can be installed to your Contentful workspace via the [marketplace](https://www.contentful.com/marketplace/app/imgix/).
 
 If running locally, the app can be installed via npm:
 
@@ -44,13 +44,13 @@ npm run start
 
 ## Configuration
 
-Upon installation, configure the app using an API key generated via the imgix [Dashboard](https://dashboard.imgix.com/api-keys). **Ensure that the generated key has the following permissions `Sources` and `Image Manager Browse`.**
+Upon installation, configure the app using an API key generated via the imgix [Dashboard](https://dashboard.imgix.com/api-keys). **Ensure that the generated key has the following permissions: `Sources` and `Image Manager Browse`.**
 
 Following the instructions on the screen, enter in the API key and press `Verify`. If the key is valid, you will receive a notification that the key has been successfully verified. If verification fails, you will need to ensure that the key was entered correctly.
 
 https://user-images.githubusercontent.com/15919091/136624478-84830210-585d-40a3-9aa0-8540b4e67d7f.mov
 
-### Assign to Fields
+### Assign to Fields (Optional)
 
 The configuration page surfaces the option for users to select pre-existing content fields that are compatible with the imgix app. Note that the app is configured to integrate with `JSON object` fields only, therefore only fields of this type will be displayed. Users may prefer this method over selecting individual fields manually for each applicable content model.
 
@@ -59,7 +59,7 @@ https://user-images.githubusercontent.com/15919091/136625503-aa4dabd4-5a7b-4886-
 ## Add to Content Model
 
 Of the many content types that users can choose from, imgix specifically integrates with the `JSON object`. Please note that if you are currently using a `Media` content type for images, you will need to create a new field of type `JSON object` to integrate the app with.
-Designate a field to use imgix on by navigating to that field’s Appearance tab and selecting the app.
+Designate a field to use imgix on by navigating to that field’s Appearance tab and selecting the app. This step can be skipped if you already [assigned the app](#assign-to-fields-optional) directly to the desired field(s).
 
 https://user-images.githubusercontent.com/15919091/136624966-717df2ec-f3fd-4e3c-aa0b-4ed1e7252e73.mov
 
@@ -71,7 +71,7 @@ https://user-images.githubusercontent.com/15919091/136625073-6c109568-7b8b-490f-
 
 ## Query an Image
 
-Once content is published, developers can query the `src` of the selected image, returned as a string, via the Contentful API. The example below demonstrates this using GraphQL, but this can be done independent of any specific tool.
+Once the content is published, developers can query the `src` of the selected image, returned as a string, via the Contentful API. The example below demonstrates this using GraphQL, but this can be done independent of any specific tool.
 
 ```graphql
 query MyQuery {
@@ -88,7 +88,7 @@ query MyQuery {
 }
 ```
 
-returns:
+returns something similar to:
 
 ```json
 {
@@ -112,14 +112,14 @@ returns:
 
 ### Transforming Images
 
-Developers can leverage the power of imgix's [rendering API](https://docs.imgix.com/apis/rendering) downstream from where the image was selected in Contentful. We recommend piping the `src` field of the image through to one of imgix's [SDKs](https://docs.imgix.com/libraries). The example below builds on the previous one by passing the image `src` through to [@imgix/gatsby](https://github.com/imgix/gatsby):
+Developers can leverage the power of imgix's [rendering API](https://docs.imgix.com/apis/rendering) downstream from where the image was selected in Contentful. We recommend piping the value of the `src` field of the image through to one of imgix's [SDKs](https://docs.imgix.com/libraries#frontend-libraries). The example below builds on the previous one by passing the image `src` through to [@imgix/gatsby](https://github.com/imgix/gatsby) component:
 
 ```js
 import React from "react";
 import { graphql } from "gatsby";
 import { ImgixGatsbyImage } from "@imgix/gatsby";
 
-export default function Home({ data }) {
+export default function Page({ data }) {
   return (
     data.allContentfulArticle.nodes.map(({ node }) => (
         <ImgixGatsbyImage
