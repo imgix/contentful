@@ -1,6 +1,27 @@
 {
   "name": "@imgix/contentful",
   "version": "1.0.0",
+  "description": "Browse for, select and insert image assets into your content quickly and easily via the imgix Image Manager.",
+  "author": "imgix SDK team <sdk@imgix.com>",
+  "private": false,
+  "license": "BSD-2-Clause",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/imgix/contentful"
+  },
+  "bugs": {
+    "url": "https://github.com/imgix/contentful/issues"
+  },
+  "keywords": [
+    "contentful",
+    "imgix",
+    "image",
+    "cdn",
+    "optimize",
+    "transform",
+    "responsive",
+    "media"
+  ],
   "dependencies": {
     "@contentful/field-editor-single-line": "^0.15.0",
     "@contentful/field-editor-test-utils": "^0.17.0",
@@ -50,5 +71,14 @@
     "@types/lodash.debounce": "4.0.6",
     "@types/react-imgix": "9.0.4",
     "prettier": "2.4.1"
-  }
+  },
+  "files": [
+    "dist",
+    "CHANGELOG.md",
+    "LICENSE",
+    "package.json",
+    "README.md",
+    "build/*",
+    "public/*"
+  ]
 }
