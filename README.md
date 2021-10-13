@@ -51,7 +51,7 @@ Upon installation, configure the app using an API key generated via the imgix [D
 Following the instructions on the screen, enter in the API key and press `Verify`. If the key is valid, you will receive a notification that the key has been successfully verified. If verification fails, you will need to ensure that the key was entered correctly.
 
 <video controls width="800" height="600">
-  <source src="https://user-images.githubusercontent.com/15919091/136624478-84830210-585d-40a3-9aa0-8540b4e67d7f.mov">
+  <source src="https://user-images.githubusercontent.com/15919091/137049820-8ffc4bfd-43f1-41d2-b078-068ddaaa0c86.mp4">
 </video>
 
 ### Assign to Fields (Optional)
@@ -59,7 +59,7 @@ Following the instructions on the screen, enter in the API key and press `Verify
 The configuration page surfaces the option for users to select pre-existing content fields that are compatible with the imgix app. Note that the app is configured to integrate with `JSON object` fields only, therefore only fields of this type will be displayed. Users may prefer this method over selecting individual fields manually for each applicable content model.
 
 <video controls width="800" height="600">
-  <source src="https://user-images.githubusercontent.com/15919091/136625503-aa4dabd4-5a7b-4886-912e-f536f7e67ab3.mov">
+  <source src="https://user-images.githubusercontent.com/15919091/137056243-487233b5-228a-4f7b-bcd3-a99bed55f460.mp4">
 </video>
 
 ## Add to Content Model
@@ -68,7 +68,7 @@ Of the many content types that users can choose from, imgix specifically integra
 Designate a field to use imgix on by navigating to that field’s Appearance tab and selecting the app. This step can be skipped if you already [assigned the app](#assign-to-fields-optional) directly to the desired field(s).
 
 <video controls width="800" height="600">
-  <source src="https://user-images.githubusercontent.com/15919091/136624966-717df2ec-f3fd-4e3c-aa0b-4ed1e7252e73.mov">
+  <source src="https://user-images.githubusercontent.com/15919091/137056289-8ee117fa-c254-4ae9-93aa-0bea3b975d1b.mp4">
 </video>
 
 
@@ -77,7 +77,7 @@ Designate a field to use imgix on by navigating to that field’s Appearance tab
 From any instance of a field using the imgix app, a modal can be opened to browse images by imgix source. First, select a desired source to browse images from. Using any of the pagination buttons, navigate each page of assets to choose from. After selecting an image, it can be inserted to the field via the `Add image` button. Additionally, there are options to replace an image, or clear a selection from the field altogether.
 
 <video controls width="800" height="600">
-  <source src="https://user-images.githubusercontent.com/15919091/136625073-6c109568-7b8b-490f-aa2f-4be12bbc2cb0.mov">
+  <source src="https://user-images.githubusercontent.com/15919091/137056329-97e3536d-2bf3-471e-970a-2921fab44e8d.mp4">
 </video>
 
 
