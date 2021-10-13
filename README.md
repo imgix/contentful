@@ -50,26 +50,36 @@ Upon installation, configure the app using an API key generated via the imgix [D
 
 Following the instructions on the screen, enter in the API key and press `Verify`. If the key is valid, you will receive a notification that the key has been successfully verified. If verification fails, you will need to ensure that the key was entered correctly.
 
-https://user-images.githubusercontent.com/15919091/136624478-84830210-585d-40a3-9aa0-8540b4e67d7f.mov
+<video controls width="800" height="600">
+  <source src="https://user-images.githubusercontent.com/15919091/136624478-84830210-585d-40a3-9aa0-8540b4e67d7f.mov">
+</video>
 
 ### Assign to Fields (Optional)
 
 The configuration page surfaces the option for users to select pre-existing content fields that are compatible with the imgix app. Note that the app is configured to integrate with `JSON object` fields only, therefore only fields of this type will be displayed. Users may prefer this method over selecting individual fields manually for each applicable content model.
 
-https://user-images.githubusercontent.com/15919091/136625503-aa4dabd4-5a7b-4886-912e-f536f7e67ab3.mov
+<video controls width="800" height="600">
+  <source src="https://user-images.githubusercontent.com/15919091/136625503-aa4dabd4-5a7b-4886-912e-f536f7e67ab3.mov">
+</video>
 
 ## Add to Content Model
 
 Of the many content types that users can choose from, imgix specifically integrates with the `JSON object`. Please note that if you are currently using a `Media` content type for images, you will need to create a new field of type `JSON object` to integrate the app with.
 Designate a field to use imgix on by navigating to that field’s Appearance tab and selecting the app. This step can be skipped if you already [assigned the app](#assign-to-fields-optional) directly to the desired field(s).
 
-https://user-images.githubusercontent.com/15919091/136624966-717df2ec-f3fd-4e3c-aa0b-4ed1e7252e73.mov
+<video controls width="800" height="600">
+  <source src="https://user-images.githubusercontent.com/15919091/136624966-717df2ec-f3fd-4e3c-aa0b-4ed1e7252e73.mov">
+</video>
+
 
 ## Browse and Select Images
 
 From any instance of a field using the imgix app, a modal can be opened to browse images by imgix source. First, select a desired source to browse images from. Using any of the pagination buttons, navigate each page of assets to choose from. After selecting an image, it can be inserted to the field via the `Add image` button. Additionally, there are options to replace an image, or clear a selection from the field altogether.
 
-https://user-images.githubusercontent.com/15919091/136625073-6c109568-7b8b-490f-aa2f-4be12bbc2cb0.mov
+<video controls width="800" height="600">
+  <source src="https://user-images.githubusercontent.com/15919091/136625073-6c109568-7b8b-490f-aa2f-4be12bbc2cb0.mov">
+</video>
+
 
 ## Query an Image
 
