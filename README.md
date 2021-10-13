@@ -1,7 +1,7 @@
 <!-- ix-docs-ignore -->
 ![imgix logo](https://assets.imgix.net/sdk-imgix-logo.svg)
 
-A Contentful app that integrates with imgix's [Image Manager](https://docs.imgix.com/setup/image-manager). Browse for, select and insert image assets into your content quickly and easily. Simplify your content editing workflow within Contentful and empower your developers with imgix’s powerful image rendering and optimization service.
+A Contentful app that integrates with imgix's [Image Manager](https://docs.imgix.com/setup/image-manager). Browse for, select, and insert image assets into your content quickly and easily. Simplify your content editing workflow within Contentful and empower your developers with imgix’s powerful image rendering and optimization service.
 
 [![npm version](https://img.shields.io/npm/v/@imgix/contentful.svg)](https://www.npmjs.com/package/@imgix/contentful)
 [![Build Status](https://travis-ci.com/imgix/contentful.svg?branch=main)](https://travis-ci.com/imgix/contentful)
