@@ -16,6 +16,7 @@ import {
 } from '../../helpers/errors';
 
 import './Dialog.css';
+import { TextInput } from '@contentful/forma-36-react-components';
 
 interface DialogProps {
   sdk: DialogExtensionSDK;
@@ -187,6 +188,12 @@ export default class Dialog extends Component<DialogProps, DialogState> {
           setSource={this.setSelectedSource}
           resetErrors={() => this.resetNErrors(this.state.errors.length)}
         />
+        {this.state.selectedSource.id && (
+          <TextInput
+            type="search"
+            placeholder="Search by name or folder path"
+          />
+        )}
         <ImageGallery
           selectedSource={selectedSource}
           imgix={imgix}
