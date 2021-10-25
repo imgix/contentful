@@ -16,7 +16,7 @@ import {
 } from '../../helpers/errors';
 
 import './Dialog.css';
-import { TextInput } from '@contentful/forma-36-react-components';
+import { TextInput, Button } from '@contentful/forma-36-react-components';
 
 interface DialogProps {
   sdk: DialogExtensionSDK;
@@ -189,10 +189,15 @@ export default class Dialog extends Component<DialogProps, DialogState> {
           resetErrors={() => this.resetNErrors(this.state.errors.length)}
         />
         {this.state.selectedSource.id && (
-          <TextInput
-            type="search"
-            placeholder="Search by name or folder path"
-          />
+          <div>
+            <TextInput
+              type="search"
+              placeholder="Search by name or folder path"
+            />
+            <Button buttonType="muted" icon="Search">
+              Search
+            </Button>
+          </div>
         )}
         <ImageGallery
           selectedSource={selectedSource}
