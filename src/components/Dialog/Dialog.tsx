@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { Component, ChangeEvent } from 'react';
 import { DialogExtensionSDK } from 'contentful-ui-extensions-sdk';
 import ImgixAPI, { APIError } from 'imgix-management-js';
 import { debounce } from 'lodash';
@@ -29,6 +29,7 @@ interface DialogState {
   selectedSource: Partial<SourceProps>;
   page: PageProps;
   verified: boolean; // if API key is verified
+  searchTerm?: string;
   assets: Array<string>;
   errors: IxError[]; // array of IxErrors if any
 }
@@ -285,6 +286,10 @@ export default class Dialog extends Component<DialogProps, DialogState> {
             <TextInput
               type="search"
               placeholder="Search by name or folder path"
+              value={this.state.searchTerm || ''}
+              onChange={(
+                e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+              ) => this.setState({ searchTerm: e.target.value })}
             />
             <Button buttonType="muted" icon="Search">
               Search
