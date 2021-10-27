@@ -175,9 +175,9 @@ export default class Dialog extends Component<DialogProps, DialogState> {
     }
   }
 
-  getImages = async () => {
+  getImages = async (query: string) => {
     const assets = await this.state.imgix.request(
-      `assets/${this.state.selectedSource?.id}?page[number]=${this.state.page.currentIndex}&page[size]=18`,
+      `assets/${this.state.selectedSource?.id}${query}`,
     );
     // TODO: add more explicit types for image
     this.handleTotalImageCount(
@@ -186,12 +186,12 @@ export default class Dialog extends Component<DialogProps, DialogState> {
     return assets;
   };
 
-  getImagePaths = async () => {
+  getImagePaths = async (query: string) => {
     let images,
       allOriginPaths: string[] = [];
 
     try {
-      images = await this.getImages();
+      images = await this.getImages(query);
     } catch (error) {
       // APIError will emit more helpful data for debugging
       if (error instanceof APIError) {
@@ -241,10 +241,11 @@ export default class Dialog extends Component<DialogProps, DialogState> {
    * Requests and constructs fully-qualified image URLs, saving the results to
    * state
    */
-  requestImageUrls = async () => {
+  requestImageUrls = async (query?: string) => {
     // if selected source, return images
     if (Object.keys(this.state.selectedSource).length) {
-      const images = await this.getImagePaths();
+      const defaultQuery = `?page[number]=${this.state.page.currentIndex}&page[size]=18`;
+      const images = await this.getImagePaths(query || defaultQuery);
       const assets = this.constructUrl(images);
       // if at least one path, remove placeholders
 
