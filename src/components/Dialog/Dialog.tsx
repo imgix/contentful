@@ -29,6 +29,7 @@ interface DialogState {
   selectedSource: Partial<SourceProps>;
   page: PageProps;
   verified: boolean; // if API key is verified
+  assets: Array<string>;
   errors: IxError[]; // array of IxErrors if any
 }
 
@@ -69,6 +70,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
         totalPageCount: 1,
       },
       verified,
+      assets: [],
       errors: [],
     };
   }
@@ -172,8 +174,98 @@ export default class Dialog extends Component<DialogProps, DialogState> {
     }
   }
 
+  getImages = async () => {
+    const assets = await this.state.imgix.request(
+      `assets/${this.state.selectedSource?.id}?page[number]=${this.state.page.currentIndex}&page[size]=18`,
+    );
+    // TODO: add more explicit types for image
+    this.handleTotalImageCount(
+      parseInt((assets.meta.cursor as any).totalRecords || 0),
+    );
+    return assets;
+  };
+
+  getImagePaths = async () => {
+    let images,
+      allOriginPaths: string[] = [];
+
+    try {
+      images = await this.getImages();
+    } catch (error) {
+      // APIError will emit more helpful data for debugging
+      if (error instanceof APIError) {
+        console.error(error.toString());
+      } else {
+        console.error(error);
+      }
+      return allOriginPaths;
+    }
+
+    /*
+     * Resolved requests can either return an array of objects or a single
+     * object via the `data` top-level field. When parsing all enabled sources,
+     * both possibilities must be accounted for.
+     */
+    if (images) {
+      const imagesArray = Array.isArray(images.data)
+        ? images.data
+        : [images.data];
+      imagesArray.map((image: any) =>
+        // TODO: add more explicit types for image
+        allOriginPaths.push(image.attributes.origin_path),
+      );
+
+      return allOriginPaths;
+    } else {
+      return [];
+    }
+  };
+
+  /*
+   * Constructs an array of imgix image URL from the selected source in the
+   * application Dialog component
+   */
+  constructUrl(images: string[]) {
+    const scheme = 'https://';
+    const domain = this.state.selectedSource.name;
+    const imgixDomain = '.imgix.net';
+
+    const urls = images.map(
+      (path: string) => scheme + domain + imgixDomain + path,
+    );
+    return urls;
+  }
+
+  /*
+   * Requests and constructs fully-qualified image URLs, saving the results to
+   * state
+   */
+  requestImageUrls = async () => {
+    // if selected source, return images
+    if (Object.keys(this.state.selectedSource).length) {
+      const images = await this.getImagePaths();
+      const assets = this.constructUrl(images);
+      // if at least one path, remove placeholders
+
+      if (assets.length) {
+        this.setState({ assets });
+      } else {
+        this.setState({ assets: [] });
+      }
+    }
+  };
+
+  async componentDidUpdate(prevProps: DialogProps, prevState: DialogState) {
+    if (
+      this.state.selectedSource.id !== prevState.selectedSource.id ||
+      this.state.page.currentIndex !== prevState.page.currentIndex
+    ) {
+      this.requestImageUrls();
+    }
+  }
+
   render() {
-    const { selectedSource, allSources, page, imgix } = this.state;
+    const { selectedSource, allSources, page, imgix, assets } = this.state;
     const sdk = this.props.sdk;
     const selectedImage = (
       this.props.sdk.parameters.invocation as AppInvocationParameters
@@ -206,6 +298,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
           getTotalImageCount={this.handleTotalImageCount}
           pageInfo={page}
           changePage={this.debounceHandlePageChange}
+          assets={assets}
         />
         {/* { UI Error fallback } */}
         {this.state.errors.length > 0 && (
