@@ -148,6 +148,14 @@ export default class Dialog extends Component<DialogProps, DialogState> {
     leading: true,
   });
 
+  searchOnClick = () => {
+    const { searchTerm } = this.state;
+    const searchQuery = `?filter[or:categories]=${searchTerm}&filter[or:keywords]=${searchTerm}&filter[or:origin_path]=${searchTerm}&page[number]=${this.state.page.currentIndex}&page[size]=18`;
+    searchTerm ? this.requestImageUrls(searchQuery) : this.requestImageUrls();
+  };
+
+  debounceSearchOnClick = debounce(this.searchOnClick, 1000, { leading: true });
+
   setSelectedSource = (source: SourceProps) => {
     this.setState({ selectedSource: source });
   };
@@ -292,7 +300,11 @@ export default class Dialog extends Component<DialogProps, DialogState> {
                 e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
               ) => this.setState({ searchTerm: e.target.value })}
             />
-            <Button buttonType="muted" icon="Search">
+            <Button
+              buttonType="muted"
+              icon="Search"
+              onClick={this.debounceSearchOnClick}
+            >
               Search
             </Button>
           </div>
