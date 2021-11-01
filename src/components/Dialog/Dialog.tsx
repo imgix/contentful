@@ -71,6 +71,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
         totalPageCount: 1,
       },
       verified,
+      searchTerm: '',
       assets: [],
       errors: [],
     };
@@ -295,7 +296,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
             <TextInput
               type="search"
               placeholder="Search by name or folder path"
-              value={this.state.searchTerm || ''}
+              value={this.state.searchTerm}
               onChange={(
                 e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
               ) => this.setState({ searchTerm: e.target.value })}
