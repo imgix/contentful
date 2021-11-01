@@ -16,7 +16,7 @@ import {
 } from '../../helpers/errors';
 
 import './Dialog.css';
-import { TextInput, Button } from '@contentful/forma-36-react-components';
+import { TextInput, Button, Form } from '@contentful/forma-36-react-components';
 
 interface DialogProps {
   sdk: DialogExtensionSDK;
@@ -293,21 +293,24 @@ export default class Dialog extends Component<DialogProps, DialogState> {
         />
         {this.state.selectedSource.id && (
           <div>
-            <TextInput
-              type="search"
-              placeholder="Search by name or folder path"
-              value={this.state.searchTerm}
-              onChange={(
-                e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-              ) => this.setState({ searchTerm: e.target.value })}
-            />
-            <Button
-              buttonType="muted"
-              icon="Search"
-              onClick={this.debounceSearchOnClick}
-            >
-              Search
-            </Button>
+            <Form>
+              <TextInput
+                type="search"
+                placeholder="Search by name or folder path"
+                value={this.state.searchTerm}
+                onChange={(
+                  e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+                ) => this.setState({ searchTerm: e.target.value })}
+              />
+              <Button
+                buttonType="muted"
+                icon="Search"
+                type="submit"
+                onClick={this.debounceSearchOnClick}
+              >
+                Search
+              </Button>
+            </Form>
           </div>
         )}
         <ImageGallery
