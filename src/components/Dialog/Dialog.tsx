@@ -285,17 +285,18 @@ export default class Dialog extends Component<DialogProps, DialogState> {
     return (
       <div className="ix-container">
         <DialogHeader handleClose={sdk.close} selectedImage={selectedImage} />
-        <SourceSelect
-          selectedSource={selectedSource}
-          allSources={allSources}
-          setSource={this.setSelectedSource}
-          resetErrors={() => this.resetNErrors(this.state.errors.length)}
-        />
-        {this.state.selectedSource.id && (
-          <div>
-            <Form>
+        <div className="ix-sources">
+          <SourceSelect
+            selectedSource={selectedSource}
+            allSources={allSources}
+            setSource={this.setSelectedSource}
+            resetErrors={() => this.resetNErrors(this.state.errors.length)}
+          />
+          {this.state.selectedSource.id && (
+            <Form className="ix-searchForm">
               <TextInput
                 type="search"
+                className="ix-searchBar"
                 placeholder="Search by name or folder path"
                 value={this.state.searchTerm}
                 onChange={(
@@ -304,6 +305,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
               />
               <Button
                 buttonType="muted"
+                className="ix-searchButton"
                 icon="Search"
                 type="submit"
                 onClick={this.debounceSearchOnClick}
@@ -311,8 +313,8 @@ export default class Dialog extends Component<DialogProps, DialogState> {
                 Search
               </Button>
             </Form>
-          </div>
-        )}
+          )}
+        </div>
         <ImageGallery
           selectedSource={selectedSource}
           imgix={imgix}
