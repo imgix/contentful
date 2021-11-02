@@ -2,6 +2,38 @@
   padding: 20px;
 }
 
+.ix-sources {
+  display: flex;
+  align-items: center;
+}
+
+.ix-searchForm {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.ix-searchForm > div {
+  display: flex;
+  margin: 0;
+}
+
+.ix-searchForm > div:first-child {
+  flex: 1;
+}
+
+.ix-searchBar {
+  display: flex;
+  margin-right: 12px;
+  width: 100%;
+}
+
+.ix-searchButton {
+  display: flex;
+  right: 0;
+  min-width: 102px;
+}
+
 @media only screen and (min-width: 481px) {
   .ix-container {
     padding: 40px;
