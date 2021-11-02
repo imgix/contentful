@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import ImgixAPI, { APIError } from 'imgix-management-js';
+import ImgixAPI from 'imgix-management-js';
 import { DialogExtensionSDK } from 'contentful-ui-extensions-sdk';
 
 import { SourceProps, PageProps } from '../Dialog';
@@ -40,7 +40,7 @@ export class Gallery extends Component<GalleryProps, GalleryState> {
   };
 
   render() {
-    const { fullUrls, selectedImage } = this.state;
+    const { selectedImage } = this.state;
 
     if (!this.props.assets.length) {
       return <ImagePlaceholder />;
