@@ -1,5 +1,6 @@
 .ix-dropdown {
-  width: 300px;
+  width: 212px;
+  margin-right: 32px;
 }
 
 .ix-dropdown > span {
@@ -7,5 +8,9 @@
 }
 
 .ix-dropdown-list {
-  width: 300px;
+  width: 212px;
+}
+
+[data-test-id='cf-ui-dropdown-container'] {
+  border-radius: 6px;
 }
