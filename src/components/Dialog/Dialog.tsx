@@ -151,8 +151,21 @@ export default class Dialog extends Component<DialogProps, DialogState> {
 
   searchOnClick = () => {
     const { searchTerm } = this.state;
-    const searchQuery = `?filter[or:categories]=${searchTerm}&filter[or:keywords]=${searchTerm}&filter[or:origin_path]=${searchTerm}&page[number]=${this.state.page.currentIndex}&page[size]=18`;
-    searchTerm ? this.requestImageUrls(searchQuery) : this.requestImageUrls();
+
+    this.setState(
+      {
+        page: {
+          ...this.state.page,
+          currentIndex: 0,
+        },
+      },
+      () => {
+        const searchQuery = `?filter[or:categories]=${searchTerm}&filter[or:keywords]=${searchTerm}&filter[or:origin_path]=${searchTerm}&page[number]=${this.state.page.currentIndex}&page[size]=18`;
+        searchTerm
+          ? this.requestImageUrls(searchQuery)
+          : this.requestImageUrls();
+      },
+    );
   };
 
   debounceSearchOnClick = debounce(this.searchOnClick, 1000, { leading: true });
