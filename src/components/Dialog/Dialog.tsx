@@ -32,6 +32,7 @@ interface DialogState {
   searchTerm?: string;
   assets: Array<string>;
   errors: IxError[]; // array of IxErrors if any
+  isSearching: boolean;
 }
 
 export type PageProps = {
@@ -74,6 +75,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
       searchTerm: '',
       assets: [],
       errors: [],
+      isSearching: false,
     };
   }
 
@@ -158,6 +160,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
           ...this.state.page,
           currentIndex: 0,
         },
+        isSearching: true,
       },
       () => {
         const searchQuery = `?filter[or:categories]=${searchTerm}&filter[or:keywords]=${searchTerm}&filter[or:origin_path]=${searchTerm}&page[number]=${this.state.page.currentIndex}&page[size]=18`;
@@ -272,7 +275,10 @@ export default class Dialog extends Component<DialogProps, DialogState> {
       // if at least one path, remove placeholders
 
       if (assets.length) {
-        this.setState({ assets });
+        this.setState({
+          assets,
+          isSearching: this.state.isSearching && false,
+        });
       } else {
         this.setState({ assets: [] });
       }
@@ -282,7 +288,8 @@ export default class Dialog extends Component<DialogProps, DialogState> {
   async componentDidUpdate(prevProps: DialogProps, prevState: DialogState) {
     if (
       this.state.selectedSource.id !== prevState.selectedSource.id ||
-      this.state.page.currentIndex !== prevState.page.currentIndex
+      (this.state.page.currentIndex !== prevState.page.currentIndex &&
+        !this.state.isSearching)
     ) {
       this.requestImageUrls();
     }
