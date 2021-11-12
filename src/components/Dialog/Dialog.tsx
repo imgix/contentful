@@ -272,12 +272,10 @@ export default class Dialog extends Component<DialogProps, DialogState> {
     // if selected source, return images
     if (Object.keys(this.state.selectedSource).length) {
       const defaultQuery = `?page[number]=${this.state.page.currentIndex}&page[size]=18`;
-      let images;
-      if (query) {
-        images = await this.getImagePaths(query, noSearchImagesError());
-      } else {
-        images = await this.getImagePaths(defaultQuery, noOriginImagesError());
-      }
+
+      const images = query
+        ? await this.getImagePaths(query, noSearchImagesError())
+        : await this.getImagePaths(defaultQuery, noOriginImagesError());
 
       if (images.length > 0 && this.state.errors.length > 0) {
         this.resetNErrors(this.state.errors.length);
