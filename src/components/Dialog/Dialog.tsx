@@ -279,6 +279,10 @@ export default class Dialog extends Component<DialogProps, DialogState> {
         images = await this.getImagePaths(defaultQuery, noOriginImagesError());
       }
 
+      if (images.length > 0 && this.state.errors.length > 0) {
+        this.resetNErrors(this.state.errors.length);
+      }
+
       const assets = this.constructUrl(images);
       // if at least one path, remove placeholders
 
