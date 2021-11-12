@@ -38,7 +38,7 @@ const ERROR_MESSAGES = {
     type: 'warning',
   },
   noSearchImagesError: {
-    message: `Consider trying to search by something else.`,
+    message: `Consider trying to search for something else.`,
     name: 'No results found',
     type: 'warning',
   }
