@@ -96,6 +96,13 @@ https://user-images.githubusercontent.com/15919091/137056329-97e3536d-2bf3-471e-
 
 The imgix app enables users to conduct a keyword search across assets in a source. Using the search box near the top of the modal will execute a search across multiple pre-determined fields: file origin path, image tags, and categories. To learn more about these fields, see our Image Manager [documentation](https://docs.imgix.com/setup/image-manager#image-details).
 
+<!-- ix-docs-ignore -->
+https://user-images.githubusercontent.com/15919091/141595662-3a9a98fd-aa88-4e56-8d6f-c30a782c678b.mov
+<!-- /ix-docs-ignore -->
+<video controls width="800" height="600">
+  <source src="https://user-images.githubusercontent.com/15919091/141595662-3a9a98fd-aa88-4e56-8d6f-c30a782c678b.mov">
+</video>
+
 ## Query an Image
 
 Once the content is published, developers can query the `src` of the selected image, returned as a string, via the Contentful API. The example below demonstrates this using GraphQL, but this can be done independent of any specific tool.
