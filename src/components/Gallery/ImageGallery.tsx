@@ -1,5 +1,4 @@
 import { Component } from 'react';
-import ImgixAPI from 'imgix-management-js';
 import { DialogExtensionSDK } from 'contentful-ui-extensions-sdk';
 
 import { SourceProps, PageProps } from '../Dialog';
@@ -10,16 +9,13 @@ import './ImageGallery.css';
 
 interface GalleryProps {
   selectedSource: Partial<SourceProps>;
-  imgix: ImgixAPI;
   sdk: DialogExtensionSDK;
-  getTotalImageCount: (totalImageCount: number) => void;
   pageInfo: PageProps;
   changePage: (newPageIndex: number) => void;
   assets: Array<string>;
 }
 
 interface GalleryState {
-  fullUrls: Array<string>;
   selectedImage: string;
 }
 
@@ -28,7 +24,6 @@ export class Gallery extends Component<GalleryProps, GalleryState> {
     super(props);
 
     this.state = {
-      fullUrls: [],
       selectedImage: '',
     };
   }
