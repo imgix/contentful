@@ -13,6 +13,7 @@ import {
   invalidApiKeyError,
   noSourcesError,
   noOriginImagesError,
+  noSearchImagesError,
 } from '../../helpers/errors';
 
 import './Dialog.css';
@@ -125,12 +126,12 @@ export default class Dialog extends Component<DialogProps, DialogState> {
     return enabledSources;
   };
 
-  handleTotalImageCount = (totalImageCount: number) => {
+  handleTotalImageCount = (totalImageCount: number, error: IxError) => {
     const totalPageCount = Math.ceil(totalImageCount / 18);
     let errors = [...this.state.errors];
 
     if (!totalPageCount) {
-      errors.push(noOriginImagesError());
+      errors.push(error);
     }
 
     return this.setState({
@@ -200,23 +201,24 @@ export default class Dialog extends Component<DialogProps, DialogState> {
     }
   }
 
-  getImages = async (query: string) => {
+  getImages = async (query: string, error: IxError) => {
     const assets = await this.state.imgix.request(
       `assets/${this.state.selectedSource?.id}${query}`,
     );
     // TODO: add more explicit types for image
     this.handleTotalImageCount(
       parseInt((assets.meta.cursor as any).totalRecords || 0),
+      error,
     );
     return assets;
   };
 
-  getImagePaths = async (query: string) => {
+  getImagePaths = async (query: string, error: IxError) => {
     let images,
       allOriginPaths: string[] = [];
 
     try {
-      images = await this.getImages(query);
+      images = await this.getImages(query, error);
     } catch (error) {
       // APIError will emit more helpful data for debugging
       if (error instanceof APIError) {
@@ -270,7 +272,13 @@ export default class Dialog extends Component<DialogProps, DialogState> {
     // if selected source, return images
     if (Object.keys(this.state.selectedSource).length) {
       const defaultQuery = `?page[number]=${this.state.page.currentIndex}&page[size]=18`;
-      const images = await this.getImagePaths(query || defaultQuery);
+      let images;
+      if (query) {
+        images = await this.getImagePaths(query, noSearchImagesError());
+      } else {
+        images = await this.getImagePaths(defaultQuery, noOriginImagesError());
+      }
+
       const assets = this.constructUrl(images);
       // if at least one path, remove placeholders
 
