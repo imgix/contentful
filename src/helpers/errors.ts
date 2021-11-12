@@ -2,7 +2,8 @@ export type NoteType = 'primary' | 'positive' | 'negative' | 'warning';
 export type ErrorType =
   | `InvalidApiKeyError`
   | `NoSourcesError`
-  | `NoOriginImagesError`;
+  | `NoOriginImagesError`
+  | `noSearchImagesError`;
 
 const DASHBOARD_URL = 'https://dashboard.imgix.com';
 
@@ -36,6 +37,11 @@ const ERROR_MESSAGES = {
     name: 'This Source has no Origin images',
     type: 'warning',
   },
+  noSearchImagesError: {
+    message: `Consider trying to search by something else.`,
+    name: 'No results found',
+    type: 'warning',
+  }
 } as const;
 
 type ErrorMessageType = keyof typeof ERROR_MESSAGES;
@@ -46,7 +52,7 @@ type ErrorMessageType = keyof typeof ERROR_MESSAGES;
  * This class is used to manage imgix API error messages and warnings. It
  * extends the builtin `Error` class and adds the `type` property.
  *
- * @param {NoteType} type "`InvalidApiKeyError` | `NoSourcesError` | `NoOriginImagesError`"
+ * @param {NoteType} type "`InvalidApiKeyError` | `NoSourcesError` | `NoOriginImagesError` | `noSearchImagesError`"
  * @param {string} message The error message string.
  *
  * @example
@@ -78,3 +84,6 @@ export const noSourcesError = (message?: string) =>
 
 export const noOriginImagesError = (message?: string) =>
   new IxError('NoOriginImagesError', message);
+
+export const noSearchImagesError = (message?: string) =>
+  new IxError('noSearchImagesError', message);
