@@ -1,7 +1,7 @@
 <!-- ix-docs-ignore -->
 ![imgix logo](https://assets.imgix.net/sdk-imgix-logo.svg)
 
-A Contentful app that integrates with imgix's [Image Manager](https://docs.imgix.com/setup/image-manager). Browse for, select, and insert image assets into your content quickly and easily. Simplify your content editing workflow within Contentful and empower your developers with imgix’s powerful image rendering and optimization service.
+A Contentful app that integrates with imgix's [Image Manager](https://docs.imgix.com/setup/image-manager). Browse, search, and insert image assets into your content quickly and easily. Simplify your content editing workflow within Contentful and empower your developers with imgix’s powerful image rendering and optimization service.
 
 [![npm version](https://img.shields.io/npm/v/@imgix/contentful.svg)](https://www.npmjs.com/package/@imgix/contentful)
 [![Build Status](https://travis-ci.com/imgix/contentful.svg?branch=main)](https://travis-ci.com/imgix/contentful)
@@ -25,6 +25,7 @@ A Contentful app that integrates with imgix's [Image Manager](https://docs.imgix
     * [Assign to Fields (Optional)](#assign-to-fields-optional)
 - [Add to Content Model](#add-to-content-model)
 - [Browse and Select Images](#browse-and-select-images)
+- [Search for Images](#search-for-images)
 - [Query an Image](#query-an-image)
     * [Transforming Images](#transforming-images)
 - [License](#license)
@@ -90,6 +91,10 @@ https://user-images.githubusercontent.com/15919091/137056329-97e3536d-2bf3-471e-
 <video controls width="800" height="600">
   <source src="https://user-images.githubusercontent.com/15919091/137056329-97e3536d-2bf3-471e-970a-2921fab44e8d.mp4">
 </video>
+
+## Search for Images
+
+The imgix app enables users to conduct a keyword search across assets in a source. Using the search box near the top of the modal will execute a search across multiple pre-determined fields: file origin path, image tags, and categories. To learn more about these fields, see our Image Manager [documentation](https://docs.imgix.com/setup/image-manager#image-details).
 
 ## Query an Image
 
