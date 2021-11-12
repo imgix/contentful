@@ -296,7 +296,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
   }
 
   render() {
-    const { selectedSource, allSources, page, imgix, assets } = this.state;
+    const { selectedSource, allSources, page, assets } = this.state;
     const sdk = this.props.sdk;
     const selectedImage = (
       this.props.sdk.parameters.invocation as AppInvocationParameters
@@ -337,9 +337,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
         </div>
         <ImageGallery
           selectedSource={selectedSource}
-          imgix={imgix}
           sdk={sdk}
-          getTotalImageCount={this.handleTotalImageCount}
           pageInfo={page}
           changePage={this.debounceHandlePageChange}
           assets={assets}
