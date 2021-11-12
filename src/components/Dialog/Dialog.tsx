@@ -277,7 +277,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
       if (assets.length) {
         this.setState({
           assets,
-          isSearching: this.state.isSearching && false,
+          isSearching: false,
         });
       } else {
         this.setState({ assets: [] });
