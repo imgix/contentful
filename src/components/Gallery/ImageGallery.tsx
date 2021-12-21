@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import { DialogExtensionSDK } from 'contentful-ui-extensions-sdk';
 
-import { SourceProps, PageProps } from '../Dialog';
+import { SourceProps, PageProps, AssetProps } from '../Dialog';
 import { ImageSelectButton } from '../ImageSelect/ImageSelect';
 import { GridImage, ImagePlaceholder, ImagePagination } from './';
 
@@ -12,11 +12,11 @@ interface GalleryProps {
   sdk: DialogExtensionSDK;
   pageInfo: PageProps;
   changePage: (newPageIndex: number) => void;
-  assets: Array<string>;
+  assets: AssetProps[];
 }
 
 interface GalleryState {
-  selectedImage: string;
+  selectedAsset: AssetProps | undefined;
 }
 
 export class Gallery extends Component<GalleryProps, GalleryState> {
@@ -24,18 +24,18 @@ export class Gallery extends Component<GalleryProps, GalleryState> {
     super(props);
 
     this.state = {
-      selectedImage: '',
+      selectedAsset: undefined,
     };
   }
 
-  handleClick = (selectedImage: string) => this.setState({ selectedImage });
+  handleClick = (selectedAsset: AssetProps) => this.setState({ selectedAsset });
 
   handleSubmit = () => {
-    this.props.sdk.close(this.state.selectedImage);
+    this.props.sdk.close(this.state.selectedAsset);
   };
 
   render() {
-    const { selectedImage } = this.state;
+    const { selectedAsset } = this.state;
 
     if (!this.props.assets.length) {
       return <ImagePlaceholder />;
@@ -44,13 +44,13 @@ export class Gallery extends Component<GalleryProps, GalleryState> {
     return (
       <div>
         <div className="ix-gallery">
-          {this.props.assets.map((url: string) => {
+          {this.props.assets.map((asset) => {
             return (
               <GridImage
-                key={url}
-                selected={selectedImage === url}
-                imageSrc={url}
-                handleClick={() => this.handleClick(url)}
+                key={asset.src}
+                selected={selectedAsset?.src === asset.src}
+                imageSrc={asset.src}
+                handleClick={() => this.handleClick(asset)}
               />
             );
           })}
@@ -63,7 +63,7 @@ export class Gallery extends Component<GalleryProps, GalleryState> {
           />
           <ImageSelectButton
             hidden={!!this.props.assets.length}
-            disabled={selectedImage === ''}
+            disabled={selectedAsset?.src === ''}
             handleSubmit={this.handleSubmit}
           />
         </div>
