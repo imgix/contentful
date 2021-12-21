@@ -23,6 +23,11 @@ interface DialogProps {
   sdk: DialogExtensionSDK;
 }
 
+export interface AssetProps {
+  src: string;
+  attributes: Record<string, any>;
+}
+
 interface DialogState {
   imgix: ImgixAPI;
   isOpen: boolean;
@@ -31,7 +36,7 @@ interface DialogState {
   page: PageProps;
   verified: boolean; // if API key is verified
   searchTerm?: string;
-  assets: Array<string>;
+  assets: AssetProps[];
   errors: IxError[]; // array of IxErrors if any
   isSearching: boolean;
 }
@@ -215,7 +220,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
 
   getImagePaths = async (query: string, error: IxError) => {
     let images,
-      allOriginPaths: string[] = [];
+      allAssets: AssetProps[] = [];
 
     try {
       images = await this.getImages(query, error);
@@ -226,7 +231,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
       } else {
         console.error(error);
       }
-      return allOriginPaths;
+      return allAssets;
     }
 
     /*
@@ -238,12 +243,12 @@ export default class Dialog extends Component<DialogProps, DialogState> {
       const imagesArray = Array.isArray(images.data)
         ? images.data
         : [images.data];
-      imagesArray.map((image: any) =>
+      allAssets = imagesArray.map((image: any) =>
         // TODO: add more explicit types for image
         allOriginPaths.push(image.attributes.origin_path),
       );
 
-      return allOriginPaths;
+      return allAssets;
     } else {
       return [];
     }
@@ -253,7 +258,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
    * Constructs an array of imgix image URL from the selected source in the
    * application Dialog component
    */
-  constructUrl(images: string[]) {
+  buildAssetWithFullUrl(images: AssetProps[]) {
     const scheme = 'https://';
     const domain = this.state.selectedSource.name;
     const imgixDomain = '.imgix.net';
@@ -281,7 +286,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
         this.resetNErrors(this.state.errors.length);
       }
 
-      const assets = this.constructUrl(images);
+      const assets = this.buildAssetWithFullUrl(images);
       // if at least one path, remove placeholders
 
       if (assets.length) {
