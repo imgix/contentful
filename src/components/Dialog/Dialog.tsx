@@ -245,7 +245,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
         : [images.data];
       allAssets = imagesArray.map((image: any) =>
         // TODO: add more explicit types for image
-        allOriginPaths.push(image.attributes.origin_path),
+        ({ src: image.attributes.origin_path, attributes: image.attributes }),
       );
 
       return allAssets;
@@ -263,10 +263,11 @@ export default class Dialog extends Component<DialogProps, DialogState> {
     const domain = this.state.selectedSource.name;
     const imgixDomain = '.imgix.net';
 
-    const urls = images.map(
-      (path: string) => scheme + domain + imgixDomain + path,
-    );
-    return urls;
+    const transformedAsset = images.map((asset) => ({
+      ...asset,
+      src: scheme + domain + imgixDomain + asset.src,
+    }));
+    return transformedAsset;
   }
 
   /*
