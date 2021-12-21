@@ -3,13 +3,14 @@ import { FieldExtensionSDK } from 'contentful-ui-extensions-sdk';
 import { debounce } from 'lodash';
 
 import { FieldImagePreview, FieldPrompt } from './';
+import { AssetProps } from '../Dialog';
 
 interface FieldProps {
   sdk: FieldExtensionSDK;
 }
 
 interface FieldState {
-  imagePath: string | undefined;
+  selectedAsset: AssetProps | undefined;
 }
 
 export default class Field extends Component<FieldProps, FieldState> {
@@ -19,7 +20,7 @@ export default class Field extends Component<FieldProps, FieldState> {
     const storedValue = this.props.sdk.field.getValue();
 
     this.state = {
-      imagePath: storedValue?.src || '',
+      selectedAsset: storedValue || undefined,
     };
   }
 
@@ -32,29 +33,29 @@ export default class Field extends Component<FieldProps, FieldState> {
         shouldCloseOnOverlayClick: true,
         allowHeightOverflow: true,
         parameters: {
-          selectedImage: this.state.imagePath,
+          selectedImage: this.state.selectedAsset,
         },
       })
-      .then((imagePath) =>
-        this.setState({ imagePath }, () =>
-          this.props.sdk.field.setValue({ src: imagePath }),
+      .then((selectedAsset) =>
+        this.setState({ selectedAsset }, () =>
+          this.props.sdk.field.setValue(selectedAsset),
         ),
       );
   };
   debounceOpenDialog = debounce(this.openDialog, 1000, { leading: true });
 
   clearSelection = () => {
-    this.setState({ imagePath: undefined }, () =>
+    this.setState({ selectedAsset: undefined }, () =>
       this.props.sdk.field.setValue(undefined),
     );
   };
 
   render() {
     const updateHeightHandler = this.props.sdk.window.updateHeight;
-    if (this.state.imagePath) {
+    if (this.state.selectedAsset) {
       return (
         <FieldImagePreview
-          imagePath={this.state.imagePath}
+          imagePath={this.state.selectedAsset?.src}
           openDialog={this.debounceOpenDialog}
           updateHeight={updateHeightHandler}
           clearSelection={this.clearSelection}
