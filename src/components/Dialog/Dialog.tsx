@@ -206,7 +206,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
     }
   }
 
-  getImages = async (query: string, error: IxError) => {
+  getAndCountAssets = async (query: string, error: IxError) => {
     const assets = await this.state.imgix.request(
       `assets/${this.state.selectedSource?.id}${query}`,
     );
@@ -218,12 +218,12 @@ export default class Dialog extends Component<DialogProps, DialogState> {
     return assets;
   };
 
-  getImagePaths = async (query: string, error: IxError) => {
-    let images,
-      allAssets: AssetProps[] = [];
+  getAssetObjects = async (query: string, error: IxError) => {
+    let assets,
+      assetObjects: AssetProps[] = [];
 
     try {
-      images = await this.getImages(query, error);
+      assets = await this.getAndCountAssets(query, error);
     } catch (error) {
       // APIError will emit more helpful data for debugging
       if (error instanceof APIError) {
@@ -231,7 +231,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
       } else {
         console.error(error);
       }
-      return allAssets;
+      return assetObjects;
     }
 
     /*
@@ -239,16 +239,16 @@ export default class Dialog extends Component<DialogProps, DialogState> {
      * object via the `data` top-level field. When parsing all enabled sources,
      * both possibilities must be accounted for.
      */
-    if (images) {
-      const imagesArray = Array.isArray(images.data)
-        ? images.data
-        : [images.data];
-      allAssets = imagesArray.map((image: any) =>
-        // TODO: add more explicit types for image
-        ({ src: image.attributes.origin_path, attributes: image.attributes }),
+    if (assets) {
+      const assetsArray = Array.isArray(assets.data)
+        ? assets.data
+        : [assets.data];
+      assetObjects = assetsArray.map((asset: any) =>
+        // TODO: add more explicit types for `asset`
+        ({ src: asset.attributes.origin_path, attributes: asset.attributes }),
       );
 
-      return allAssets;
+      return assetObjects;
     } else {
       return [];
     }
@@ -258,12 +258,12 @@ export default class Dialog extends Component<DialogProps, DialogState> {
    * Constructs an array of imgix image URL from the selected source in the
    * application Dialog component
    */
-  buildAssetWithFullUrl(images: AssetProps[]) {
+  buildAssetWithFullUrl(asset: AssetProps[]) {
     const scheme = 'https://';
     const domain = this.state.selectedSource.name;
     const imgixDomain = '.imgix.net';
 
-    const transformedAsset = images.map((asset) => ({
+    const transformedAsset = asset.map((asset) => ({
       ...asset,
       src: scheme + domain + imgixDomain + asset.src,
     }));
@@ -275,19 +275,19 @@ export default class Dialog extends Component<DialogProps, DialogState> {
    * state
    */
   requestImageUrls = async (query?: string) => {
-    // if selected source, return images
+    // if selected source, return assets
     if (Object.keys(this.state.selectedSource).length) {
       const defaultQuery = `?page[number]=${this.state.page.currentIndex}&page[size]=18`;
 
-      const images = query
-        ? await this.getImagePaths(query, noSearchImagesError())
-        : await this.getImagePaths(defaultQuery, noOriginImagesError());
+      const assetObjects = query
+        ? await this.getAssetObjects(query, noSearchImagesError())
+        : await this.getAssetObjects(defaultQuery, noOriginImagesError());
 
-      if (images.length > 0 && this.state.errors.length > 0) {
+      if (assetObjects.length > 0 && this.state.errors.length > 0) {
         this.resetNErrors(this.state.errors.length);
       }
 
-      const assets = this.buildAssetWithFullUrl(images);
+      const assets = this.buildAssetWithFullUrl(assetObjects);
       // if at least one path, remove placeholders
 
       if (assets.length) {
