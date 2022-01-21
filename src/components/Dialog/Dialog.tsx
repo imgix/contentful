@@ -255,6 +255,15 @@ export default class Dialog extends Component<DialogProps, DialogState> {
   };
 
   /*
+  * Stringifies all JSON field values within the asset.attribute object
+  */
+  stringifyJsonFields = (asset: AssetProps) => {
+    asset.attributes.custom_fields = JSON.stringify(asset.attributes.custom_fields);
+    asset.attributes.colors.dominant_colors = JSON.stringify(asset.attributes.colors.dominant_colors);
+    asset.attributes.tags = JSON.stringify(asset.attributes.tags);
+  };
+
+  /*
    * Constructs an array of imgix image URL from the selected source in the
    * application Dialog component
    */
