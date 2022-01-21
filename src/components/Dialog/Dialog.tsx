@@ -243,10 +243,11 @@ export default class Dialog extends Component<DialogProps, DialogState> {
       const assetsArray = Array.isArray(assets.data)
         ? assets.data
         : [assets.data];
-      assetObjects = assetsArray.map((asset: any) =>
+      assetObjects = assetsArray.map((asset: any) => {
+        this.stringifyJsonFields(asset);
         // TODO: add more explicit types for `asset`
-        ({ src: asset.attributes.origin_path, attributes: asset.attributes }),
-      );
+        return ({ src: asset.attributes.origin_path, attributes: asset.attributes });
+      });
 
       return assetObjects;
     } else {
