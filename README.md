@@ -284,7 +284,7 @@ returns something similar to:
 }
 ```
 
-**Note**: Certain fields under `attributes` are returned as strings to provide better [resiliency](https://forums.fauna.com/t/how-to-store-arbitrary-json-object-via-graphql/142/3) when used with GraphQL. Therefore, these fields will need to be parsed back into JSON objects after being queried. The example below demonstrates how to do this:
+**Note**: Certain fields under `attributes` are returned as strings to provide better [resiliency](https://forums.fauna.com/t/how-to-store-arbitrary-json-object-via-graphql/142/3) when used with GraphQL. Therefore, these fields (`custom_fields`, `tags`, `colors.dominant_colors`) will need to be parsed back into JSON objects after being queried. The example below demonstrates how to do this:
 
 ```js
 {
