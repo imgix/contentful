@@ -185,5 +185,141 @@ query MyQuery {
 `;
 ```
 
+### Metadata
+
+Users may also access metadata associated with an image via the `attributes` field. Refer to the [imgix documentation](https://docs.imgix.com/setup/image-manager#:~:text=per%20device/browser.-,Metadata,-This%20section%20displays) to learn more about the various types of metadata available on images and how to use them.
+
+```graphql
+query MyQuery {
+  allContentfulArticle {
+    nodes {
+      bannerImage {
+        src
+        attributes {
+          analyzed_content_warnings
+          analyzed_faces
+          analyzed_tags
+          color_model
+          color_profile
+          content_type
+          custom_fields
+          date_created
+          date_modified
+          dpi_height
+          dpi_width
+          face_count
+          file_size
+          has_frames
+          media_height
+          media_kind
+          media_width
+          origin_path
+          source_id
+          tags
+          uploaded_by_api
+          warning_adult
+          warning_medical
+          warning_racy
+          warning_spoof
+          warning_violence
+        }
+      }
+    }
+  }
+}
+```
+
+returns something similar to:
+
+```json
+{
+  "data": {
+    "allContentfulArticle": {
+      "nodes": [
+        {
+          "bannerImage": {
+            "src": "https://fourbottle.imgix.net/heroes/woman-stirring.jpg",
+            "attributes": {
+              "analyzed_content_warnings": true,
+              "analyzed_faces": true,
+              "analyzed_tags": true,
+              "color_model": "RGB",
+              "color_profile": "c2",
+              "content_type": "image/jpeg",
+              "custom_fields": "\"\"",
+              "date_created": 1625796011,
+              "date_modified": 1642786873,
+              "dpi_height": 72,
+              "dpi_width": 72,
+              "face_count": 1,
+              "file_size": 3411741,
+              "has_frames": false,
+              "media_height": 4000,
+              "media_kind": "IMAGE",
+              "media_width": 6000,
+              "origin_path": "/heroes/woman-stirring.jpg",
+              "source_id": "5f73d9798d5327eb5194d54a",
+              "tags": "{\"Arm\":0.9448454976081848,\"Cup\":0.8950006365776062,\"Drinkware\":0.9177042841911316,\"Glasses\":0.9809675216674805,\"Hand\":0.9596579074859619,\"Joint\":0.9762823581695557,\"Photograph\":0.94278883934021,\"Shoulder\":0.9465579986572266,\"Tableware\":0.949840784072876,\"Vision care\":0.9289617538452148}",
+              "uploaded_by_api": false,
+              "warning_adult": 1,
+              "warning_medical": 1,
+              "warning_racy": 2,
+              "warning_spoof": 1,
+              "warning_violence": 1
+            }
+          }
+        }
+      ]
+    }
+  }
+}
+```
+
+**Note**: Certain fields under `attributes` are returned as strings to provide better [resiliency](https://forums.fauna.com/t/how-to-store-arbitrary-json-object-via-graphql/142/3) when used with GraphQL. Therefore, these fields will need to be parsed back into JSON objects after being queried. The example below demonstrates how to do this:
+
+```js
+{data.allContentfulArticle.edges.map(({ node }) => (
+  <div className="p-4 lg:w-1/3 md:w-1/2 sm:w-full">
+    <ImgixGatsbyImage
+      src={node.bannerImage.src}
+      imgixParams={{
+        auto: "format,compress",
+        crop: "faces,edges",
+      }}
+      layout="constrained"
+      width={350}
+      aspectRatio={16 / 9}
+      sizes="(min-width: 1024px) calc(30vw - 128px), (min-width: 768px) calc(50vw - 100px), calc(100vw - 70px)"
+      alt="An imgix-served image from Contentful"
+    />
+    {node.bannerImage.attributes.custom_fields ?
+     Object.entries(JSON.parse(node.bannerImage.attributes.custom_fields)).map(([key, value]) => (<p>{key}: {value}</p>)) : <br></br>}
+    {Object.entries(JSON.parse(node.bannerImage.attributes.colors.dominant_colors)).map(([key, value]) => (<p>{key}: {value}</p>))}
+    {Object.entries(JSON.parse(node.bannerImage.attributes.tags)).map(([key, value]) => (<p>{key}: {value}</p>))}
+  </div>
+))}
+
+export const query = graphql`
+{
+  allContentfulArticle {
+    edges {
+      node {
+        bannerImage {
+          src
+          attributes {
+            custom_fields
+            colors {
+              dominant_colors
+            }
+            tags
+          }
+        }
+      }
+    }
+  }
+}
+`;
+```
+
 ## License
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fimgix%2Fcontentful.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fimgix%2Fcontentful?ref=badge_large)
