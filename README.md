@@ -29,6 +29,7 @@ A Contentful app that integrates with imgix's [Image Manager](https://docs.imgix
 - [Search for Images](#search-for-images)
 - [Query an Image](#query-an-image)
     * [Transforming Images](#transforming-images)
+    * [Metadata](#metadata)
 - [License](#license)
 
 <!-- tocstop -->
