@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.0](https://github.com/imgix/contentful/compare/v1.1.0...v1.2.0) (2022-01-31)
+
+### Features
+
+- Add asset metadata to returned JSON object.
+
 ## [1.1.0](https://github.com/imgix/contentful/compare/v1.0.0...v1.1.0) (2021-11-12)
 
 ### Features
@@ -16,8 +22,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Features
 
 - Allow users to configure their app with an imgix API key
-    * Add button to `Verify` user's key
-    * Users can assign the imgix app to pre-existing `JSON object` fields at installation
+  - Add button to `Verify` user's key
+  - Users can assign the imgix app to pre-existing `JSON object` fields at installation
 - Modal from which users can select an imgix source to browse images from
 - Pagination buttons for browsing multiple pages of assets
 - `Add image` button saves the image `src` to the field value
