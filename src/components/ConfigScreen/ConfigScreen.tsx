@@ -210,6 +210,7 @@ export default class Config extends Component<ConfigProps, ConfigState> {
 
     const imgix = new ImgixAPI({
       apiKey: this.state.parameters.imgixAPIKey || '',
+      pluginOrigin: "imgix-contentful/1.2.1",
     });
 
     let updatedInstallationParameters: AppInstallationParameters = {

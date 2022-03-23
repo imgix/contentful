@@ -66,6 +66,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
     const verified = !!installationParameters.successfullyVerified;
     const imgix = new ImgixAPI({
       apiKey,
+      pluginOrigin: "imgix-contentful/1.2.1",
     });
 
     this.state = {
