@@ -1,4 +1,5 @@
 import { Component, ChangeEvent } from 'react';
+import { TextInput, Button, Form } from '@contentful/forma-36-react-components';
 import { DialogExtensionSDK } from 'contentful-ui-extensions-sdk';
 import ImgixAPI, { APIError } from 'imgix-management-js';
 import { debounce } from 'lodash';
@@ -17,7 +18,7 @@ import {
 } from '../../helpers/errors';
 
 import './Dialog.css';
-import { TextInput, Button, Form } from '@contentful/forma-36-react-components';
+import packageJson from '../../../package.json';
 
 interface DialogProps {
   sdk: DialogExtensionSDK;
@@ -66,6 +67,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
     const verified = !!installationParameters.successfullyVerified;
     const imgix = new ImgixAPI({
       apiKey,
+      pluginOrigin: `contentful/v${packageJson.version}`,
     });
 
     this.state = {

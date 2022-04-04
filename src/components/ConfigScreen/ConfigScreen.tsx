@@ -19,6 +19,7 @@ import ImgixAPI, { APIError } from 'imgix-management-js';
 import debounce from 'lodash.debounce';
 
 import './ConfigScreen.css';
+import packageJson from './../../../package.json';
 
 export interface AppInstallationParameters {
   imgixAPIKey?: string;
@@ -210,6 +211,7 @@ export default class Config extends Component<ConfigProps, ConfigState> {
 
     const imgix = new ImgixAPI({
       apiKey: this.state.parameters.imgixAPIKey || '',
+      pluginOrigin: `contentful/v${packageJson.version}`,
     });
 
     let updatedInstallationParameters: AppInstallationParameters = {
