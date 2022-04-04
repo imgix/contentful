@@ -248,7 +248,10 @@ export default class Dialog extends Component<DialogProps, DialogState> {
       assetObjects = assetsArray.map((asset: any) => {
         this.stringifyJsonFields(asset);
         // TODO: add more explicit types for `asset`
-        return ({ src: asset.attributes.origin_path, attributes: asset.attributes });
+        return {
+          src: asset.attributes.origin_path,
+          attributes: asset.attributes,
+        };
       });
 
       return assetObjects;
@@ -258,14 +261,24 @@ export default class Dialog extends Component<DialogProps, DialogState> {
   };
 
   /*
-  * Stringifies all JSON field values within the asset.attribute object
-  */
+   * Stringifies all JSON field values within the asset.attribute object
+   */
   stringifyJsonFields = (asset: AssetProps) => {
-    const replaceNullWithEmptyString = (_: any, value: any) => (value === null) ? "" : value;
-    asset.attributes.custom_fields = JSON.stringify(asset.attributes.custom_fields, replaceNullWithEmptyString);
-    asset.attributes.tags = JSON.stringify(asset.attributes.tags, replaceNullWithEmptyString);
+    const replaceNullWithEmptyString = (_: any, value: any) =>
+      value === null ? '' : value;
+    asset.attributes.custom_fields = JSON.stringify(
+      asset.attributes.custom_fields,
+      replaceNullWithEmptyString,
+    );
+    asset.attributes.tags = JSON.stringify(
+      asset.attributes.tags,
+      replaceNullWithEmptyString,
+    );
     if (asset.attributes.colors?.dominant_colors) {
-      asset.attributes.colors.dominant_colors = JSON.stringify(asset.attributes.colors?.dominant_colors, replaceNullWithEmptyString);
+      asset.attributes.colors.dominant_colors = JSON.stringify(
+        asset.attributes.colors?.dominant_colors,
+        replaceNullWithEmptyString,
+      );
     }
   };
 
