@@ -101,7 +101,7 @@ export default class Config extends Component<ConfigProps, ConfigState> {
     // TODO: add more explicit types from https://github.com/contentful/apps/blob/9a06aa60c815bf674f019ddb1b9806a53ac8fb0b/packages/dam-app-base/src/AppConfig/fields.ts
     const getCompatibleFields = (controls: any[], fields: any[]) => {
       const compatibleFields: CompatibleField[] = [];
-      controls.forEach((control, index) => {
+      controls?.forEach((control, index) => {
         if (control.fieldId === fields[index].id) {
           if (fields[index].type === 'Object') {
             // const enabled = control.widgetId === appId; KEEP THIS
@@ -120,7 +120,7 @@ export default class Config extends Component<ConfigProps, ConfigState> {
 
     return Promise.all(
       // TODO: add more explicit types from https://github.com/contentful/apps/blob/9a06aa60c815bf674f019ddb1b9806a53ac8fb0b/packages/dam-app-base/src/AppConfig/fields.ts
-      editorInterfaces.items.map(async (ei: any) => {
+      editorInterfaces?.items?.map(async (ei: any) => {
         const contentId = ei.sys?.contentType?.sys?.id;
         const contentType: any = await space.getContentType(contentId);
         if (contentType.fields) {
