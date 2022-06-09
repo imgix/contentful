@@ -1,7 +1,7 @@
 {
   "name": "@imgix/contentful",
   "version": "1.2.2",
-  "description": "Browse for, select, and insert image assets into your content quickly and easily via the imgix Image Manager.",
+  "description": "Browse for, select, and insert image assets into your content quickly and easily via the imgix Asset Manager.",
   "author": "imgix SDK team <sdk@imgix.com>",
   "private": false,
   "license": "BSD-2-Clause",

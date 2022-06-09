@@ -23,13 +23,13 @@ A Contentful app that integrates with imgix's [Image Manager](https://docs.imgix
 
 - [Installation](#installation)
 - [Configuration](#configuration)
-    * [Assign to Fields (Optional)](#assign-to-fields-optional)
+  - [Assign to Fields (Optional)](#assign-to-fields-optional)
 - [Add to Content Model](#add-to-content-model)
 - [Browse and Select Images](#browse-and-select-images)
 - [Search for Images](#search-for-images)
 - [Query an Image](#query-an-image)
-    * [Transforming Images](#transforming-images)
-    * [Metadata](#metadata)
+  - [Transforming Images](#transforming-images)
+  - [Metadata](#metadata)
 - [License](#license)
 
 <!-- tocstop -->
@@ -49,7 +49,7 @@ npm run start
 
 ## Configuration
 
-Upon installation, configure the app using an API key generated via the imgix [Dashboard](https://dashboard.imgix.com/api-keys). **Ensure that the generated key has the following permissions: `Sources` and `Image Manager Browse`.**
+Upon installation, configure the app using an API key generated via the imgix [Dashboard](https://dashboard.imgix.com/api-keys). **Ensure that the generated key has the following permissions: `Sources` and `Asset Manager Browse`.**
 
 Following the instructions on the screen, enter in the API key and press `Verify`. If the key is valid, you will receive a notification that the key has been successfully verified. If verification fails, you will need to ensure that the key was entered correctly.
 
@@ -104,7 +104,7 @@ https://user-images.githubusercontent.com/15919091/137056329-97e3536d-2bf3-471e-
 
 ## Search for Images
 
-The imgix app enables users to conduct a keyword search across assets in a source. Using the search box near the top of the modal will execute a search across multiple pre-determined fields: file origin path, image tags, and categories. To learn more about these fields, see our Image Manager [documentation](https://docs.imgix.com/setup/image-manager#image-details).
+The imgix app enables users to conduct a keyword search across assets in a source. Using the search box near the top of the modal will execute a search across multiple pre-determined fields: file origin path, image tags, and categories. To learn more about these fields, see our Asset Manager [documentation](https://docs.imgix.com/setup/image-manager#image-details).
 
 <!-- ix-docs-ignore -->
 
