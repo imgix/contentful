@@ -49,6 +49,8 @@
     "start": "cross-env BROWSER=none react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "prepare": "react-scripts build",
+    "prepublishOnly": "react-scripts build",
     "eject": "react-scripts eject",
     "lint": "prettier --write '{src,test}/**/*.{tsx,css}'"
   },
