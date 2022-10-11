@@ -23,7 +23,7 @@
     "media"
   ],
   "dependencies": {
-    "@contentful/field-editor-single-line": "^0.15.0",
+    "@contentful/field-editor-single-line": "^1.0.0",
     "@contentful/field-editor-test-utils": "^0.17.0",
     "@contentful/forma-36-fcss": "^0.3.0",
     "@contentful/forma-36-react-components": "^3.97.1",
