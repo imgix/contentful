@@ -5,7 +5,7 @@
 A Contentful app that integrates with imgix's [Image Manager](https://docs.imgix.com/setup/image-manager). Browse, search, and insert image assets into your content quickly and easily. Simplify your content editing workflow within Contentful and empower your developers with imgix’s powerful image rendering and optimization service.
 
 [![npm version](https://img.shields.io/npm/v/@imgix/contentful.svg)](https://www.npmjs.com/package/@imgix/contentful)
-[![Build Status](https://travis-ci.com/imgix/contentful.svg?branch=main)](https://travis-ci.com/imgix/contentful)
+[![Build Status](https://circleci.com/gh/imgix/contentful.svg?style=shield)](https://circleci.com/gh/imgix/contentful)
 [![Downloads](https://img.shields.io/npm/dm/@imgix/contentful.svg)](https://www.npmjs.com/package/@imgix/contentful)
 [![License](https://img.shields.io/github/license/imgix/contentful.svg?color=informational)](https://github.com/imgix/contentful/blob/main/LICENSE.md)
 [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
