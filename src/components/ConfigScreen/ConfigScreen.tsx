@@ -294,7 +294,7 @@ export default class Config extends Component<ConfigProps, ConfigState> {
               href="https://docs.imgix.com/setup/image-manager"
               target="_blank"
             >
-              Image Manager
+              Asset Manager
             </TextLink>{' '}
             to select and insert images into your content models.<br></br>
             <br></br>
@@ -311,7 +311,7 @@ export default class Config extends Component<ConfigProps, ConfigState> {
             <code className="ix-config-description-permissions">Sources</code>{' '}
             and{' '}
             <code className="ix-config-description-permissions">
-              Image Manager Browse
+              Asset Manager Browse
             </code>
             .<br></br>
             <br></br>
