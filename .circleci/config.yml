@@ -6,8 +6,8 @@ orbs:
 jobs:
   test:
     parameters:
-      version: 
-        default: "stable"
+      version:
+        default: 'stable'
         description: Node.JS version to install
         type: string
     docker:
@@ -15,12 +15,7 @@ jobs:
     resource_class: large
     steps:
       - checkout
-      - when:
-          condition:
-            equal: [ "17.9", <<parameters.version>>]
-          steps:
-            # Prevents build error on stable node version
-            - run: echo 'export NODE_OPTIONS=--openssl-legacy-provider' >> $BASH_ENV      
+      - run: echo 'export NODE_OPTIONS=--openssl-legacy-provider' >> $BASH_ENV
       - node/install-packages
       - run: npm run lint
       - run: npm run test
@@ -33,5 +28,5 @@ workflows:
           matrix:
             parameters:
               version:
-                - "17.9"
-                - "lts"
+                - 'current'
+                - 'lts'
