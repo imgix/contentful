@@ -1,9 +1,9 @@
-import { Component } from 'react';
 import { DialogExtensionSDK } from 'contentful-ui-extensions-sdk';
+import { Component } from 'react';
 
-import { SourceProps, PageProps, AssetProps } from '../Dialog';
+import { AssetProps, PageProps, SourceProps } from '../Dialog';
 import { ImageSelectButton } from '../ImageSelect/ImageSelect';
-import { GridImage, ImagePlaceholder, ImagePagination } from './';
+import { GridImage, ImagePagination, ImagePlaceholder } from './';
 
 import './ImageGallery.css';
 
@@ -49,7 +49,7 @@ export class Gallery extends Component<GalleryProps, GalleryState> {
               <GridImage
                 key={asset.src}
                 selected={selectedAsset?.src === asset.src}
-                imageSrc={asset.src}
+                asset={asset}
                 handleClick={() => this.handleClick(asset)}
               />
             );
