@@ -1,10 +1,13 @@
 .ix-gallery-item {
   position: relative;
+  overflow: hidden;
+  border-radius: 2px;
+  background-color: #fff;
 }
 
 .ix-gallery-item img {
   width: 100%;
-  height: 100%;
+  height: 85%;
   vertical-align: middle;
   position: relative;
   z-index: 1;
@@ -40,4 +43,46 @@
 
 .ix-selected {
   border: 4px solid #2e75d4;
+}
+
+.asset-filename {
+  position: relative;
+  margin: 0px;
+  padding: 6px 10px;
+}
+.asset-filename:before {
+  content: " ";
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 20px;
+  background: linear-gradient(90deg, #fff 25%, #fff);
+  background: linear-gradient(90deg, #fff 25%, hsla(0, 0%, 100%, 0));
+}
+
+.asset-filename-span {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  -ms-flex: 0 1 auto;
+  flex: 0 1 auto;
+  font-size: 14px;
+  line-height: 20px;
+  color: #6c7f8e;
+  font-weight: 400;
+  white-space: nowrap;
+  font-family: Roboto, sans-serif;
+}
+.asset-filename-span:before {
+  content: "";
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+}
+
+.asset-filename-span:after {
+  content: "";
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
 }
