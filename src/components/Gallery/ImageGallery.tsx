@@ -62,6 +62,7 @@ export class Gallery extends Component<GalleryProps, GalleryState> {
           selectedAsset={selectedAsset}
           pageInfo={this.props.pageInfo}
           changePage={this.props.changePage}
+          handleClose={this.props.sdk.close}
         />
       </div>
     );

@@ -15,3 +15,17 @@
   padding-top: 25px;
   width: 100%;
 }
+
+.ix-action-button-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.ix-action-button-container > button {
+  margin-left: 25px;
+}
+
+.ix-close-button {
+  padding: 20px 0;
+}
