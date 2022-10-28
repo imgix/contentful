@@ -16,12 +16,6 @@
   overflow: hidden;
 }
 
-.ix-gallery-footer {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
 .ix-placeholder svg {
   background-color: #e5ebed;
   width: 100%;
