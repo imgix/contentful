@@ -2,9 +2,9 @@ import { DialogExtensionSDK } from 'contentful-ui-extensions-sdk';
 import { Component } from 'react';
 
 import { AssetProps, PageProps, SourceProps } from '../Dialog';
-import { ImageSelectButton } from '../ImageSelect/ImageSelect';
-import { GridImage, ImagePagination, ImagePlaceholder } from './';
+import { GridImage, ImagePlaceholder } from './';
 
+import { ActionBar } from '../ActionBar';
 import './ImageGallery.css';
 
 interface GalleryProps {
@@ -55,18 +55,14 @@ export class Gallery extends Component<GalleryProps, GalleryState> {
             );
           })}
         </div>
-        <div className="ix-gallery-footer">
-          <ImagePagination
-            sourceId={this.props.selectedSource.id}
-            pageInfo={this.props.pageInfo}
-            changePage={this.props.changePage}
-          />
-          <ImageSelectButton
-            hidden={!!this.props.assets.length}
-            disabled={selectedAsset?.src === ''}
-            handleSubmit={this.handleSubmit}
-          />
-        </div>
+        <ActionBar
+          assets={this.props.assets}
+          selectedSource={this.props.selectedSource}
+          handleSubmit={this.handleSubmit}
+          selectedAsset={selectedAsset}
+          pageInfo={this.props.pageInfo}
+          changePage={this.props.changePage}
+        />
       </div>
     );
   }
