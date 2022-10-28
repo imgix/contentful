@@ -7,7 +7,7 @@ jobs:
   test:
     parameters:
       version:
-        default: 'stable'
+        default: 'current'
         description: Node.JS version to install
         type: string
     docker:
