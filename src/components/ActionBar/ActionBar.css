@@ -1,0 +1,17 @@
+.ix-action-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  position: absolute;
+  bottom: 0px;
+  left: 0;
+  right: 0;
+  box-sizing: border-box;
+  background: #F7F9FA;
+  border-top: 1px solid #CFD9E0;
+  padding-left: 35px;
+  padding-right: 35px;
+  padding-bottom: 25px;
+  padding-top: 25px;
+  width: 100%;
+}
