@@ -1,25 +1,25 @@
+import { Component, ChangeEvent } from 'react';
+import { AppExtensionSDK } from 'contentful-ui-extensions-sdk';
 import {
-  Button,
-  CheckboxField,
-  Form,
   Heading,
+  Form,
+  Workbench,
+  Paragraph,
+  TextField,
+  Notification,
   Icon,
+  Button,
+  TextLink,
   List,
   ListItem,
-  Notification,
-  Paragraph,
+  CheckboxField,
   Subheading,
-  TextField,
-  TextLink,
-  Workbench,
 } from '@contentful/forma-36-react-components';
-import { AppExtensionSDK } from 'contentful-ui-extensions-sdk';
 import ImgixAPI, { APIError } from 'imgix-management-js';
 import debounce from 'lodash.debounce';
-import { ChangeEvent, Component } from 'react';
 
-import packageJson from './../../../package.json';
 import './ConfigScreen.css';
+import packageJson from './../../../package.json';
 
 export interface AppInstallationParameters {
   imgixAPIKey?: string;
