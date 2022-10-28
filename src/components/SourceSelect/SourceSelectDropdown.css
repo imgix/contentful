@@ -9,6 +9,8 @@
 
 .ix-dropdown-list {
   width: 212px;
+  overflow: scroll;
+  max-height: 500px;
 }
 
 [data-test-id='cf-ui-dropdown-container'] {
