@@ -1,8 +1,9 @@
 .ix-gallery-item {
   position: relative;
   overflow: hidden;
-  border-radius: 2px;
-  background-color: #fff;
+  border-radius: 4px;
+  background-color: #E7EBEE;
+  border: 1px solid #E7EBEE;
 }
 
 .ix-gallery-item img {
@@ -49,6 +50,7 @@
   position: relative;
   margin: 0px;
   padding: 6px 10px;
+  background-color: #fff;
 }
 .asset-filename:before {
   content: " ";
