@@ -4,11 +4,11 @@ import { AssetProps } from '../Dialog';
 
 import './GridImage.css';
 
-interface GridImageComponentProps {
+export type GridImageComponentProps = {
   asset: AssetProps;
   selected: boolean;
   handleClick: MouseEventHandler<HTMLDivElement>;
-}
+};
 
 export const GridImage: FunctionComponent<GridImageComponentProps> = ({
   asset,
