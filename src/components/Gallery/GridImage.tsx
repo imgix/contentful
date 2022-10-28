@@ -16,7 +16,6 @@ export const GridImage: FunctionComponent<GridImageComponentProps> = ({
   handleClick,
 }) => {
   const focus = selected ? ' ix-selected' : '';
-  console.log(asset);
   const originPath = asset.attributes.origin_path;
   return (
     <div
