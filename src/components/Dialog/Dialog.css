@@ -119,6 +119,9 @@
 .ix-upload-destination {
   min-width: 210px;
 }
+.ix-upload-destination > form {
+  all: revert;
+}
 
 .ix-upload-destination > input {
   outline: none;
