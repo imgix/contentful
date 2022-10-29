@@ -3,7 +3,13 @@ import { useRef } from 'react';
 import { Button } from '@contentful/forma-36-react-components';
 import './UploadButton.css';
 
-export function UploadButton(props: { handleClick: (args?: any) => void }) {
+export function UploadButton(props: {
+  handleFileChange: (
+    fileObject: any,
+    previewSource: string,
+    isUploading: boolean,
+  ) => void;
+}) {
   const inputRef = useRef<HTMLInputElement>(null);
   const handleClick = () => {
     // open file input box
@@ -17,6 +23,10 @@ export function UploadButton(props: { handleClick: (args?: any) => void }) {
     if (!fileObj) {
       return;
     }
+
+    const previewSource = URL.createObjectURL(fileObj);
+
+    props.handleFileChange(fileObj, previewSource, true);
 
     // TODO: trigger a file editor modal
     // and pass the modal the file object
