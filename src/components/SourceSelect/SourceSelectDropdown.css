@@ -1,5 +1,6 @@
 .ix-dropdown {
-  width: 212px;
+  width: auto;
+  height: 40px;
   margin-right: 32px;
 }
 
