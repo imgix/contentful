@@ -349,13 +349,11 @@ export default class Dialog extends Component<DialogProps, DialogState> {
   };
 
   setUploadSource = (source: { id: string; name: string; domain: string }) => {
-    console.log('update upload source to: ', source);
     const uploadForm = { ...this.state.uploadForm, source };
     this.setState({ uploadForm });
   };
 
   updateFileForm = (file: any, previewSource: string, isUploading: boolean) => {
-    console.log('file added to form', file, previewSource);
     const uploadForm = {
       ...this.state.uploadForm,
       file,
@@ -381,8 +379,6 @@ export default class Dialog extends Component<DialogProps, DialogState> {
     const selectedImage = (
       this.props.sdk.parameters.invocation as AppInvocationParameters
     )?.selectedImage;
-    console.log(uploadForm?.previewSource);
-    console.log(this.state.uploadForm);
 
     return (
       <div className="ix-container">
@@ -483,7 +479,6 @@ export default class Dialog extends Component<DialogProps, DialogState> {
                   className="ix-upload-confirm-button"
                   onClick={() => {
                     this.setIsUploading(false);
-                    console.log('uploading...');
                   }}
                 >
                   Confirm upload
