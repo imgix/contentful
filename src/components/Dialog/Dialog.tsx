@@ -49,6 +49,7 @@ interface DialogState {
       name?: string;
       domain?: string;
     };
+    destination?: string;
     previewSource?: string;
   };
 }
@@ -353,6 +354,16 @@ export default class Dialog extends Component<DialogProps, DialogState> {
     this.setState({ uploadForm });
   };
 
+  setDestinationFilePath = (filePath: string) => {
+    const uploadForm = { ...this.state.uploadForm, destination: filePath };
+    this.setState({ uploadForm });
+  };
+
+  updateDestinationFilePath = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    this.setDestinationFilePath(value);
+  };
+
   updateFileForm = (file: any, previewSource: string, isUploading: boolean) => {
     const uploadForm = {
       ...this.state.uploadForm,
@@ -460,7 +471,11 @@ export default class Dialog extends Component<DialogProps, DialogState> {
                   </div>
                   <div className="ix-upload-destination">
                     <p>destination path</p>
-                    <TextInput placeholder="/"></TextInput>
+                    <TextInput
+                      value={this.state.uploadForm.destination}
+                      onChange={this.updateDestinationFilePath}
+                      placeholder="/"
+                    ></TextInput>
                   </div>
                 </div>
                 <div className="ix-upload-preview">
