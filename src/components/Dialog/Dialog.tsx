@@ -41,6 +41,16 @@ interface DialogState {
   assets: AssetProps[];
   errors: IxError[]; // array of IxErrors if any
   isSearching: boolean;
+  isUploading: boolean;
+  uploadForm: {
+    file?: any;
+    source?: {
+      id?: string;
+      name?: string;
+      domain?: string;
+    };
+    previewSource?: string;
+  };
 }
 
 export type PageProps = {
@@ -85,6 +95,8 @@ export default class Dialog extends Component<DialogProps, DialogState> {
       assets: [],
       errors: [],
       isSearching: false,
+      isUploading: false,
+      uploadForm: {},
     };
   }
 
@@ -332,6 +344,27 @@ export default class Dialog extends Component<DialogProps, DialogState> {
     }
   };
 
+  setIsUploading = (value: boolean) => {
+    this.setState({ isUploading: value });
+  };
+
+  setUploadSource = (source: { id: string; name: string; domain: string }) => {
+    console.log('update upload source to: ', source);
+    const uploadForm = { ...this.state.uploadForm, source };
+    this.setState({ uploadForm });
+  };
+
+  updateFileForm = (file: any, previewSource: string, isUploading: boolean) => {
+    console.log('file added to form', file, previewSource);
+    const uploadForm = {
+      ...this.state.uploadForm,
+      file,
+      source: this.state.selectedSource,
+      previewSource,
+    };
+    this.setState({ uploadForm, isUploading });
+  };
+
   async componentDidUpdate(prevProps: DialogProps, prevState: DialogState) {
     if (
       this.state.selectedSource.id !== prevState.selectedSource.id ||
@@ -343,11 +376,13 @@ export default class Dialog extends Component<DialogProps, DialogState> {
   }
 
   render() {
-    const { selectedSource, allSources, page, assets } = this.state;
+    const { selectedSource, allSources, page, assets, uploadForm } = this.state;
     const sdk = this.props.sdk;
     const selectedImage = (
       this.props.sdk.parameters.invocation as AppInvocationParameters
     )?.selectedImage;
+    console.log(uploadForm?.previewSource);
+    console.log(this.state.uploadForm);
 
     return (
       <div className="ix-container">
@@ -381,12 +416,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
                   Search
                 </Button>
               </Form>
-              <UploadButton
-                handleFileChange={(fileObj, previewSource, isUploading) => {
-                  console.log('upload');
-                  console.log(fileObj, previewSource, isUploading);
-                }}
-              />
+              <UploadButton handleFileChange={this.updateFileForm} />
             </div>
           )}
         </div>
@@ -404,6 +434,63 @@ export default class Dialog extends Component<DialogProps, DialogState> {
             type={this.state.errors[0].type}
             resetErrorBoundary={this.resetNErrors}
           />
+        )}
+        {this.state.isUploading && (
+          <div className="ix-upload-editor-container">
+            <div className="ix-upload-editor">
+              <div className="ix-upload-title-bar">
+                <p className="ix-upload-header-text">Upload to Asset Manager</p>
+                <Button
+                  size="small"
+                  buttonType="naked"
+                  icon="Close"
+                  className="ix-close-button"
+                  onClick={() => this.setIsUploading(false)}
+                ></Button>
+              </div>
+              <div className="ix-upload-content">
+                <div className="ix-upload-options">
+                  <div className="ix-upload-sources">
+                    <p>imgix source:</p>
+                    <SourceSelect
+                      selectedSource={
+                        this.state.uploadForm?.source || selectedSource
+                      }
+                      allSources={allSources}
+                      setSource={this.setUploadSource}
+                      resetErrors={() =>
+                        this.resetNErrors(this.state.errors.length)
+                      }
+                    />
+                  </div>
+                  <div className="ix-upload-destination">
+                    <p>destination path</p>
+                    <TextInput placeholder="/"></TextInput>
+                  </div>
+                </div>
+                <div className="ix-upload-preview">
+                  <img
+                    alt="upload-preview"
+                    src={this.state.uploadForm.previewSource}
+                    width={384}
+                    height={288}
+                  />
+                  <p className="ix-upload-preview-filename">filename.jpg</p>
+                </div>
+                <Button
+                  size="small"
+                  buttonType="positive"
+                  className="ix-upload-confirm-button"
+                  onClick={() => {
+                    this.setIsUploading(false);
+                    console.log('uploading...');
+                  }}
+                >
+                  Confirm upload
+                </Button>
+              </div>
+            </div>
+          </div>
         )}
       </div>
     );

@@ -39,6 +39,133 @@
   width: 100%;
 }
 
+.ix-upload-editor-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  background-color: rgba(0, 0, 0, 0.572);
+}
+
+.ix-upload-editor {
+  position: absolute;
+  width: 432px;
+  height: 574px;
+  top: 2.5%;
+  left: 25%;
+  right: 25%;
+  bottom: 0%;
+  background-color: #fff;
+  z-index: 3;
+  margin: 25px;
+  border-radius: 4px;
+}
+
+.ix-upload-title-bar {
+  width: 100%;
+  background: #F7F9FA;
+  /* Subheading */
+  font-family: 'SF Pro Text';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  /* identical to box height, or 150% */
+  letter-spacing: -0.32px;
+  border-bottom: 1px solid #CFD9E0;
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: space-between;
+  border-radius: 4px;
+}
+
+.ix-upload-header-text {
+  margin: 25px;
+}
+
+.ix-close-button {
+  margin: auto 15px;
+}
+
+.ix-upload-content {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+}
+
+.ix-upload-options {
+  display: flex;
+  flex-direction: row;
+  margin: 0 auto;
+  margin-top: 25px;
+}
+
+.ix-upload-sources {
+  /* min-width: 210px; */
+}
+
+.ix-upload-sources > p, .ix-upload-destination > p {
+/* SectionHeading */
+  font-family: 'SF Pro Text';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 18px;
+  /* identical to box height, or 150% */
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  margin: auto 4px;
+}
+
+.ix-upload-destination {
+  min-width: 210px;
+}
+
+.ix-upload-destination > input {
+  outline: none;
+  border: none;
+}
+
+.ix-upload-preview > img {
+  display: block;
+  margin: 0 auto;
+  margin-top: 15px;
+}
+
+.ix-upload-preview-filename {
+  /* Font */
+  font-family: 'SF Pro Text';
+  font-style: snormal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+  /* Auto layout */
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+
+  position: relative;
+  width: 384px;
+  height: 48px;
+  margin: 0 auto;
+  margin-bottom: 10px;
+
+  background: #F7F9FA;
+  box-shadow: inset 0px -1px 0px #E7EBEE;
+  border-radius: 0px 0px 6px 6px
+}
+
+.ix-upload-confirm-button {
+  min-width: 384px;
+  margin: auto;
+}
+
 @media only screen and (min-width: 481px) {
   .ix-container {
     padding: 40px;
