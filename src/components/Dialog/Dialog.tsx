@@ -345,6 +345,15 @@ export default class Dialog extends Component<DialogProps, DialogState> {
     }
   };
 
+  uploadAssets = async () => {
+    const { file, source, destination } = this.state.uploadForm;
+    console.log('uploading');
+    console.log('file', file);
+    console.log('to', source);
+    console.log('at', destination);
+    this.setIsUploading(false);
+  };
+
   setIsUploading = (value: boolean) => {
     this.setState({ isUploading: value });
   };
@@ -469,14 +478,16 @@ export default class Dialog extends Component<DialogProps, DialogState> {
                       }
                     />
                   </div>
-                  <div className="ix-upload-destination">
-                    <p>destination path</p>
-                    <TextInput
-                      value={this.state.uploadForm.destination}
-                      onChange={this.updateDestinationFilePath}
-                      placeholder="/"
-                    ></TextInput>
-                  </div>
+                  <form onSubmit={this.uploadAssets}>
+                    <div className="ix-upload-destination">
+                      <p>destination path</p>
+                      <TextInput
+                        value={this.state.uploadForm.destination || '/'}
+                        onChange={this.updateDestinationFilePath}
+                        placeholder="/"
+                      ></TextInput>
+                    </div>
+                  </form>
                 </div>
                 <div className="ix-upload-preview">
                   <img
@@ -491,9 +502,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
                   size="small"
                   buttonType="positive"
                   className="ix-upload-confirm-button"
-                  onClick={() => {
-                    this.setIsUploading(false);
-                  }}
+                  onClick={this.uploadAssets}
                 >
                   Confirm upload
                 </Button>
