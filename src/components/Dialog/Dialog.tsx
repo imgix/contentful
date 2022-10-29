@@ -1,24 +1,25 @@
-import { Component, ChangeEvent } from 'react';
-import { TextInput, Button, Form } from '@contentful/forma-36-react-components';
+import { Button, Form, TextInput } from '@contentful/forma-36-react-components';
 import { DialogExtensionSDK } from 'contentful-ui-extensions-sdk';
 import ImgixAPI, { APIError } from 'imgix-management-js';
 import { debounce } from 'lodash';
+import { ChangeEvent, Component } from 'react';
 
-import { DialogHeader } from './';
-import { AppInstallationParameters } from '../ConfigScreen/';
-import { ImageGallery } from '../Gallery/';
-import { SourceSelect } from '../SourceSelect/';
-import { Note } from '../Note/';
 import {
-  IxError,
   invalidApiKeyError,
-  noSourcesError,
+  IxError,
   noOriginImagesError,
   noSearchImagesError,
+  noSourcesError,
 } from '../../helpers/errors';
+import { AppInstallationParameters } from '../ConfigScreen/';
+import { ImageGallery } from '../Gallery/';
+import { Note } from '../Note/';
+import { SourceSelect } from '../SourceSelect/';
+import { DialogHeader } from './';
 
-import './Dialog.css';
 import packageJson from '../../../package.json';
+import { UploadButton } from '../UploadButton/UploadButton';
+import './Dialog.css';
 
 interface DialogProps {
   sdk: DialogExtensionSDK;
@@ -88,7 +89,9 @@ export default class Dialog extends Component<DialogProps, DialogState> {
   }
 
   getSources = async () => {
-    return await this.state.imgix.request('sources?sort=name&page[number]=1&page[size]=100');
+    return await this.state.imgix.request(
+      'sources?sort=name&page[number]=1&page[size]=100',
+    );
   };
 
   getSourceIDAndPaths = async (): Promise<Array<SourceProps>> => {
@@ -357,26 +360,33 @@ export default class Dialog extends Component<DialogProps, DialogState> {
             resetErrors={() => this.resetNErrors(this.state.errors.length)}
           />
           {this.state.selectedSource.id && (
-            <Form className="ix-searchForm">
-              <TextInput
-                type="search"
-                className="ix-searchBar"
-                placeholder="Search by name or folder path"
-                value={this.state.searchTerm}
-                onChange={(
-                  e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-                ) => this.setState({ searchTerm: e.target.value })}
+            <div className="ix-top-bar-container">
+              <Form className="ix-searchForm">
+                <TextInput
+                  type="search"
+                  className="ix-searchBar"
+                  placeholder="Search by name or folder path"
+                  value={this.state.searchTerm}
+                  onChange={(
+                    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+                  ) => this.setState({ searchTerm: e.target.value })}
+                />
+                <Button
+                  buttonType="muted"
+                  className="ix-searchButton"
+                  icon="Search"
+                  type="submit"
+                  onClick={this.debounceSearchOnClick}
+                >
+                  Search
+                </Button>
+              </Form>
+              <UploadButton
+                handleClick={() => {
+                  console.log('upload');
+                }}
               />
-              <Button
-                buttonType="muted"
-                className="ix-searchButton"
-                icon="Search"
-                type="submit"
-                onClick={this.debounceSearchOnClick}
-              >
-                Search
-              </Button>
-            </Form>
+            </div>
           )}
         </div>
         <ImageGallery
