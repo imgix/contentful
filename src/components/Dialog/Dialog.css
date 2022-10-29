@@ -34,6 +34,11 @@
   min-width: 102px;
 }
 
+.ix-top-bar-container {
+  display: flex;
+  width: 100%;
+}
+
 @media only screen and (min-width: 481px) {
   .ix-container {
     padding: 40px;

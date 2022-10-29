@@ -1,0 +1,10 @@
+.ix-uploadButton {
+  display: flex;
+  right: 0;
+  min-width: 102px;
+  margin-left: 50px;
+}
+
+.ix-uploadButton > span > svg {
+  rotate: 180deg;
+}
