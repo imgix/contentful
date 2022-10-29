@@ -382,8 +382,9 @@ export default class Dialog extends Component<DialogProps, DialogState> {
                 </Button>
               </Form>
               <UploadButton
-                handleClick={() => {
+                handleFileChange={(fileObj, previewSource, isUploading) => {
                   console.log('upload');
+                  console.log(fileObj, previewSource, isUploading);
                 }}
               />
             </div>
