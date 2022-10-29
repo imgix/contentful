@@ -449,9 +449,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
                   <div className="ix-upload-sources">
                     <p>imgix source:</p>
                     <SourceSelect
-                      selectedSource={
-                        this.state.uploadForm?.source || selectedSource
-                      }
+                      selectedSource={uploadForm.source || selectedSource}
                       allSources={allSources}
                       setSource={this.setUploadSource}
                       resetErrors={() =>
@@ -467,7 +465,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
                 <div className="ix-upload-preview">
                   <img
                     alt="upload-preview"
-                    src={this.state.uploadForm.previewSource}
+                    src={uploadForm.previewSource}
                     width={384}
                     height={288}
                   />
