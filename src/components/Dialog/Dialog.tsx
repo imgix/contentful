@@ -43,7 +43,8 @@ interface DialogState {
   isSearching: boolean;
   isUploading: boolean;
   uploadForm: {
-    file?: any;
+    file?: File;
+    filename?: string;
     source?: {
       id?: string;
       name?: string;
@@ -345,13 +346,63 @@ export default class Dialog extends Component<DialogProps, DialogState> {
     }
   };
 
+  upload = (buffer: Buffer) => {
+    let { file, filename, source, destination } = this.state.uploadForm;
+
+    // do nothing if fileForm is invalid
+    if (!file || !source) {
+      console.error('imgix: cannot upload a form with missing file or source');
+      return;
+    }
+
+    let _destination, path;
+    if (destination) {
+      // strip the leading and trailing slash from destination
+      _destination = destination.replace(/^\//, '').replace(/\/$/, '');
+      path = _destination + '/' + filename;
+    } else {
+      path = filename;
+    }
+    debugger;
+
+    // make a put request to upload the file
+    const imgix = this.state.imgix;
+    // wait until request fails/succeeds
+    // close the modal
+    try {
+      imgix
+        .request(`sources/${source.id}/upload/${path}`, {
+          method: 'POST',
+          body: buffer,
+        })
+        .then((_resp) => {
+          this.setIsUploading(false);
+        });
+    } catch (error) {
+      console.error('imgix: upload error', error);
+      this.setIsUploading(false);
+    }
+  };
+
   uploadAssets = async () => {
-    const { file, source, destination } = this.state.uploadForm;
-    console.log('uploading');
-    console.log('file', file);
-    console.log('to', source);
-    console.log('at', destination);
-    this.setIsUploading(false);
+    let { file } = this.state.uploadForm;
+    // create a Buffer from the users' selected asset and upload that buffer
+    const reader = new FileReader();
+    reader.addEventListener(
+      'load',
+      () => {
+        // convert image file to base64 string
+        const assetBase64String = reader.result as string;
+        const fileString = assetBase64String.replace(
+          /^data:image\/gif;base64,|^data:image\/png;base64,|^data:image\/jpeg;base64,|^data:image\/jpg;base64,|^data:image\/bmp;base64,/,
+          '',
+        );
+        const buffer = Buffer.from(fileString, 'base64');
+        this.upload(buffer);
+      },
+      false,
+    );
+    reader.readAsDataURL(file as File);
   };
 
   setIsUploading = (value: boolean) => {
@@ -373,10 +424,21 @@ export default class Dialog extends Component<DialogProps, DialogState> {
     this.setDestinationFilePath(value);
   };
 
-  updateFileForm = (file: any, previewSource: string, isUploading: boolean) => {
+  setFilename = (filename: string) => {
+    const uploadForm = { ...this.state.uploadForm, filename: filename };
+    this.setState({ uploadForm });
+  };
+
+  updateFileName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    this.setFilename(value);
+  };
+
+  openFileForm = (file: File, previewSource: string, isUploading: boolean) => {
     const uploadForm = {
       ...this.state.uploadForm,
       file,
+      filename: file.name,
       source: this.state.selectedSource,
       previewSource,
     };
@@ -432,7 +494,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
                   Search
                 </Button>
               </Form>
-              <UploadButton handleFileChange={this.updateFileForm} />
+              <UploadButton handleFileChange={this.openFileForm} />
             </div>
           )}
         </div>
@@ -496,7 +558,12 @@ export default class Dialog extends Component<DialogProps, DialogState> {
                     width={384}
                     height={288}
                   />
-                  <p className="ix-upload-preview-filename">filename.jpg</p>
+                  <div className="ix-upload-preview-filename">
+                    <TextInput
+                      value={this.state.uploadForm.filename || ''}
+                      onChange={this.updateFileName}
+                    ></TextInput>
+                  </div>
                 </div>
                 <Button
                   size="small"
