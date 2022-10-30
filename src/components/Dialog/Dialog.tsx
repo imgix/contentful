@@ -42,6 +42,7 @@ interface DialogState {
   errors: IxError[]; // array of IxErrors if any
   isSearching: boolean;
   isUploading: boolean;
+  showUpload: boolean;
   uploadForm: {
     file?: File;
     filename?: string;
@@ -98,6 +99,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
       errors: [],
       isSearching: false,
       isUploading: false,
+      showUpload: false,
       uploadForm: {},
     };
   }
@@ -369,6 +371,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
     const imgix = this.state.imgix;
     // wait until request fails/succeeds
     // close the modal
+    this.setIsUploading(true);
     try {
       imgix
         .request(`sources/${source.id}/upload/${path}`, {
@@ -376,11 +379,11 @@ export default class Dialog extends Component<DialogProps, DialogState> {
           body: buffer,
         })
         .then((_resp) => {
-          this.setIsUploading(false);
+          this.setState({ isUploading: false, showUpload: false });
         });
     } catch (error) {
       console.error('imgix: upload error', error);
-      this.setIsUploading(false);
+      this.setState({ isUploading: false, showUpload: false });
     }
   };
 
@@ -409,6 +412,10 @@ export default class Dialog extends Component<DialogProps, DialogState> {
     this.setState({ isUploading: value });
   };
 
+  setShowUpload = (value: boolean) => {
+    this.setState({ showUpload: value });
+  };
+
   setUploadSource = (source: { id: string; name: string; domain: string }) => {
     const uploadForm = { ...this.state.uploadForm, source };
     this.setState({ uploadForm });
@@ -434,7 +441,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
     this.setFilename(value);
   };
 
-  openFileForm = (file: File, previewSource: string, isUploading: boolean) => {
+  openFileForm = (file: File, previewSource: string, showUpload: boolean) => {
     const uploadForm = {
       ...this.state.uploadForm,
       file,
@@ -442,7 +449,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
       source: this.state.selectedSource,
       previewSource,
     };
-    this.setState({ uploadForm, isUploading });
+    this.setState({ uploadForm, showUpload });
   };
 
   async componentDidUpdate(prevProps: DialogProps, prevState: DialogState) {
@@ -513,7 +520,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
             resetErrorBoundary={this.resetNErrors}
           />
         )}
-        {this.state.isUploading && (
+        {this.state.showUpload && (
           <div className="ix-upload-editor-container">
             <div className="ix-upload-editor">
               <div className="ix-upload-title-bar">
@@ -523,7 +530,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
                   buttonType="naked"
                   icon="Close"
                   className="ix-close-button"
-                  onClick={() => this.setIsUploading(false)}
+                  onClick={() => this.setShowUpload(false)}
                 ></Button>
               </div>
               <div className="ix-upload-content">
@@ -570,8 +577,9 @@ export default class Dialog extends Component<DialogProps, DialogState> {
                   buttonType="positive"
                   className="ix-upload-confirm-button"
                   onClick={this.uploadAssets}
+                  loading={this.state.isUploading}
                 >
-                  Confirm upload
+                  {this.state.isUploading ? 'Uploading' : 'Confirm Upload'}
                 </Button>
               </div>
             </div>
