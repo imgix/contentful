@@ -503,7 +503,10 @@ export default class Dialog extends Component<DialogProps, DialogState> {
                   Search
                 </Button>
               </Form>
-              <UploadButton handleFileChange={this.openFileForm} />
+              <UploadButton
+                disabled={selectedSource && selectedSource.type === 'webfolder'}
+                handleFileChange={this.openFileForm}
+              />
             </div>
           )}
         </div>

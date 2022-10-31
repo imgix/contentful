@@ -9,6 +9,7 @@ export function UploadButton(props: {
     previewSource: string,
     isUploading: boolean,
   ) => void;
+  disabled?: boolean;
 }) {
   const inputRef = useRef<HTMLInputElement>(null);
   const handleClick = () => {
@@ -42,6 +43,7 @@ export function UploadButton(props: {
         className="ix-uploadButton"
         icon="Download"
         type="submit"
+        disabled={props.disabled}
         onClick={handleClick}
       >
         Upload
