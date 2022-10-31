@@ -64,6 +64,7 @@ export type PageProps = {
 export type SourceProps = {
   id: string;
   name: string;
+  type: 'azure' | 'gcs' | 's3' | 'webfolder' | 'webproxy';
   domain: string;
 };
 
@@ -140,9 +141,10 @@ export default class Dialog extends Component<DialogProps, DialogState> {
         if (source.attributes.enabled) {
           const id = source.id;
           const name = source.attributes.name;
+          const type = source.attributes.deployment.type;
           // there may be multiple domains, but we'll extract the first one for now
           let domain = source.attributes.deployment.imgix_subdomains[0];
-          result.push({ id, name, domain });
+          result.push({ id, name, type, domain });
         }
         return result;
       },
