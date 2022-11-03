@@ -17,12 +17,44 @@ import Dialog from './components/Dialog/';
 
 import './index.css';
 
-import LocalhostWarning from './components/LocalhostWarning';
-
 if (process.env.NODE_ENV === 'development' && window.self === window.top) {
   // You can remove this if block before deploying your app
   const root = document.getElementById('root');
-  render(<LocalhostWarning />, root);
+  const API_KEY = process.env.REACT_APP_CTFL_API_KEY;
+
+  render(
+    <div
+      style={{
+        display: 'block',
+        width: '100%',
+        border: 'none',
+        minHeight: '1200px',
+        boxSizing: 'border-box',
+      }}
+    >
+      <div style={{ display: 'block', margin: '0px' }}>
+        <Dialog
+          sdk={
+            {
+              parameters: {
+                invocation: {
+                  selectedImage: '',
+                },
+                installation: {
+                  imgixAPIKey: API_KEY,
+                  successfullyVerified: true,
+                },
+              },
+              close: () => {
+                console.log('close');
+              },
+            } as any
+          }
+        />
+      </div>
+    </div>,
+    root,
+  );
 } else {
   init((sdk) => {
     const root = document.getElementById('root');
