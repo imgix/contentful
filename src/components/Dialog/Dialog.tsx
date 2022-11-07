@@ -367,7 +367,6 @@ export default class Dialog extends Component<DialogProps, DialogState> {
     } else {
       path = filename;
     }
-    debugger;
 
     // make a put request to upload the file
     const imgix = this.state.imgix;
