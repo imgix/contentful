@@ -449,6 +449,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
                   <div className="ix-upload-sources">
                     <p>imgix source:</p>
                     <SourceSelect
+                      testId="upload-source-select-dropdown"
                       selectedSource={uploadForm.source || selectedSource}
                       allSources={allSources}
                       setSource={this.setUploadSource}
