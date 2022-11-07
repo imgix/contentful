@@ -11,6 +11,7 @@ import { SourceProps } from '../Dialog';
 import './SourceSelectDropdown.css';
 
 interface Props {
+  testId?: string;
   selectedSource: Partial<SourceProps>;
   allSources: Array<any>;
   setSource: Function;
@@ -18,6 +19,7 @@ interface Props {
 }
 
 export function SourceSelectDropdown({
+  testId,
   selectedSource,
   allSources,
   setSource,
@@ -32,6 +34,7 @@ export function SourceSelectDropdown({
 
   return (
     <Dropdown
+      testId={testId}
       isOpen={isOpen}
       onClose={() => setOpen(false)}
       toggleElement={
