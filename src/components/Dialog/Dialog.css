@@ -103,10 +103,6 @@
   margin-top: 25px;
 }
 
-.ix-upload-sources {
-  /* min-width: 210px; */
-}
-
 .ix-upload-sources > p, .ix-upload-destination > p {
 /* SectionHeading */
   font-family: 'SF Pro Text';
@@ -164,6 +160,14 @@
 .ix-upload-confirm-button {
   min-width: 384px;
   margin: auto;
+}
+
+[data-test-id='upload-source-select-dropdown'] > button {
+  margin-right: 0px;
+}
+
+[data-test-id='upload-source-select-dropdown'] {
+  margin-right: 3px;
 }
 
 @media only screen and (min-width: 481px) {
