@@ -107,7 +107,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
 
   getSources = async () => {
     return await this.state.imgix.request(
-      'sources?sort=name&page[number]=1&page[size]=100',
+      'sources?sort=name&page[number]=0&page[size]=200',
     );
   };
 
