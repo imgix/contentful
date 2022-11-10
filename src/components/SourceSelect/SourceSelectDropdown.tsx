@@ -16,6 +16,7 @@ interface Props {
   allSources: Array<any>;
   setSource: Function;
   resetErrors: Function;
+  disabled?: boolean;
 }
 
 export function SourceSelectDropdown({
@@ -24,6 +25,7 @@ export function SourceSelectDropdown({
   allSources,
   setSource,
   resetErrors,
+  disabled,
 }: Props): ReactElement {
   const [isOpen, setOpen] = React.useState(false);
   const handleClick = (source: SourceProps) => {
@@ -44,6 +46,7 @@ export function SourceSelectDropdown({
           className="ix-dropdown"
           indicateDropdown
           onClick={() => setOpen(!isOpen)}
+          disabled={disabled}
         >
           {selectedSource.name || 'Select an imgix Source'}
         </Button>
