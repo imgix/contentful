@@ -561,6 +561,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
                   buttonType="naked"
                   icon="Close"
                   className="ix-close-button"
+                  disabled={this.state.isUploading}
                   onClick={() => this.setShowUpload(false)}
                 ></Button>
               </div>
