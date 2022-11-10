@@ -10,7 +10,9 @@
   display: grid;
   grid-gap: 20px;
   grid-template-columns: repeat(6, 1fr);
-  grid-template-rows: auto;
+  /* The maximum height of rows becomes length of 1fr. 
+  The height of each row is determined by the tallest (max-content) grid item. */
+  grid-auto-rows: 1fr; 
   margin-top: 32px;
   margin-bottom: 32px;
   overflow: hidden;
