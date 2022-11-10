@@ -1,12 +1,22 @@
-import { FunctionComponent, MouseEventHandler } from 'react';
-import Imgix from 'react-imgix';
+import {
+  FunctionComponent,
+  MouseEventHandler,
+  useEffect,
+  useState,
+} from 'react';
+import Imgix, { Picture, Source } from 'react-imgix';
 import { AssetProps } from '../Dialog';
+import { AiAssetSVG } from '../Icons/AiAssetSVG';
+import { PDFAssetSVG } from '../Icons/PDFAssetSVG';
+import { UnknownAssetSVG } from '../Icons/UnknownAssetSVG';
+import { VideoAssetSVG } from '../Icons/VideoAssetSVG';
 
 import './GridImage.css';
 
 export type GridImageComponentProps = {
   asset: AssetProps;
   selected: boolean;
+  attributes?: { [key: string]: any; content_type: string };
   handleClick: MouseEventHandler<HTMLDivElement>;
 };
 
@@ -17,14 +27,10 @@ export const GridImage: FunctionComponent<GridImageComponentProps> = ({
 }) => {
   const focus = selected ? ' ix-selected' : '';
   const originPath = asset.attributes.origin_path;
-  return (
-    <div
-      onClick={handleClick}
-      className="ix-gallery-item"
-      style={{ paddingBottom: 5 }}
-    >
-      <div className={'ix-gallery-image-gradient' + focus}></div>
+  const GridImageAsset = () => {
+    return (
       <Imgix
+        className="ix-grid-image"
         src={asset.src || ''}
         width={140}
         height={125}
@@ -35,6 +41,26 @@ export const GridImage: FunctionComponent<GridImageComponentProps> = ({
         }}
         sizes="(min-width: 480px) calc(12.5vw - 20px)"
       />
+    );
+  };
+  return (
+    <div
+      onClick={handleClick}
+      className="ix-gallery-item"
+      style={{ paddingBottom: 5 }}
+    >
+      <div className={'ix-gallery-image-gradient' + focus}></div>
+      {asset.attributes.content_type.startsWith('image') ? (
+        <GridImageAsset />
+      ) : asset.attributes.content_type.startsWith('video') ? (
+        <VideoAssetSVG />
+      ) : asset.attributes.content_type === 'application/postscript' ? (
+        <AiAssetSVG />
+      ) : asset.attributes.content_type === 'application/pdf' ? (
+        <PDFAssetSVG />
+      ) : (
+        <UnknownAssetSVG />
+      )}
       <h5 className="asset-filename">
         <span className="asset-filename-span">{originPath}</span>
       </h5>
