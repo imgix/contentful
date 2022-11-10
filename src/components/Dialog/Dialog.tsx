@@ -609,6 +609,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
                   className="ix-upload-confirm-button"
                   onClick={this.uploadAssets}
                   loading={this.state.isUploading}
+                  disabled={this.state.isUploading}
                 >
                   {this.state.isUploading ? 'Uploading' : 'Confirm Upload'}
                 </Button>
