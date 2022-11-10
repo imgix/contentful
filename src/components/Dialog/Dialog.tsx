@@ -584,6 +584,9 @@ export default class Dialog extends Component<DialogProps, DialogState> {
                     <div className="ix-upload-destination">
                       <p>destination path</p>
                       <TextInput
+                        className={
+                          this.state.isUploading ? 'ix-input-readonly' : ''
+                        }
                         value={this.state.uploadForm.destination || '/'}
                         onChange={this.updateDestinationFilePath}
                         placeholder="/"
@@ -601,6 +604,9 @@ export default class Dialog extends Component<DialogProps, DialogState> {
                   />
                   <div className="ix-upload-preview-filename">
                     <TextInput
+                      className={
+                        this.state.isUploading ? 'ix-input-readonly' : ''
+                      }
                       value={this.state.uploadForm.filename || ''}
                       onChange={this.updateFileName}
                       isReadOnly={this.state.isUploading}

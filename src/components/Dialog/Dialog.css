@@ -128,6 +128,24 @@
   border: none;
 }
 
+.ix-input-readonly > input {
+  background-color: #fff;
+  border-color: #aec1cc;
+  box-shadow: 0 1px 0 rgb(246 247 247 / 32%);
+  color: #111b2b42;
+}
+
+.ix-input-readonly > *:focus {
+  outline: none;
+  border-color: #aec1cc;
+  box-shadow: 0 1px 0 rgb(246 247 247 / 32%);
+  color: #111b2b42;
+}
+
+.ix-input-readonly > *:hover {
+  cursor: not-allowed;
+}
+
 .ix-upload-preview > img {
   display: block;
   margin: 0 auto;
