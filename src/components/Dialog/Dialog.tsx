@@ -577,6 +577,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
                       resetErrors={() =>
                         this.resetNErrors(this.state.errors.length)
                       }
+                      disabled={this.state.isUploading}
                     />
                   </div>
                   <form onSubmit={this.uploadAssets}>
@@ -586,6 +587,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
                         value={this.state.uploadForm.destination || '/'}
                         onChange={this.updateDestinationFilePath}
                         placeholder="/"
+                        isReadOnly={this.state.isUploading}
                       ></TextInput>
                     </div>
                   </form>
@@ -601,6 +603,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
                     <TextInput
                       value={this.state.uploadForm.filename || ''}
                       onChange={this.updateFileName}
+                      isReadOnly={this.state.isUploading}
                     ></TextInput>
                   </div>
                 </div>
