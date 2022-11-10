@@ -1,4 +1,9 @@
-import { Button, Form, TextInput } from '@contentful/forma-36-react-components';
+import {
+  Button,
+  Form,
+  TextInput,
+  Notification,
+} from '@contentful/forma-36-react-components';
 import { DialogExtensionSDK } from 'contentful-ui-extensions-sdk';
 import ImgixAPI, { APIError } from 'imgix-management-js';
 import { debounce } from 'lodash';
@@ -373,19 +378,41 @@ export default class Dialog extends Component<DialogProps, DialogState> {
     // wait until request fails/succeeds
     // close the modal
     this.setIsUploading(true);
-    try {
-      imgix
-        .request(`sources/${source.id}/upload/${path}`, {
-          method: 'POST',
-          body: buffer,
-        })
-        .then((_resp) => {
+    imgix
+      .request(`sources/${source.id}/upload/${path}`, {
+        method: 'POST',
+        body: buffer,
+      })
+      .then(
+        (_resp) => {
           this.setState({ isUploading: false, showUpload: false });
-        });
-    } catch (error) {
-      console.error('imgix: upload error', error);
-      this.setState({ isUploading: false, showUpload: false });
-    }
+          Notification.setPosition('top', { offset: 650 });
+          Notification.success('File successfully uploaded to imgix Source.', {
+            duration: 50000,
+            id: 'ix-dialog-notification',
+          });
+        },
+        (error: APIError) => {
+          // Note the APIError.message doesn't have as much detail as the
+          // response.errors[0].detail does. This is why we're accessing that
+          // instead.
+          const errorResponse = error.response as {
+            errors: [{ detail: string }];
+          };
+          // In the rare case the response doesn't have an `errors` array, we
+          // need to do some optional chaining here to avoid trying to access
+          // a property or index that does not exist.
+          const reason = errorResponse?.errors[0]?.detail;
+          console.error('imgix: upload error', error.response);
+          Notification.setPosition('top', { offset: 650 });
+          Notification.error(`Upload failed: ${reason}`, {
+            duration: 10000,
+            id: 'ix-dialog-notification',
+          });
+          // We're not adding this error to state because `errors` in state is used as a UI fallback, not a notification message.
+          this.setState({ isUploading: false, showUpload: false });
+        },
+      );
   };
 
   uploadAssets = async () => {
