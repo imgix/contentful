@@ -5,6 +5,8 @@ import {
   Notification,
   Subheading,
   SectionHeading,
+  Icon,
+  Tooltip,
 } from '@contentful/forma-36-react-components';
 import { DialogExtensionSDK } from 'contentful-ui-extensions-sdk';
 import ImgixAPI, { APIError } from 'imgix-management-js';
@@ -610,6 +612,18 @@ export default class Dialog extends Component<DialogProps, DialogState> {
                       ></TextInput>
                     </div>
                   </form>
+
+                  <div id="destination-tooltip">
+                    <Tooltip
+                      place="top"
+                      content="Assets can be uploaded to any directory path in your asset storage. If you leave this blank, assets will be uploaded to the root directory."
+                    >
+                      <Icon
+                        className="ix-destination-tooltip"
+                        icon="ErrorCircleOutline"
+                      />
+                    </Tooltip>
+                  </div>
                 </div>
                 <div className="ix-upload-preview">
                   <img
