@@ -3,6 +3,8 @@ import {
   Form,
   TextInput,
   Notification,
+  Subheading,
+  SectionHeading,
 } from '@contentful/forma-36-react-components';
 import { DialogExtensionSDK } from 'contentful-ui-extensions-sdk';
 import ImgixAPI, { APIError } from 'imgix-management-js';
@@ -566,7 +568,9 @@ export default class Dialog extends Component<DialogProps, DialogState> {
           <div className="ix-upload-editor-container">
             <div className="ix-upload-editor">
               <div className="ix-upload-title-bar">
-                <p className="ix-upload-header-text">Upload to Asset Manager</p>
+                <p className="ix-upload-header-text">
+                  <Subheading>Upload to Asset Manager</Subheading>
+                </p>
                 <Button
                   size="small"
                   buttonType="naked"
@@ -579,7 +583,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
               <div className="ix-upload-content">
                 <div className="ix-upload-options">
                   <div className="ix-upload-sources">
-                    <p>imgix source:</p>
+                    <SectionHeading>imgix source:</SectionHeading>
                     <SourceSelect
                       testId="upload-source-select-dropdown"
                       selectedSource={uploadForm.source || selectedSource}
@@ -593,7 +597,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
                   </div>
                   <form onSubmit={this.uploadAssets}>
                     <div className="ix-upload-destination">
-                      <p>destination path</p>
+                      <SectionHeading>destination path</SectionHeading>
                       <TextInput
                         className={
                           this.state.isUploading ? 'ix-input-readonly' : ''

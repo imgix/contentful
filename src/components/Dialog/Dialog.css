@@ -64,7 +64,6 @@
   width: 100%;
   background: #F7F9FA;
   /* Subheading */
-  font-family: 'SF Pro Text';
   font-style: normal;
   font-weight: 600;
   font-size: 16px;
@@ -98,11 +97,19 @@
   flex-direction: row;
   margin: 0 auto;
   margin-top: 25px;
+  min-width: 385px;
+}
+
+.ix-upload-sources {
+  margin-right: 8px;
+}
+
+.ix-upload-sources > [data-test-id='upload-source-select-dropdown'] > button {
+ min-width: 114px;
 }
 
 .ix-upload-sources > p, .ix-upload-destination > p {
 /* SectionHeading */
-  font-family: 'SF Pro Text';
   font-style: normal;
   font-weight: 600;
   font-size: 12px;
@@ -118,6 +125,7 @@
 }
 .ix-upload-destination > form {
   all: revert;
+  min-width: 230px;
 }
 
 .ix-upload-destination > input {
@@ -152,8 +160,6 @@
 
 .ix-upload-preview-filename {
   /* Font */
-  font-family: 'SF Pro Text';
-  font-style: snormal;
   font-weight: 600;
   font-size: 14px;
   line-height: 20px;
@@ -170,9 +176,6 @@
   height: 48px;
   margin: 0 auto;
   margin-bottom: 10px;
-
-  background: #F7F9FA;
-  box-shadow: inset 0px -1px 0px #E7EBEE;
   border-radius: 0px 0px 6px 6px
 }
 
