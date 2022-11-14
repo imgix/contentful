@@ -36,7 +36,7 @@ export class Gallery extends Component<GalleryProps, GalleryState> {
 
   render() {
     const { selectedAsset } = this.state;
-
+    console.log('Selected Asset: ', selectedAsset?.attributes.content_type);
     if (!this.props.assets.length) {
       return <ImagePlaceholder />;
     }

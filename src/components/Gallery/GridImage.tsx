@@ -10,6 +10,7 @@ import { AiAssetSVG } from '../Icons/AiAssetSVG';
 import { PDFAssetSVG } from '../Icons/PDFAssetSVG';
 import { UnknownAssetSVG } from '../Icons/UnknownAssetSVG';
 import { VideoAssetSVG } from '../Icons/VideoAssetSVG';
+import { ImageAssetSVG } from '../Icons/ImageAssetSVG';
 
 import './GridImage.css';
 
@@ -27,10 +28,15 @@ export const GridImage: FunctionComponent<GridImageComponentProps> = ({
 }) => {
   const focus = selected ? ' ix-selected' : '';
   const originPath = asset.attributes.origin_path;
+  const [imageDidError, setImageDidError] = useState(false);
+  const handleOnImageError = () => {
+    setImageDidError(true);
+  };
   const GridImageAsset = () => {
-    return (
+    return imageDidError ? (
+      <ImageAssetSVG />
+    ) : (
       <Imgix
-        className="ix-grid-image"
         src={asset.src || ''}
         width={140}
         height={125}
@@ -40,6 +46,7 @@ export const GridImage: FunctionComponent<GridImageComponentProps> = ({
           crop: 'entropy',
         }}
         sizes="(min-width: 480px) calc(12.5vw - 20px)"
+        htmlAttributes={{ onError: handleOnImageError }}
       />
     );
   };
