@@ -12,8 +12,9 @@ import { ChangeEvent, Component } from 'react';
 import {
   invalidApiKeyError,
   IxError,
-  noOriginImagesError,
-  noSearchImagesError,
+  noOriginAssetsError,
+  noOriginAssetsWebFolderError,
+  noSearchAssetsError,
   noSourcesError,
 } from '../../helpers/errors';
 import { AppInstallationParameters } from '../ConfigScreen/';
@@ -338,8 +339,13 @@ export default class Dialog extends Component<DialogProps, DialogState> {
       const defaultQuery = `?page[number]=${this.state.page.currentIndex}&page[size]=18`;
 
       const assetObjects = query
-        ? await this.getAssetObjects(query, noSearchImagesError())
-        : await this.getAssetObjects(defaultQuery, noOriginImagesError());
+        ? await this.getAssetObjects(query, noSearchAssetsError())
+        : this.state.selectedSource.type === 'webfolder'
+        ? await this.getAssetObjects(
+            defaultQuery,
+            noOriginAssetsWebFolderError(),
+          )
+        : await this.getAssetObjects(defaultQuery, noOriginAssetsError());
 
       if (assetObjects.length > 0 && this.state.errors.length > 0) {
         this.resetNErrors(this.state.errors.length);
@@ -553,6 +559,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
             error={this.state.errors[0]}
             type={this.state.errors[0].type}
             resetErrorBoundary={this.resetNErrors}
+            dismissable={this.state.errors[0].dismissable}
           />
         )}
         {this.state.showUpload && (
