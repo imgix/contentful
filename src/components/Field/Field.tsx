@@ -28,10 +28,10 @@ export default class Field extends Component<FieldProps, FieldState> {
     this.props.sdk.dialogs
       .openCurrentApp({
         width: 1200,
-        minHeight: 1200,
+        minHeight: 860,
         position: 'top',
         shouldCloseOnOverlayClick: true,
-        allowHeightOverflow: true,
+        allowHeightOverflow: false,
         parameters: {
           selectedImage: this.state.selectedAsset,
         },
