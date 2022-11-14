@@ -1,10 +1,5 @@
-import {
-  FunctionComponent,
-  MouseEventHandler,
-  useEffect,
-  useState,
-} from 'react';
-import Imgix, { Picture, Source } from 'react-imgix';
+import { FunctionComponent, MouseEventHandler, useState } from 'react';
+import Imgix from 'react-imgix';
 import { AssetProps } from '../Dialog';
 import { AiAssetSVG } from '../Icons/AiAssetSVG';
 import { PDFAssetSVG } from '../Icons/PDFAssetSVG';
