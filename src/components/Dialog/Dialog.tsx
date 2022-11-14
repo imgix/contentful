@@ -143,7 +143,11 @@ export default class Dialog extends Component<DialogProps, DialogState> {
     enabledSources = sourcesArray.reduce(
       (result: SourceProps[], source: any) => {
         // TODO: add more explicit types for source
-        if (source.attributes.enabled) {
+        if (
+          source.attributes.enabled &&
+          // filters out unsupported webproxy sources
+          source.attributes.deployment.type !== 'webproxy'
+        ) {
           const id = source.id;
           const name = source.attributes.name;
           const type = source.attributes.deployment.type;
