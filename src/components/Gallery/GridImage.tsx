@@ -47,11 +47,7 @@ export const GridImage: FunctionComponent<GridImageComponentProps> = ({
     );
   };
   return (
-    <div
-      onClick={handleClick}
-      className="ix-gallery-item"
-      style={{ paddingBottom: 5 }}
-    >
+    <div onClick={handleClick} className="ix-gallery-item">
       <div className={'ix-gallery-image-gradient' + focus}></div>
       {!asset.attributes.content_type ? (
         <UnknownAssetSVG />

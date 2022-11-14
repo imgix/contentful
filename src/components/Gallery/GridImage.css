@@ -51,6 +51,7 @@
   margin: 0px;
   padding: 6px 10px;
   background-color: #fff;
+  height: 15%;
 }
 .asset-filename:before {
   content: " ";
