@@ -6,7 +6,7 @@ import './ImageSelect.css';
 interface ImageSelectProps {
   handleSubmit: Function; // Called when the button is clicked
   disabled: boolean; // Whether the button is disabled
-  hidden: boolean; // Whether the button is hidden
+  hidden?: boolean; // Whether the button is hidden
 }
 
 export function ImageSelectButton({
@@ -30,7 +30,7 @@ export function ImageSelectButton({
       disabled={disabled}
       onClick={handleClick}
     >
-      Add image
+      Add Selected Asset
     </Button>
   );
 }

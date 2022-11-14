@@ -33,7 +33,7 @@ export function ActionBar(props: ActionBarProps) {
         </Button>
         <ImageSelectButton
           hidden={!!props.assets.length}
-          disabled={props.selectedAsset?.src === ''}
+          disabled={!props.selectedAsset}
           handleSubmit={props.handleSubmit}
         />
       </div>
