@@ -613,13 +613,13 @@ export default class Dialog extends Component<DialogProps, DialogState> {
                     </div>
                   </form>
 
-                  <div id="destination-tooltip">
+                  <div id="ix-destination-tooltip">
                     <Tooltip
                       place="top"
                       content="Assets can be uploaded to any directory path in your asset storage. If you leave this blank, assets will be uploaded to the root directory."
                     >
                       <Icon
-                        className="ix-destination-tooltip"
+                        className="ix-destination-tooltip-icon"
                         icon="ErrorCircleOutline"
                       />
                     </Tooltip>
