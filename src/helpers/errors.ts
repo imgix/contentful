@@ -2,10 +2,13 @@ export type NoteType = 'primary' | 'positive' | 'negative' | 'warning';
 export type ErrorType =
   | `InvalidApiKeyError`
   | `NoSourcesError`
-  | `NoOriginImagesError`
-  | `noSearchImagesError`;
+  | `NoOriginAssetsError`
+  | `NoOriginAssetsWebFolderError`
+  | `noSearchAssetsError`;
 
 const DASHBOARD_URL = 'https://dashboard.imgix.com';
+const WEBFOLDER_DOCUMENTATION_URL = `https://docs.imgix.com/setup/serving-assets#web-folder`;
+const SUPPORT_URL = `https://imgix.com/contact`;
 
 /*
 * The error messages are split on `$` and then again on `|`. The `$` is used to
@@ -26,21 +29,31 @@ const ERROR_MESSAGES = {
     contact your system administrator.`,
     name: 'Invalid API Key',
     type: 'negative',
+    dismissable: false,
   },
   NoSourcesError: {
     message: `Go to $${DASHBOARD_URL + '/sources'}$ to add an imgix Source.`,
     name: 'You have no imgix Sources',
     type: 'warning',
+    dismissable: false,
   },
-  NoOriginImagesError: {
-    message: `Go to $${DASHBOARD_URL + '/sources'}$ to add Origin images to this Source.`,
-    name: 'This Source has no Origin images',
+  NoOriginAssetsError: {
+    message: `To upload images to this Source, select the Upload button located in the top-right-hand corner of the modal.`,
+    name: 'This Source has no Origin assets',
     type: 'warning',
+    dismissable: false,
+  },
+  NoOriginAssetsWebFolderError: {
+    message: `imgix couldn’t find any Origin Assets in this Web Folder. Please check back later, visit our $${WEBFOLDER_DOCUMENTATION_URL}|documentation,$ or $${SUPPORT_URL}| contact Support$.`,
+    name: 'This Web Folder Source has no Origin Assets',
+    type: 'warning',
+    dismissable: false,
   },
   noSearchImagesError: {
     message: `Consider trying to search for something else.`,
     name: 'No results found',
     type: 'warning',
+    dismissable: true,
   }
 } as const;
 
@@ -52,7 +65,7 @@ type ErrorMessageType = keyof typeof ERROR_MESSAGES;
  * This class is used to manage imgix API error messages and warnings. It
  * extends the builtin `Error` class and adds the `type` property.
  *
- * @param {NoteType} type "`InvalidApiKeyError` | `NoSourcesError` | `NoOriginImagesError` | `noSearchImagesError`"
+ * @param {NoteType} type "`InvalidApiKeyError` | `NoSourcesError` | `NoOriginAssetsError` | `NoOriginAssetsWebFolderError` | `noSearchAssetsError`"
  * @param {string} message The error message string.
  *
  * @example
@@ -67,12 +80,15 @@ type ErrorMessageType = keyof typeof ERROR_MESSAGES;
 
 export class IxError extends Error {
   type: NoteType;
+  dismissable: boolean;
   constructor(type: ErrorType, message?: string) {
     super(message);
     this.name =
       ERROR_MESSAGES[type as ErrorMessageType].name || 'imgix API Error';
     this.message = message || ERROR_MESSAGES[type as ErrorMessageType].message;
     this.type = ERROR_MESSAGES[type as ErrorMessageType].type || 'warning';
+    this.dismissable = ERROR_MESSAGES[type as ErrorMessageType].dismissable;
+    
   }
 }
 
@@ -82,8 +98,11 @@ export const invalidApiKeyError = (message?: string) =>
 export const noSourcesError = (message?: string) =>
   new IxError('NoSourcesError', message);
 
-export const noOriginImagesError = (message?: string) =>
-  new IxError('NoOriginImagesError', message);
+export const noOriginAssetsError = (message?: string) =>
+  new IxError('NoOriginAssetsError', message);
 
-export const noSearchImagesError = (message?: string) =>
-  new IxError('noSearchImagesError', message);
+export const noOriginAssetsWebFolderError = (message?: string) =>
+  new IxError('NoOriginAssetsWebFolderError', message);
+
+export const noSearchAssetsError = (message?: string) =>
+  new IxError('noSearchAssetsError', message);
