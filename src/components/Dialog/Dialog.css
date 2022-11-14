@@ -133,6 +133,12 @@
   border: none;
 }
 
+.ix-destination-tooltip {
+  fill: #414d63;
+  margin-top: 25px;
+  margin-left: 10px;
+}
+
 .ix-input-readonly > input {
   background-color: #fff;
   border-color: #aec1cc;
