@@ -133,8 +133,11 @@
   border: none;
 }
 
-.ix-destination-tooltip {
+.ix-destination-tooltip-icon {
   fill: #414d63;
+}
+
+#ix-destination-tooltip {
   margin-top: 25px;
   margin-left: 10px;
 }
