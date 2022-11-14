@@ -52,12 +52,12 @@ export const GridImage: FunctionComponent<GridImageComponentProps> = ({
       style={{ paddingBottom: 5 }}
     >
       <div className={'ix-gallery-image-gradient' + focus}></div>
-      {asset.attributes.content_type.startsWith('image') ? (
+      {!asset.attributes.content_type ? (
+        <UnknownAssetSVG />
+      ) : asset.attributes.content_type.startsWith('image') ? (
         <GridImageAsset />
       ) : asset.attributes.content_type.startsWith('video') ? (
         <VideoAssetSVG />
-      ) : asset.attributes.content_type === 'application/postscript' ? (
-        <AiAssetSVG />
       ) : asset.attributes.content_type === 'application/pdf' ? (
         <PDFAssetSVG />
       ) : (
