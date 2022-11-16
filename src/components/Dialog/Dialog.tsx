@@ -620,7 +620,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
                     >
                       <Icon
                         className="ix-destination-tooltip-icon"
-                        icon="ErrorCircleOutline"
+                        icon="InfoCircle"
                       />
                     </Tooltip>
                   </div>
