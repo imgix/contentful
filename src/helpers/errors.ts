@@ -49,7 +49,7 @@ const ERROR_MESSAGES = {
     type: 'warning',
     dismissable: false,
   },
-  noSearchImagesError: {
+  noSearchAssetsError: {
     message: `Consider trying to search for something else.`,
     name: 'No results found',
     type: 'warning',
