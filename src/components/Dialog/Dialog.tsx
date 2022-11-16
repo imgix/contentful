@@ -288,7 +288,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
    */
   buildAssetWithFullUrl(asset: AssetProps[]) {
     const scheme = 'https://';
-    const domain = this.state.selectedSource.name;
+    const domain = this.state.selectedSource.domain;
     const imgixDomain = '.imgix.net';
 
     const transformedAsset = asset.map((asset) => ({
