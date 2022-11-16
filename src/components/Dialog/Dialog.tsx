@@ -403,6 +403,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
             duration: 50000,
             id: 'ix-dialog-notification',
           });
+          this.requestImageUrls();
         },
         (error: APIError) => {
           // Note the APIError.message doesn't have as much detail as the
