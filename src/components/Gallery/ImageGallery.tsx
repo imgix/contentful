@@ -2,7 +2,12 @@ import { DialogExtensionSDK } from 'contentful-ui-extensions-sdk';
 import { Component } from 'react';
 
 import { AssetProps, PageProps, SourceProps } from '../Dialog';
-import { GridImage, ImagePlaceholder } from './';
+import {
+  GridImage,
+  WebFolderPlaceholder,
+  SourcePlaceholder,
+  EmptySourcePlaceholder,
+} from './';
 
 import { ActionBar } from '../ActionBar';
 import './ImageGallery.css';
@@ -37,7 +42,13 @@ export class Gallery extends Component<GalleryProps, GalleryState> {
   render() {
     const { selectedAsset } = this.state;
     if (!this.props.assets.length) {
-      return <ImagePlaceholder />;
+      return !this.props.selectedSource.type ? (
+        <SourcePlaceholder /> //No source selected
+      ) : this.props.selectedSource.type === 'webfolder' ? (
+        <WebFolderPlaceholder /> //Empty webfolder selected
+      ) : (
+        <EmptySourcePlaceholder /> //Empty source selected
+      );
     }
 
     return (
