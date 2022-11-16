@@ -28,7 +28,7 @@ export default class Field extends Component<FieldProps, FieldState> {
     this.props.sdk.dialogs
       .openCurrentApp({
         width: 1200,
-        minHeight: 860,
+        minHeight: 660,
         position: 'top',
         shouldCloseOnOverlayClick: true,
         allowHeightOverflow: false,

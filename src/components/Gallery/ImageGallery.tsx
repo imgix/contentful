@@ -52,7 +52,7 @@ export class Gallery extends Component<GalleryProps, GalleryState> {
     }
 
     return (
-      <div>
+      <>
         <div className="ix-gallery">
           {this.props.assets.map((asset) => {
             return (
@@ -74,7 +74,7 @@ export class Gallery extends Component<GalleryProps, GalleryState> {
           changePage={this.props.changePage}
           handleClose={this.props.sdk.close}
         />
-      </div>
+      </>
     );
   }
 }
