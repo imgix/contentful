@@ -44,7 +44,7 @@ const ERROR_MESSAGES = {
     dismissable: false,
   },
   NoOriginAssetsWebFolderError: {
-    message: `imgix couldn’t find any Origin Assets in this Web Folder. Please check back later, visit our $${WEBFOLDER_DOCUMENTATION_URL}|documentation,$ or $${SUPPORT_URL}| contact Support$.`,
+    message: `imgix couldn’t find any Origin Assets in this Web Folder. Please check back later, visit our $${WEBFOLDER_DOCUMENTATION_URL}|documentation,$ or $${SUPPORT_URL}| contact Support.$`,
     name: 'This Web Folder Source has no Origin Assets',
     type: 'warning',
     dismissable: false,
