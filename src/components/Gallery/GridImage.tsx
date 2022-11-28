@@ -28,6 +28,14 @@ export const GridImage: FunctionComponent<GridImageComponentProps> = ({
   const handleOnImageError = () => {
     setImageDidError(true);
   };
+
+  const VideoThumbnail = () => {
+    const url =
+      asset.src.replace('imgix.net', 'imgix.video') +
+      '?video-generate=thumbnail&time=0.1';
+    return url;
+  };
+
   const GridImageAsset = () => {
     return imageDidError ? (
       <ImageAssetSVG />
@@ -46,6 +54,26 @@ export const GridImage: FunctionComponent<GridImageComponentProps> = ({
       />
     );
   };
+
+  const GridVideoAsset = () => {
+    return imageDidError ? (
+      <VideoAssetSVG />
+    ) : (
+      <Imgix
+        src={VideoThumbnail() || ''}
+        width={140}
+        height={125}
+        imgixParams={{
+          auto: 'format',
+          fit: 'crop',
+          crop: 'entropy',
+        }}
+        sizes="(min-width: 480px) calc(12.5vw - 20px)"
+        htmlAttributes={{ onError: handleOnImageError }}
+      />
+    );
+  };
+
   return (
     <div onClick={handleClick} className="ix-gallery-item">
       <div className={'ix-gallery-image-gradient' + focus}></div>
@@ -56,7 +84,7 @@ export const GridImage: FunctionComponent<GridImageComponentProps> = ({
       ) : asset.attributes.content_type.startsWith('image') ? (
         <GridImageAsset />
       ) : asset.attributes.content_type.startsWith('video') ? (
-        <VideoAssetSVG />
+        <GridVideoAsset />
       ) : asset.attributes.content_type.startsWith('text') ? (
         <DocumentAssetSVG />
       ) : asset.attributes.content_type === 'application/pdf' ? (
