@@ -475,16 +475,6 @@ export default class Dialog extends Component<DialogProps, DialogState> {
     this.setDestinationFilePath(value);
   };
 
-  setFilename = (filename: string) => {
-    const uploadForm = { ...this.state.uploadForm, filename: filename };
-    this.setState({ uploadForm });
-  };
-
-  updateFileName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    this.setFilename(value);
-  };
-
   openFileForm = (file: File, previewSource: string, showUpload: boolean) => {
     const uploadForm = {
       ...this.state.uploadForm,
