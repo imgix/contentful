@@ -7,6 +7,7 @@ import {
   SectionHeading,
   Icon,
   Tooltip,
+  Paragraph,
 } from '@contentful/forma-36-react-components';
 import { DialogExtensionSDK } from 'contentful-ui-extensions-sdk';
 import ImgixAPI, { APIError } from 'imgix-management-js';
@@ -633,14 +634,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
                     height={288}
                   />
                   <div className="ix-upload-preview-filename">
-                    <TextInput
-                      className={
-                        this.state.isUploading ? 'ix-input-readonly' : ''
-                      }
-                      value={this.state.uploadForm.filename || ''}
-                      onChange={this.updateFileName}
-                      isReadOnly={this.state.isUploading}
-                    ></TextInput>
+                    <Paragraph>{this.state.uploadForm.filename}</Paragraph>
                   </div>
                 </div>
                 <Button
