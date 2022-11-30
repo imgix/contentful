@@ -34,6 +34,14 @@ export class Gallery extends Component<GalleryProps, GalleryState> {
     this.props.sdk.close(this.state.selectedAsset);
   };
 
+  componentDidUpdate(prevProps: GalleryProps) {
+    if (prevProps.selectedSource.id !== this.props.selectedSource.id) {
+      this.setState({
+        selectedAsset: undefined,
+      });
+    }
+  }
+
   render() {
     const { selectedAsset } = this.state;
     if (!this.props.assets.length) {
