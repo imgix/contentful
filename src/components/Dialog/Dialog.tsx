@@ -440,7 +440,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
         // convert image file to base64 string
         const assetBase64String = reader.result as string;
         const fileString = assetBase64String.replace(
-          /^data:image\/gif;base64,|^data:image\/png;base64,|^data:image\/jpeg;base64,|^data:image\/jpg;base64,|^data:image\/bmp;base64,/,
+          /^data:image\/gif;base64,|^data:image\/png;base64,|^data:image\/jpeg;base64,|^data:image\/jpg;base64,|^data:image\/bmp;base64,|^data:image\/webp;base64,/,
           '',
         );
         const buffer = Buffer.from(fileString, 'base64');
