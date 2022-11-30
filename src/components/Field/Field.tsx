@@ -55,6 +55,7 @@ export default class Field extends Component<FieldProps, FieldState> {
     if (this.state.selectedAsset) {
       return (
         <FieldImagePreview
+          contentType={this.state.selectedAsset.attributes.content_type}
           imagePath={this.state.selectedAsset?.src}
           openDialog={this.debounceOpenDialog}
           updateHeight={updateHeightHandler}
