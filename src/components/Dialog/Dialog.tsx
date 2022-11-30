@@ -244,6 +244,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
         throw noSourcesError();
       }
       this.setState({ allSources: sources });
+      this.props.sdk.window.startAutoResizer();
     } catch (error) {
       this.setState({ errors: [error] as IxError[] });
     }
