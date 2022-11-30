@@ -2,8 +2,8 @@
   position: relative;
   overflow: hidden;
   border-radius: 4px;
-  background-color: #E7EBEE;
-  border: 1px solid #E7EBEE;
+  background-color: #e7ebee;
+  border: 1px solid #e7ebee;
 }
 
 .ix-gallery-item img {
@@ -54,7 +54,7 @@
   height: 15%;
 }
 .asset-filename:before {
-  content: " ";
+  content: ' ';
   position: absolute;
   top: 0;
   left: 0;
@@ -79,13 +79,13 @@
   font-family: Roboto, sans-serif;
 }
 .asset-filename-span:before {
-  content: "";
+  content: '';
   -ms-flex: 1 1 auto;
   flex: 1 1 auto;
 }
 
 .asset-filename-span:after {
-  content: "";
+  content: '';
   -ms-flex: 1 1 auto;
   flex: 1 1 auto;
 }

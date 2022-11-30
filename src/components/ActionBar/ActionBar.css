@@ -7,8 +7,8 @@
   left: 0;
   right: 0;
   box-sizing: border-box;
-  background: #F7F9FA;
-  border-top: 1px solid #CFD9E0;
+  background: #f7f9fa;
+  border-top: 1px solid #cfd9e0;
   padding-left: 35px;
   padding-right: 35px;
   padding-bottom: 25px;
@@ -17,7 +17,7 @@
   z-index: 2;
 }
 
-.ix-action-button-container{
+.ix-action-button-container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
