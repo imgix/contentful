@@ -581,7 +581,9 @@ export default class Dialog extends Component<DialogProps, DialogState> {
                     <SourceSelect
                       testId="upload-source-select-dropdown"
                       selectedSource={uploadForm.source || selectedSource}
-                      allSources={allSources}
+                      allSources={allSources.filter(
+                        (source) => source.type !== 'webfolder',
+                      )}
                       setSource={this.setUploadSource}
                       resetErrors={() =>
                         this.resetNErrors(this.state.errors.length)
