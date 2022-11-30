@@ -401,7 +401,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
       .then(
         (_resp) => {
           this.setState({ isUploading: false, showUpload: false });
-          Notification.setPosition('top', { offset: 650 });
+          Notification.setPosition('top', { offset: 565 });
           Notification.success('File successfully uploaded to imgix Source.', {
             duration: 50000,
             id: 'ix-dialog-notification',
@@ -420,7 +420,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
           // a property or index that does not exist.
           const reason = errorResponse?.errors[0]?.detail;
           console.error('imgix: upload error', error.response);
-          Notification.setPosition('top', { offset: 650 });
+          Notification.setPosition('top', { offset: 565 });
           Notification.error(`Upload failed: ${reason}`, {
             duration: 10000,
             id: 'ix-dialog-notification',
