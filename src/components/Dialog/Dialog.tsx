@@ -217,7 +217,10 @@ export default class Dialog extends Component<DialogProps, DialogState> {
   debounceSearchOnClick = debounce(this.searchOnClick, 1000, { leading: true });
 
   setSelectedSource = (source: SourceProps) => {
-    this.setState({ selectedSource: source });
+    this.setState({ selectedSource: source, page: {
+      currentIndex: 0,
+      totalPageCount: 0,
+    } });
   };
 
   resetNErrors = (n: number = 1) => {
@@ -337,10 +340,10 @@ export default class Dialog extends Component<DialogProps, DialogState> {
    * Requests and constructs fully-qualified image URLs, saving the results to
    * state
    */
-  requestImageUrls = async (query?: string) => {
+  requestImageUrls = async (query?: string, currentIndex?: number) => {
     // if selected source, return assets
     if (Object.keys(this.state.selectedSource).length) {
-      const defaultQuery = `?page[number]=${this.state.page.currentIndex}&page[size]=18`;
+      const defaultQuery = `?page[number]=${currentIndex || this.state.page.currentIndex}&page[size]=18`;
 
       const assetObjects = query
         ? await this.getAssetObjects(query, noSearchAssetsError())
@@ -501,7 +504,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
       (this.state.page.currentIndex !== prevState.page.currentIndex &&
         !this.state.isSearching)
     ) {
-      this.requestImageUrls();
+      this.requestImageUrls(undefined, 0);
     }
   }
 
