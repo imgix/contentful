@@ -5,22 +5,24 @@ import { ImageSelectButton } from '../ImageSelect';
 import './ActionBar.css';
 
 export type ActionBarProps = {
-  assets: AssetProps[];
-  selectedAsset: any;
-  selectedSource: { [key: string]: any };
-  pageInfo: any;
-  changePage: (pageInfo: any) => void;
-  handleSubmit: (arg: any) => void;
+  assets?: AssetProps[];
+  selectedAsset?: any;
+  selectedSource?: { [key: string]: any };
+  pageInfo?: any;
+  changePage?: (pageInfo: any) => void;
+  handleSubmit?: (arg: any) => void;
   handleClose: () => void;
 };
 export function ActionBar(props: ActionBarProps) {
   return (
     <div className="ix-action-bar">
-      <ImagePagination
-        sourceId={props.selectedSource.id}
-        pageInfo={props.pageInfo}
-        changePage={props.changePage}
-      />
+      {props.changePage && props.selectedSource ? (
+        <ImagePagination
+          sourceId={props.selectedSource.id}
+          pageInfo={props.pageInfo}
+          changePage={props.changePage}
+        />
+      ) : null}
       <div className="ix-action-button-container">
         <Button
           size="small"
@@ -31,11 +33,13 @@ export function ActionBar(props: ActionBarProps) {
         >
           Cancel
         </Button>
-        <ImageSelectButton
-          hidden={!!props.assets.length}
-          disabled={!props.selectedAsset}
-          handleSubmit={props.handleSubmit}
-        />
+        {props.handleSubmit && props.assets ? (
+          <ImageSelectButton
+            hidden={!!props.assets.length}
+            disabled={!props.selectedAsset}
+            handleSubmit={props.handleSubmit}
+          />
+        ) : null}
       </div>
     </div>
   );
