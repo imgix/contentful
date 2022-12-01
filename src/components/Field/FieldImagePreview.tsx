@@ -57,8 +57,8 @@ export function FieldImagePreview({
           imagePath.replace('imgix.net', 'imgix.video') +
           '?video-generate=thumbnail&time=0.1'
         }
-        width={140}
-        height={125}
+        width={230}
+        height={230}
         imgixParams={{
           auto: 'format',
           fit: 'crop',
