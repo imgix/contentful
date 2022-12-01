@@ -27,6 +27,7 @@ A Contentful app that integrates with imgix's [Asset Manager](https://docs.imgix
 - [Add to Content Model](#add-to-content-model)
 - [Browse and Select Assets](#browse-and-select-assets)
 - [Search for Assets](#search-for-assets)
+- [Upload Assets](#upload-assets)
 - [Query an Asset](#query-an-asset)
   - [Transforming Assets](#transforming-assets)
   - [Metadata](#metadata)
@@ -113,6 +114,19 @@ https://user-images.githubusercontent.com/15919091/141595662-3a9a98fd-aa88-4e56-
 <!-- /ix-docs-ignore -->
 <video controls width="800" height="600">
   <source src="https://user-images.githubusercontent.com/15919091/141595662-3a9a98fd-aa88-4e56-8d6f-c30a782c678b.mov">
+</video>
+
+## Upload Assets
+
+The imgix app enables users to upload assets to a source. Using the "Upload" button near the top of the modal, users can select an image to upload to their desired source. Users change the upload source destination, filepath, or filename. To learn more about uploading, see our Asset Manager [documentation](https://docs.imgix.com/setup/asset-manager).
+
+<!-- ix-docs-ignore -->
+https://user-images.githubusercontent.com/16711614/205107815-9d576fd8-530a-41c0-99fa-0e3800b3e896.mp4
+
+<!-- /ix-docs-ignore -->
+<video controls width="800" height="600">
+  <source src="https://user-images.githubusercontent.com/16711614/205107815-9d576fd8-530a-41c0-99fa-0e3800b3e896.mp4
+">
 </video>
 
 ## Query an Asset
