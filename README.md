@@ -118,6 +118,8 @@ https://user-images.githubusercontent.com/15919091/141595662-3a9a98fd-aa88-4e56-
 
 ## Upload Assets
 
+> note: uploading to web folder sources is not supported at this time.
+
 The imgix app enables users to upload assets to a source. Using the "Upload" button near the top of the modal, users can select an image to upload to their desired source. Users change the upload source destination, filepath, or filename. To learn more about uploading, see our Asset Manager [documentation](https://docs.imgix.com/setup/asset-manager).
 
 <!-- ix-docs-ignore -->
