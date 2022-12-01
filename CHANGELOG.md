@@ -5,6 +5,30 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.0](https://github.com/imgix/contentful/compare/v1.2.3...v1.2.4) (2022-12-01)
+- use grid-image placeholders
+- create gallery placeholder component
+- remove webfolder sources from upload sources
+- display video frame as thumbnail
+- add destination tooltip
+- refresh image gallery on upload
+- add fallback icon on error
+- add svg icons for filetypes
+- add icon component for SVG support
+- disable upload button after click
+- add upload success and error notifications
+- disable button is webfolder source
+- show upload indicator when uploading
+- upload selected image to imgix source
+- add upload handler function
+- store destination path to state
+- create upload modal
+- create placeholder image url from file
+- create upload button
+- create action bar component
+- add filename overlay  to assets
+- populate the SourceDropdown with more sources
+
 ## [1.2.4](https://github.com/imgix/contentful/compare/v1.2.3...v1.2.4) (2022-11-16)
 
 ### Bug Fixes
