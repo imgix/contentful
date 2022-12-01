@@ -168,17 +168,24 @@
 }
 
 .ix-upload-preview-filename {
+  /* Font */
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+  /* Auto layout */
+
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  gap: 8px;
+
+  position: relative;
   width: 384px;
   height: 48px;
-  border-radius: 0px 0px 6px 6px;
   margin: 0 auto;
-  margin-bottom: 12px;
-  background: #F7F9FA;
-  box-shadow: inset 0px -1px 0px #e7ebee;
+  margin-bottom: 10px;
+  border-radius: 0px 0px 6px 6px
 }
 
 .ix-upload-confirm-button {
