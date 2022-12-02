@@ -5,6 +5,8 @@ import {
   Dropdown,
   DropdownList,
   DropdownListItem,
+  Paragraph,
+  Spinner,
 } from '@contentful/forma-36-react-components';
 
 import { SourceProps } from '../Dialog';
@@ -53,6 +55,11 @@ export function SourceSelectDropdown({
       }
     >
       <DropdownList className="ix-dropdown-list">
+        {!allSources.length ? (
+          <Paragraph style={{ paddingLeft: 5 }}>
+            Loading <Spinner />
+          </Paragraph>
+        ) : null}
         {allSources.map((source: SourceProps) => (
           <DropdownListItem key={source.id} onClick={() => handleClick(source)}>
             {source.name}
