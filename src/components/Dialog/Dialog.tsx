@@ -7,6 +7,7 @@ import {
   SectionHeading,
   Icon,
   Tooltip,
+  Paragraph,
 } from '@contentful/forma-36-react-components';
 import { DialogExtensionSDK } from 'contentful-ui-extensions-sdk';
 import ImgixAPI, { APIError } from 'imgix-management-js';
@@ -80,7 +81,9 @@ export type SourceProps = {
 };
 
 type AppInvocationParameters = {
-  selectedImage: string;
+  selectedImage: {
+    [key: string]: any;
+  };
 };
 
 export default class Dialog extends Component<DialogProps, DialogState> {
@@ -246,7 +249,19 @@ export default class Dialog extends Component<DialogProps, DialogState> {
       if (sources.length === 0) {
         throw noSourcesError();
       }
-      this.setState({ allSources: sources });
+      // check if previously selected source exists
+      // if it does, add it to state.
+      const previouslySelectedSourceID = (
+        this.props.sdk.parameters.invocation as AppInvocationParameters
+      )?.selectedImage?.selectedSourceId;
+      const selectedSource = sources.find((source: any) => {
+        return source.id === previouslySelectedSourceID;
+      });
+      if (selectedSource) {
+        this.setState({ allSources: sources, selectedSource });
+      } else {
+        this.setState({ allSources: sources });
+      }
     } catch (error) {
       this.setState({ errors: [error] as IxError[] });
     }
@@ -531,7 +546,9 @@ export default class Dialog extends Component<DialogProps, DialogState> {
 
     return (
       <div className="ix-container">
-        <DialogHeader handleClose={sdk.close} selectedImage={selectedImage} />
+        <div className="ix-header-container">
+          <Paragraph className="ix-title">imgix Source:</Paragraph>
+        </div>{' '}
         <div className="ix-sources">
           <SourceSelect
             selectedSource={selectedSource}
