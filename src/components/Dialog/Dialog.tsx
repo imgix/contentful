@@ -52,6 +52,7 @@ interface DialogState {
   errors: IxError[]; // array of IxErrors if any
   isSearching: boolean;
   isUploading: boolean;
+  loading: boolean;
   showUpload: boolean;
   uploadForm: {
     file?: File;
@@ -110,6 +111,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
       errors: [],
       isSearching: false,
       isUploading: false,
+      loading: false,
       showUpload: false,
       uploadForm: {},
     };
@@ -182,6 +184,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
         totalPageCount,
       },
       errors,
+      loading: false,
     });
   };
 
@@ -370,6 +373,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
         this.setState({
           assets,
           isSearching: false,
+          loading: false,
         });
       } else {
         this.setState({ assets: [] });
@@ -433,7 +437,11 @@ export default class Dialog extends Component<DialogProps, DialogState> {
             id: 'ix-dialog-notification',
           });
           // We're not adding this error to state because `errors` in state is used as a UI fallback, not a notification message.
-          this.setState({ isUploading: false, showUpload: false });
+          this.setState({
+            isUploading: false,
+            showUpload: false,
+            loading: false,
+          });
         },
       );
   };
@@ -509,6 +517,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
       (this.state.page.currentIndex !== prevState.page.currentIndex &&
         !this.state.isSearching)
     ) {
+      this.setState({ loading: true });
       this.requestImageUrls(undefined, 0);
     }
   }
@@ -565,6 +574,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
           pageInfo={page}
           changePage={this.debounceHandlePageChange}
           assets={assets}
+          loading={this.state.loading}
         />
         {/* { UI Error fallback } */}
         {this.state.errors.length > 0 && (
