@@ -1,5 +1,5 @@
 import { ReactElement } from 'react';
-import { Paragraph } from '@contentful/forma-36-react-components';
+import { Paragraph, Spinner } from '@contentful/forma-36-react-components';
 import { ActionBar } from '../ActionBar';
 import './ImagePlaceholder.css';
 
@@ -14,6 +14,7 @@ export function GalleryPlaceholder({
     <div className="ix-grid-item-placeholder">
       <Paragraph className="ix-placeholder-text">{text}</Paragraph>
       <ActionBar handleClose={sdk.close} />
+      {text === 'Loading' ? <Spinner /> : null}
     </div>
   );
 }
