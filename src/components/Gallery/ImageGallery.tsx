@@ -32,7 +32,10 @@ export class Gallery extends Component<GalleryProps, GalleryState> {
   handleClick = (selectedAsset: AssetProps) => this.setState({ selectedAsset });
 
   handleSubmit = () => {
-    this.props.sdk.close(this.state.selectedAsset);
+    this.props.sdk.close({
+      ...this.state.selectedAsset,
+      selectedSourceId: this.props.selectedSource.id,
+    });
   };
 
   componentDidUpdate(prevProps: GalleryProps) {
