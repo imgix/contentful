@@ -26,7 +26,6 @@ import { AppInstallationParameters } from '../ConfigScreen/';
 import { ImageGallery } from '../Gallery/';
 import { Note } from '../Note/';
 import { SourceSelect } from '../SourceSelect/';
-import { DialogHeader } from './';
 
 import packageJson from '../../../package.json';
 import { UploadButton } from '../UploadButton/UploadButton';
@@ -540,9 +539,6 @@ export default class Dialog extends Component<DialogProps, DialogState> {
   render() {
     const { selectedSource, allSources, page, assets, uploadForm } = this.state;
     const sdk = this.props.sdk;
-    const selectedImage = (
-      this.props.sdk.parameters.invocation as AppInvocationParameters
-    )?.selectedImage;
 
     return (
       <div className="ix-container">
