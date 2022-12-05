@@ -201,3 +201,19 @@
 [data-test-id='upload-source-select-dropdown'] {
   margin-right: 3px;
 }
+
+/* Dialog Header Styles */
+.ix-header-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0px 40px;
+  margin-top: 40px;
+}
+
+.ix-title {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 150%;
+}
