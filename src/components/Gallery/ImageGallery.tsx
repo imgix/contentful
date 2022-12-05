@@ -13,6 +13,7 @@ interface GalleryProps {
   pageInfo: PageProps;
   changePage: (newPageIndex: number) => void;
   assets: AssetProps[];
+  loading: boolean;
 }
 
 interface GalleryState {
@@ -44,7 +45,7 @@ export class Gallery extends Component<GalleryProps, GalleryState> {
 
   render() {
     const { selectedAsset } = this.state;
-    if (!this.props.assets.length) {
+    if (!this.props.assets.length && !this.props.loading) {
       return !this.props.selectedSource.type ? (
         <GalleryPlaceholder
           sdk={this.props.sdk}
@@ -61,6 +62,8 @@ export class Gallery extends Component<GalleryProps, GalleryState> {
           text="Add assets to this Source by selecting Upload."
         />
       );
+    } else if (this.props.loading) {
+      return <GalleryPlaceholder sdk={this.props.sdk} text="Loading" />;
     }
 
     return (
