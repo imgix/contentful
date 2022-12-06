@@ -38,6 +38,12 @@ export class Gallery extends Component<GalleryProps, GalleryState> {
     });
   };
 
+  handleClose = () => {
+    this.props.sdk.close({
+      ...(this.props.sdk.parameters.invocation as any)?.selectedImage,
+    });
+  };
+
   componentDidUpdate(prevProps: GalleryProps) {
     if (prevProps.selectedSource.id !== this.props.selectedSource.id) {
       this.setState({
@@ -52,21 +58,30 @@ export class Gallery extends Component<GalleryProps, GalleryState> {
       return !this.props.selectedSource.type ? (
         <GalleryPlaceholder
           sdk={this.props.sdk}
+          handleClose={this.handleClose}
           text="Select a Source to view your image gallery"
         />
       ) : this.props.selectedSource.type === 'webfolder' ? (
         <GalleryPlaceholder
           sdk={this.props.sdk}
+          handleClose={this.handleClose}
           text="Select a different Source to view your visual media."
         />
       ) : (
         <GalleryPlaceholder
           sdk={this.props.sdk}
+          handleClose={this.handleClose}
           text="Add assets to this Source by selecting Upload."
         />
       );
     } else if (this.props.loading) {
-      return <GalleryPlaceholder sdk={this.props.sdk} text="Loading" />;
+      return (
+        <GalleryPlaceholder
+          handleClose={this.handleClose}
+          sdk={this.props.sdk}
+          text="Loading"
+        />
+      );
     }
 
     return (
@@ -90,7 +105,7 @@ export class Gallery extends Component<GalleryProps, GalleryState> {
           selectedAsset={selectedAsset}
           pageInfo={this.props.pageInfo}
           changePage={this.props.changePage}
-          handleClose={this.props.sdk.close}
+          handleClose={this.handleClose}
         />
       </>
     );
