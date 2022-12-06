@@ -34,7 +34,7 @@ export class Gallery extends Component<GalleryProps, GalleryState> {
   handleSubmit = () => {
     this.props.sdk.close({
       ...this.state.selectedAsset,
-      selectedSourceId: this.props.selectedSource.id,
+      selectedSource: this.props.selectedSource,
     });
   };
 
@@ -54,32 +54,53 @@ export class Gallery extends Component<GalleryProps, GalleryState> {
 
   render() {
     const { selectedAsset } = this.state;
-    if (!this.props.assets.length && !this.props.loading) {
+    const previouslySelectedSource = (
+      this.props.sdk.parameters.invocation as any
+    )?.selectedImage?.selectedSource;
+
+    if (this.props.loading) {
+      return (
+        <GalleryPlaceholder
+          handleClose={this.handleClose}
+          sdk={this.props.sdk}
+          text="Loading"
+        />
+      );
+    }
+
+    // If replacing an image
+    if (previouslySelectedSource && !this.props.assets.length) {
+      return (
+        <GalleryPlaceholder
+          handleClose={this.handleClose}
+          sdk={this.props.sdk}
+          text="Loading"
+        />
+      );
+    }
+
+    // If no asset in state
+    if (!this.props.assets.length) {
+      // If a source hasn't been selected
       return !this.props.selectedSource.type ? (
         <GalleryPlaceholder
           sdk={this.props.sdk}
           handleClose={this.handleClose}
           text="Select a Source to view your image gallery"
         />
-      ) : this.props.selectedSource.type === 'webfolder' ? (
+      ) : // If the source is a webfolder
+      this.props.selectedSource.type === 'webfolder' ? (
         <GalleryPlaceholder
           sdk={this.props.sdk}
           handleClose={this.handleClose}
           text="Select a different Source to view your visual media."
         />
       ) : (
+        // If the source is empty
         <GalleryPlaceholder
           sdk={this.props.sdk}
           handleClose={this.handleClose}
           text="Add assets to this Source by selecting Upload."
-        />
-      );
-    } else if (this.props.loading) {
-      return (
-        <GalleryPlaceholder
-          handleClose={this.handleClose}
-          sdk={this.props.sdk}
-          text="Loading"
         />
       );
     }
