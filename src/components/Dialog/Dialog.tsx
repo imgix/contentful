@@ -250,11 +250,12 @@ export default class Dialog extends Component<DialogProps, DialogState> {
       }
       // check if previously selected source exists
       // if it does, add it to state.
-      const previouslySelectedSourceID = (
+      const previouslySelectedSource = (
         this.props.sdk.parameters.invocation as AppInvocationParameters
-      )?.selectedImage?.selectedSourceId;
+      )?.selectedImage?.selectedSource;
+
       const selectedSource = sources.find((source: any) => {
-        return source.id === previouslySelectedSourceID;
+        return source.id === previouslySelectedSource?.id;
       });
       if (selectedSource) {
         this.setState({ allSources: sources, selectedSource });
@@ -537,8 +538,14 @@ export default class Dialog extends Component<DialogProps, DialogState> {
   }
 
   render() {
-    const { selectedSource, allSources, page, assets, uploadForm } = this.state;
+    const { allSources, page, assets, uploadForm } = this.state;
     const sdk = this.props.sdk;
+    const previouslySelectedSource = (
+      sdk.parameters.invocation as AppInvocationParameters
+    )?.selectedImage?.selectedSource;
+    const selectedSource = this.state.selectedSource.id
+      ? this.state.selectedSource
+      : previouslySelectedSource || {};
 
     return (
       <div className="ix-container">
@@ -552,7 +559,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
             setSource={this.setSelectedSource}
             resetErrors={() => this.resetNErrors(this.state.errors.length)}
           />
-          {this.state.selectedSource.id && (
+          {selectedSource?.id && (
             <div className="ix-top-bar-container">
               <Form className="ix-searchForm">
                 <TextInput
