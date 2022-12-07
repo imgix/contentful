@@ -52,7 +52,7 @@ export default class Field extends Component<FieldProps, FieldState> {
 
   render() {
     const updateHeightHandler = this.props.sdk.window.updateHeight;
-    if (this.state.selectedAsset) {
+    if (this.state.selectedAsset && this.state.selectedAsset.src) {
       return (
         <FieldImagePreview
           contentType={this.state.selectedAsset.attributes.content_type}
