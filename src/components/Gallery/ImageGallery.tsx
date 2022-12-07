@@ -58,18 +58,11 @@ export class Gallery extends Component<GalleryProps, GalleryState> {
       this.props.sdk.parameters.invocation as any
     )?.selectedImage?.selectedSource;
 
-    if (this.props.loading) {
-      return (
-        <GalleryPlaceholder
-          handleClose={this.handleClose}
-          sdk={this.props.sdk}
-          text="Loading"
-        />
-      );
-    }
-
-    // If replacing an image
-    if (previouslySelectedSource && !this.props.assets.length) {
+    // If replacing an image or `loading` is true
+    if (
+      (previouslySelectedSource && !this.props.assets.length) ||
+      this.props.loading
+    ) {
       return (
         <GalleryPlaceholder
           handleClose={this.handleClose}
