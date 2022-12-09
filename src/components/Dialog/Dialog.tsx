@@ -391,7 +391,7 @@ export default class Dialog extends Component<DialogProps, DialogState> {
           loading: false,
         });
       } else {
-        this.setState({ assets: [] });
+        this.setState({ assets: [], loading: false });
       }
     }
   };
