@@ -36,11 +36,14 @@ export default class Field extends Component<FieldProps, FieldState> {
           selectedImage: this.state.selectedAsset,
         },
       })
-      .then((selectedAsset) =>
-        this.setState({ selectedAsset }, () =>
+      .then((selectedAsset) => {
+        if (!selectedAsset) {
+          return;
+        }
+        return this.setState({ selectedAsset }, () =>
           this.props.sdk.field.setValue(selectedAsset),
-        ),
-      );
+        );
+      });
   };
   debounceOpenDialog = debounce(this.openDialog, 1000, { leading: true });
 
