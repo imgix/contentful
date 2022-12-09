@@ -39,9 +39,7 @@ export class Gallery extends Component<GalleryProps, GalleryState> {
   };
 
   handleClose = () => {
-    this.props.sdk.close({
-      ...(this.props.sdk.parameters.invocation as any)?.selectedImage,
-    });
+    this.props.sdk.close();
   };
 
   componentDidUpdate(prevProps: GalleryProps) {
