@@ -60,7 +60,9 @@ export class Gallery extends Component<GalleryProps, GalleryState> {
 
     // If replacing an image or `loading` is true
     if (
-      (previouslySelectedSource && !this.props.assets.length) ||
+      (previouslySelectedSource &&
+        previouslySelectedSource.id === this.props.selectedSource.id &&
+        !this.props.assets.length) ||
       this.props.loading
     ) {
       return (
