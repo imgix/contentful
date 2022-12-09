@@ -37,12 +37,11 @@ export default class Field extends Component<FieldProps, FieldState> {
         },
       })
       .then((selectedAsset) => {
-        if (!selectedAsset) {
-          return;
+        if (selectedAsset) {
+          return this.setState({ selectedAsset }, () =>
+            this.props.sdk.field.setValue(selectedAsset),
+          );
         }
-        return this.setState({ selectedAsset }, () =>
-          this.props.sdk.field.setValue(selectedAsset),
-        );
       });
   };
   debounceOpenDialog = debounce(this.openDialog, 1000, { leading: true });
