@@ -5,7 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.3.0](https://github.com/imgix/contentful/compare/v1.2.3...v1.2.4) (2022-12-01)
+## [1.4.0](https://github.com/imgix/contentful/compare/v1.3.0...v1.4.0) (2022-12-12)
+
+### Updates
+
+- add loading spinner to source dropdown
+- show loading spinner on source change
+- load previously selected source after image select
+- keep previously selected asset populated
+
+### Fixes
+- fix loading indicator when no assets present in source
+- fix clear on click away
+
+## [1.3.0](https://github.com/imgix/contentful/compare/v1.2.4...v1.3.0) (2022-12-01)
+### Updates
+
 - use grid-image placeholders
 - create gallery placeholder component
 - remove webfolder sources from upload sources
@@ -26,7 +41,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - create placeholder image url from file
 - create upload button
 - create action bar component
-- add filename overlay  to assets
+- add filename overlay to assets
+
+### Bug Fixes
+
 - populate the SourceDropdown with more sources
 
 ## [1.2.4](https://github.com/imgix/contentful/compare/v1.2.3...v1.2.4) (2022-11-16)
