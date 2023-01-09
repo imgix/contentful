@@ -63,6 +63,10 @@ https://user-images.githubusercontent.com/15919091/137049820-8ffc4bfd-43f1-41d2-
   <source src="https://user-images.githubusercontent.com/15919091/137049820-8ffc4bfd-43f1-41d2-b078-068ddaaa0c86.mp4">
 </video>
 
+### Compatibility
+
+This Contentful app works is **not compatible with Web Folder or Web Proxy Sources**. [See the imgix documentation](https://docs.imgix.com/setup/creating-sources) for a list of Sources that you can create in imgix.
+
 ### Assign to Fields (Optional)
 
 The configuration page surfaces the option for users to select pre-existing content fields that are compatible with the imgix app. Note that the app is configured to integrate with `JSON object` fields only, therefore only fields of this type will be displayed. Users may prefer this method over selecting individual fields manually for each applicable content model.
