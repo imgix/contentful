@@ -65,7 +65,7 @@ https://user-images.githubusercontent.com/15919091/137049820-8ffc4bfd-43f1-41d2-
 
 ### Compatibility
 
-This Contentful app works is **not compatible with Web Folder or Web Proxy Sources**. [See the imgix documentation](https://docs.imgix.com/setup/creating-sources) for a list of Sources that you can create in imgix.
+This Contentful app is **not compatible with Web Proxy Sources**. Uploading functionality is not **not compatible** with Web Folder sources. [See the imgix documentation](https://docs.imgix.com/setup/creating-sources) for a list of Sources that you can create in imgix.
 
 ### Assign to Fields (Optional)
 
