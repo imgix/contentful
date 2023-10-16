@@ -67,7 +67,7 @@
     "@types/jest": "29.5.5",
     "@types/lodash.debounce": "4.0.7",
     "@types/node": "18.18.5",
-    "@types/react": "17.0.67",
+    "@types/react": "17.0.68",
     "@types/react-dom": "17.0.21",
     "@types/react-imgix": "9.5.1",
     "cypress": "13.3.0",
