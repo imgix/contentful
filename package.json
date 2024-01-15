@@ -64,7 +64,7 @@
     "@testing-library/jest-dom": "5.17.0",
     "@testing-library/react": "12.1.5",
     "@testing-library/user-event": "14.5.2",
-    "@types/jest": "29.5.10",
+    "@types/jest": "29.5.11",
     "@types/lodash.debounce": "4.0.9",
     "@types/node": "18.19.5",
     "@types/react": "17.0.74",
