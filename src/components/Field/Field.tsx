@@ -2,9 +2,7 @@ import { Component } from 'react';
 import { FieldExtensionSDK } from 'contentful-ui-extensions-sdk';
 import {
   CheckboxField,
-  Icon,
   SectionHeading,
-  Tooltip,
 } from '@contentful/forma-36-react-components';
 import { debounce } from 'lodash';
 
@@ -13,33 +11,7 @@ import { AssetProps } from '../Dialog';
 import { groupParamsByKey, paramsReducer } from '../../helpers/utils';
 
 import './Field.css';
-
-/**
- * note: the management API doesn't return permissions object, as a result
- * we're manually keeping track of the params that needs tooltip. In future, we
- * should remove this when there's a reliable way to check for permissions.
- */
-const PERMISSIONS_GATED_PARAMETERS = {
-  'bg-remove': { 'bg-remove': true },
-  upscale: { upscale: true },
-};
-
-const PARAM_OPTIONS = {
-  'auto=format': { auto: 'format' },
-  'auto=enhance': { auto: 'enhance' },
-  'auto=compress': { auto: 'compress' },
-  'auto=redeye': { auto: 'redeye' },
-  ...PERMISSIONS_GATED_PARAMETERS,
-};
-
-const INITIAL_CHECKBOX_STATE = {
-  'auto=format': false,
-  'auto=enhance': false,
-  'auto=compress': false,
-  'auto=redeye': false,
-  'bg-remove': false,
-  upscale: false,
-};
+import { CheckboxList } from '../CheckboxList/ParamsCheckboxList';
 
 interface FieldProps {
   sdk: FieldExtensionSDK;
@@ -47,7 +19,6 @@ interface FieldProps {
 
 interface FieldState {
   selectedAsset: AssetProps | undefined;
-  checkboxValues: typeof INITIAL_CHECKBOX_STATE;
 }
 
 export default class Field extends Component<FieldProps, FieldState> {
@@ -55,19 +26,9 @@ export default class Field extends Component<FieldProps, FieldState> {
     super(props);
 
     const storedValue = this.props.sdk.field.getValue();
-    const imgixParams = storedValue?.imgixParams || {};
 
     this.state = {
       selectedAsset: storedValue || undefined,
-      // todo: find a better way to manage this state using imgix-url-params spec
-      checkboxValues: {
-        'auto=format': imgixParams['auto']?.includes('format') || false,
-        'auto=enhance': imgixParams['auto']?.includes('enhance') || false,
-        'auto=compress': imgixParams['auto']?.includes('compress') || false,
-        'auto=redeye': imgixParams['auto']?.includes('redeye') || false,
-        'bg-remove': !!imgixParams['bg-remove'],
-        upscale: !!imgixParams['upscale'],
-      },
     };
   }
 
@@ -85,9 +46,8 @@ export default class Field extends Component<FieldProps, FieldState> {
       })
       .then((selectedAsset) => {
         if (selectedAsset) {
-          return this.setState(
-            { selectedAsset, checkboxValues: { ...INITIAL_CHECKBOX_STATE } },
-            () => this.props.sdk.field.setValue(selectedAsset),
+          return this.setState({ selectedAsset }, () =>
+            this.props.sdk.field.setValue(selectedAsset),
           );
         }
       });
@@ -136,46 +96,10 @@ export default class Field extends Component<FieldProps, FieldState> {
     );
   };
 
-  /**
-   * Toggle checkbox and add/remove the selected parameter.
-   */
-  handleCheckboxChange =
-    (
-      key: string,
-      value: Record<string, string | boolean | undefined>,
-      checked: boolean,
-    ) =>
-    (_e: React.ChangeEvent<HTMLInputElement>) => {
-      const action = checked ? 'remove' : 'add';
-
-      this.updateParams(value, action);
-      this.setState((prevState) => ({
-        checkboxValues: {
-          ...prevState.checkboxValues,
-          [key]: !checked,
-        },
-      }));
-    };
-
-  /**
-   * Determines if a checkbox should be disabled.
-   */
-  isCheckboxDisabled = (key: string): boolean => {
-    const { checkboxValues } = this.state;
-    if (key === 'bg-remove') return checkboxValues['upscale'];
-    if (key === 'upscale') return checkboxValues['bg-remove'];
-    return false;
-  };
-
-  /**
-   * Determines if the parameter requires a source capability.
-   */
-  isCapabilityGatedParameter = (parameter: string) =>
-    Object.keys(PERMISSIONS_GATED_PARAMETERS).filter((param) =>
-      parameter.includes(param),
-    ).length > 0;
-
   render() {
+    // Uncomment to test
+    // console.log({ ...this.state.selectedAsset });
+
     const updateHeightHandler = this.props.sdk.window.updateHeight;
     if (this.state.selectedAsset && this.state.selectedAsset.src) {
       return (
@@ -202,52 +126,14 @@ export default class Field extends Component<FieldProps, FieldState> {
                 <SectionHeading style={{ paddingBottom: 4 }}>
                   imgix Parameters
                 </SectionHeading>
-                {Object.entries(PARAM_OPTIONS).map(([key, value]) => {
-                  // note: silly type-guards for indexing into checkbox state
-                  const paramKey = key as keyof typeof PARAM_OPTIONS;
-                  const checkboxKey =
-                    paramKey satisfies keyof typeof INITIAL_CHECKBOX_STATE;
-
-                  return (
-                    <div className="ix-asset-param" key={`${key}-${value}`}>
-                      <CheckboxField
-                        id={key}
-                        labelText={key}
-                        checked={this.state.checkboxValues[checkboxKey]}
-                        disabled={this.isCheckboxDisabled(key)}
-                        onChange={this.handleCheckboxChange(
-                          key,
-                          value,
-                          this.state.checkboxValues[checkboxKey],
-                        )}
-                      />
-                      {this.isCapabilityGatedParameter(key) && (
-                        <Tooltip
-                          id={key}
-                          hideDelay={50}
-                          content={
-                            <span>
-                              <a
-                                className="ix-field-checkbox-tooltip-link"
-                                target="_blank"
-                                rel="noreferrer"
-                                href="https://www.imgix.com/contact-us?imgix-plugin=contentful"
-                              >
-                                Contact us
-                              </a>{' '}
-                              to enable this parameter
-                            </span>
-                          }
-                        >
-                          <Icon
-                            className="ix-field-checkbox-tooltip-icon"
-                            icon="InfoCircle"
-                          />
-                        </Tooltip>
-                      )}
-                    </div>
-                  );
-                })}
+                <CheckboxList
+                  selectedAsset={this.state.selectedAsset}
+                  onCheckChange={(
+                    value: Record<string, string | boolean | undefined>,
+                    action: 'add' | 'remove',
+                  ) => this.updateParams(value, action)}
+                  render={({ field }) => <CheckboxField {...field} />}
+                />
               </form>
             </div>
           )}
