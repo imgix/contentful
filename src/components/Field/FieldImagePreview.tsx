@@ -11,6 +11,7 @@ import { ImageAssetSVG } from '../Icons/ImageAssetSVG';
 
 interface FieldImagePreviewProps {
   imagePath: string;
+  imgixParams?: Record<string, string>;
   contentType: string;
   updateHeight: Function;
   openDialog: Function;
@@ -19,6 +20,7 @@ interface FieldImagePreviewProps {
 
 export function FieldImagePreview({
   imagePath,
+  imgixParams,
   contentType,
   openDialog,
   updateHeight,
@@ -43,6 +45,7 @@ export function FieldImagePreview({
           auto: 'format',
           fit: 'crop',
           crop: 'entropy',
+          ...imgixParams,
         }}
         htmlAttributes={{ onError: handleOnImageError }}
       />
