@@ -1,0 +1,53 @@
+.ix-field-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.ix-field-form-container {
+  padding-left: 12px;
+  font-family: 'sans-serif';
+}
+
+.ix-field-checkbox-tooltip-link {
+  text-decoration: none;
+  color: #0099cb;
+}
+
+.ix-field-checkbox-tooltip-icon {
+  margin-left: 4px;
+  color: lightgrey;
+  fill: currentcolor;
+}
+
+.ix-asset-params {
+  display: flex;
+  flex-direction: column;
+}
+
+.ix-asset-param {
+  padding-top: 2px;
+  padding-bottom: 2px;
+  display: flex;
+}
+
+.ix-asset-param > label {
+  margin-top: auto;
+}
+
+.ix-field-image-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px;
+  background-color: #e7ebee;
+  border: 1px solid #e7ebee;
+  padding-bottom: 28px;
+}
+
+.ix-field-image-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  vertical-align: middle;
+  position: relative;
+  z-index: 1;
+}
