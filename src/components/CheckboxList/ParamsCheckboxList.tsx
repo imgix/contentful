@@ -136,7 +136,7 @@ export const CheckboxList = ({
                       className="ix-field-checkbox-tooltip-link"
                       target="_blank"
                       rel="noreferrer"
-                      href="https://www.imgix.com/contact-us?imgix-plugin=contentful"
+                      href="https://www.imgix.com/contact-us?imgix-plugin=contentful&cta=param-tooltip"
                     >
                       Contact us
                     </a>{' '}
