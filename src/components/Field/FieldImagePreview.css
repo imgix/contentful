@@ -4,8 +4,8 @@
   grid-template-rows: repeat(2, 1fr);
   grid-column-gap: 0px;
   grid-row-gap: 16px;
-  width: 230px;
-  max-height: 311px;
+  width: 200px;
+  height: 420px;
 }
 
 .ix-field-image-preview-buttons {
