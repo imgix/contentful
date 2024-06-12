@@ -14,15 +14,6 @@ import { groupParamsByKey, paramsReducer } from '../../helpers/utils';
 
 import './Field.css';
 
-interface FieldProps {
-  sdk: FieldExtensionSDK;
-}
-
-interface FieldState {
-  selectedAsset: AssetProps | undefined;
-  checkboxValues: Record<string, boolean>;
-}
-
 /**
  * note: the management API doesn't return permissions object, as a result
  * we're manually keeping track of the params that needs tooltip. In future, we
@@ -49,6 +40,15 @@ const INITIAL_CHECKBOX_STATE = {
   'bg-remove': false,
   upscale: false,
 };
+
+interface FieldProps {
+  sdk: FieldExtensionSDK;
+}
+
+interface FieldState {
+  selectedAsset: AssetProps | undefined;
+  checkboxValues: typeof INITIAL_CHECKBOX_STATE;
+}
 
 export default class Field extends Component<FieldProps, FieldState> {
   constructor(props: FieldProps) {
@@ -112,9 +112,7 @@ export default class Field extends Component<FieldProps, FieldState> {
     }
 
     const url = new URL(this.state.selectedAsset.src || '');
-    // Update the params
     const newParams = paramsReducer(url.searchParams, params, action);
-    // Construct the new URL string
     const newURL = `${url.origin}${url.pathname}?${newParams.toString()}`;
 
     // Use setState callback to ensure we use the latest state
@@ -126,11 +124,10 @@ export default class Field extends Component<FieldProps, FieldState> {
           imgixParams: groupParamsByKey(new URL(newURL).searchParams),
         };
 
-        // todo: don't cast here
         return {
           ...prevState,
           selectedAsset: updatedSelectedAsset,
-        } as FieldState;
+        } as FieldState; // todo: don't cast here
       },
       () => {
         // Update field value after state update
@@ -140,7 +137,7 @@ export default class Field extends Component<FieldProps, FieldState> {
   };
 
   /**
-   * Toggle checkbox and add/remove the selected parameter
+   * Toggle checkbox and add/remove the selected parameter.
    */
   handleCheckboxChange =
     (
@@ -161,7 +158,7 @@ export default class Field extends Component<FieldProps, FieldState> {
     };
 
   /**
-   * Determines if a checkbox should be disabled
+   * Determines if a checkbox should be disabled.
    */
   isCheckboxDisabled = (key: string): boolean => {
     const { checkboxValues } = this.state;
@@ -170,6 +167,9 @@ export default class Field extends Component<FieldProps, FieldState> {
     return false;
   };
 
+  /**
+   * Determines if the parameter requires a source capability.
+   */
   isCapabilityGatedParameter = (parameter: string) =>
     Object.keys(PERMISSIONS_GATED_PARAMETERS).filter((param) =>
       parameter.includes(param),
@@ -202,45 +202,52 @@ export default class Field extends Component<FieldProps, FieldState> {
                 <SectionHeading style={{ paddingBottom: 4 }}>
                   imgix Parameters
                 </SectionHeading>
-                {Object.entries(PARAM_OPTIONS).map(([key, value]) => (
-                  <div className="ix-asset-param" key={`${key}-${value}`}>
-                    <CheckboxField
-                      id={key}
-                      labelText={key}
-                      checked={this.state.checkboxValues[key]}
-                      disabled={this.isCheckboxDisabled(key)}
-                      onChange={this.handleCheckboxChange(
-                        key,
-                        value,
-                        this.state.checkboxValues[key],
-                      )}
-                    />
-                    {this.isCapabilityGatedParameter(key) && (
-                      <Tooltip
+                {Object.entries(PARAM_OPTIONS).map(([key, value]) => {
+                  // note: silly type-guards for indexing into checkbox state
+                  const paramKey = key as keyof typeof PARAM_OPTIONS;
+                  const checkboxKey =
+                    paramKey satisfies keyof typeof INITIAL_CHECKBOX_STATE;
+
+                  return (
+                    <div className="ix-asset-param" key={`${key}-${value}`}>
+                      <CheckboxField
                         id={key}
-                        hideDelay={50}
-                        content={
-                          <span>
-                            <a
-                              className="ix-field-checkbox-tooltip-link"
-                              target="_blank"
-                              rel="noreferrer"
-                              href="https://www.imgix.com/contact-us?imgix-plugin=contentful"
-                            >
-                              Contact us
-                            </a>{' '}
-                            to enable this parameter
-                          </span>
-                        }
-                      >
-                        <Icon
-                          className="ix-field-checkbox-tooltip-icon"
-                          icon="InfoCircle"
-                        />
-                      </Tooltip>
-                    )}
-                  </div>
-                ))}
+                        labelText={key}
+                        checked={this.state.checkboxValues[checkboxKey]}
+                        disabled={this.isCheckboxDisabled(key)}
+                        onChange={this.handleCheckboxChange(
+                          key,
+                          value,
+                          this.state.checkboxValues[checkboxKey],
+                        )}
+                      />
+                      {this.isCapabilityGatedParameter(key) && (
+                        <Tooltip
+                          id={key}
+                          hideDelay={50}
+                          content={
+                            <span>
+                              <a
+                                className="ix-field-checkbox-tooltip-link"
+                                target="_blank"
+                                rel="noreferrer"
+                                href="https://www.imgix.com/contact-us?imgix-plugin=contentful"
+                              >
+                                Contact us
+                              </a>{' '}
+                              to enable this parameter
+                            </span>
+                          }
+                        >
+                          <Icon
+                            className="ix-field-checkbox-tooltip-icon"
+                            icon="InfoCircle"
+                          />
+                        </Tooltip>
+                      )}
+                    </div>
+                  );
+                })}
               </form>
             </div>
           )}
