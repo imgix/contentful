@@ -107,6 +107,15 @@ https://user-images.githubusercontent.com/15919091/137056329-97e3536d-2bf3-471e-
   <source src="https://user-images.githubusercontent.com/15919091/137056329-97e3536d-2bf3-471e-970a-2921fab44e8d.mp4">
 </video>
 
+### Add Parameters to Assets
+
+>[!NOTE]
+> Some parameters are only available for Premium accounts. [Contact](https://www.imgix.com/contact?imgix-plugin=contentful&cta=param-tooltip) us to enable them.
+
+Once you've selected an asset, you can optionally apply imgix rendering parameters to it right in the Field Preview by toggling the parameter checkboxes.
+
+https://github.com/imgix/contentful/assets/16711614/56b4c838-e504-48a9-94ad-c003764461b6
+
 ## Search for Assets
 
 The imgix app enables users to conduct a keyword search across assets in a source. Using the search box near the top of the modal will execute a search across multiple pre-determined fields: file origin path, asset tags, and categories. To learn more about these fields, see our Asset Manager [documentation](https://docs.imgix.com/setup/asset-manager#image-details).
