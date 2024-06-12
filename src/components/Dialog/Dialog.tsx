@@ -38,6 +38,7 @@ interface DialogProps {
 export interface AssetProps {
   src: string;
   attributes: Record<string, any>;
+  imgixParams?: Record<string, any>;
 }
 
 interface DialogState {
