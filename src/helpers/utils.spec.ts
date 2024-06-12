@@ -1,4 +1,9 @@
-import { addOrMergeParams, groupParamsByKey, removeParams } from './utils';
+import {
+  addOrMergeParams,
+  groupParamsByKey,
+  paramsReducer,
+  removeParams,
+} from './utils';
 
 describe('groupParamsByKey', () => {
   test('should group single value parameters correctly', () => {
@@ -138,5 +143,55 @@ describe('addOrMergeParams', () => {
     const paramsToAdd = { foo: '3' };
     const result = addOrMergeParams(searchParams, paramsToAdd);
     expect(result.toString()).toBe('foo=1%2C2%2C3');
+  });
+});
+
+describe('paramsReducer', () => {
+  describe('add action', () => {
+    it('should add new parameters', () => {
+      const existingParams = new URLSearchParams('auto=format');
+      const newParams = { fit: 'crop' };
+      const updatedParams = paramsReducer(existingParams, newParams, 'add');
+      expect(updatedParams.toString()).toBe('auto=format&fit=crop');
+    });
+
+    it('should merge existing parameters', () => {
+      const existingParams = new URLSearchParams('auto=format');
+      const newParams = { auto: 'format', fit: 'crop' };
+      const updatedParams = paramsReducer(existingParams, newParams, 'add');
+      expect(updatedParams.toString()).toBe('auto=format&fit=crop');
+    });
+
+    it('should handle boolean and undefined values', () => {
+      const existingParams = new URLSearchParams('auto=fm');
+      const newParams = { fit: 'crop', verbose: true, debug: undefined };
+      const updatedParams = paramsReducer(existingParams, newParams, 'add');
+      expect(updatedParams.toString()).toBe('auto=fm&fit=crop&verbose=true');
+    });
+  });
+
+  describe('remove action', () => {
+    it('should remove specified parameters', () => {
+      const existingParams = new URLSearchParams('auto=format&fit=crop');
+      const newParams = { fit: 'crop' };
+      const updatedParams = paramsReducer(existingParams, newParams, 'remove');
+      expect(updatedParams.toString()).toBe('auto=format');
+    });
+
+    it('should handle multiple parameters to remove', () => {
+      const existingParams = new URLSearchParams(
+        'auto=format&fit=crop&quality=80',
+      );
+      const newParams = { fit: 'crop', quality: '80' };
+      const updatedParams = paramsReducer(existingParams, newParams, 'remove');
+      expect(updatedParams.toString()).toBe('auto=format');
+    });
+
+    it('should handle non-existing parameters gracefully', () => {
+      const existingParams = new URLSearchParams('auto=format&fit=crop');
+      const newParams = { quality: '80' };
+      const updatedParams = paramsReducer(existingParams, newParams, 'remove');
+      expect(updatedParams.toString()).toBe('auto=format&fit=crop');
+    });
   });
 });
