@@ -371,11 +371,11 @@ export default class Dialog extends Component<DialogProps, DialogState> {
       const assetObjects = query
         ? await this.getAssetObjects(query, noSearchAssetsError())
         : this.state.selectedSource.type === 'webfolder'
-        ? await this.getAssetObjects(
-            defaultQuery,
-            noOriginAssetsWebFolderError(),
-          )
-        : await this.getAssetObjects(defaultQuery, noOriginAssetsError());
+          ? await this.getAssetObjects(
+              defaultQuery,
+              noOriginAssetsWebFolderError(),
+            )
+          : await this.getAssetObjects(defaultQuery, noOriginAssetsError());
 
       if (assetObjects.length > 0 && this.state.errors.length > 0) {
         this.resetNErrors(this.state.errors.length);
