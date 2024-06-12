@@ -71,21 +71,26 @@ export function FieldImagePreview({
 
   return (
     <div className="ix-field-image-preview">
-      {!contentType ? (
-        <UnknownAssetSVG />
-      ) : contentType.startsWith('image/svg') ? (
-        <SVGAssetSVG />
-      ) : contentType.startsWith('image') ? (
-        <FieldImage />
-      ) : contentType.startsWith('video') ? (
-        <FieldVideo />
-      ) : contentType.startsWith('text') ? (
-        <DocumentAssetSVG />
-      ) : contentType === 'application/pdf' ? (
-        <PDFAssetSVG />
-      ) : (
-        <UnknownAssetSVG />
-      )}
+      <div className="ix-field-image-item">
+        {!contentType ? (
+          <UnknownAssetSVG />
+        ) : contentType.startsWith('image/svg') ? (
+          <SVGAssetSVG />
+        ) : contentType.startsWith('image') ? (
+          <FieldImage />
+        ) : contentType.startsWith('video') ? (
+          <FieldVideo />
+        ) : contentType.startsWith('text') ? (
+          <DocumentAssetSVG />
+        ) : contentType === 'application/pdf' ? (
+          <PDFAssetSVG />
+        ) : (
+          <UnknownAssetSVG />
+        )}
+        <h5 className="asset-filename">
+          <span className="asset-filename-span">{imagePath.split('?')[0]}</span>
+        </h5>
+      </div>
       <div className="ix-field-image-preview-buttons">
         <Button
           className="ix-field-image-preview-buttons-replace"
