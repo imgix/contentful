@@ -24,6 +24,12 @@ export const addOrMergeParams = (
     }
     if (newSearchParams.has(key)) {
       const existingValue = newSearchParams.get(key);
+
+      // don't add param if its a duplicate
+      if (existingValue === value) {
+        return;
+      }
+
       return newSearchParams.set(key, `${existingValue},${value}`);
     }
     newSearchParams.set(key, String(value));
