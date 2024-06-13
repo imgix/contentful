@@ -48,14 +48,21 @@ export class Gallery extends Component<GalleryProps, GalleryState> {
     // add metadata to selectedAsset attributes
     const metadata = await this.getAssetMetadata(this.state.selectedAsset.src);
     const selectedAsset = { ...this.state.selectedAsset };
-    const assetAttributes = stringifyJsonFields(
-      { ...selectedAsset.attributes, ...metadata },
-      ['custom_fields', 'tags', 'colors.dominant_colors'],
-    );
-    selectedAsset.attributes = assetAttributes;
+
+    if (!selectedAsset.attributes.media_width) {
+      selectedAsset.attributes.media_width = metadata.PixelWidth;
+    }
+
+    if (!selectedAsset.attributes.media_height) {
+      selectedAsset.attributes.media_hight = metadata.PixelHeight;
+    }
 
     this.props.sdk.close({
-      ...selectedAsset,
+      ...stringifyJsonFields(selectedAsset, [
+        'attributes.custom_fields',
+        'attributes.tags',
+        'attributes.colors.dominant_colors',
+      ]),
       selectedSource: this.props.selectedSource,
     });
   };
