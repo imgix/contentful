@@ -308,9 +308,9 @@ export default class Dialog extends Component<DialogProps, DialogState> {
         : [assets.data];
       assetObjects = assetsArray.map((asset: any) => {
         stringifyJsonFields(asset, [
-          'custom_fields',
-          'tags',
-          'colors.dominant_colors',
+          'attributes.custom_fields',
+          'attributes.tags',
+          'attributes.colors.dominant_colors',
         ]);
         // TODO: add more explicit types for `asset`
         return {
