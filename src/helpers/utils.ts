@@ -149,3 +149,31 @@ export const paramsReducer = (
       return removeParams(existingParams, newParams);
   }
 };
+
+/**
+ * Stringifies value to '' if the value is null
+ */
+export const replaceNullWithEmptyString = (_: any, value: any) =>
+  value === null ? '' : value;
+
+/*
+ * Stringifies all JSON field values within the asset.attribute object
+ */
+export const stringifyJsonFields = (
+  object: Record<string, any>,
+  fields: string[] = [],
+): Record<string, any> => {
+  const normalizedObject = { ...object };
+
+  for (const field of fields) {
+    if (!normalizedObject[field]) {
+      continue;
+    }
+    normalizedObject[field] = JSON.stringify(
+      normalizedObject[field],
+      replaceNullWithEmptyString,
+    );
+  }
+
+  return normalizedObject;
+};

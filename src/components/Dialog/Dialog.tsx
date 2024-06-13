@@ -30,6 +30,7 @@ import { SourceSelect } from '../SourceSelect/';
 import packageJson from '../../../package.json';
 import { UploadButton } from '../UploadButton/UploadButton';
 import './Dialog.css';
+import { stringifyJsonFields } from '../../helpers/utils';
 
 interface DialogProps {
   sdk: DialogExtensionSDK;
@@ -306,7 +307,11 @@ export default class Dialog extends Component<DialogProps, DialogState> {
         ? assets.data
         : [assets.data];
       assetObjects = assetsArray.map((asset: any) => {
-        this.stringifyJsonFields(asset);
+        stringifyJsonFields(asset, [
+          'custom_fields',
+          'tags',
+          'colors.dominant_colors',
+        ]);
         // TODO: add more explicit types for `asset`
         return {
           src: asset.attributes.origin_path,
@@ -317,28 +322,6 @@ export default class Dialog extends Component<DialogProps, DialogState> {
       return assetObjects;
     } else {
       return [];
-    }
-  };
-
-  /*
-   * Stringifies all JSON field values within the asset.attribute object
-   */
-  stringifyJsonFields = (asset: AssetProps) => {
-    const replaceNullWithEmptyString = (_: any, value: any) =>
-      value === null ? '' : value;
-    asset.attributes.custom_fields = JSON.stringify(
-      asset.attributes.custom_fields,
-      replaceNullWithEmptyString,
-    );
-    asset.attributes.tags = JSON.stringify(
-      asset.attributes.tags,
-      replaceNullWithEmptyString,
-    );
-    if (asset.attributes.colors?.dominant_colors) {
-      asset.attributes.colors.dominant_colors = JSON.stringify(
-        asset.attributes.colors?.dominant_colors,
-        replaceNullWithEmptyString,
-      );
     }
   };
 

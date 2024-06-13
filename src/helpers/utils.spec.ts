@@ -3,6 +3,8 @@ import {
   groupParamsByKey,
   paramsReducer,
   removeParams,
+  replaceNullWithEmptyString,
+  stringifyJsonFields,
 } from './utils';
 
 describe('groupParamsByKey', () => {
@@ -193,5 +195,70 @@ describe('paramsReducer', () => {
       const updatedParams = paramsReducer(existingParams, newParams, 'remove');
       expect(updatedParams.toString()).toBe('auto=format&fit=crop');
     });
+  });
+});
+
+describe('stringifyJsonFields', () => {
+  it('should stringify specified fields', () => {
+    const input = {
+      field1: { a: 1, b: 2 },
+      field2: { c: 3, d: 4 },
+    };
+    const fields = ['field1', 'field2'];
+    const output = stringifyJsonFields(input, fields);
+
+    expect(output.field1).toBe(
+      JSON.stringify({ a: 1, b: 2 }, replaceNullWithEmptyString),
+    );
+    expect(output.field2).toBe(
+      JSON.stringify({ c: 3, d: 4 }, replaceNullWithEmptyString),
+    );
+  });
+
+  it('should not change fields that are not specified', () => {
+    const input = {
+      field1: { a: 1, b: 2 },
+      field2: { c: 3, d: 4 },
+      field3: { e: 5, f: 6 },
+    };
+    const fields = ['field1'];
+    const output = stringifyJsonFields(input, fields);
+
+    expect(output.field1).toBe(
+      JSON.stringify({ a: 1, b: 2 }, replaceNullWithEmptyString),
+    );
+    expect(output.field2).toEqual({ c: 3, d: 4 });
+    expect(output.field3).toEqual({ e: 5, f: 6 });
+  });
+
+  it('should handle fields with null values correctly', () => {
+    const input = {
+      field1: { a: 1, b: null },
+    };
+    const fields = ['field1'];
+    const output = stringifyJsonFields(input, fields);
+
+    expect(output.field1).toBe(
+      JSON.stringify({ a: 1, b: '' }, replaceNullWithEmptyString),
+    );
+  });
+
+  it('should not modify the input object if no fields are specified', () => {
+    const input = {
+      field1: { a: 1, b: 2 },
+    };
+    const output = stringifyJsonFields(input, []);
+
+    expect(output).toEqual(input);
+  });
+
+  it('should not modify the input object if specified fields do not exist', () => {
+    const input = {
+      field1: { a: 1, b: 2 },
+    };
+    const fields = ['field2'];
+    const output = stringifyJsonFields(input, fields);
+
+    expect(output).toEqual(input);
   });
 });
