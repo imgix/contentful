@@ -201,15 +201,16 @@ describe('paramsReducer', () => {
 describe('stringifyJsonFields', () => {
   it('should stringify specified fields', () => {
     const input = {
-      field1: { a: 1, b: 2 },
+      field1: { a: 1, b: null },
       field2: { c: 3, d: 4 },
     };
-    const fields = ['field1', 'field2'];
+    const fields = ['field1.b', 'field2'];
     const output = stringifyJsonFields(input, fields);
 
-    expect(output.field1).toBe(
-      JSON.stringify({ a: 1, b: 2 }, replaceNullWithEmptyString),
-    );
+    expect(output.field1).toStrictEqual({
+      a: 1,
+      b: JSON.stringify('', replaceNullWithEmptyString),
+    });
     expect(output.field2).toBe(
       JSON.stringify({ c: 3, d: 4 }, replaceNullWithEmptyString),
     );
@@ -260,5 +261,18 @@ describe('stringifyJsonFields', () => {
     const output = stringifyJsonFields(input, fields);
 
     expect(output).toEqual(input);
+  });
+
+  it('should not mutate the input object', () => {
+    const input = {
+      field1: { a: 1 },
+      field2: { b: null },
+    };
+    const copy = { ...input };
+    const fields = ['field2'];
+    const output = stringifyJsonFields(input, fields);
+
+    expect(output.field2).toEqual(JSON.stringify({ b: '' }));
+    expect(input).toEqual(copy);
   });
 });

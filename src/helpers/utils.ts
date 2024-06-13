@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 /**
  * Adds or merges specified parameters into a URLSearchParams object.
  *
@@ -157,23 +159,19 @@ export const replaceNullWithEmptyString = (_: any, value: any) =>
   value === null ? '' : value;
 
 /*
- * Stringifies all JSON field values within the asset.attribute object
+ * Stringifies all JSON field values in the specified fields array.
  */
 export const stringifyJsonFields = (
   object: Record<string, any>,
   fields: string[] = [],
 ): Record<string, any> => {
-  const normalizedObject = { ...object };
+  const modifiedObject = { ...object };
 
   for (const field of fields) {
-    if (!normalizedObject[field]) {
-      continue;
-    }
-    normalizedObject[field] = JSON.stringify(
-      normalizedObject[field],
-      replaceNullWithEmptyString,
-    );
+    const value = _.get(object, field);
+    const newValue = JSON.stringify(value, replaceNullWithEmptyString);
+    _.set(modifiedObject, field, newValue);
   }
 
-  return normalizedObject;
+  return modifiedObject;
 };
