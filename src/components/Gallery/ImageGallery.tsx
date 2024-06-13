@@ -6,6 +6,7 @@ import { GridImage, GalleryPlaceholder } from './';
 
 import { ActionBar } from '../ActionBar';
 import './ImageGallery.css';
+import { stringifyJsonFields } from '../../helpers/utils';
 
 interface GalleryProps {
   selectedSource: Partial<SourceProps>;
@@ -29,11 +30,32 @@ export class Gallery extends Component<GalleryProps, GalleryState> {
     };
   }
 
+  /**
+   * Fetches an Object of asset metadata, like width and height attributes.
+   */
+  getAssetMetadata = async (assetURL: string) => {
+    const response = await fetch(`${assetURL.split('?')[0]}?fm=json`);
+    return await response.json();
+  };
+
   handleClick = (selectedAsset: AssetProps) => this.setState({ selectedAsset });
 
-  handleSubmit = () => {
+  handleSubmit = async () => {
+    if (!this.state.selectedAsset?.src) {
+      return;
+    }
+
+    // add metadata to selectedAsset attributes
+    const metadata = await this.getAssetMetadata(this.state.selectedAsset.src);
+    const selectedAsset = { ...this.state.selectedAsset };
+    const assetAttributes = stringifyJsonFields(
+      { ...selectedAsset.attributes, ...metadata },
+      ['custom_fields', 'tags', 'colors.dominant_colors'],
+    );
+    selectedAsset.attributes = assetAttributes;
+
     this.props.sdk.close({
-      ...this.state.selectedAsset,
+      ...selectedAsset,
       selectedSource: this.props.selectedSource,
     });
   };
