@@ -226,7 +226,7 @@ export const query = graphql`
 
 ### Metadata
 
-Users may also access metadata associated with an asset via the `attributes` field. Refer to the [imgix documentation](https://docs.imgix.com/setup/asset-manager#:~:text=per%20device/browser.-,Metadata,-This%20section%20displays) to learn more about the various types of metadata available on images and how to use them.
+Users may also access metadata associated with an asset via the `attributes` field. Refer to the [imgix documentation metadata](https://docs.imgix.com/getting-started/setup/asset-manager#metadata) to learn more about the various types of metadata available on images and how to use them.
 
 ```graphql
 query MyQuery {
