@@ -6,7 +6,6 @@ import {
   Workbench,
   Paragraph,
   TextField,
-  Notification,
   Icon,
   TextLink,
   List,
