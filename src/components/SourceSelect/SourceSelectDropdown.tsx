@@ -5,7 +5,6 @@ import {
   Dropdown,
   DropdownList,
   DropdownListItem,
-  Paragraph,
   Spinner,
 } from '@contentful/forma-36-react-components';
 
@@ -42,24 +41,30 @@ export function SourceSelectDropdown({
       isOpen={isOpen}
       onClose={() => setOpen(false)}
       toggleElement={
-        <Button
-          size="small"
-          buttonType="muted"
-          className="ix-dropdown"
-          indicateDropdown
-          onClick={() => setOpen(!isOpen)}
-          disabled={disabled}
-        >
-          {selectedSource.name || 'Select an imgix Source'}
-        </Button>
+        !allSources.length ? (
+          <Button
+            size="small"
+            buttonType="muted"
+            className="ix-dropdown"
+            disabled={true}
+          >
+            <Spinner />
+          </Button>
+        ) : (
+          <Button
+            size="small"
+            buttonType="muted"
+            className="ix-dropdown"
+            indicateDropdown
+            onClick={() => setOpen(!isOpen)}
+            disabled={disabled}
+          >
+            {selectedSource.name || 'Select an imgix Source'}
+          </Button>
+        )
       }
     >
       <DropdownList className="ix-dropdown-list">
-        {!allSources.length ? (
-          <Paragraph style={{ paddingLeft: 5 }}>
-            Loading <Spinner />
-          </Paragraph>
-        ) : null}
         {allSources.map((source: SourceProps) => (
           <DropdownListItem key={source.id} onClick={() => handleClick(source)}>
             {source.name}

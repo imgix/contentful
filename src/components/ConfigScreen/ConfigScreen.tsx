@@ -23,6 +23,7 @@ import packageJson from './../../../package.json';
 
 export interface AppInstallationParameters {
   imgixAPIKey?: string;
+  sourceID?: string;
   successfullyVerified?: boolean;
 }
 
@@ -197,10 +198,27 @@ export default class Config extends Component<ConfigProps, ConfigState> {
     return { ...currentState, EditorInterface };
   };
 
-  handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  handleAPIKeyChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    const prevState = { ...this.state };
     this.setState({
       parameters: {
+        ...prevState.parameters,
         imgixAPIKey: e.target.value,
+        successfullyVerified: this.state.parameters.successfullyVerified,
+      },
+    });
+  };
+
+  handleSourceIDChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    const prevState = { ...this.state };
+    this.setState({
+      parameters: {
+        ...prevState.parameters,
+        sourceID: e.target.value,
         successfullyVerified: this.state.parameters.successfullyVerified,
       },
     });
@@ -219,7 +237,12 @@ export default class Config extends Component<ConfigProps, ConfigState> {
     };
 
     try {
-      await imgix.request('sources');
+      if (this.state.parameters.sourceID?.length) {
+        await imgix.request(`sources/${this.state.parameters.sourceID}`);
+      } else {
+        await imgix.request('sources');
+      }
+
       Notification.setPosition('top', { offset: 650 });
       Notification.success(
         'Your API key was successfully confirmed! Click the Install/Save button (in the top right corner) to complete installation.',
@@ -347,7 +370,7 @@ export default class Config extends Component<ConfigProps, ConfigState> {
                     type: 'password',
                     autoComplete: 'new-api-key',
                   }}
-                  onChange={this.handleChange}
+                  onChange={this.handleAPIKeyChange}
                 />
               </div>
               {this.state.parameters.successfullyVerified && (
@@ -366,6 +389,22 @@ export default class Config extends Component<ConfigProps, ConfigState> {
                 https://dashboard.imgix.com/api-keys
               </a>
             </p>
+            <div className="flex-container">
+              <div className="flex-child">
+                <TextField
+                  name="Default Source"
+                  id="SourceID"
+                  labelText="Default Source ID"
+                  value={this.state.parameters?.sourceID || ''}
+                  validationMessage={this.state.validationMessage}
+                  textInputProps={{
+                    type: 'text',
+                    autoComplete: 'default-source-id',
+                  }}
+                  onChange={this.handleSourceIDChange}
+                />
+              </div>
+            </div>
           </div>
           <Button
             type="submit"

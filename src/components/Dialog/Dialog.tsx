@@ -250,15 +250,21 @@ export default class Dialog extends Component<DialogProps, DialogState> {
       if (sources.length === 0) {
         throw noSourcesError();
       }
+      const invocationParams = this.props.sdk.parameters
+        .invocation as AppInvocationParameters;
+      const installationParams = this.props.sdk.parameters
+        .installation as AppInstallationParameters;
+
       // check if previously selected source exists
       // if it does, add it to state.
-      const previouslySelectedSource = (
-        this.props.sdk.parameters.invocation as AppInvocationParameters
-      )?.selectedImage?.selectedSource;
+      const previouslySelectedSource =
+        invocationParams?.selectedImage?.selectedSource?.id ||
+        installationParams.sourceID;
 
       const selectedSource = sources.find((source: any) => {
-        return source.id === previouslySelectedSource?.id;
+        return source.id === previouslySelectedSource;
       });
+
       if (selectedSource) {
         this.setState({ allSources: sources, selectedSource });
       } else {
