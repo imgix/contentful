@@ -71,7 +71,7 @@
     "@types/react-dom": "17.0.25",
     "@types/react-imgix": "9.5.3",
     "cypress": "13.11.0",
-    "prettier": "3.2.5",
+    "prettier": "3.3.2",
     "typescript": "5.4.3"
   },
   "files": [
