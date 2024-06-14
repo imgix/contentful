@@ -8,7 +8,6 @@ import {
   TextField,
   Notification,
   Icon,
-  Button,
   TextLink,
   List,
   ListItem,
@@ -16,7 +15,6 @@ import {
   Subheading,
 } from '@contentful/forma-36-react-components';
 import ImgixAPI, { APIError } from 'imgix-management-js';
-import debounce from 'lodash.debounce';
 
 import './ConfigScreen.css';
 import packageJson from './../../../package.json';
@@ -145,16 +143,43 @@ export default class Config extends Component<ConfigProps, ConfigState> {
   }
 
   onConfigure = async () => {
+    this.setState({
+      ...this.state,
+      validationMessage: '',
+      parameters: {
+        ...this.state.parameters,
+        successfullyVerified: false,
+      },
+    });
     // This method will be called when a user clicks on "Install"
     // or "Save" in the configuration screen.
     // for more details see https://www.contentful.com/developers/docs/extensibility/ui-extensions/sdk-reference/#register-an-app-configuration-hook
 
     // ensure the API key is validated
-    await this.verifyAPIKey();
+    const hasValidAPIKey = await this.verifyAPIKey();
+
+    if (!hasValidAPIKey) {
+      const validationMessage =
+        "We couldn't verify this API Key. Confirm your details and try again.";
+      this.setState({
+        ...this.state,
+        validationMessage,
+      });
+
+      return false; // return false so we don't save invalid config details
+    }
 
     // Generate a new target state with the App assigned to the selected
     // content types
     const targetState = await this.createTargetState();
+
+    this.setState({
+      ...this.state,
+      parameters: {
+        ...this.state.parameters,
+        successfullyVerified: true,
+      },
+    });
 
     return {
       // Parameters to be persisted as the app configuration.
@@ -203,6 +228,8 @@ export default class Config extends Component<ConfigProps, ConfigState> {
   ) => {
     const prevState = { ...this.state };
     this.setState({
+      ...prevState,
+      validationMessage: '',
       parameters: {
         ...prevState.parameters,
         imgixAPIKey: e.target.value,
@@ -216,6 +243,7 @@ export default class Config extends Component<ConfigProps, ConfigState> {
   ) => {
     const prevState = { ...this.state };
     this.setState({
+      ...prevState,
       parameters: {
         ...prevState.parameters,
         sourceID: e.target.value,
@@ -224,7 +252,7 @@ export default class Config extends Component<ConfigProps, ConfigState> {
     });
   };
 
-  verifyAPIKey = async () => {
+  verifyAPIKey = async (): Promise<boolean> => {
     this.setState({ isButtonLoading: true });
 
     const imgix = new ImgixAPI({
@@ -232,26 +260,18 @@ export default class Config extends Component<ConfigProps, ConfigState> {
       pluginOrigin: `contentful/v${packageJson.version}`,
     });
 
-    let updatedInstallationParameters: AppInstallationParameters = {
-      ...this.state.parameters,
-    };
-
     try {
       if (this.state.parameters.sourceID?.length) {
         await imgix.request(`sources/${this.state.parameters.sourceID}`);
       } else {
         await imgix.request('sources');
       }
+      this.setState({
+        ...this.state,
+        isButtonLoading: false,
+      });
 
-      Notification.setPosition('top', { offset: 650 });
-      Notification.success(
-        'Your API key was successfully confirmed! Click the Install/Save button (in the top right corner) to complete installation.',
-        {
-          duration: 10000,
-          id: 'ix-config-notification',
-        },
-      );
-      updatedInstallationParameters.successfullyVerified = true;
+      return true;
     } catch (error) {
       // APIError will emit more helpful data for debugging
       if (error instanceof APIError) {
@@ -259,42 +279,14 @@ export default class Config extends Component<ConfigProps, ConfigState> {
       } else {
         console.error(error);
       }
-      Notification.setPosition('top', { offset: 650 });
-      Notification.error(
-        "We couldn't verify this API Key. Confirm your details and try again.",
-        {
-          duration: 3000,
-          id: 'ix-config-notification',
-        },
-      );
-      updatedInstallationParameters.successfullyVerified = false;
-    } finally {
       this.setState({
-        validationMessage: '',
+        ...this.state,
         isButtonLoading: false,
-        parameters: updatedInstallationParameters,
       });
+
+      return false;
     }
   };
-
-  onClick = async () => {
-    if (this.state.parameters.imgixAPIKey === '') {
-      let updatedInstallationParameters: AppInstallationParameters = {
-        ...this.state.parameters,
-      };
-      updatedInstallationParameters.successfullyVerified = false;
-      this.setState({
-        validationMessage: 'Please input your API Key',
-        parameters: updatedInstallationParameters,
-      });
-    } else {
-      await this.verifyAPIKey();
-    }
-  };
-
-  debounceOnClick = debounce(this.onClick, 1000, {
-    leading: true,
-  });
 
   getAPIKey = async () => {
     return this.props.sdk.app
@@ -396,7 +388,6 @@ export default class Config extends Component<ConfigProps, ConfigState> {
                   id="SourceID"
                   labelText="Default Source ID"
                   value={this.state.parameters?.sourceID || ''}
-                  validationMessage={this.state.validationMessage}
                   textInputProps={{
                     type: 'text',
                     autoComplete: 'default-source-id',
@@ -406,15 +397,6 @@ export default class Config extends Component<ConfigProps, ConfigState> {
               </div>
             </div>
           </div>
-          <Button
-            type="submit"
-            buttonType="positive"
-            disabled={!this.state.parameters.imgixAPIKey?.length}
-            loading={this.state.isButtonLoading}
-            onClick={this.debounceOnClick}
-          >
-            Verify
-          </Button>
           {this.state.contentTypes.length > 0 && (
             <div>
               <hr></hr>
