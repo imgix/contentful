@@ -108,7 +108,12 @@ export class Gallery extends Component<GalleryProps, GalleryState> {
         <GalleryPlaceholder
           sdk={this.props.sdk}
           handleClose={this.handleClose}
-          text="Select a Source to view your image gallery"
+          text={
+            // @ts-ignore
+            this.props.sdk.parameters.installation.sourceID
+              ? 'Loading'
+              : 'Select a Source to view your image gallery'
+          }
         />
       ) : // If the source is a webfolder
       this.props.selectedSource.type === 'webfolder' ? (
