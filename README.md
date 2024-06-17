@@ -52,6 +52,9 @@ npm run start
 
 Upon installation, configure the app using an API key generated via the imgix [Dashboard](https://dashboard.imgix.com/api-keys). **Ensure that the generated key has the following permissions: `Sources` and `Asset Manager Browse`.**
 
+> [!TIP]
+> You can also optionally configure a default Source ID for the app to use. When configured, you'll have to click the Sources dropdown to select an asset from a different source.
+
 Following the instructions on the screen, enter in the API key and press `Verify`. If the key is valid, you will receive a notification that the key has been successfully verified. If verification fails, you will need to ensure that the key was entered correctly.
 
 <!-- ix-docs-ignore -->
@@ -382,4 +385,3 @@ export const query = graphql`
   }
 `;
 ```
-
