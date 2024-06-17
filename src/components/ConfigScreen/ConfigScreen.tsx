@@ -385,7 +385,7 @@ export default class Config extends Component<ConfigProps, ConfigState> {
                 <TextField
                   name="Default Source"
                   id="SourceID"
-                  labelText="Default Source ID"
+                  labelText="Default Source ID (Optional) "
                   value={this.state.parameters?.sourceID || ''}
                   textInputProps={{
                     type: 'text',
