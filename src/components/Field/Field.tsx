@@ -39,7 +39,7 @@ export default class Field extends Component<FieldProps, FieldState> {
         minHeight: 660,
         position: 'top',
         shouldCloseOnOverlayClick: true,
-        allowHeightOverflow: false,
+        allowHeightOverflow: true,
         parameters: {
           selectedImage: this.state.selectedAsset,
         },
