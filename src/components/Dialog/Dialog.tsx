@@ -257,12 +257,12 @@ export default class Dialog extends Component<DialogProps, DialogState> {
 
       // check if previously selected source exists
       // if it does, add it to state.
-      const previouslySelectedSource =
+      const previouslySelectedSourceID =
         invocationParams?.selectedImage?.selectedSource?.id ||
         installationParams.sourceID;
 
       const selectedSource = sources.find((source: any) => {
-        return source.id === previouslySelectedSource;
+        return source.id === previouslySelectedSourceID;
       });
 
       if (selectedSource) {
