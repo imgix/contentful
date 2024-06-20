@@ -54,7 +54,7 @@ export class Gallery extends Component<GalleryProps, GalleryState> {
     }
 
     if (!selectedAsset.attributes.media_height) {
-      selectedAsset.attributes.media_hight = metadata.PixelHeight;
+      selectedAsset.attributes.media_height = metadata.PixelHeight;
     }
 
     this.props.sdk.close({
