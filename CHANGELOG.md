@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.1](https://github.com/imgix/contentful/compare/v1.4.0...v1.4.1) (2024-06-20)
+
+### Updates
+
+- adds per-asset imgix parameter transformation checkboxes
+- adds image width/height metadata
+- adds default source configuration option
+- allows dialog to be scrolled in smaller viewport
+
 ## [1.4.0](https://github.com/imgix/contentful/compare/v1.3.0...v1.4.0) (2022-12-12)
 
 ### Updates
