@@ -169,8 +169,10 @@ export const stringifyJsonFields = (
 
   for (const field of fields) {
     const value = _.get(object, field);
-    const newValue = JSON.stringify(value, replaceNullWithEmptyString);
-    _.set(modifiedObject, field, newValue);
+    if (typeof value !== 'string') {
+      const newValue = JSON.stringify(value, replaceNullWithEmptyString);
+      _.set(modifiedObject, field, newValue);
+    }
   }
 
   return modifiedObject;
