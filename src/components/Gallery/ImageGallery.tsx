@@ -33,9 +33,13 @@ export class Gallery extends Component<GalleryProps, GalleryState> {
   /**
    * Fetches an Object of asset metadata, like width and height attributes.
    */
-  getAssetMetadata = async (assetURL: string) => {
-    const response = await fetch(`${assetURL.split('?')[0]}?fm=json`);
-    return await response.json();
+  getAssetMetadata = async (assetURL: string): Promise<Record<string, any>> => {
+    try {
+      const response = await fetch(`${assetURL.split('?')[0]}?fm=json`);
+      return await response.json();
+    } catch (error) {
+      return {};
+    }
   };
 
   handleClick = (selectedAsset: AssetProps) => this.setState({ selectedAsset });
@@ -50,19 +54,23 @@ export class Gallery extends Component<GalleryProps, GalleryState> {
     const selectedAsset = { ...this.state.selectedAsset };
 
     if (!selectedAsset.attributes.media_width) {
-      selectedAsset.attributes.media_width = metadata.PixelWidth;
+      selectedAsset.attributes.media_width = metadata?.PixelWidth || '';
     }
 
     if (!selectedAsset.attributes.media_height) {
-      selectedAsset.attributes.media_height = metadata.PixelHeight;
+      selectedAsset.attributes.media_height = metadata?.PixelHeight || '';
     }
 
-    this.props.sdk.close({
+    const stringifiedAsset = {
       ...stringifyJsonFields(selectedAsset, [
         'attributes.custom_fields',
         'attributes.tags',
         'attributes.colors.dominant_colors',
       ]),
+    };
+
+    this.props.sdk.close({
+      ...stringifiedAsset,
       selectedSource: this.props.selectedSource,
     });
   };
