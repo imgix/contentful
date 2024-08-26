@@ -62,17 +62,17 @@
     ]
   },
   "devDependencies": {
-    "@testing-library/jest-dom": "6.4.8",
-    "@testing-library/react": "16.0.0",
+    "@testing-library/jest-dom": "5.17.0",
+    "@testing-library/react": "12.1.5",
     "@testing-library/user-event": "14.5.2",
     "@types/jest": "29.5.12",
     "@types/lodash.debounce": "4.0.9",
-    "@types/node": "20.16.1",
+    "@types/node": "20.14.7",
     "@types/react": "17.0.80",
     "@types/react-dom": "17.0.25",
     "@types/react-imgix": "9.5.3",
-    "cypress": "13.13.3",
-    "prettier": "3.3.3",
+    "cypress": "13.11.0",
+    "prettier": "3.2.5",
     "typescript": "4.9.5"
   },
   "files": [
