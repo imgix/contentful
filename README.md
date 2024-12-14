@@ -1,6 +1,6 @@
 <!-- ix-docs-ignore -->
 
-![imgix logo](https://assets.imgix.net/sdk-imgix-logo.svg)
+![imgix logo](https://assets.imgix.net/sdk-imgix-logo-new.svg)
 
 A Contentful app that integrates with imgix's [Asset Manager](https://docs.imgix.com/setup/asset-manager). Browse, search, and insert assets into your content quickly and easily. Simplify your content editing workflow within Contentful and empower your developers with imgix’s powerful image rendering and optimization service.
 
