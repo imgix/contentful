@@ -67,7 +67,7 @@
     "@testing-library/user-event": "14.6.1",
     "@types/jest": "29.5.14",
     "@types/lodash.debounce": "4.0.9",
-    "@types/node": "22.13.1",
+    "@types/node": "22.13.13",
     "@types/react": "17.0.84",
     "@types/react-dom": "17.0.26",
     "@types/react-imgix": "9.5.4",
