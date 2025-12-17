@@ -1,9 +1,9 @@
 import { Component } from 'react';
 import { FieldExtensionSDK } from 'contentful-ui-extensions-sdk';
 import {
-  CheckboxField,
+  Checkbox,
   SectionHeading,
-} from '@contentful/forma-36-react-components';
+} from '@contentful/f36-components';
 import { debounce } from 'lodash';
 
 import { FieldImagePreview, FieldPrompt } from './';
@@ -132,7 +132,7 @@ export default class Field extends Component<FieldProps, FieldState> {
                     value: Record<string, string | boolean | undefined>,
                     action: 'add' | 'remove',
                   ) => this.updateParams(value, action)}
-                  render={({ field }) => <CheckboxField {...field} />}
+                  render={({ field }) => <Checkbox {...field} />}
                 />
               </form>
             </div>

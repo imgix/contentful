@@ -3,16 +3,16 @@ import { AppExtensionSDK } from 'contentful-ui-extensions-sdk';
 import {
   Heading,
   Form,
-  Workbench,
   Paragraph,
-  TextField,
+  FormControl,
+  TextInput,
   Icon,
   TextLink,
   List,
   ListItem,
-  CheckboxField,
+  Checkbox,
   Subheading,
-} from '@contentful/forma-36-react-components';
+} from '@contentful/f36-components';
 import ImgixAPI, { APIError } from 'imgix-management-js';
 
 import './ConfigScreen.css';
@@ -297,7 +297,7 @@ export default class Config extends Component<ConfigProps, ConfigState> {
 
   render() {
     return (
-      <Workbench className="ix-config-container">
+      <div className="ix-config-container">
         <Form className="ix-config-description">
           <Heading>Getting set up with imgix and Contentful</Heading>
           <Paragraph>
@@ -351,22 +351,27 @@ export default class Config extends Component<ConfigProps, ConfigState> {
           <div>
             <div className="flex-container">
               <div className="flex-child">
-                <TextField
-                  name="API Key"
-                  id="APIKey"
-                  labelText="API Key"
-                  value={this.state.parameters?.imgixAPIKey || ''}
-                  validationMessage={this.state.validationMessage}
-                  textInputProps={{
-                    type: 'password',
-                    autoComplete: 'new-api-key',
-                  }}
-                  onChange={this.handleAPIKeyChange}
-                />
+                <FormControl
+                  isInvalid={!!this.state.validationMessage}
+                >
+                  <FormControl.Label>API Key</FormControl.Label>
+                  <TextInput
+                    name="API Key"
+                    id="APIKey"
+                    type="password"
+                    autoComplete="new-api-key"
+                    value={this.state.parameters?.imgixAPIKey || ''}
+                    onChange={this.handleAPIKeyChange}
+                  />
+                  {this.state.validationMessage && (
+                    <FormControl.ValidationMessage>
+                      {this.state.validationMessage}
+                    </FormControl.ValidationMessage>
+                  )}
+                </FormControl>
               </div>
               {this.state.parameters.successfullyVerified && (
                 <div className="icon">
-                  <Icon icon="CheckCircle" size="tiny" color="positive" />
                 </div>
               )}
             </div>
@@ -382,17 +387,17 @@ export default class Config extends Component<ConfigProps, ConfigState> {
             </p>
             <div className="flex-container">
               <div className="flex-child">
-                <TextField
-                  name="Default Source"
-                  id="SourceID"
-                  labelText="Default Source ID (Optional) "
-                  value={this.state.parameters?.sourceID || ''}
-                  textInputProps={{
-                    type: 'text',
-                    autoComplete: 'default-source-id',
-                  }}
-                  onChange={this.handleSourceIDChange}
-                />
+                <FormControl>
+                  <FormControl.Label>Default Source ID (Optional)</FormControl.Label>
+                  <TextInput
+                    name="Default Source"
+                    id="SourceID"
+                    type="text"
+                    autoComplete="default-source-id"
+                    value={this.state.parameters?.sourceID || ''}
+                    onChange={this.handleSourceIDChange}
+                  />
+                </FormControl>
               </div>
             </div>
           </div>
@@ -420,12 +425,11 @@ export default class Config extends Component<ConfigProps, ConfigState> {
                           { fieldId, fieldName, enabled }: CompatibleField,
                           fieldIndex,
                         ) => (
-                          <CheckboxField
+                          <Checkbox
                             key={contentId + '-' + fieldId}
-                            labelText={fieldName}
                             id={fieldId}
                             helpText={`FieldId: ${fieldId}`}
-                            checked={enabled}
+                            isChecked={enabled}
                             onChange={() => {
                               // flip the enabled value of the selected field
                               const changedState = { ...this.state };
@@ -434,7 +438,9 @@ export default class Config extends Component<ConfigProps, ConfigState> {
                               ].compatibleFields[fieldIndex].enabled = !enabled;
                               this.setState(changedState);
                             }}
-                          />
+                          >
+                            {fieldName}
+                          </Checkbox>
                         ),
                       )}
                     </Form>
@@ -451,7 +457,7 @@ export default class Config extends Component<ConfigProps, ConfigState> {
             alt="App logo"
           />
         </div>
-      </Workbench>
+      </div>
     );
   }
 }

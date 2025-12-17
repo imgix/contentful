@@ -1,10 +1,9 @@
 import React, { ReactElement } from 'react';
 import {
   Button,
-  Dropdown,
-  DropdownList,
-  DropdownListItem,
-} from '@contentful/forma-36-react-components';
+  Menu,
+} from '@contentful/f36-components';
+import { CaretUpIcon, CaretDownIcon } from '@contentful/f36-icons';
 
 import { PageProps } from '../Dialog';
 
@@ -52,51 +51,46 @@ export function ImagePagination({
     <div className="ix-pagination">
       <Button
         className="ix-pagination-button ix-pagination-prevButton"
-        buttonType="muted"
-        icon="ChevronLeft"
+        variant="secondary"
         size="small"
-        disabled={leftDisabled}
+        isDisabled={leftDisabled}
         onClick={paginateBackward}
       >
         Prev Page
       </Button>
-      <Dropdown
-        isOpen={isOpen}
-        onClose={() => setOpen(false)}
-        toggleElement={
+      <Menu isOpen={isOpen} onClose={() => setOpen(false)}>
+        <Menu.Trigger>
           <Button
             size="small"
-            buttonType="muted"
+            variant="secondary"
             className="ix-pagination-button ix-pagination-dropdownButton"
-            indicateDropdown
+            endIcon={isOpen ? <CaretUpIcon /> : <CaretDownIcon />}
             onClick={() => setOpen(!isOpen)}
           >
             {`Page ${pageInfo.currentIndex + 1} of ${pageInfo.totalPageCount}`}
           </Button>
-        }
-      >
-        <DropdownList className="ix-pagination-dropdown" maxHeight={111}>
+        </Menu.Trigger>
+        <Menu.List className="ix-pagination-dropdown" style={{ maxHeight: 111, overflowY: 'auto' }}>
           {/* a maxHeight of 111 is the minimum height to fit 3 entries without
           needing to scroll */}
           {[...Array(pageInfo.totalPageCount)].map((_, _pageIndex) => {
             const pageIndex = _pageIndex + 1;
             return (
-              <DropdownListItem
+              <Menu.Item
                 key={`page-${pageIndex}`}
                 onClick={() => handleDropdownClick(_pageIndex)}
               >
                 {'Page ' + pageIndex}
-              </DropdownListItem>
+              </Menu.Item>
             );
           })}
-        </DropdownList>
-      </Dropdown>
+        </Menu.List>
+      </Menu>
       <Button
         className="ix-pagination-button ix-pagination-nextButton"
-        buttonType="muted"
-        icon="ChevronRight"
+        variant="secondary"
         size="small"
-        disabled={rightDisabled}
+        isDisabled={rightDisabled}
         onClick={paginateForward}
       >
         Next Page

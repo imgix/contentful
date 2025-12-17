@@ -2,11 +2,10 @@ import React, { ReactElement } from 'react';
 
 import {
   Button,
-  Dropdown,
-  DropdownList,
-  DropdownListItem,
+  Menu,
   Spinner,
-} from '@contentful/forma-36-react-components';
+} from '@contentful/f36-components';
+import { CaretUpIcon, CaretDownIcon } from '@contentful/f36-icons';
 
 import { SourceProps } from '../Dialog';
 import './SourceSelectDropdown.css';
@@ -36,41 +35,37 @@ export function SourceSelectDropdown({
   };
 
   return (
-    <Dropdown
-      testId={testId}
-      isOpen={isOpen}
-      onClose={() => setOpen(false)}
-      toggleElement={
-        !allSources.length ? (
+    <Menu isOpen={isOpen} onClose={() => setOpen(false)}>
+      <Menu.Trigger>
+        {!allSources.length ? (
           <Button
             size="small"
-            buttonType="muted"
+            variant="secondary"
             className="ix-dropdown"
-            disabled={true}
+            isDisabled={true}
           >
             <Spinner />
           </Button>
         ) : (
           <Button
             size="small"
-            buttonType="muted"
+            variant="secondary"
             className="ix-dropdown"
-            indicateDropdown
+            endIcon={isOpen ? <CaretUpIcon /> : <CaretDownIcon />}
             onClick={() => setOpen(!isOpen)}
-            disabled={disabled}
+            isDisabled={disabled}
           >
             {selectedSource.name || 'Select an imgix Source'}
           </Button>
-        )
-      }
-    >
-      <DropdownList className="ix-dropdown-list">
+        )}
+      </Menu.Trigger>
+      <Menu.List className="ix-dropdown-list">
         {allSources.map((source: SourceProps) => (
-          <DropdownListItem key={source.id} onClick={() => handleClick(source)}>
+          <Menu.Item key={source.id} onClick={() => handleClick(source)}>
             {source.name}
-          </DropdownListItem>
+          </Menu.Item>
         ))}
-      </DropdownList>
-    </Dropdown>
+      </Menu.List>
+    </Menu>
   );
 }

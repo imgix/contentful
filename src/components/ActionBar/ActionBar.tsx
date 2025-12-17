@@ -1,4 +1,4 @@
-import { Button } from '@contentful/forma-36-react-components';
+import { Button } from '@contentful/f36-components';
 import { AssetProps } from '../Dialog';
 import { ImagePagination } from '../Gallery';
 import { ImageSelectButton } from '../ImageSelect';
@@ -26,8 +26,7 @@ export function ActionBar(props: ActionBarProps) {
       <div className="ix-action-button-container">
         <Button
           size="small"
-          buttonType="muted"
-          icon="Close"
+          variant="secondary"
           className="ix-close-button"
           onClick={() => props.handleClose()}
         >

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button } from '@contentful/forma-36-react-components';
+import { Button } from '@contentful/f36-components';
 
 import './ImageSelect.css';
 
@@ -24,10 +24,9 @@ export function ImageSelectButton({
   return (
     <Button
       size="small"
-      buttonType="primary"
+      variant="primary"
       className={hidden ? 'ix-select-addButton' : 'ix-select-addButton_hidden'}
-      icon="Plus"
-      disabled={disabled}
+      isDisabled={disabled}
       onClick={handleClick}
     >
       Add Selected Asset

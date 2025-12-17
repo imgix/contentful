@@ -1,5 +1,5 @@
 import { ReactElement, useState } from 'react';
-import { Button } from '@contentful/forma-36-react-components';
+import { Button } from '@contentful/f36-components';
 import Imgix from 'react-imgix';
 
 import './FieldImagePreview.css';
@@ -97,16 +97,14 @@ export function FieldImagePreview({
       <div className="ix-field-image-preview-buttons">
         <Button
           className="ix-field-image-preview-buttons-replace"
-          icon="Plus"
-          buttonType="primary"
+          variant="primary"
           onClick={() => openDialog()}
         >
           Replace
         </Button>
         <Button
           className="ix-field-image-preview-buttons-remove"
-          icon="Delete"
-          buttonType="negative"
+          variant="negative"
           onClick={() => clearSelection()}
         >
           Remove

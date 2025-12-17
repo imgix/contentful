@@ -1,4 +1,4 @@
-import { Icon, Tooltip } from '@contentful/forma-36-react-components';
+import { Icon, Tooltip } from '@contentful/f36-components';
 import React, { ReactNode, useEffect } from 'react';
 import { AssetProps } from '../Dialog';
 
@@ -146,7 +146,6 @@ export const CheckboxList = ({
               >
                 <Icon
                   className="ix-field-checkbox-tooltip-icon"
-                  icon="InfoCircle"
                 />
               </Tooltip>
             )}

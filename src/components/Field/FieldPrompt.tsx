@@ -1,5 +1,5 @@
 import { ReactElement } from 'react';
-import { Button } from '@contentful/forma-36-react-components';
+import { Button } from '@contentful/f36-components';
 
 import './FieldPrompt.css';
 
@@ -17,7 +17,6 @@ export function FieldPrompt({
     <div className="ix-field-prompt">
       <Button
         className="ix-add-image-button"
-        icon="Plus"
         onClick={() => openDialog()}
       >
         Add An Origin Image

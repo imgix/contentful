@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 
-import { Button } from '@contentful/forma-36-react-components';
+import { Button } from '@contentful/f36-components';
 import './UploadButton.css';
 
 export function UploadButton(props: {
@@ -39,11 +39,10 @@ export function UploadButton(props: {
   return (
     <div>
       <Button
-        buttonType="positive"
+        variant="positive"
         className="ix-uploadButton"
-        icon="Download"
         type="submit"
-        disabled={props.disabled}
+        isDisabled={props.disabled}
         onClick={handleClick}
       >
         Upload

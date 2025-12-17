@@ -1,5 +1,5 @@
 import { ReactElement } from 'react';
-import { Paragraph, Spinner } from '@contentful/forma-36-react-components';
+import { Paragraph, Spinner } from '@contentful/f36-components';
 import { ActionBar } from '../ActionBar';
 import './ImagePlaceholder.css';
 

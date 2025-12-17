@@ -1,5 +1,5 @@
 import { ReactElement } from 'react';
-import { Note, TextLink } from '@contentful/forma-36-react-components';
+import { Note, TextLink } from '@contentful/f36-components';
 
 import './Note.css';
 
@@ -25,9 +25,9 @@ export function IxNote({
   return (
     <div className="ix-note">
       <Note
-        noteType={type}
+        variant={type}
         title={error.name}
-        hasCloseButton={dismissable}
+        withCloseButton={dismissable}
         onClose={resetErrorBoundary}
       >
         {message + ' '}

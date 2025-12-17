@@ -8,7 +8,7 @@ import {
   Icon,
   Tooltip,
   Paragraph,
-} from '@contentful/forma-36-react-components';
+} from '@contentful/f36-components';
 import { DialogExtensionSDK } from 'contentful-ui-extensions-sdk';
 import ImgixAPI, { APIError } from 'imgix-management-js';
 import { debounce } from 'lodash';
@@ -417,7 +417,6 @@ export default class Dialog extends Component<DialogProps, DialogState> {
       .then(
         (_resp) => {
           this.setState({ isUploading: false, showUpload: false });
-          Notification.setPosition('top', { offset: 565 });
           Notification.success('File successfully uploaded to imgix Source.', {
             duration: 50000,
             id: 'ix-dialog-notification',
@@ -436,7 +435,6 @@ export default class Dialog extends Component<DialogProps, DialogState> {
           // a property or index that does not exist.
           const reason = errorResponse?.errors[0]?.detail;
           console.error('imgix: upload error', error.response);
-          Notification.setPosition('top', { offset: 565 });
           Notification.error(`Upload failed: ${reason}`, {
             duration: 10000,
             id: 'ix-dialog-notification',
@@ -562,9 +560,8 @@ export default class Dialog extends Component<DialogProps, DialogState> {
                   ) => this.setState({ searchTerm: e.target.value })}
                 />
                 <Button
-                  buttonType="muted"
+                  variant="secondary"
                   className="ix-searchButton"
-                  icon="Search"
                   type="submit"
                   onClick={this.debounceSearchOnClick}
                 >
@@ -604,10 +601,9 @@ export default class Dialog extends Component<DialogProps, DialogState> {
                 </p>
                 <Button
                   size="small"
-                  buttonType="naked"
-                  icon="Close"
+                  variant="transparent"
                   className="ix-close-button"
-                  disabled={this.state.isUploading}
+                  isDisabled={this.state.isUploading}
                   onClick={() => this.setShowUpload(false)}
                 ></Button>
               </div>
@@ -645,12 +641,11 @@ export default class Dialog extends Component<DialogProps, DialogState> {
 
                   <div id="ix-destination-tooltip">
                     <Tooltip
-                      place="top"
+                      placement="top"
                       content="Assets can be uploaded to any directory path in your asset storage. If you leave this blank, assets will be uploaded to the root directory."
                     >
                       <Icon
                         className="ix-destination-tooltip-icon"
-                        icon="InfoCircle"
                       />
                     </Tooltip>
                   </div>
@@ -675,11 +670,11 @@ export default class Dialog extends Component<DialogProps, DialogState> {
                 </div>
                 <Button
                   size="small"
-                  buttonType="positive"
+                  variant="positive"
                   className="ix-upload-confirm-button"
                   onClick={this.uploadAssets}
-                  loading={this.state.isUploading}
-                  disabled={this.state.isUploading}
+                  isLoading={this.state.isUploading}
+                  isDisabled={this.state.isUploading}
                 >
                   {this.state.isUploading ? 'Uploading' : 'Confirm Upload'}
                 </Button>

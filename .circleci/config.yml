@@ -28,5 +28,4 @@ workflows:
           matrix:
             parameters:
               version:
-                - 'current'
-                - 'lts'
+                - '20'

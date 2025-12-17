@@ -2,7 +2,7 @@ import {
   Paragraph,
   TextLink,
   Note,
-} from '@contentful/forma-36-react-components';
+} from '@contentful/f36-components';
 
 const LocalhostWarning = () => {
   return (
